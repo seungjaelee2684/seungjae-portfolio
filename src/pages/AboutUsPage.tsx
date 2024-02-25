@@ -5,7 +5,7 @@ import Wrapper from '../components/common/Wrapper';
 const AboutUsPage = () => {
   return (
     <Wrapper>
-        AboutUsPage
+      AboutUsPage
     </Wrapper>
   )
 };
