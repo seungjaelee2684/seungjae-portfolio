@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Wrapper from '../components/common/Wrapper';
+
+const TypingAnimation = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const MainPage = () => {
 
@@ -46,7 +55,7 @@ const MainLayOut = styled.div`
 
 const EffectAnimation = styled.div`
   width: 100%;
-  height: 10000px;
+  height: 100vh;
   background-color: #000000;
   color: #FFFFFF;
   position: relative;
@@ -61,19 +70,12 @@ const TitleContainer = styled.div`
 `;
 
 const Bar = styled.div`
+  opacity: 0;
   width: 4px;
   height: 32px;
   background-color: #FFFFFF;
-  animation: typing 0.1s forwards linear;
-
-  @keyframes typing {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  animation: ${TypingAnimation} 1.2s forwards infinite;
+  margin-left: 3px;
 `;
 
 const Button = styled.div`
