@@ -1,97 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import Wrapper from '../components/common/Wrapper';
-
-const TypingAnimation = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+import AboutMe from '../components/Category/AboutMe';
 
 const MainPage = () => {
 
-  const [title, setTitle] = useState("");
-  const [count, setCount] = useState(0);
-  const completionWord = 'Frontend Dveloper SeungJae';
-
-  useEffect(() => {
-    const typingInterval = setInterval(() => {
-      setTitle((prevTitleValue) => {
-        let result = prevTitleValue ? prevTitleValue + completionWord[count] : completionWord[0];
-        setCount(count + 1);
-
-        if (count >= completionWord.length) {
-          setCount(0)
-          setTitle("")
-        }
-
-        return result;
-      });
-    }, (count >= completionWord.length) ? 1000 : 100);
-
-    return () => {
-      clearInterval(typingInterval);
-    };
-  });
-
   return (
     <MainLayOut>
-      <EffectAnimation>  
-        <TitleContainer>
-          {title}
-          <Bar />
-        </TitleContainer>
+      <EffectAnimation>
+        <AboutMe />
       </EffectAnimation>
     </MainLayOut>
   )
 };
 
-const MainLayOut = styled.div`
+const MainLayOut = styled.main`
   width: 100%;
+  height: 100vh;
+  background-color: #212226;
+  position: relative;
 `;
 
 const EffectAnimation = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #000000;
-  color: #FFFFFF;
-  position: relative;
+  width: 1320px;
+  height: 100%;
+  color: #d4b681;
   font-family: "GongGothicMedium";
-  font-size: 32px;
-`;
-
-const TitleContainer = styled.div`
-  width: fit-content;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-`;
+  margin: 0px auto;
 
-const Bar = styled.div`
-  opacity: 0;
-  width: 4px;
-  height: 32px;
-  background-color: #FFFFFF;
-  animation: ${TypingAnimation} 1.2s forwards infinite;
-  margin-left: 3px;
-`;
-
-const Button = styled.div`
-  width: 120px;
-  height: 120px;
-  background-color: pink;
-  position: sticky;
-  top: 0;
-`;
-
-const Button2 = styled.div`
-  width: 120px;
-  height: 120px;
-  background-color: blue;
-  position: sticky;
-  top: 20%;
+  @media screen and (max-width: 1320px) {
+    width: 96%;
+  }
 `;
 
 export default MainPage;
