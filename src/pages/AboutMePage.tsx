@@ -24,134 +24,87 @@ const BoxRotate = keyframes`
 
 const AboutMePage = () => {
   return (
-    <AboutContainer>
-      <AboutWrapper>
-        <TopLaneContainer>
-          <LeftText>
-            <Icon>
-              <GiWingedArrow />
-            </Icon>
-            Developer
-          </LeftText>
-          About Me
-        </TopLaneContainer>
-        <InBoxContainer>
-          <BackgroundEffect />
-          <BackgroundCharactor src={CharactorBG} />
-          <InBoxContent>
-            <Charactor src={CharactorImage} alt='' />
-            <RightWrapper>
-              <LaneContainer>
-                <StarWrapper>
-                  <BsFillStarFill />
-                  <BsFillStarFill />
-                  <BsFillStarFill />
-                </StarWrapper>
-              </LaneContainer>
-              <UnderBar />
-              <LaneContainer>
-                <IntroduceWrapper>
-                  <Front>
-                    Frontend Developer
-                  </Front>
-                  <NameWrapper>
-                    이승재 (Lee SeungJae)
-                    <NameIconWrapper>
-                      <SlMagnifier />
-                    </NameIconWrapper>
-                  </NameWrapper>
-                  <StatusText>
-                    <NameWrapper>
-                      <GiRaiseSkeleton style={{ fontSize: "24px" }} />
-                      네크로맨서
-                    </NameWrapper>
-                    <NameWrapper>
-                      <RiSwordFill style={{ fontSize: "24px" }} />
-                      전투력
-                      <div style={{ color: "#FFFFFF" }}>
-                        01065325635
-                      </div>
-                    </NameWrapper>
-                  </StatusText>
-                </IntroduceWrapper>
-              </LaneContainer>
-              <UnderBar />
-              <DefaultLane>
+    <InBoxContainer>
+      <BackgroundEffect />
+      <BackgroundCharactor src={CharactorBG} />
+      <InBoxContent>
+        <Charactor src={CharactorImage} alt='' />
+        <RightWrapper>
+          <LaneContainer>
+            <StarWrapper>
+              <BsFillStarFill />
+              <BsFillStarFill />
+              <BsFillStarFill />
+            </StarWrapper>
+          </LaneContainer>
+          <UnderBar />
+          <LaneContainer>
+            <IntroduceWrapper>
+              <Front>
+                Frontend Developer
+              </Front>
+              <NameWrapper>
+                이승재 (Lee SeungJae)
+                <NameIconWrapper>
+                  <SlMagnifier />
+                </NameIconWrapper>
+              </NameWrapper>
+              <StatusText>
+                <NameWrapper>
+                  <GiRaiseSkeleton style={{ fontSize: "24px" }} />
+                  네크로맨서
+                </NameWrapper>
+                <NameWrapper>
+                  <RiSwordFill style={{ fontSize: "24px" }} />
+                  전투력
+                  <div style={{ color: "#FFFFFF" }}>
+                    01065325635
+                  </div>
+                </NameWrapper>
+              </StatusText>
+            </IntroduceWrapper>
+          </LaneContainer>
+          <UnderBar />
+          <DefaultLane>
+            <GiBarbedSun style={{ color: "#e5cca0" }} />
+            행동특성
+            <StatusWrapper>
+              <StatusIcon color="#294b94">
+                <GiCruiser />
+              </StatusIcon>
+              <StatusIcon color="#237014" style={{ fontSize: "22px" }}>
+                <GiSpiderWeb />
+              </StatusIcon>
+              <StatusIcon color="#999b13" style={{ fontSize: "20px" }}>
+                <BsMinecartLoaded />
+              </StatusIcon>
+            </StatusWrapper>
+          </DefaultLane>
+          <UnderBar />
+          <LaneContainer style={{ fontFamily: "EF_watermelonSalad", fontSize: "14px", fontWeight: "600" }}>
+            <MyIntroBox>
+              <IntroTopLane>
                 <GiBarbedSun style={{ color: "#e5cca0" }} />
-                행동특성
-                <StatusWrapper>
-                  <StatusIcon color="#294b94">
-                    <GiCruiser />
-                  </StatusIcon>
-                  <StatusIcon color="#237014" style={{ fontSize: "22px" }}>
-                    <GiSpiderWeb />
-                  </StatusIcon>
-                  <StatusIcon color="#999b13" style={{ fontSize: "20px" }}>
-                    <BsMinecartLoaded />
-                  </StatusIcon>
-                </StatusWrapper>
-              </DefaultLane>
-              <UnderBar />
-              <LaneContainer>
-                <MyIntroBox>
-                  <IntroTopLane>
-                    <GiBarbedSun style={{ color: "#e5cca0" }} />
-                    캐릭터 소개
-                  </IntroTopLane>
-                </MyIntroBox>
-              </LaneContainer>
-            </RightWrapper>
-          </InBoxContent>
-        </InBoxContainer>
-      </AboutWrapper>
-    </AboutContainer>
+                캐릭터 소개
+              </IntroTopLane>
+              <IntroContentWrapper>
+                자신의 프로젝트에 활력을 불어넣을 수 있고 높은 책임감으로 업무에 끈질기게 달라붙을 수 있는 프론트엔드 개발자이다.
+              </IntroContentWrapper>
+              <IntroContentWrapper>
+                업무에서는 항상 프로젝트의 성공을 최우선 과제로 여기며, 단순히 모든 작업에 순응하고 따라가는 것이 아닌 개선했으면 하는 부분을 팀원들과 끊임
+                없이 논의하고 함께 협력하여 목표 달성에 기여한 바가 있다.
+              </IntroContentWrapper>
+              <IntroContentWrapper>
+                자신에게 주어진 과제 및 기술영역뿐만이 아닌 다른 분야, 그리고 디자인의 영역까지 관심을 가지며 그들과 사용자의 입장까지 고려
+                하며 개발을 이어나가는 타입이다.
+              </IntroContentWrapper>
+            </MyIntroBox>
+          </LaneContainer>
+        </RightWrapper>
+      </InBoxContent>
+    </InBoxContainer>
   )
 };
-
-export const AboutContainer = styled.article`
-  width: 1320px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const AboutWrapper = styled.div`
-  width: 90%;
-  height: 80%;
-  background-color: #27282d;
-  box-shadow: #0d0d0e 0px 0px 8px 0px;
-`;
-
-export const TopLaneContainer = styled.div`
-  width: 100%;
-  height: 50px;
-  background-color: #141519;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 20px;
-  box-sizing: border-box;
-  font-size: 24px;
-`;
-
-export const LeftText = styled.div`
-  color: #FFFFFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: 18px;
-`;
-
-export const Icon = styled.div`
-  color: #d4b681;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const InBoxContainer = styled.div`
   width: 100%;
@@ -230,8 +183,9 @@ export const LaneContainer = styled.div`
 export const DefaultLane = styled(LaneContainer)`
   padding: 8px 5px;
   color: #FFFFFF;
-  font-size: 16px;
-  font-weight: 100;
+  font-family: "EF_watermelonSalad";
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 export const UnderBar = styled.div`
@@ -285,10 +239,12 @@ export const StatusWrapper = styled.div`
 export const NameWrapper = styled(StatusWrapper)`
   margin-left: 0px;
   gap: 5px;
+  justify-content: start;
+  text-align: start;
 `;
 
 export const NameIconWrapper = styled.div`
-  width: 34px;
+  min-width: 34px;
   height: 34px;
   border: 1px solid #adadadba;
   border-radius: 100%;
@@ -333,6 +289,17 @@ export const MyIntroBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  gap: 15px;
+`;
+
+export const IntroContentWrapper = styled.div`
+  width: 100%;
+  font-family: "EF_watermelonSalad";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  text-align: start;
+  color: #FFFFFF;
 `;
 
 export default AboutMePage;
