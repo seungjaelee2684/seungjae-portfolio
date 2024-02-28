@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components';
-import CharactorImage from '../assets/images/picture.png';
-import CharactorBG from '../assets/images/nukki.png';
+import CharactorImage from '../assets/images/picture.webp';
+import CharactorBG from '../assets/images/nukki.webp';
 import { BsFillStarFill } from "react-icons/bs";
 import { GiBarbedSun } from "react-icons/gi";
 import { GiCruiser } from "react-icons/gi";
@@ -15,19 +15,30 @@ import { GiSpikesHalf } from "react-icons/gi";
 import { GiSkullStaff } from "react-icons/gi";
 
 const BoxRotate = keyframes`
-    0% {
-        transform: rotate(-45deg);
-    }
+  0% {
+    transform: rotate(-45deg);
+  }
 
-    100% {
-        transform: rotate(-405deg);
-    }
+  100% {
+    transform: rotate(-405deg);
+  }
+`;
+
+const SecondBoxRotate = keyframes`
+  0% {
+    transform: rotate(-90deg);
+  }
+
+  100% {
+    transform: rotate(-450deg);
+  }
 `;
 
 const AboutMePage = () => {
   return (
     <InBoxContainer>
       <BackgroundEffect />
+      <SecondBackgroundEffect />
       <BackgroundCharactor src={CharactorBG} />
       <InBoxContent>
         <Charactor src={CharactorImage} alt='' />
@@ -121,13 +132,25 @@ export const InBoxContainer = styled.div`
 `;
 
 export const BackgroundEffect = styled.div`
-  width: 100%;
-  height: 150%;
-  background-color: #212226;
+  width: 200%;
+  height: 250%;
+  background-color: #212226ac;
+  border-radius: 90%;
   position: absolute;
-  top: 10%;
+  top: 50%;
+  right: -50%;
+  animation: ${BoxRotate} 20s linear forwards infinite;
+`;
+
+export const SecondBackgroundEffect = styled.div`
+  width: 200%;
+  height: 300%;
+  background-color: #2d2f3657;
+  border-radius: 80%;
+  position: absolute;
+  top: 30%;
   right: -25%;
-  animation: ${BoxRotate} 10s linear forwards infinite;
+  animation: ${SecondBoxRotate} 20s linear forwards infinite;
 `;
 
 export const InBoxContent = styled.section`

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import Wrapper from '../components/common/Wrapper';
 import { InBoxContainer } from './AboutMePage';
-import CardBG from '../assets/images/picture.png';
+import CardBG from '../assets/images/picture.webp';
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 
