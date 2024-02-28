@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharactorImage from '../assets/images/picture.png';
 import CharactorBG from '../assets/images/nukki.png';
-import { GiWingedArrow } from "react-icons/gi";
 import { BsFillStarFill } from "react-icons/bs";
 import { GiBarbedSun } from "react-icons/gi";
 import { GiCruiser } from "react-icons/gi";
@@ -11,6 +10,9 @@ import { BsMinecartLoaded } from "react-icons/bs";
 import { GiRaiseSkeleton } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
+import { GiSmallFishingSailboat } from "react-icons/gi";
+import { GiSpikesHalf } from "react-icons/gi";
+import { GiSkullStaff } from "react-icons/gi";
 
 const BoxRotate = keyframes`
     0% {
@@ -51,7 +53,7 @@ const AboutMePage = () => {
               </NameWrapper>
               <StatusText>
                 <NameWrapper>
-                  <GiRaiseSkeleton style={{ fontSize: "24px" }} />
+                  <GiSkullStaff style={{ fontSize: "24px" }} />
                   네크로맨서
                 </NameWrapper>
                 <NameWrapper>
@@ -66,13 +68,13 @@ const AboutMePage = () => {
           </LaneContainer>
           <UnderBar />
           <DefaultLane>
-            <GiBarbedSun style={{ color: "#e5cca0" }} />
+            <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
             <StatusWrapper>
               <StatusIcon color="#294b94">
-                <GiCruiser />
+                <GiSmallFishingSailboat />
               </StatusIcon>
-              <StatusIcon color="#237014" style={{ fontSize: "22px" }}>
+              <StatusIcon color="#237014">
                 <GiSpiderWeb />
               </StatusIcon>
               <StatusIcon color="#999b13" style={{ fontSize: "20px" }}>
@@ -84,7 +86,7 @@ const AboutMePage = () => {
           <LaneContainer style={{ fontFamily: "EF_watermelonSalad", fontSize: "14px", fontWeight: "600" }}>
             <MyIntroBox>
               <IntroTopLane>
-                <GiBarbedSun style={{ color: "#e5cca0" }} />
+                <GiSpikesHalf style={{ color: "#e5cca0" }} />
                 캐릭터 소개
               </IntroTopLane>
               <IntroContentWrapper>
@@ -112,6 +114,10 @@ export const InBoxContainer = styled.div`
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  
+  ::-webkit-scrollbar {
+   opacity: 0;
+  }
 `;
 
 export const BackgroundEffect = styled.div`
@@ -144,6 +150,10 @@ export const Charactor = styled.img`
   position: absolute;
   bottom: 0;
   left: 0;
+
+  @media screen and (max-width: 1600px) {
+    width: 400px;
+  }
 
   @media screen and (max-width: 836px) {
     width: 300px;
@@ -191,7 +201,7 @@ export const DefaultLane = styled(LaneContainer)`
 export const UnderBar = styled.div`
   width: calc(45% + 10px);
   height: 1px;
-  background-image: linear-gradient(to right, #d4b581, transparent);
+  background-image: linear-gradient(to right, #e6ca9b, #967c4d, transparent);
 `;
 
 export const StarWrapper = styled.div`
@@ -262,7 +272,7 @@ export const NameIconWrapper = styled.div`
 
 export const StatusIcon = styled.div<{ color: string }>`
   color: #FFFFFF;
-  font-size: 28px;
+  font-size: 24px;
   width: 30px;
   height: 30px;
   background-color: ${(props) => props.color};
