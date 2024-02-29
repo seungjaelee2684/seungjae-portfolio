@@ -11,16 +11,6 @@ const MainLayout = () => {
 
   const windowPath = useSelector((state : RootState) => state.pageState);
 
-  const pagePathname = () => {
-    if (location.pathname.includes ("/about")) {
-      return "About Us";
-    } else if (location.pathname.includes ("/stack")) {
-      return "Stacks";
-    } else {
-      return ;
-    };
-  };
-
   return (
     <MainLayOut>
       <BackgroundEffect />
@@ -93,7 +83,7 @@ export const AboutContainer = styled.article`
 const AboutWrapper = styled.div`
   width: 90%;
   height: 80%;
-  background-color: #27282d;
+  background-color: #27282db0;
   box-shadow: #0d0d0e 0px 0px 8px 0px;
 
   @media screen and (max-width: 1320px) {
@@ -104,7 +94,7 @@ const AboutWrapper = styled.div`
 const TopLaneContainer = styled.div`
   width: 100%;
   height: 50px;
-  background-color: #141519;
+  background-color: #141519c7;
   display: flex;
   justify-content: space-between;
   align-items: center;

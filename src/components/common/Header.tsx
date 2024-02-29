@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
@@ -8,10 +8,21 @@ import { pageMove } from '../../store/modules/pageState';
 const Header = () => {
 
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const windowPath = useSelector((state : RootState) => state.pageState);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerOpen, setHeaderOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 500);
+
+  const onClickHeaderOpenHandler = () => {
+    if (headerRef.current) {
+      if (headerOpen) {
+        setHeaderOpen(false);
+        headerRef.current.style.transform = "translateX(0%)";
+      } else {
+        setHeaderOpen(true);
+        headerRef.current.style.transform = "translateX(100%)";
+      };
+    };
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -23,33 +34,35 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  console.log("페이지 -> ", windowPath, "모바일 -> ", isMobile);
+  console.log("모바일 -> ", isMobile);
 
   return (
-    <HeaderLayout>
+    <HeaderLayout ref={headerRef}>
+      <Button onClick={onClickHeaderOpenHandler}>a</Button>
       <HeaderWrapper>
         <NavButton
+          width={40}
           onClick={() => {
-            dispatch(pageMove(""));
             navigate("/")
           }}>
           Main
         </NavButton>
         <NavButton
+          width={30}
           onClick={() => {
-            dispatch(pageMove("Loby"));
             navigate("/loby")
           }}>
           Loby
         </NavButton>
         <NavButton
+          width={20}
           onClick={() => {
-            dispatch(pageMove("About Us"));
             navigate("/about")
           }}>
           About Us
         </NavButton>
-        <NavButton>
+        <NavButton
+          width={10}>
           Stacks
         </NavButton>
       </HeaderWrapper>
@@ -60,19 +73,20 @@ const Header = () => {
 const HeaderLayout = styled.header`
   position: fixed;
   top: 10%;
-  left: 0;
+  left: -162px;
   z-index: 14;
+  transition: all 0.4s ease-out;
 `;
 
 const HeaderWrapper = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   position: relative;
 `;
 
-const NavButton = styled.a`
-  width: 120px;
+const NavButton = styled.a<{ width : number }>`
+  width: ${(props) => props.width + 120}px;
   height: 40px;
   border-top: 1px solid #e6ca9b;
   border-bottom: 1px solid #e6ca9b;
@@ -84,6 +98,17 @@ const NavButton = styled.a`
   font-size: 20px;
   color: #FFFFFF;
   transition: all 0.3s;
+  cursor: pointer;
+`;
+
+const Button = styled.div`
+  width: 40px;
+  height: 40px;
+  background-color: #FFFFFF;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  z-index: 15;
   cursor: pointer;
 `;
 
