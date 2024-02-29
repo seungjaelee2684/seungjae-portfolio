@@ -71,8 +71,11 @@ const Header = () => {
           </ButtonIcons>
           About Us
         </NavButton>
-        <NavButton>
-        <ButtonIcons>
+        <NavButton
+          onClick={() => {
+            navigate("/stack")
+          }}>
+          <ButtonIcons>
             <LiaGripfire />
           </ButtonIcons>
           Stacks
@@ -120,17 +123,6 @@ const NavButton = styled.a`
 
 const ButtonIcons = styled.div`
   font-size: 60px;
-`;
-
-const Button = styled.div`
-  width: 40px;
-  height: 40px;
-  background-color: #FFFFFF;
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  z-index: 15;
-  cursor: pointer;
 `;
 
 export default Header

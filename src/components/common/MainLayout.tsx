@@ -60,11 +60,11 @@ const EffectAnimation = styled.div`
 const BackgroundEffect = styled.div`
   width: 150%;
   height: 70%;
-  background-color: #17181b;
+  background-color: #0e0e13;
   position: absolute;
   top: 25%;
-  left: -25%;
-  transform: rotate(45deg);
+  left: -70%;
+  transform: rotate(75deg);
 `;
 
 export const AboutContainer = styled.article`
