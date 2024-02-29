@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharactorImage from '../assets/images/picture.webp';
 import CharactorBG from '../assets/images/nukki.webp';
@@ -13,6 +13,8 @@ import { SlMagnifier } from "react-icons/sl";
 import { GiSmallFishingSailboat } from "react-icons/gi";
 import { GiSpikesHalf } from "react-icons/gi";
 import { GiSkullStaff } from "react-icons/gi";
+import { useDispatch } from 'react-redux';
+import { pageMove } from '../store/modules/pageState';
 
 const BoxRotate = keyframes`
   0% {
@@ -35,6 +37,13 @@ const SecondBoxRotate = keyframes`
 `;
 
 const AboutMePage = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(pageMove("About Us"));
+  }, []);
+
   return (
     <InBoxContainer>
       <BackgroundEffect />

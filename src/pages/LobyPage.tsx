@@ -5,10 +5,18 @@ import { InBoxContainer } from './AboutMePage';
 import CardBG from '../assets/images/picture.webp';
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { pageMove } from '../store/modules/pageState';
+import { BsFillStarFill } from "react-icons/bs";
 
 const LobyPage = () => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(pageMove("About Us"));
+  }, []);
 
   return (
     <InBoxContainer>
@@ -17,7 +25,19 @@ const LobyPage = () => {
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
-            이승재
+            <CardTopBox>
+              Frontend Developer
+            </CardTopBox>
+            <CardUnderBox>
+              <CardUnderText>
+                이승재
+              </CardUnderText>
+              <Stars>
+                <BsFillStarFill />
+                <BsFillStarFill />
+                <BsFillStarFill />
+              </Stars>
+            </CardUnderBox>
           </CardContent>
         </CardContainer>
         <CardContainer
@@ -127,14 +147,53 @@ const NoneCardContainer = styled.div`
 
 const CardContent = styled.div`
   width: 100%;
+  height: calc(100% - 60px);
+  padding: 30px 0px;
   position: absolute;
-  bottom: 20px;
+  top: 0;
   left: 0;
-  font-size: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   line-height: 100%;
-  color: #FFFFFF;
-  text-shadow: 0px 0px 4px #616227;
   z-index: 11;
+`;
+
+const CardTopBox = styled.div`
+  width: 100%;
+  font-size: 18px;
+  color: #FFFFFF;
+`;
+
+const CardUnderBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
+
+const CardUnderText = styled.div`
+  width: 100%;
+  height: 40px;
+  font-size: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e2dbb7;
+  background-image: radial-gradient(circle at bottom center, #e2dbb761 0%, transparent 100%);
+  text-shadow: 0px 0px 4px #616227;
+`;
+
+const Stars = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #e2dbb7;
 `;
 
 const SlashBar = styled.div`

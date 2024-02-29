@@ -10,16 +10,16 @@ import Header from '../components/common/Header';
 const Router = () => {
   return (
     <BrowserRouter>
-        <AnimatePresence>
-          <Header />
-            <Routes>
-              <Route element={<MainLayout />}>
-                <Route path='/' element={<StartPage />} />
-                <Route path='/loby' element={<LobyPage />} />
-                <Route path='/about' element={<AboutUsPage />} />
-              </Route>
-            </Routes>
-        </AnimatePresence>
+      <Header />
+      <AnimatePresence>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<StartPage />} />
+            <Route path='/loby' element={<LobyPage />} />
+            <Route path='/about' element={<AboutUsPage />} />
+          </Route>
+        </Routes>
+      </AnimatePresence>
     </BrowserRouter>
   )
 };
