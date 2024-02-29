@@ -15,6 +15,9 @@ import { GiSpikesHalf } from "react-icons/gi";
 import { GiSkullStaff } from "react-icons/gi";
 import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
+import Tistory from '../assets/icons/tistory.svg';
+import Github from '../assets/icons/github.png';
+import { useNavigate } from 'react-router-dom';
 
 const BoxRotate = keyframes`
   0% {
@@ -48,6 +51,7 @@ const CharactorAppear = keyframes`
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(pageMove("About Us"));
@@ -127,6 +131,19 @@ const AboutMePage = () => {
               <IntroContentWrapper>
                 {"자신에게 주어진 과제 및 기술영역뿐만이 아닌 다른 분야, 그리고 디자인의 영역까지 관심을 가지며\n그들과 사용자의 입장까지 고려하며 개발을 이어나가는 타입이다."}
               </IntroContentWrapper>
+              <LocationButtonWrapper>
+                <LocationButton onClick={() => window.open("https://github.com/seungjaelee2684")}>
+                  <LocationIcon src={Github} alt=''/>
+                  Github
+                </LocationButton>
+                <LocationButton onClick={() => window.open("https://sean2684.tistory.com/")}>
+                  <LocationIcon src={Tistory} alt=''/>
+                  Tistory
+                </LocationButton>
+                <LocationButton style={{fontSize: "22px"}} onClick={() => navigate("/stack")}>
+                  스킬 장착하러 가기
+                </LocationButton>
+              </LocationButtonWrapper>
             </MyIntroBox>
           </LaneContainer>
         </RightWrapper>
@@ -352,6 +369,43 @@ export const IntroContentWrapper = styled.div`
   text-align: start;
   color: #FFFFFF;
   white-space: pre-line;
+`;
+
+const LocationButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 30px;
+`;
+
+const LocationButton = styled.div`
+  width: 200px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-family: "GongGothicMedium";
+  font-size: 24px;
+  color: #FFFFFF;
+  box-shadow: #177edf6a 0px 0px 4px 0px;
+  border: 1px solid #177edf6a;
+  background-image: linear-gradient(to top, #3b7fc06a, transparent);
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: #177edf 0px 0px 4px 0px;
+    border: 1px solid #177edf;
+    background-image: linear-gradient(to top, #3b7fc0, transparent);
+  }
+`;
+
+const LocationIcon = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 `;
 
 export default AboutMePage;
