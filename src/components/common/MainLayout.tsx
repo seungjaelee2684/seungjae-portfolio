@@ -68,39 +68,32 @@ const BackgroundEffect = styled.div`
 `;
 
 export const AboutContainer = styled.article`
-  width: 1320px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @media screen and (max-width: 1320px) {
-    width: 100%;
-  }
 `;
 
 const AboutWrapper = styled.div`
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   background-color: #27282db0;
   box-shadow: #0d0d0e 0px 0px 8px 0px;
-
-  @media screen and (max-width: 1320px) {
-    height: 90%;
-  }
 `;
 
 const TopLaneContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 60px;
   background-color: #141519c7;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 20px;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 32px;
+  user-select: none;
 `;
 
 const LeftText = styled.div`
@@ -109,12 +102,12 @@ const LeftText = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  font-size: 18px;
+  font-size: 26px;
 `;
 
 const Icon = styled.div`
   color: #d4b681;
-  font-size: 20px;
+  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
