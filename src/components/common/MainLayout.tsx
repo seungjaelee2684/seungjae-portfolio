@@ -80,7 +80,6 @@ const AboutWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: #27282db0;
-  box-shadow: #0d0d0e 0px 0px 8px 0px;
 `;
 
 const TopLaneContainer = styled.div`
