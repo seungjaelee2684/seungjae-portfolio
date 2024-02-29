@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import { BsFillStarFill } from "react-icons/bs";
+import { IoIosPerson } from "react-icons/io";
+import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
+
+
 
 const LobyPage = () => {
 
@@ -19,7 +23,7 @@ const LobyPage = () => {
   }, []);
 
   return (
-    <InBoxContainer>
+    <LobyInBoxContainer>
       <CardWrapper>
         <CardContainer onClick={() => navigate("/about")}>
           <CardBackgroundImage src={CardBG} alt=''/>
@@ -49,19 +53,51 @@ const LobyPage = () => {
           <GoPlus />
         </CardContainer>
         <NoneCardContainer>
-          <SlashBar />
+          <IoIosPerson />
         </NoneCardContainer>
         <NoneCardContainer>
-          <SlashBar />
+          <IoIosPerson />
         </NoneCardContainer>
       </CardWrapper>
-    </InBoxContainer>
+      <ChoiceButtonWrapper>
+        <PrevNextButton xy="-50%">
+          <TbArrowBadgeLeft />
+        </PrevNextButton>
+        <ChoiceButton>
+          캐릭터 선택
+        </ChoiceButton>
+        <PrevNextButton xy="50%">
+          <TbArrowBadgeRight />
+        </PrevNextButton>
+      </ChoiceButtonWrapper>
+    </LobyInBoxContainer>
   )
 };
 
+const PrevNextButtonMove = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(var(--xy));
+  }
+`;
+
+const LobyInBoxContainer = styled(InBoxContainer)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
+
 const CardWrapper = styled.div`
   width: calc(100% - 40px);
-  height: 100%;
+  height: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,7 +135,7 @@ const StatusContent = styled.div`
 const CardContainer = styled.div`
   max-width: 250px;
   width: 100%;
-  height: 80%;
+  height: 100%;
   border: 1px solid #a5a675;
   display: flex;
   justify-content: center;
@@ -134,7 +170,7 @@ const CardContainer = styled.div`
 const NoneCardContainer = styled.div`
   max-width: 250px;
   width: 100%;
-  height: 80%;
+  height: 100%;
   border: 1px solid #64652c;
   display: flex;
   justify-content: center;
@@ -142,7 +178,9 @@ const NoneCardContainer = styled.div`
   transition: all 0.2s;
   position: relative;
   overflow: hidden;
-  background-color: #1c1c1f;
+  background-image: radial-gradient(circle at center, #2a2a30, #1c1c1f);
+  color: #15151660;
+  font-size: 200px;
 `;
 
 const CardContent = styled.div`
@@ -196,14 +234,47 @@ const Stars = styled.div`
   color: #e2dbb7;
 `;
 
-const SlashBar = styled.div`
-  width: 4px;
-  height: 140%;
-  position: absolute;
-  top: -25%;
-  left: 50%;
-  transform: rotate(20deg);
-  background-color: #64652c;
+const ChoiceButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
+
+const ChoiceButton = styled.div`
+  width: 240px;
+  height: 50px;
+  /* background-color: #e2dbb7; */
+  border: 1px solid #d4b681;
+  border-radius: 30px;
+  box-shadow: #aca480 0px 0px 8px 0px;
+  text-shadow: 0px 0px 8px #cac5ac;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #d4b681;
+  background-image: radial-gradient(circle at bottom center, #0a090ec5, #201d31c5);
+  cursor: pointer;
+
+  &:hover {
+    color: #e2dbb7;
+    border: 1px solid #e2dbb7;
+    background-image: radial-gradient(circle at bottom center, #e2dbb724, #201d31c5);
+  }
+`;
+
+const PrevNextButton = styled.div<{ xy : string }>`
+  font-size: 50px;
+  color: #d4b681;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${PrevNextButtonMove} 1.5s linear infinite;
+  cursor: pointer;
+
+  --xy: ${(props) => props.xy};
 `;
 
 export default LobyPage;
