@@ -6,7 +6,7 @@ import CardBG from '../assets/images/picture.webp';
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 
-const MainPage = () => {
+const LobyPage = () => {
 
   const navigate = useNavigate();
 
@@ -147,4 +147,4 @@ const SlashBar = styled.div`
   background-color: #64652c;
 `;
 
-export default MainPage;
+export default LobyPage;

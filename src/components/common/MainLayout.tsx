@@ -2,10 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/config/configureStore';
 
 const MainLayout = () => {
 
   const location = useLocation();
+
+  const windowPath = useSelector((state : RootState) => state.pageState);
 
   const pagePathname = () => {
     if (location.pathname.includes ("/about")) {
@@ -30,7 +34,7 @@ const MainLayout = () => {
                 </Icon>
                 Developer
               </LeftText>
-              {pagePathname()}
+              {windowPath}
             </TopLaneContainer>
             <Outlet />
           </AboutWrapper>

@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import { RootState } from '../../store/config/configureStore';
+import { pageMove } from '../../store/modules/pageState';
 
 const Header = () => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+  const windowPath = useSelector((state : RootState) => state.pageState);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 500);
 
   useEffect(() => {
@@ -18,16 +23,30 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  console.log("페이지 -> ", windowPath, "모바일 -> ", isMobile);
+
   return (
     <HeaderLayout>
       <HeaderWrapper>
-        <NavButton onClick={() => navigate("/")}>
-          Loby
-        </NavButton>
-        <NavButton onClick={() => navigate("/main")}>
+        <NavButton
+          onClick={() => {
+            dispatch(pageMove(""));
+            navigate("/")
+          }}>
           Main
         </NavButton>
-        <NavButton onClick={() => navigate("/about")}>
+        <NavButton
+          onClick={() => {
+            dispatch(pageMove("Loby"));
+            navigate("/loby")
+          }}>
+          Loby
+        </NavButton>
+        <NavButton
+          onClick={() => {
+            dispatch(pageMove("About Us"));
+            navigate("/about")
+          }}>
           About Us
         </NavButton>
         <NavButton>

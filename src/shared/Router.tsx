@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainPage from '../pages/MainPage';
+import LobyPage from '../pages/LobyPage';
 import { AnimatePresence } from 'framer-motion';
 import AboutUsPage from '../pages/AboutMePage';
 import MainLayout from '../components/common/MainLayout';
@@ -15,7 +15,7 @@ const Router = () => {
             <Routes>
               <Route element={<MainLayout />}>
                 <Route path='/' element={<StartPage />} />
-                <Route path='/main' element={<MainPage />} />
+                <Route path='/loby' element={<LobyPage />} />
                 <Route path='/about' element={<AboutUsPage />} />
               </Route>
             </Routes>
