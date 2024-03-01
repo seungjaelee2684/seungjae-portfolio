@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharactorImage from '../assets/images/picture.webp';
 import CharactorBG from '../assets/images/nukki.webp';
@@ -10,10 +10,22 @@ import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import MobileView from '../components/AboutMePage/MobileView';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
+import InfoModal from '../components/AboutMePage/InfoModal';
 
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
+
+  const [statusModal, setStatusModal] = useState<{
+    information: boolean,
+    state: number | undefined
+  }>({
+    information: false,
+    state: undefined
+  });
+  const { information, state } = statusModal;
+
+  console.log("모달 창", state);
 
   useEffect(() => {
     dispatch(pageMove("About Us"));
@@ -41,7 +53,7 @@ const AboutMePage = () => {
               </Front>
               <NameWrapper>
                 이승재 (Lee SeungJae)
-                <NameIconWrapper>
+                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information})}>
                   <SlMagnifier />
                 </NameIconWrapper>
               </NameWrapper>
@@ -59,20 +71,34 @@ const AboutMePage = () => {
                 </NameWrapper>
               </StatusText>
             </IntroduceWrapper>
+            {(information) && <InfoModal />}
           </LaneContainer>
           <DefaultLane>
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
             <StatusWrapper>
-              <StatusIcon color="#294b94" size={0}>
+              <StatusIcon
+                color="#294b94"
+                size={0}
+                onMouseOver={() => setStatusModal({...statusModal, state: 1})}
+                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
                 <GiSmallFishingSailboat />
               </StatusIcon>
-              <StatusIcon color="#237014" size={-2}>
+              <StatusIcon
+                color="#237014"
+                size={-2}
+                onMouseOver={() => setStatusModal({...statusModal, state: 2})}
+                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
                 <GiSpiderWeb />
               </StatusIcon>
-              <StatusIcon color="#999b13" size={-4}>
+              <StatusIcon
+                color="#999b13"
+                size={-4}
+                onMouseOver={() => setStatusModal({...statusModal, state: 3})}
+                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
                 <BsMinecartLoaded />
               </StatusIcon>
+              {(state) && <InfoModal />}
             </StatusWrapper>
           </DefaultLane>
           <LaneContainer
@@ -148,7 +174,7 @@ export const InBoxContainer = styled.div`
 
 export const BackgroundEffect = styled.div`
   width: 200%;
-  height: 250%;
+  height: 350%;
   background-color: #212226ac;
   border-radius: 90%;
   position: absolute;
@@ -159,7 +185,7 @@ export const BackgroundEffect = styled.div`
 
 export const SecondBackgroundEffect = styled.div`
   width: 200%;
-  height: 300%;
+  height: 400%;
   background-color: #2d2f3657;
   border-radius: 80%;
   position: absolute;
@@ -187,11 +213,12 @@ export const Charactor = styled.img`
   opacity: 0;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 10%;
   animation: ${CharactorAppear} 0.5s forwards 0.2s;
 
   @media screen and (max-width: 1320px) {
     width: 400px;
+    left: 5%;
   }
 
   @media screen and (max-width: 836px) {
@@ -236,11 +263,12 @@ export const LaneContainer = styled.div`
   justify-content: start;
   align-items: center;
   border-bottom: 1px solid #e6ca9b;
-  padding: 40px 20px;
+  padding: 40px 20px 40px 0px;
   gap: 10px;
+  position: relative;
 
   @media screen and (max-width: 1600px) {
-    padding: 10px 10px;
+    padding: 10px 10px 10px 0px;
   }
 
   @media screen and (max-width: 1320px) {
@@ -249,19 +277,19 @@ export const LaneContainer = styled.div`
 `;
 
 export const DefaultLane = styled(LaneContainer)`
-  padding: 5px 20px;
+  padding: 5px 20px 5px 0px;
   color: #FFFFFF;
   font-family: "EF_watermelonSalad";
   font-size: 18px;
   font-weight: 600;
 
   @media screen and (max-width: 1600px) {
-    padding: 5px 10px;
+    padding: 5px 10px 5px 0px;
     font-size: 16px;
   }
 
   @media screen and (max-width: 1320px) {
-    padding: 3px 10px;
+    padding: 3px 10px 3px 0px;
   }
 
   @media screen and (max-width: 836px) {
@@ -343,6 +371,7 @@ export const StatusWrapper = styled.div`
   align-items: center;
   gap: 16px;
   margin-left: 20px;
+  position: relative;
 
   @media screen and (max-width: 836px) {
     gap: 5px;
