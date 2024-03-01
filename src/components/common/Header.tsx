@@ -81,7 +81,13 @@ const HeaderLayout = styled.header`
 
   @media screen and (max-width: 1320px) {
     top: 70px;
-    left: 0px;
+    left: 10px;
+  }
+
+  @media screen and (max-width: 836px) {
+    top: 70px;
+    left: auto;
+    right: 10px;
   }
 
   @media screen and (max-width: 500px) {
@@ -105,7 +111,7 @@ const HeaderWrapper = styled.nav`
     gap: 30px;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 836px) {
     flex-direction: row;
   }
 

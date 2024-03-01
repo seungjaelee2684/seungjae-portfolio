@@ -96,18 +96,24 @@ const AboutMePage = () => {
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
             <StatusWrapper>
-              <StatusIcon color="#294b94">
+              <StatusIcon color="#294b94" size={0}>
                 <GiSmallFishingSailboat />
               </StatusIcon>
-              <StatusIcon color="#237014">
+              <StatusIcon color="#237014" size={-2}>
                 <GiSpiderWeb />
               </StatusIcon>
-              <StatusIcon color="#999b13" style={{ fontSize: "26px" }}>
+              <StatusIcon color="#999b13" size={-4}>
                 <BsMinecartLoaded />
               </StatusIcon>
             </StatusWrapper>
           </DefaultLane>
-          <LaneContainer style={{ fontFamily: "EF_watermelonSalad", fontSize: "14px", fontWeight: "600" }}>
+          <LaneContainer
+            style={{
+              fontFamily: "EF_watermelonSalad",
+              fontSize: "14px",
+              fontWeight: "600",
+              borderBottom: "none"
+            }}>
             <MyIntroBox>
               <IntroTopLane>
                 <GiSpikesHalf style={{ color: "#e5cca0" }} />
@@ -123,15 +129,15 @@ const AboutMePage = () => {
                 {"자신에게 주어진 과제 및 기술영역뿐만이 아닌 다른 분야, 그리고 디자인의 영역까지 관심을 가지며\n그들과 사용자의 입장까지 고려하며 개발을 이어나가는 타입이다."}
               </IntroContentWrapper>
               <LocationButtonWrapper>
-                <LocationButton onClick={() => window.open("https://github.com/seungjaelee2684")}>
+                <LocationButton size={0} onClick={() => window.open("https://github.com/seungjaelee2684")}>
                   <LocationIcon src={Github} alt=''/>
                   Github
                 </LocationButton>
-                <LocationButton onClick={() => window.open("https://sean2684.tistory.com/")}>
+                <LocationButton size={0} onClick={() => window.open("https://sean2684.tistory.com/")}>
                   <LocationIcon src={Tistory} alt=''/>
                   Tistory
                 </LocationButton>
-                <LocationButton style={{fontSize: "22px"}} onClick={() => navigate("/stack")}>
+                <LocationButton size={-4} onClick={() => navigate("/stack")}>
                   스킬 장착하러 가기
                 </LocationButton>
               </LocationButtonWrapper>
@@ -231,6 +237,12 @@ export const RightWrapper = styled.div`
   justify-content: center;
   align-items: end;
   padding-right: 20px;
+
+  @media screen and (max-width: 836px) {
+    justify-content: end;
+    margin-bottom: 60px;
+    height: calc(100% - 60px);
+  }
 `;
 
 export const LaneContainer = styled.div`
@@ -242,9 +254,12 @@ export const LaneContainer = styled.div`
   padding: 40px 20px;
   gap: 10px;
 
+  @media screen and (max-width: 1600px) {
+    padding: 10px 10px;
+  }
+
   @media screen and (max-width: 1320px) {
     width: 55%;
-    padding: 10px 10px;
   }
 `;
 
@@ -255,8 +270,17 @@ export const DefaultLane = styled(LaneContainer)`
   font-size: 18px;
   font-weight: 600;
 
+  @media screen and (max-width: 1600px) {
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 1320px) {
     padding: 3px 10px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 12px;
   }
 `;
 
@@ -268,9 +292,13 @@ export const StarWrapper = styled.div`
   font-size: 32px;
   color: #ecd1a4;
 
+  @media screen and (max-width: 1600px) {
+    font-size: 28px;
+    gap: 8px;
+  }
+
   @media screen and (max-width: 1320px) {
     font-size: 24px;
-    gap: 8px;
   }
 `;
 
@@ -284,6 +312,11 @@ export const IntroduceWrapper = styled.div`
   font-size: 40px;
   color: #FFFFFF;
 
+  @media screen and (max-width: 1600px) {
+    font-size: 34px;
+    gap: 5px;
+  }
+
   @media screen and (max-width: 1320px) {
     font-size: 30px;
   }
@@ -296,6 +329,10 @@ export const Front = styled.div`
   align-items: center;
   gap: 16px;
 
+  @media screen and (max-width: 1600px) {
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 1320px) {
     font-size: 12px;
   }
@@ -306,7 +343,11 @@ export const StatusText = styled(Front)`
   color: #acb2c9;
   font-size: 18px;
 
-  @media screen and (max-width: 16000px) {
+  @media screen and (max-width: 1600px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 1320px) {
     font-size: 12px;
   }
 `;
@@ -317,6 +358,11 @@ export const StatusWrapper = styled.div`
   align-items: center;
   gap: 16px;
   margin-left: 20px;
+
+  @media screen and (max-width: 836px) {
+    gap: 5px;
+    margin-left: 10px;
+  }
 `;
 
 export const NameWrapper = styled(StatusWrapper)`
@@ -342,6 +388,12 @@ export const NameIconWrapper = styled.div`
     color: #ADADAD;
   }
 
+  @media screen and (max-width: 1600px) {
+    min-width: 32px;
+    height: 32px;
+    font-size: 22px;
+  }
+
   @media screen and (max-width: 1320px) {
     min-width: 28px;
     height: 28px;
@@ -349,9 +401,9 @@ export const NameIconWrapper = styled.div`
   }
 `;
 
-export const StatusIcon = styled.div<{ color: string }>`
+export const StatusIcon = styled.div<{ color: string, size : number }>`
   color: #FFFFFF;
-  font-size: 32px;
+  font-size: ${(props) => props.size + 32}px;
   width: 40px;
   height: 40px;
   background-color: ${(props) => props.color};
@@ -362,10 +414,16 @@ export const StatusIcon = styled.div<{ color: string }>`
   box-shadow: #00000090 0px 0px 8px 0px;
   cursor: pointer;
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1600px) {
     width: 32px;
     height: 32px;
-    font-size: 26px;
+    font-size: ${(props) => props.size + 26}px;
+  }
+
+  @media screen and (max-width: 1320px) {
+    width: 24px;
+    height: 24px;
+    font-size: ${(props) => props.size + 20}px;
   }
 `;
 
@@ -378,8 +436,16 @@ export const IntroTopLane = styled.div`
   gap: 10px;
   color: #FFFFFF;
 
+  @media screen and (max-width: 1600px) {
+    font-size: 16px;
+  }
+
   @media screen and (max-width: 1320px) {
     font-size: 14px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 12px;
   }
 `;
 
@@ -391,8 +457,16 @@ export const MyIntroBox = styled.div`
   align-items: start;
   gap: 30px;
 
+  @media screen and (max-width: 1600px) {
+    gap: 24px;
+  }
+
   @media screen and (max-width: 1320px) {
     gap: 20px;
+  }
+
+  @media screen and (max-width: 836px) {
+    gap: 16px;
   }
 `;
 
@@ -406,9 +480,19 @@ export const IntroContentWrapper = styled.div`
   color: #FFFFFF;
   white-space: pre-line;
 
+  @media screen and (max-width: 1600px) {
+    font-size: 16px;
+    line-height: 120%;
+  }
+
   @media screen and (max-width: 1320px) {
     font-size: 14px;
     line-height: 120%;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 12px;
+    line-height: 110%;
   }
 `;
 
@@ -422,9 +506,13 @@ const LocationButtonWrapper = styled.div`
   @media screen and (max-width: 1320px) {
     gap: 20px;
   }
+
+  @media screen and (max-width: 836px) {
+    gap: 16px;
+  }
 `;
 
-const LocationButton = styled.div`
+const LocationButton = styled.div<{ size : number }>`
   width: 200px;
   height: 80px;
   display: flex;
@@ -432,7 +520,7 @@ const LocationButton = styled.div`
   align-items: center;
   gap: 16px;
   font-family: "GongGothicMedium";
-  font-size: 24px;
+  font-size: ${(props) => props.size + 24}px;
   color: #FFFFFF;
   box-shadow: #177edf6a 0px 0px 4px 0px;
   border: 1px solid #177edf6a;
@@ -449,8 +537,15 @@ const LocationButton = styled.div`
   @media screen and (max-width: 1320px) {
     width: 160px;
     height: 60px;
-    font-size: 18px;
+    font-size: ${(props) => props.size + 18}px;
     gap: 10px;
+  }
+
+  @media screen and (max-width: 836px) {
+    width: 100px;
+    height: 40px;
+    gap: 5px;
+    font-size: ${(props) => props.size + 12}px;
   }
 `;
 
@@ -462,6 +557,11 @@ const LocationIcon = styled.img`
   @media screen and (max-width: 1320px) {
     width: 30px;
     height: 30px;
+  }
+
+  @media screen and (max-width: 836px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 
