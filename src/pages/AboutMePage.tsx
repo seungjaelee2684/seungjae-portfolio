@@ -71,7 +71,7 @@ const AboutMePage = () => {
                 </NameWrapper>
               </StatusText>
             </IntroduceWrapper>
-            {(information) && <InfoModal />}
+            {(information) && <InfoModal statusModal={statusModal}/>}
           </LaneContainer>
           <DefaultLane>
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
@@ -98,7 +98,7 @@ const AboutMePage = () => {
                 onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
                 <BsMinecartLoaded />
               </StatusIcon>
-              {(state) && <InfoModal />}
+              {(state) && <InfoModal statusModal={statusModal}/>}
             </StatusWrapper>
           </DefaultLane>
           <LaneContainer
