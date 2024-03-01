@@ -93,6 +93,19 @@ const TopLaneContainer = styled.div`
   box-sizing: border-box;
   font-size: 32px;
   user-select: none;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 28px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 22px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+    height: 40px;
+  }
 `;
 
 const LeftText = styled.div`
@@ -102,6 +115,18 @@ const LeftText = styled.div`
   align-items: center;
   gap: 8px;
   font-size: 26px;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 18px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
+  }
 `;
 
 const Icon = styled.div`
@@ -110,6 +135,18 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 28px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 export default MainLayout;

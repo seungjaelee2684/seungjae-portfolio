@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import pageState from '../modules/pageState';
+import isMobile from '../modules/isMobile';
 
 const store = configureStore({
     reducer: {
-        pageState
+        pageState,
+        isMobile
     }
 });
 

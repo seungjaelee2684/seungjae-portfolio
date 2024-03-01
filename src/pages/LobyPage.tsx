@@ -19,7 +19,7 @@ const LobyPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(pageMove("About Us"));
+    dispatch(pageMove("Charactor"));
   }, []);
 
   return (
@@ -93,16 +93,26 @@ const LobyInBoxContainer = styled(InBoxContainer)`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 500px) {
+    height: 94%;
+    gap: 40px;
+  }
 `;
 
 const CardWrapper = styled.div`
   width: calc(100% - 40px);
   height: 65%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 16px;
   padding: 0px 20px;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const CardBackgroundImage = styled.img`
@@ -124,12 +134,6 @@ const FilterContainer = styled.div`
   z-index: 10;
   background-image: linear-gradient(to top, #000000b1, transparent);
   transition: all 0.2s;
-`;
-
-const StatusContent = styled.div`
-  font-size: 20px;
-  line-height: 100%;
-
 `;
 
 const CardContainer = styled.div`
@@ -165,6 +169,15 @@ const CardContainer = styled.div`
   &:hover ${FilterContainer} {
     background-image: linear-gradient(to top, #d3d4a433, transparent);
   }
+
+  @media screen and (max-width: 1320px) {
+    max-height: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    max-width: 150px;
+    max-height: 50%;
+  }
 `;
 
 const NoneCardContainer = styled.div`
@@ -181,6 +194,15 @@ const NoneCardContainer = styled.div`
   background-image: radial-gradient(circle at center, #2a2a30, #1c1c1f);
   color: #15151660;
   font-size: 200px;
+
+  @media screen and (max-width: 1320px) {
+    max-height: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    max-width: 150px;
+    max-height: 50%;
+  }
 `;
 
 const CardContent = styled.div`
@@ -196,12 +218,29 @@ const CardContent = styled.div`
   align-items: center;
   line-height: 100%;
   z-index: 11;
+
+  @media screen and (max-width: 500px) {
+    height: calc(100% - 20px);
+    padding: 10px 0px;
+  }
 `;
 
 const CardTopBox = styled.div`
   width: 100%;
   font-size: 18px;
   color: #FFFFFF;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
 const CardUnderBox = styled.div`
@@ -223,6 +262,11 @@ const CardUnderText = styled.div`
   color: #e2dbb7;
   background-image: radial-gradient(circle at bottom center, #e2dbb761 0%, transparent 100%);
   text-shadow: 0px 0px 4px #616227;
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+    height: 20px;
+  }
 `;
 
 const Stars = styled.div`
@@ -232,6 +276,10 @@ const Stars = styled.div`
   gap: 8px;
   font-size: 14px;
   color: #e2dbb7;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 const ChoiceButtonWrapper = styled.div`
@@ -240,6 +288,10 @@ const ChoiceButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 500px) {
+    gap: 10px;
+  }
 `;
 
 const ChoiceButton = styled.div`
@@ -262,6 +314,12 @@ const ChoiceButton = styled.div`
     color: #e2dbb7;
     border: 1px solid #e2dbb7;
     background-image: radial-gradient(circle at bottom center, #e2dbb724, #201d31c5);
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
   }
 `;
 

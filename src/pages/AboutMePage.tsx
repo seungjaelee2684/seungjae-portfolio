@@ -215,6 +215,10 @@ export const Charactor = styled.img`
   @media screen and (max-width: 836px) {
     width: 300px;
   }
+
+  @media screen and (max-width: 500px) {
+    width: 200px;
+  }
 `;
 
 export const BackgroundCharactor = styled.img`
