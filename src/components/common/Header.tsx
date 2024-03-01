@@ -60,7 +60,7 @@ const Header = () => {
         </NavButton>
         <NavButton
           onClick={() => {
-            navigate("/stack")
+            navigate("/skill")
           }}>
           <ButtonIcons>
             <LiaGripfire />
