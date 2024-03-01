@@ -11,8 +11,6 @@ import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
 
-
-
 const LobyPage = () => {
 
   const dispatch = useDispatch();
