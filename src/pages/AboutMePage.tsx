@@ -2,22 +2,16 @@ import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharactorImage from '../assets/images/picture.webp';
 import CharactorBG from '../assets/images/nukki.webp';
-import { BsFillStarFill } from "react-icons/bs";
-import { GiBarbedSun } from "react-icons/gi";
-import { GiCruiser } from "react-icons/gi";
-import { GiSpiderWeb } from "react-icons/gi";
-import { BsMinecartLoaded } from "react-icons/bs";
-import { GiRaiseSkeleton } from "react-icons/gi";
+import { BsFillStarFill, BsMinecartLoaded } from "react-icons/bs";
+import { GiSpiderWeb, GiSpikesHalf, GiSkullStaff, GiSmallFishingSailboat } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
-import { GiSmallFishingSailboat } from "react-icons/gi";
-import { GiSpikesHalf } from "react-icons/gi";
-import { GiSkullStaff } from "react-icons/gi";
 import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import Tistory from '../assets/icons/tistory.svg';
 import Github from '../assets/icons/github.png';
 import { useNavigate } from 'react-router-dom';
+import MobileView from '../components/AboutMePage/MobileView';
 
 const BoxRotate = keyframes`
   0% {
@@ -72,7 +66,6 @@ const AboutMePage = () => {
               <BsFillStarFill />
             </StarWrapper>
           </LaneContainer>
-          <UnderBar />
           <LaneContainer>
             <IntroduceWrapper>
               <Front>
@@ -99,7 +92,6 @@ const AboutMePage = () => {
               </StatusText>
             </IntroduceWrapper>
           </LaneContainer>
-          <UnderBar />
           <DefaultLane>
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
@@ -110,12 +102,11 @@ const AboutMePage = () => {
               <StatusIcon color="#237014">
                 <GiSpiderWeb />
               </StatusIcon>
-              <StatusIcon color="#999b13" style={{ fontSize: "28px" }}>
+              <StatusIcon color="#999b13" style={{ fontSize: "26px" }}>
                 <BsMinecartLoaded />
               </StatusIcon>
             </StatusWrapper>
           </DefaultLane>
-          <UnderBar />
           <LaneContainer style={{ fontFamily: "EF_watermelonSalad", fontSize: "14px", fontWeight: "600" }}>
             <MyIntroBox>
               <IntroTopLane>
@@ -208,7 +199,7 @@ export const Charactor = styled.img`
   left: 0;
   animation: ${CharactorAppear} 0.5s forwards 0.2s;
 
-  @media screen and (max-width: 1600px) {
+  @media screen and (max-width: 1320px) {
     width: 400px;
   }
 
@@ -247,8 +238,14 @@ export const LaneContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  border-bottom: 1px solid #e6ca9b;
   padding: 40px 20px;
   gap: 10px;
+
+  @media screen and (max-width: 1320px) {
+    width: 55%;
+    padding: 10px 10px;
+  }
 `;
 
 export const DefaultLane = styled(LaneContainer)`
@@ -257,12 +254,10 @@ export const DefaultLane = styled(LaneContainer)`
   font-family: "EF_watermelonSalad";
   font-size: 18px;
   font-weight: 600;
-`;
 
-export const UnderBar = styled.div`
-  width: calc(50% + 20px);
-  height: 1px;
-  background-image: linear-gradient(to right, #e6ca9b, #967c4d, transparent);
+  @media screen and (max-width: 1320px) {
+    padding: 3px 10px;
+  }
 `;
 
 export const StarWrapper = styled.div`
@@ -272,6 +267,11 @@ export const StarWrapper = styled.div`
   gap: 10px;
   font-size: 32px;
   color: #ecd1a4;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 24px;
+    gap: 8px;
+  }
 `;
 
 export const IntroduceWrapper = styled.div`
@@ -283,6 +283,10 @@ export const IntroduceWrapper = styled.div`
   gap: 8px;
   font-size: 40px;
   color: #FFFFFF;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 30px;
+  }
 `;
 
 export const Front = styled.div`
@@ -291,12 +295,20 @@ export const Front = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 12px;
+  }
 `;
 
 export const StatusText = styled(Front)`
   margin-top: 8px;
   color: #acb2c9;
   font-size: 18px;
+
+  @media screen and (max-width: 16000px) {
+    font-size: 12px;
+  }
 `;
 
 export const StatusWrapper = styled.div`
@@ -329,6 +341,12 @@ export const NameIconWrapper = styled.div`
   &:hover {
     color: #ADADAD;
   }
+
+  @media screen and (max-width: 1320px) {
+    min-width: 28px;
+    height: 28px;
+    font-size: 18px;
+  }
 `;
 
 export const StatusIcon = styled.div<{ color: string }>`
@@ -343,6 +361,12 @@ export const StatusIcon = styled.div<{ color: string }>`
   align-items: center;
   box-shadow: #00000090 0px 0px 8px 0px;
   cursor: pointer;
+
+  @media screen and (max-width: 1320px) {
+    width: 32px;
+    height: 32px;
+    font-size: 26px;
+  }
 `;
 
 export const IntroTopLane = styled.div`
@@ -353,6 +377,10 @@ export const IntroTopLane = styled.div`
   align-items: center;
   gap: 10px;
   color: #FFFFFF;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 14px;
+  }
 `;
 
 export const MyIntroBox = styled.div`
@@ -362,6 +390,10 @@ export const MyIntroBox = styled.div`
   justify-content: center;
   align-items: start;
   gap: 30px;
+
+  @media screen and (max-width: 1320px) {
+    gap: 20px;
+  }
 `;
 
 export const IntroContentWrapper = styled.div`
@@ -373,6 +405,11 @@ export const IntroContentWrapper = styled.div`
   text-align: start;
   color: #FFFFFF;
   white-space: pre-line;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 14px;
+    line-height: 120%;
+  }
 `;
 
 const LocationButtonWrapper = styled.div`
@@ -381,6 +418,10 @@ const LocationButtonWrapper = styled.div`
   justify-content: start;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 1320px) {
+    gap: 20px;
+  }
 `;
 
 const LocationButton = styled.div`
@@ -404,12 +445,24 @@ const LocationButton = styled.div`
     border: 1px solid #177edf;
     background-image: linear-gradient(to top, #3b7fc0, transparent);
   }
+
+  @media screen and (max-width: 1320px) {
+    width: 160px;
+    height: 60px;
+    font-size: 18px;
+    gap: 10px;
+  }
 `;
 
 const LocationIcon = styled.img`
   width: 40px;
   height: 40px;
   object-fit: cover;
+
+  @media screen and (max-width: 1320px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 export default AboutMePage;
