@@ -18,7 +18,7 @@ const LocationBtn = () => {
         <LocationIcon src={Tistory} alt='' />
         Tistory
       </LocationButton>
-      <LocationButton size={-4} onClick={() => navigate("/skill")}>
+      <LocationButton size={-3} onClick={() => navigate("/skill")}>
         스킬 장착하러 가기
       </LocationButton>
     </LocationButtonWrapper>
@@ -76,6 +76,13 @@ const LocationButton = styled.div<{ size: number }>`
     gap: 5px;
     font-size: ${(props) => props.size + 12}px;
   }
+
+  @media screen and (max-width: 500px) {
+    width: 80px;
+    height: 30px;
+    gap: 5px;
+    font-size: ${(props) => props.size + 10}px;
+  }
 `;
 
 const LocationIcon = styled.img`
@@ -91,6 +98,11 @@ const LocationIcon = styled.img`
   @media screen and (max-width: 836px) {
     width: 20px;
     height: 20px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 14px;
+    height: 14px;
   }
 `;
 

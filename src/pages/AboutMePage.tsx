@@ -59,11 +59,15 @@ const AboutMePage = () => {
               </NameWrapper>
               <StatusText>
                 <NameWrapper>
-                  <GiSkullStaff style={{ fontSize: "28px" }} />
+                  <StatusIcons>
+                    <GiSkullStaff />
+                  </StatusIcons>
                   네크로맨서
                 </NameWrapper>
                 <NameWrapper>
-                  <RiSwordFill style={{ fontSize: "28px" }} />
+                  <StatusIcons>
+                    <RiSwordFill />
+                  </StatusIcons>
                   전투력
                   <div style={{ color: "#FFFFFF" }}>
                     01065325635
@@ -226,7 +230,10 @@ export const Charactor = styled.img`
   }
 
   @media screen and (max-width: 500px) {
-    width: 200px;
+    width: 160px;
+    bottom: auto;
+    top: 20px;
+    left: calc(50% - 80px);
   }
 `;
 
@@ -239,6 +246,10 @@ export const BackgroundCharactor = styled.img`
   top: 0;
   left: 0;
   z-index: 9;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 export const RightWrapper = styled.div`
@@ -274,6 +285,11 @@ export const LaneContainer = styled.div`
   @media screen and (max-width: 1320px) {
     width: 55%;
   }
+
+  @media screen and (max-width: 500px) {
+    width: calc(100% - 20px);
+    padding: 10px;
+  }
 `;
 
 export const DefaultLane = styled(LaneContainer)`
@@ -295,6 +311,10 @@ export const DefaultLane = styled(LaneContainer)`
   @media screen and (max-width: 836px) {
     font-size: 12px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const StarWrapper = styled.div`
@@ -312,6 +332,10 @@ export const StarWrapper = styled.div`
 
   @media screen and (max-width: 1320px) {
     font-size: 24px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 14px;
   }
 `;
 
@@ -333,6 +357,10 @@ export const IntroduceWrapper = styled.div`
   @media screen and (max-width: 1320px) {
     font-size: 30px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 export const Front = styled.div`
@@ -349,6 +377,10 @@ export const Front = styled.div`
   @media screen and (max-width: 1320px) {
     font-size: 12px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const StatusText = styled(Front)`
@@ -362,6 +394,30 @@ export const StatusText = styled(Front)`
 
   @media screen and (max-width: 1320px) {
     font-size: 12px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 8px;
+    margin-top: 3px;
+  }
+`;
+
+const StatusIcons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+
+  @media screen and (max-width: 1600px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 1320px) {
+    font-size: 22px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
   }
 `;
 
@@ -384,6 +440,10 @@ export const NameWrapper = styled(StatusWrapper)`
   gap: 5px;
   justify-content: start;
   text-align: start;
+
+  @media screen and (max-width: 500px) {
+    gap: 3px;
+  }
 `;
 
 export const NameIconWrapper = styled.div`
@@ -461,6 +521,10 @@ export const IntroTopLane = styled.div`
   @media screen and (max-width: 836px) {
     font-size: 12px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const MyIntroBox = styled.div`
@@ -481,6 +545,10 @@ export const MyIntroBox = styled.div`
 
   @media screen and (max-width: 836px) {
     gap: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    gap: 8px;
   }
 `;
 
@@ -507,6 +575,10 @@ export const IntroContentWrapper = styled.div`
   @media screen and (max-width: 836px) {
     font-size: 12px;
     line-height: 110%;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 9px;
   }
 `;
 
