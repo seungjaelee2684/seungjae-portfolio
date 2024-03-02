@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharactorImage from '../assets/images/picture.webp';
 import CharactorBG from '../assets/images/nukki.webp';
-import { BsFillStarFill, BsMinecartLoaded } from "react-icons/bs";
-import { GiSpiderWeb, GiSpikesHalf, GiSkullStaff, GiSmallFishingSailboat } from "react-icons/gi";
+import { BsFillStarFill } from "react-icons/bs";
+import { GiSpikesHalf, GiSkullStaff } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
 import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
-import MobileView from '../components/AboutMePage/MobileView';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
 import InfoModal from '../components/AboutMePage/InfoModal';
+import StatusLane from '../components/AboutMePage/StatusLane';
 
 const AboutMePage = () => {
 
@@ -77,34 +77,7 @@ const AboutMePage = () => {
             </IntroduceWrapper>
             {(information) && <InfoModal statusModal={statusModal}/>}
           </LaneContainer>
-          <DefaultLane>
-            <GiSpikesHalf style={{ color: "#e5cca0" }} />
-            행동특성
-            <StatusWrapper>
-              <StatusIcon
-                color="#294b94"
-                size={0}
-                onMouseOver={() => setStatusModal({...statusModal, state: 1})}
-                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
-                <GiSmallFishingSailboat />
-              </StatusIcon>
-              <StatusIcon
-                color="#237014"
-                size={-2}
-                onMouseOver={() => setStatusModal({...statusModal, state: 2})}
-                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
-                <GiSpiderWeb />
-              </StatusIcon>
-              <StatusIcon
-                color="#999b13"
-                size={-4}
-                onMouseOver={() => setStatusModal({...statusModal, state: 3})}
-                onMouseLeave={() => setStatusModal({...statusModal, state: undefined})}>
-                <BsMinecartLoaded />
-              </StatusIcon>
-              {(state) && <InfoModal statusModal={statusModal}/>}
-            </StatusWrapper>
-          </DefaultLane>
+          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal}/>
           <LaneContainer
             style={{
               fontFamily: "EF_watermelonSalad",
@@ -279,7 +252,7 @@ export const LaneContainer = styled.div`
   position: relative;
 
   @media screen and (max-width: 1600px) {
-    padding: 10px 10px 10px 0px;
+    padding: 20px 10px 20px 0px;
   }
 
   @media screen and (max-width: 1320px) {
@@ -402,6 +375,20 @@ export const StatusText = styled(Front)`
   }
 `;
 
+export const StatusWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-left: 20px;
+  position: relative;
+
+  @media screen and (max-width: 836px) {
+    gap: 5px;
+    margin-left: 10px;
+  }
+`;
+
 const StatusIcons = styled.div`
   display: flex;
   justify-content: center;
@@ -418,20 +405,6 @@ const StatusIcons = styled.div`
 
   @media screen and (max-width: 500px) {
     font-size: 16px;
-  }
-`;
-
-export const StatusWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  margin-left: 20px;
-  position: relative;
-
-  @media screen and (max-width: 836px) {
-    gap: 5px;
-    margin-left: 10px;
   }
 `;
 
