@@ -16,14 +16,56 @@ const LobyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(pageMove("Charactor"));
-  }, []);
+  type CharactorType = {
+    id: number,
+    content: string,
+  }
 
-  return (
-    <LobyInBoxContainer>
-      <CardWrapper>
-        <CardContainer onClick={() => navigate("/about")}>
+  const charactor : CharactorType[] = [
+    {id: 1, content: "캐릭터 접속"},
+    {id: 2, content: "새 캐릭터 추가"},
+  ];
+  const [selectCharactor, setSelectCharactor] = useState<number | undefined>();
+  console.log("선택 캐릭터", selectCharactor);
+
+  const onClickSelectHandler = (index: number) => {
+    if (selectCharactor) {
+      if (selectCharactor === index) {
+        setSelectCharactor(undefined);
+      } else {
+        setSelectCharactor(index);
+      };
+    } else {
+      setSelectCharactor(index);
+    };
+  };
+
+  const selectSaveContainer = () => {
+    if (selectCharactor === 1) {
+      return (
+        <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
+          <SelectBackgroundImage src={CardBG} alt=''/>
+          <SelectFilterContainer />
+          <CardContent>
+            <CardTopBox>
+              Frontend Developer
+            </CardTopBox>
+            <CardUnderBox>
+              <CardUnderText>
+                이승재
+              </CardUnderText>
+              <Stars>
+                <BsFillStarFill />
+                <BsFillStarFill />
+                <BsFillStarFill />
+              </Stars>
+            </CardUnderBox>
+          </CardContent>
+        </SelectCardContainer>
+      )
+    } else {
+      return (
+        <CardContainer onClick={() => onClickSelectHandler(1)}>
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
@@ -42,14 +84,69 @@ const LobyPage = () => {
             </CardUnderBox>
           </CardContent>
         </CardContainer>
+      )
+    };
+  };
+
+  const selectNewContainer = () => {
+    if (selectCharactor === 2) {
+      return (
+        <SelectCardContainer
+          style={{
+            boxShadow: "#b2b47696 0px 0px 5px 0px",
+            backgroundColor: "#27282d"
+          }}
+          onClick={() => onClickSelectHandler(2)}>
+          <SelectFilterContainer />
+          <GoPlus />
+        </SelectCardContainer>
+      )
+    } else {
+      return (
         <CardContainer
           style={{
             boxShadow: "#b2b47696 0px 0px 5px 0px",
             backgroundColor: "#27282d"
-          }}>
+          }}
+          onClick={() => onClickSelectHandler(2)}>
           <FilterContainer />
           <GoPlus />
         </CardContainer>
+      )
+    }
+  };
+
+  const selectButton = () => {
+    if (selectCharactor) {
+      return (
+        <ChoiceButton onClick={() => {
+          if (selectCharactor === 1) {
+            navigate("/about");
+          } else {
+
+          };
+        }}>
+          {charactor[selectCharactor - 1]?.content}
+        </ChoiceButton>
+      );
+    } else {
+      return (
+        <ChoiceButton>
+          캐릭터 선택
+        </ChoiceButton>
+      )
+    }
+  };
+
+  useEffect(() => {
+    dispatch(pageMove("Charactor"));
+  }, []);
+
+  return (
+    <LobyInBoxContainer>
+      <CardWrapper>
+        {selectSaveContainer()}
+        {selectNewContainer()}
         <NoneCardContainer>
           <IoIosPerson />
         </NoneCardContainer>
@@ -61,9 +158,7 @@ const LobyPage = () => {
         <PrevNextButton xy="-50%">
           <TbArrowBadgeLeft />
         </PrevNextButton>
-        <ChoiceButton>
-          캐릭터 선택
-        </ChoiceButton>
+        {selectButton()}
         <PrevNextButton xy="50%">
           <TbArrowBadgeRight />
         </PrevNextButton>
@@ -123,6 +218,12 @@ const CardBackgroundImage = styled.img`
   transition: all 0.2s;
 `;
 
+const SelectBackgroundImage = styled(CardBackgroundImage)`
+  width: 105%;
+  height: 85%;
+  left: -2.5%;
+`;
+
 const FilterContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -132,6 +233,10 @@ const FilterContainer = styled.div`
   z-index: 10;
   background-image: linear-gradient(to top, #000000b1, transparent);
   transition: all 0.2s;
+`;
+
+const SelectFilterContainer = styled(FilterContainer)`
+  background-image: linear-gradient(to top, #d3d4a433, transparent);
 `;
 
 const CardContainer = styled.div`
@@ -176,6 +281,13 @@ const CardContainer = styled.div`
     max-width: 150px;
     max-height: 50%;
   }
+`;
+
+const SelectCardContainer = styled(CardContainer)`
+  box-shadow: #dfe0b5c4 0px 0px 10px 2px;
+  border: 1px solid #d3d4a4;
+  transform: scale(105%);
+  color: #d1c797;
 `;
 
 const NoneCardContainer = styled.div`
