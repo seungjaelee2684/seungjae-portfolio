@@ -8,41 +8,28 @@ import { LiaGripfire } from "react-icons/lia";
 import { GoHomeFill } from "react-icons/go";
 import { HiUsers } from "react-icons/hi2";
 import { GrContactInfo } from "react-icons/gr";
+import { mobileView } from '../../store/modules/isMobile';
 
 const Header = () => {
 
   const navigate = useNavigate();
-  const headerRef = useRef<HTMLDivElement>(null);
-  // const [headerOpen, setHeaderOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 500);
-
-  // const onClickHeaderOpenHandler = () => {
-  //   if (headerRef.current) {
-  //     if (headerOpen) {
-  //       setHeaderOpen(false);
-  //       headerRef.current.style.transform = "translateX(0%)";
-  //     } else {
-  //       setHeaderOpen(true);
-  //       headerRef.current.style.transform = "translateX(100%)";
-  //     };
-  //   };
-  // };
+  const dispatch = useDispatch();
+  const isMobile = useSelector((state : RootState) => state.isMobile);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 500);
+      dispatch(mobileView(window.innerWidth <= 500));
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [window.innerWidth]);
 
   console.log("모바일 -> ", isMobile);
 
   return (
-    <HeaderLayout ref={headerRef}>
-      {/* <Button onClick={onClickHeaderOpenHandler}>a</Button> */}
+    <HeaderLayout>
       <HeaderWrapper>
         <NavButton
           onClick={() => {
@@ -73,12 +60,12 @@ const Header = () => {
         </NavButton>
         <NavButton
           onClick={() => {
-            navigate("/stack")
+            navigate("/skill")
           }}>
           <ButtonIcons>
             <LiaGripfire />
           </ButtonIcons>
-          Stacks
+          Skills
         </NavButton>
       </HeaderWrapper>
     </HeaderLayout>
@@ -91,6 +78,26 @@ const HeaderLayout = styled.header`
   left: 20px;
   z-index: 14;
   transition: all 0.4s ease-out;
+
+  @media screen and (max-width: 1320px) {
+    top: 70px;
+    left: 10px;
+  }
+
+  @media screen and (max-width: 970px) {
+    top: 70px;
+    left: auto;
+    right: 10px;
+  }
+
+  @media screen and (max-width: 500px) {
+    top: auto;
+    bottom: 10px;
+    left: auto;
+    right: 0;
+    width: calc(100% - 40px);
+    padding: 0px 20px;
+  }
 `;
 
 const HeaderWrapper = styled.nav`
@@ -99,6 +106,19 @@ const HeaderWrapper = styled.nav`
   align-items: center;
   gap: 60px;
   position: relative;
+
+  @media screen and (max-width: 1320px) {
+    gap: 30px;
+  }
+
+  @media screen and (max-width: 970px) {
+    flex-direction: row;
+  }
+
+  @media screen and (max-width: 500px) {
+    gap: 0px;
+    justify-content: space-between;
+  }
 `;
 
 const NavButton = styled.a`
@@ -119,10 +139,35 @@ const NavButton = styled.a`
     color: #aea8c4;
     text-shadow: 1px 1px 2px #3b3942;
   }
+
+  @media screen and (max-width: 1320px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 12px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+    gap: 2px;
+  }
 `;
 
 const ButtonIcons = styled.div`
   font-size: 60px;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 55px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 50px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+  }
 `;
 
 export default Header

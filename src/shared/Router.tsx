@@ -6,7 +6,7 @@ import AboutUsPage from '../pages/AboutMePage';
 import MainLayout from '../components/common/MainLayout';
 import StartPage from '../pages/StartPage';
 import Header from '../components/common/Header';
-import StacksPage from '../pages/StacksPage';
+import SkillsPage from '../pages/SkillsPage';
 
 const Router = () => {
   return (
@@ -18,7 +18,7 @@ const Router = () => {
             <Route path='/' element={<StartPage />} />
             <Route path='/loby' element={<LobyPage />} />
             <Route path='/about' element={<AboutUsPage />} />
-            <Route path='/stack' element={<StacksPage />} />
+            <Route path='/skill' element={<SkillsPage />} />
           </Route>
         </Routes>
       </AnimatePresence>

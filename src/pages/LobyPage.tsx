@@ -11,21 +11,61 @@ import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
 
-
-
 const LobyPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(pageMove("About Us"));
-  }, []);
+  type CharactorType = {
+    id: number,
+    content: string,
+  }
 
-  return (
-    <LobyInBoxContainer>
-      <CardWrapper>
-        <CardContainer onClick={() => navigate("/about")}>
+  const charactor : CharactorType[] = [
+    {id: 1, content: "캐릭터 접속"},
+    {id: 2, content: "새 캐릭터 추가"},
+  ];
+  const [selectCharactor, setSelectCharactor] = useState<number | undefined>();
+  console.log("선택 캐릭터", selectCharactor);
+
+  const onClickSelectHandler = (index: number) => {
+    if (selectCharactor) {
+      if (selectCharactor === index) {
+        setSelectCharactor(undefined);
+      } else {
+        setSelectCharactor(index);
+      };
+    } else {
+      setSelectCharactor(index);
+    };
+  };
+
+  const selectSaveContainer = () => {
+    if (selectCharactor === 1) {
+      return (
+        <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
+          <SelectBackgroundImage src={CardBG} alt=''/>
+          <SelectFilterContainer />
+          <CardContent>
+            <CardTopBox>
+              Frontend Developer
+            </CardTopBox>
+            <CardUnderBox>
+              <CardUnderText>
+                이승재
+              </CardUnderText>
+              <Stars>
+                <BsFillStarFill />
+                <BsFillStarFill />
+                <BsFillStarFill />
+              </Stars>
+            </CardUnderBox>
+          </CardContent>
+        </SelectCardContainer>
+      )
+    } else {
+      return (
+        <CardContainer onClick={() => onClickSelectHandler(1)}>
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
@@ -44,14 +84,69 @@ const LobyPage = () => {
             </CardUnderBox>
           </CardContent>
         </CardContainer>
+      )
+    };
+  };
+
+  const selectNewContainer = () => {
+    if (selectCharactor === 2) {
+      return (
+        <SelectCardContainer
+          style={{
+            boxShadow: "#b2b47696 0px 0px 5px 0px",
+            backgroundColor: "#27282d"
+          }}
+          onClick={() => onClickSelectHandler(2)}>
+          <SelectFilterContainer />
+          <GoPlus />
+        </SelectCardContainer>
+      )
+    } else {
+      return (
         <CardContainer
           style={{
             boxShadow: "#b2b47696 0px 0px 5px 0px",
             backgroundColor: "#27282d"
-          }}>
+          }}
+          onClick={() => onClickSelectHandler(2)}>
           <FilterContainer />
           <GoPlus />
         </CardContainer>
+      )
+    }
+  };
+
+  const selectButton = () => {
+    if (selectCharactor) {
+      return (
+        <ChoiceButton onClick={() => {
+          if (selectCharactor === 1) {
+            navigate("/about");
+          } else {
+
+          };
+        }}>
+          {charactor[selectCharactor - 1]?.content}
+        </ChoiceButton>
+      );
+    } else {
+      return (
+        <ChoiceButton>
+          캐릭터 선택
+        </ChoiceButton>
+      )
+    }
+  };
+
+  useEffect(() => {
+    dispatch(pageMove("Charactor"));
+  }, []);
+
+  return (
+    <LobyInBoxContainer>
+      <CardWrapper>
+        {selectSaveContainer()}
+        {selectNewContainer()}
         <NoneCardContainer>
           <IoIosPerson />
         </NoneCardContainer>
@@ -63,9 +158,7 @@ const LobyPage = () => {
         <PrevNextButton xy="-50%">
           <TbArrowBadgeLeft />
         </PrevNextButton>
-        <ChoiceButton>
-          캐릭터 선택
-        </ChoiceButton>
+        {selectButton()}
         <PrevNextButton xy="50%">
           <TbArrowBadgeRight />
         </PrevNextButton>
@@ -93,16 +186,26 @@ const LobyInBoxContainer = styled(InBoxContainer)`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 500px) {
+    height: 94%;
+    gap: 40px;
+  }
 `;
 
 const CardWrapper = styled.div`
   width: calc(100% - 40px);
   height: 65%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 16px;
   padding: 0px 20px;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const CardBackgroundImage = styled.img`
@@ -113,6 +216,12 @@ const CardBackgroundImage = styled.img`
   bottom: 0;
   left: 0;
   transition: all 0.2s;
+`;
+
+const SelectBackgroundImage = styled(CardBackgroundImage)`
+  width: 105%;
+  height: 85%;
+  left: -2.5%;
 `;
 
 const FilterContainer = styled.div`
@@ -126,10 +235,8 @@ const FilterContainer = styled.div`
   transition: all 0.2s;
 `;
 
-const StatusContent = styled.div`
-  font-size: 20px;
-  line-height: 100%;
-
+const SelectFilterContainer = styled(FilterContainer)`
+  background-image: linear-gradient(to top, #d3d4a433, transparent);
 `;
 
 const CardContainer = styled.div`
@@ -165,6 +272,22 @@ const CardContainer = styled.div`
   &:hover ${FilterContainer} {
     background-image: linear-gradient(to top, #d3d4a433, transparent);
   }
+
+  @media screen and (max-width: 1320px) {
+    max-height: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    max-width: 150px;
+    max-height: 50%;
+  }
+`;
+
+const SelectCardContainer = styled(CardContainer)`
+  box-shadow: #dfe0b5c4 0px 0px 10px 2px;
+  border: 1px solid #d3d4a4;
+  transform: scale(105%);
+  color: #d1c797;
 `;
 
 const NoneCardContainer = styled.div`
@@ -181,6 +304,15 @@ const NoneCardContainer = styled.div`
   background-image: radial-gradient(circle at center, #2a2a30, #1c1c1f);
   color: #15151660;
   font-size: 200px;
+
+  @media screen and (max-width: 1320px) {
+    max-height: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    max-width: 150px;
+    max-height: 50%;
+  }
 `;
 
 const CardContent = styled.div`
@@ -196,12 +328,29 @@ const CardContent = styled.div`
   align-items: center;
   line-height: 100%;
   z-index: 11;
+
+  @media screen and (max-width: 500px) {
+    height: calc(100% - 20px);
+    padding: 10px 0px;
+  }
 `;
 
 const CardTopBox = styled.div`
   width: 100%;
   font-size: 18px;
   color: #FFFFFF;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
 const CardUnderBox = styled.div`
@@ -223,6 +372,11 @@ const CardUnderText = styled.div`
   color: #e2dbb7;
   background-image: radial-gradient(circle at bottom center, #e2dbb761 0%, transparent 100%);
   text-shadow: 0px 0px 4px #616227;
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+    height: 20px;
+  }
 `;
 
 const Stars = styled.div`
@@ -232,6 +386,10 @@ const Stars = styled.div`
   gap: 8px;
   font-size: 14px;
   color: #e2dbb7;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 const ChoiceButtonWrapper = styled.div`
@@ -240,6 +398,10 @@ const ChoiceButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+
+  @media screen and (max-width: 500px) {
+    gap: 10px;
+  }
 `;
 
 const ChoiceButton = styled.div`
@@ -262,6 +424,12 @@ const ChoiceButton = styled.div`
     color: #e2dbb7;
     border: 1px solid #e2dbb7;
     background-image: radial-gradient(circle at bottom center, #e2dbb724, #201d31c5);
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
   }
 `;
 
