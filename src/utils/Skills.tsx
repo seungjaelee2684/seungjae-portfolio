@@ -16,83 +16,95 @@ export const skillList = [
         name: "HTML5",
         content: <FaHtml5 />,
         color: "#E34F26",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 2,
         name: "CSS3",
         content: <IoLogoCss3 />,
         color: "#1572B6",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 3,
         name: "JavaScript",
         content: <SiJavascript />,
         color: "#F7DF1E",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 4,
         name: "TypeScript",
         content: <SiTypescript />,
         color: "#3178C6",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 5,
         name: "React",
         content: <FaReact />,
         color: "#61DAFB",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 6,
         name: "Redux",
         content: <SiRedux />,
         color: "#764ABC",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 7,
         name: "Recoil",
         content: <SiRecoil />,
         color: "#3578E5",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 8,
         name: "Styled\nComponents",
         content: <SiStyledcomponents />,
         color: "#DB7093",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 9,
         name: "React\nQuery",
         content: <SiReactquery />,
         color: "#FF4154",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 10,
         name: "Axios",
         content: <SiAxios />,
         color: "#5A29E4",
-        mystack: true
+        mystack: true,
+        percentage: 0
     },
     {
         id: 11,
         name: "Locked",
         content: <AiOutlineLock />,
         color: "#b5b5b5",
-        mystack: false
+        mystack: false,
+        percentage: 0
     },
     {
         id: 12,
         name: "Locked",
         content: <AiOutlineLock />,
         color: "#b5b5b5",
-        mystack: false
+        mystack: false,
+        percentage: 0
     },
 ];

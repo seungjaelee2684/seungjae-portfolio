@@ -56,8 +56,10 @@ const SkillsLayout = styled.div`
 `;
 
 const LeftContainer = styled.section`
-  width: 50%;
-  height: 100%;
+  width: calc(50% - 70px);
+  height: calc(100% - 40px);
+  position: relative;
+  padding: 20px 10px 20px 60px;
 `;
 
 const RightContainer = styled.section`
@@ -66,9 +68,9 @@ const RightContainer = styled.section`
 `;
 
 const SkillsListWrapper = styled.div`
-  width: calc(100% - 80px);
-  height: calc(100% - 100px);
-  margin: 30px;
+  width: calc(100% - 60px);
+  height: calc(100% - 80px);
+  margin: 20px;
   padding: 20px 10px;
   display: flex;
   justify-content: center;

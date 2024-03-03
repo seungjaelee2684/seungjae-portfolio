@@ -84,17 +84,10 @@ const HeaderLayout = styled.header`
     left: 10px;
   }
 
-  @media screen and (max-width: 970px) {
-    top: 70px;
-    left: auto;
-    right: 10px;
-  }
-
   @media screen and (max-width: 500px) {
     top: auto;
     bottom: 10px;
-    left: auto;
-    right: 0;
+    left: 0;
     width: calc(100% - 40px);
     padding: 0px 20px;
   }
