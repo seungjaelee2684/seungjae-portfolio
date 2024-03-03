@@ -10,7 +10,16 @@ import { SiReactquery } from "react-icons/si";
 import { SiAxios } from "react-icons/si";
 import { AiOutlineLock } from "react-icons/ai";
 
-export const skillList = [
+type SkillListType = {
+    id: number,
+    name: string,
+    content: React.ReactNode,
+    color: string,
+    mystack: boolean,
+    percentage: number
+};
+
+export const skillList : SkillListType[] = [
     {
         id: 1,
         name: "HTML5",

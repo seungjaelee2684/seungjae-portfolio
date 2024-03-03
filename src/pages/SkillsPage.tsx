@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { InBoxContainer } from './AboutMePage';
 import { useDispatch } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import { skillList } from '../utils/Skills';
+import Fitting from '../components/SkillsPage/Fitting';
 
 const SkillsPage = () => {
 
   const dispatch = useDispatch();
+
+  const [fittingSkill, setFittingSkill] = useState<number>(0);
+
+  const onClickStackAddHandler = (item : any) => {
+    setFittingSkill(fittingSkill + item.percentage);
+  };
 
   useEffect(() => {
     dispatch(pageMove("Skills"));
@@ -17,14 +24,14 @@ const SkillsPage = () => {
     <InBoxContainer>
       <SkillsLayout>
         <LeftContainer>
-
+          <Fitting fittingSkill={fittingSkill} setFittingSkill={setFittingSkill}/>
         </LeftContainer>
         <RightContainer>
           <SkillsListWrapper>
             {skillList?.map((item: any) => {
               return (
                 (item?.mystack)
-                  ? <SkillButton>
+                  ? <SkillButton onClick={() => onClickStackAddHandler(item)}>
                     <SkillIcon color={item?.color}>
                       {item?.content}
                     </SkillIcon>
@@ -56,10 +63,10 @@ const SkillsLayout = styled.div`
 `;
 
 const LeftContainer = styled.section`
-  width: calc(50% - 70px);
-  height: calc(100% - 40px);
+  width: calc(50% - 90px);
+  height: calc(100% - 120px);
   position: relative;
-  padding: 20px 10px 20px 60px;
+  padding: 100px 10px 20px 80px;
 `;
 
 const RightContainer = styled.section`
@@ -126,7 +133,7 @@ const SkillButton = styled.div`
   white-space: pre-line;
 
   &:hover ${SkillIcon} {
-    font-size: 54px;
+    background-image: linear-gradient(to top, #c8a87897, transparent);
   }
 
   @media screen and (max-width: 1320px) {
@@ -134,20 +141,12 @@ const SkillButton = styled.div`
     height: 105px;
     font-size: 14px;
     gap: 8px;
-
-    &:hover ${SkillIcon} {
-      font-size: 38px;
-    }
   }
 
   @media screen and (max-width: 836px) {
     width: 92px;
     height: 92px;
     font-size: 14px;
-
-    &:hover ${SkillIcon} {
-      font-size: 30px;
-    }
   }
 `;
 
