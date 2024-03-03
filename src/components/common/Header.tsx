@@ -9,11 +9,13 @@ import { GoHomeFill } from "react-icons/go";
 import { HiUsers } from "react-icons/hi2";
 import { GrContactInfo } from "react-icons/gr";
 import { mobileView } from '../../store/modules/isMobile';
+import { FaDungeon } from "react-icons/fa6";
 
 const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const page = useSelector((state : RootState) => state.pageState);
   const isMobile = useSelector((state : RootState) => state.isMobile);
 
   useEffect(() => {
@@ -32,6 +34,7 @@ const Header = () => {
     <HeaderLayout>
       <HeaderWrapper>
         <NavButton
+          style={{color: `${(page === "") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/")
           }}>
@@ -41,6 +44,7 @@ const Header = () => {
           Main
         </NavButton>
         <NavButton
+          style={{color: `${(page === "Charactor") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/loby")
           }}>
@@ -50,6 +54,7 @@ const Header = () => {
           Charactor
         </NavButton>
         <NavButton
+          style={{color: `${(page === "About Us") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/about")
           }}>
@@ -59,6 +64,7 @@ const Header = () => {
           About Us
         </NavButton>
         <NavButton
+          style={{color: `${(page === "Skills") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/skill")
           }}>
@@ -66,6 +72,16 @@ const Header = () => {
             <LiaGripfire />
           </ButtonIcons>
           Skills
+        </NavButton>
+        <NavButton
+          style={{color: `${(page === "Dungeon") ? "#d2cbe9" : ""}`}}
+          onClick={() => {
+            navigate("/dungeon")
+          }}>
+          <ButtonIcons>
+            <FaDungeon />
+          </ButtonIcons>
+          Dungeon
         </NavButton>
       </HeaderWrapper>
     </HeaderLayout>
@@ -84,19 +100,11 @@ const HeaderLayout = styled.header`
     left: 10px;
   }
 
-  @media screen and (max-width: 970px) {
-    top: 70px;
-    left: auto;
-    right: 10px;
-  }
-
   @media screen and (max-width: 500px) {
     top: auto;
     bottom: 10px;
-    left: auto;
-    right: 0;
-    width: calc(100% - 40px);
-    padding: 0px 20px;
+    left: 0;
+    width: 100%;
   }
 `;
 
@@ -116,8 +124,9 @@ const HeaderWrapper = styled.nav`
   }
 
   @media screen and (max-width: 500px) {
+    width: 100%;
     gap: 0px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 `;
 
@@ -136,7 +145,7 @@ const NavButton = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: #aea8c4;
+    color: #d2cbe9;
     text-shadow: 1px 1px 2px #3b3942;
   }
 

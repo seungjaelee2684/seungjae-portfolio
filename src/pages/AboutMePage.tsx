@@ -147,6 +147,11 @@ export const InBoxContainer = styled.div`
   ::-webkit-scrollbar {
    opacity: 0;
   }
+
+  @media screen and (max-width: 500px) {
+    padding-bottom: 60px;
+    height: calc(100% - 60px);
+  }
 `;
 
 export const BackgroundEffect = styled.div`
@@ -181,6 +186,10 @@ export const InBoxContent = styled.section`
   display: flex;
   justify-content: center;
   align-items: end;
+
+  @media screen and (max-width: 500px) {
+    height: calc(100% - 60px);
+  }
 `;
 
 export const Charactor = styled.img`
@@ -236,8 +245,6 @@ export const RightWrapper = styled.div`
 
   @media screen and (max-width: 836px) {
     justify-content: end;
-    margin-bottom: 60px;
-    height: calc(100% - 60px);
   }
 `;
 
