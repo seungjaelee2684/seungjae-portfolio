@@ -37,7 +37,11 @@ const SkillsPage = () => {
     <InBoxContainer>
       <SkillsLayout>
         <LeftContainer>
-          <Fitting fittingSkill={fittingSkill} setFittingSkill={setFittingSkill}/>
+          <Fitting
+            skillArr={skillArr}
+            setSkillArr={setSkillArr}
+            fittingSkill={fittingSkill}
+            setFittingSkill={setFittingSkill}/>
         </LeftContainer>
         <RightContainer>
           <SkillsListWrapper>
@@ -89,6 +93,7 @@ const SkillsLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   @media screen and (max-width: 1320px) {
     flex-direction: column;
@@ -102,7 +107,9 @@ const LeftContainer = styled.section`
   padding: 100px 10px 20px 80px;
 
   @media screen and (max-width: 1320px) {
-    height: calc(60% - 120px);
+    height: calc(60% - 80px);
+    padding: 60px 10px 20px 10px;
+    width: calc(100% - 20px);
   }
 `;
 
@@ -113,6 +120,10 @@ const RightContainer = styled.section`
 
   @media screen and (max-width: 1320px) {
     width: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 50%;
   }
 `;
 
@@ -130,6 +141,14 @@ const SkillsListWrapper = styled.div`
 
   @media screen and (max-width: 836px) {
     gap: 8px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: calc(100% - 40px);
+    height: calc(100% - 30px);
+    margin: 10px;
+    padding: 10px 5px;
+    gap: 3px;
   }
 `;
 
@@ -158,6 +177,12 @@ const SkillIcon = styled.div<{ color : string }>`
     min-width: 50px;
     min-height: 50px;
     font-size: 28px;
+  }
+
+  @media screen and (max-width: 500px) {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 20px;
   }
 `;
 
@@ -190,6 +215,12 @@ const SkillButton = styled.div`
     height: 92px;
     font-size: 14px;
   }
+
+  @media screen and (max-width: 500px) {
+    width: 64px;
+    height: 70px;
+    font-size: 9px;
+  }
 `;
 
 const LockedIcon = styled.div`
@@ -209,8 +240,12 @@ const LockedIcon = styled.div`
     font-size: 36px;
   }
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 836px) {
     font-size: 28px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 22px;
   }
 `;
 
@@ -229,6 +264,14 @@ const SelectSkill = styled.div`
 
   @media screen and (max-width: 1320px) {
     font-size: 18px;
+  }
+
+  @media screen and (max-width: 836px) {
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
   }
 `;
 
