@@ -60,6 +60,22 @@ const Fitting : React.FC<FittingProps> = ({ fittingSkill, setFittingSkill }) => 
                 </BackendStackBox>
             </BackendStackWrapper>
         </TopContainer>
+        <ButtonWrapper>
+            {(fittingSkill === 0)
+                ? <DefaultButton>
+                    전체 스킬 장착해제
+                </DefaultButton>
+                : <Button>
+                    전체 스킬 장착해제
+                </Button>}
+            {(fittingSkill < 100)
+                ? <DefaultButton>
+                    스킬 장착 완료
+                </DefaultButton>
+                : <Button>
+                    스킬 장착 완료
+                </Button>}
+        </ButtonWrapper>
     </FittingContainer>
   )
 };
@@ -72,7 +88,11 @@ const FittingContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
+    
+    @media screen and (max-width: 1320px) {
+        gap: 0px;
+    }
 `;
 
 const TopContainer = styled.div`
@@ -168,6 +188,50 @@ const BackendStack = styled.div<{ color : string }>`
 
     @media screen and (max-width: 1320px) {
         font-size: 48px;
+    }
+`;
+
+const ButtonWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    gap: 40px;
+`;
+
+const DefaultButton = styled.div`
+    width: 180px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: 1px solid #177edf24;
+    background-image: linear-gradient(to top, #3b7fc024, transparent);
+    box-shadow: none;
+    color: #ADADAD;
+    background-color: #000000;
+    cursor: default;
+
+    @media screen and (max-width: 1320px) {
+        width: 140px;
+        height: 46px;
+        font-size: 14px;
+    }
+`;
+
+const Button = styled(DefaultButton)`
+    border: 1px solid #177edf6a;
+    background-image: linear-gradient(to top, #3b7fc06a, transparent);
+    box-shadow: #177edf6a 0px 0px 4px 0px;
+    color: #FFFFFF;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: #177edf 0px 0px 4px 0px;
+        border: 1px solid #177edf;
+        background-image: linear-gradient(to top, #3b7fc0, transparent);
     }
 `;
 
