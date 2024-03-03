@@ -6,14 +6,25 @@ import { SiMongodb } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { SiJira } from "react-icons/si";
 import { SiVisualstudiocode } from "react-icons/si";
+import { useNavigate } from 'react-router-dom';
 
 interface FittingProps {
+    skillArr: number[];
+    setSkillArr: React.Dispatch<React.SetStateAction<number[]>>;
     fittingSkill: number;
     setFittingSkill: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Fitting : React.FC<FittingProps> = ({ fittingSkill, setFittingSkill }) => {
-  return (
+const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill, setFittingSkill }) => {
+  
+    const navigate = useNavigate();
+
+    const onClickRemoveSkillHandler = () => {
+        setSkillArr([]);
+        setFittingSkill(0);
+    };
+  
+    return (
     <FittingContainer>
         <TopContainer>
             <MainStack>
@@ -34,7 +45,7 @@ const Fitting : React.FC<FittingProps> = ({ fittingSkill, setFittingSkill }) => 
                 </Tools>
                 <Tools
                     title="Visual Studio Code"
-                    right='30px'
+                    right='20px'
                     color="#007ACC">
                     <SiVisualstudiocode />
                 </Tools>
@@ -65,14 +76,14 @@ const Fitting : React.FC<FittingProps> = ({ fittingSkill, setFittingSkill }) => 
                 ? <DefaultButton>
                     전체 스킬 장착해제
                 </DefaultButton>
-                : <Button>
+                : <Button onClick={onClickRemoveSkillHandler}>
                     전체 스킬 장착해제
                 </Button>}
             {(fittingSkill < 100)
                 ? <DefaultButton>
                     스킬 장착 완료
                 </DefaultButton>
-                : <Button>
+                : <Button onClick={() => navigate("/dungeon")}>
                     스킬 장착 완료
                 </Button>}
         </ButtonWrapper>
@@ -92,6 +103,10 @@ const FittingContainer = styled.div`
     
     @media screen and (max-width: 1320px) {
         gap: 0px;
+    }
+
+    @media screen and (max-width: 800px) {
+        gap: 30px;
     }
 `;
 
@@ -118,6 +133,18 @@ const MainStack = styled.div`
         min-width: 260px;
         height: 260px;
     }
+
+    @media screen and (max-width: 800px) {
+        min-width: 200px;
+        height: 200px;
+        font-size: 28px;
+    }
+
+    @media screen and (max-width: 500px) {
+        min-width: 120px;
+        height: 120px;
+        font-size: 22px;
+    }
 `;
 
 const ToolsWrapper = styled.div`
@@ -128,6 +155,16 @@ const ToolsWrapper = styled.div`
 
     @media screen and (max-width: 1320px) {
         width: 80px;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 70px;
+        gap: 16px;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 50px;
+        gap: 8px;
     }
 `;
 
@@ -143,6 +180,18 @@ const Tools = styled(MainStack)<{ right : string, color : string }>`
         height: 76px;
         font-size: 40px;
     }
+
+    @media screen and (max-width: 800px) {
+        min-width: 64px;
+        height: 64px;
+        font-size: 36px;
+    }
+
+    @media screen and (max-width: 500px) {
+        min-width: 40px;
+        height: 40px;
+        font-size: 24px;
+    }
 `;
 
 const BackendStackWrapper = styled.div`
@@ -152,6 +201,14 @@ const BackendStackWrapper = styled.div`
     align-items: center;
     gap: 30px;
     margin-left: 80px;
+
+    @media screen and (max-width: 800px) {
+        margin-left: 60px;
+    }
+
+    @media screen and (max-width: 500px) {
+        margin-left: 40px;
+    }
 `;
 
 const BackendStackTitle = styled.div`
@@ -160,6 +217,16 @@ const BackendStackTitle = styled.div`
 
     @media screen and (max-width: 1320px) {
         font-size: 20px;
+    }
+
+    @media screen and (max-width: 800px) {
+        font-size: 18px;
+        line-height: 130%;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+        line-height: 100%;
     }
 `;
 
@@ -179,6 +246,18 @@ const BackendStackBox = styled.div`
         width: 80px;
         height: 80px;
     }
+
+    @media screen and (max-width: 800px) {
+        width: 66px;
+        height: 66px;
+        margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 3px;
+    }
 `;
 
 const BackendStack = styled.div<{ color : string }>`
@@ -189,6 +268,14 @@ const BackendStack = styled.div<{ color : string }>`
     @media screen and (max-width: 1320px) {
         font-size: 48px;
     }
+
+    @media screen and (max-width: 800px) {
+        font-size: 44px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 30px;
+    }
 `;
 
 const ButtonWrapper = styled.div`
@@ -197,7 +284,15 @@ const ButtonWrapper = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 10;
-    gap: 40px;
+    gap: 30px;
+
+    @media screen and (max-width: 800px) {
+        gap: 16px;
+    }
+
+    @media screen and (max-width: 500px) {
+        gap: 20px;
+    }
 `;
 
 const DefaultButton = styled.div`
@@ -218,6 +313,18 @@ const DefaultButton = styled.div`
         width: 140px;
         height: 46px;
         font-size: 14px;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 120px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100px;
+        height: 32px;
+        font-size: 10px;
     }
 `;
 
