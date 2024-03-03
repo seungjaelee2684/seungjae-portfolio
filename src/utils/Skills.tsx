@@ -26,7 +26,7 @@ export const skillList : SkillListType[] = [
         content: <FaHtml5 />,
         color: "#E34F26",
         mystack: true,
-        percentage: 0
+        percentage: 4
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ export const skillList : SkillListType[] = [
         content: <IoLogoCss3 />,
         color: "#1572B6",
         mystack: true,
-        percentage: 0
+        percentage: 6
     },
     {
         id: 3,
@@ -42,7 +42,7 @@ export const skillList : SkillListType[] = [
         content: <SiJavascript />,
         color: "#F7DF1E",
         mystack: true,
-        percentage: 0
+        percentage: 12
     },
     {
         id: 4,
@@ -50,7 +50,7 @@ export const skillList : SkillListType[] = [
         content: <SiTypescript />,
         color: "#3178C6",
         mystack: true,
-        percentage: 0
+        percentage: 24
     },
     {
         id: 5,
@@ -58,7 +58,7 @@ export const skillList : SkillListType[] = [
         content: <FaReact />,
         color: "#61DAFB",
         mystack: true,
-        percentage: 0
+        percentage: 34
     },
     {
         id: 6,
@@ -66,7 +66,7 @@ export const skillList : SkillListType[] = [
         content: <SiRedux />,
         color: "#764ABC",
         mystack: true,
-        percentage: 0
+        percentage: 3
     },
     {
         id: 7,
@@ -74,7 +74,7 @@ export const skillList : SkillListType[] = [
         content: <SiRecoil />,
         color: "#3578E5",
         mystack: true,
-        percentage: 0
+        percentage: 4
     },
     {
         id: 8,
@@ -82,7 +82,7 @@ export const skillList : SkillListType[] = [
         content: <SiStyledcomponents />,
         color: "#DB7093",
         mystack: true,
-        percentage: 0
+        percentage: 10
     },
     {
         id: 9,
@@ -90,7 +90,7 @@ export const skillList : SkillListType[] = [
         content: <SiReactquery />,
         color: "#FF4154",
         mystack: true,
-        percentage: 0
+        percentage: 2
     },
     {
         id: 10,
@@ -98,7 +98,7 @@ export const skillList : SkillListType[] = [
         content: <SiAxios />,
         color: "#5A29E4",
         mystack: true,
-        percentage: 0
+        percentage: 1
     },
     {
         id: 11,

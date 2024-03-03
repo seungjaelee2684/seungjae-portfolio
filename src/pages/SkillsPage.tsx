@@ -10,11 +10,24 @@ const SkillsPage = () => {
 
   const dispatch = useDispatch();
 
+  const [skillArr, setSkillArr] = useState<number[]>([]);
   const [fittingSkill, setFittingSkill] = useState<number>(0);
 
   const onClickStackAddHandler = (item : any) => {
-    setFittingSkill(fittingSkill + item.percentage);
+    if (skillArr.includes(item?.id)) {
+      const removeSkill = skillArr?.filter((value) => value !== item?.id);
+
+      setSkillArr(removeSkill);
+      setFittingSkill(fittingSkill - item?.percentage);
+    } else {
+      if (fittingSkill < 100) {
+        setSkillArr([...skillArr, item?.id]);
+        setFittingSkill(fittingSkill + item?.percentage);
+      };
+    };
   };
+
+  console.log("My stack", skillArr, fittingSkill);
 
   useEffect(() => {
     dispatch(pageMove("Skills"));
@@ -31,13 +44,29 @@ const SkillsPage = () => {
             {skillList?.map((item: any) => {
               return (
                 (item?.mystack)
-                  ? <SkillButton onClick={() => onClickStackAddHandler(item)}>
-                    <SkillIcon color={item?.color}>
-                      {item?.content}
-                    </SkillIcon>
-                    {item?.name}
-                  </SkillButton>
-                  : <SkillButton style={{cursor: "default"}}>
+                  ? (skillArr?.includes(item?.id))
+                    ? <SkillButton
+                      key={item?.id}
+                      onClick={() => onClickStackAddHandler(item)}>
+                      <SkillIcon color={item?.color}>
+                        <SelectSkill>
+                          {item?.percentage}%
+                        </SelectSkill>
+                        {item?.content}
+                      </SkillIcon>
+                      {item?.name}
+                    </SkillButton>
+                    : <SkillButton
+                      key={item?.id}
+                      onClick={() => onClickStackAddHandler(item)}>
+                      <SkillIcon color={item?.color}>
+                        {item?.content}
+                      </SkillIcon>
+                      {item?.name}
+                    </SkillButton>
+                  : <SkillButton
+                    key={item?.id}
+                    style={{cursor: "default"}}>
                     <SkillIcon color={item?.color}>
                       <LockedIcon>
                         {item?.content}
@@ -60,6 +89,10 @@ const SkillsLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1320px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftContainer = styled.section`
@@ -67,11 +100,20 @@ const LeftContainer = styled.section`
   height: calc(100% - 120px);
   position: relative;
   padding: 100px 10px 20px 80px;
+
+  @media screen and (max-width: 1320px) {
+    height: calc(60% - 120px);
+  }
 `;
 
 const RightContainer = styled.section`
   width: 50%;
   height: 100%;
+  position: relative;
+
+  @media screen and (max-width: 1320px) {
+    width: 100%;
+  }
 `;
 
 const SkillsListWrapper = styled.div`
@@ -169,6 +211,24 @@ const LockedIcon = styled.div`
 
   @media screen and (max-width: 1320px) {
     font-size: 28px;
+  }
+`;
+
+const SelectSkill = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #00000090;
+  color: #FFFFFF;
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 18px;
   }
 `;
 
