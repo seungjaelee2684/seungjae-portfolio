@@ -88,8 +88,7 @@ const HeaderLayout = styled.header`
     top: auto;
     bottom: 10px;
     left: 0;
-    width: calc(100% - 40px);
-    padding: 0px 20px;
+    width: 100%;
   }
 `;
 
@@ -109,8 +108,9 @@ const HeaderWrapper = styled.nav`
   }
 
   @media screen and (max-width: 500px) {
+    width: 100%;
     gap: 0px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 `;
 
