@@ -4,11 +4,13 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
+import ModalContainer from './ModalContainer';
 
 const MainLayout = () => {
 
   const location = useLocation();
 
+  const isModal = useSelector((state : RootState) => state.modalOpen.isopen)
   const windowPath = useSelector((state : RootState) => state.pageState);
 
   return (
@@ -30,6 +32,7 @@ const MainLayout = () => {
           </AboutWrapper>
         </AboutContainer>
       </EffectAnimation>
+      {(isModal) && <ModalContainer />}
     </MainLayOut>
   )
 };
