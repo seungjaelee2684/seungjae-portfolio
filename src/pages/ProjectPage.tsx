@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { pageMove } from '../store/modules/pageState';
+import { InBoxContainer } from './AboutMePage';
 
 const ProjectPage = () => {
 
@@ -12,7 +13,9 @@ const ProjectPage = () => {
     }, []);
 
     return (
-        <div>ProjectPage</div>
+        <InBoxContainer>
+            ProjectPage
+        </InBoxContainer>
     )
 };
 

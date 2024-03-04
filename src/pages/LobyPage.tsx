@@ -10,6 +10,7 @@ import { pageMove } from '../store/modules/pageState';
 import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
+import { modalOpen } from '../store/modules/globalModalOpen';
 
 const LobyPage = () => {
 
@@ -123,7 +124,7 @@ const LobyPage = () => {
           if (selectCharactor === 1) {
             navigate("/about");
           } else {
-
+            dispatch(modalOpen({ kind: "addCharactor", isopen: true}))
           };
         }}>
           {charactor[selectCharactor - 1]?.content}
