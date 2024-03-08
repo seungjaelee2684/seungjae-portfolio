@@ -8,6 +8,7 @@ import { SiRecoil } from "react-icons/si";
 import { SiStyledcomponents } from "react-icons/si";
 import { SiReactquery } from "react-icons/si";
 import { SiAxios } from "react-icons/si";
+import { SiNextdotjs } from "react-icons/si";
 import { AiOutlineLock } from "react-icons/ai";
 
 type SkillListType = {
@@ -58,7 +59,7 @@ export const skillList : SkillListType[] = [
         content: <FaReact />,
         color: "#61DAFB",
         mystack: true,
-        percentage: 34
+        percentage: 32
     },
     {
         id: 6,
@@ -102,11 +103,11 @@ export const skillList : SkillListType[] = [
     },
     {
         id: 11,
-        name: "Locked",
-        content: <AiOutlineLock />,
-        color: "#b5b5b5",
-        mystack: false,
-        percentage: 0
+        name: "Next.js",
+        content: <SiNextdotjs />,
+        color: "#000000",
+        mystack: true,
+        percentage: 2
     },
     {
         id: 12,
