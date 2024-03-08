@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components';
+import { projectDto } from '../../utils/Projects';
 
 const ProjectCard = () => {
 
@@ -11,14 +12,14 @@ const ProjectCard = () => {
         const movement = (e: any) => {
             let x = e.offsetX;
             let y = e.offsetY;
-            let rotateX = 4 / 30 * y - 20;
-            let rotateY = -1 / 5 * x + 20;
+            let rotateX = 4 / 19 * y - 20;
+            let rotateY = -2 / 17 * x + 20;
 
             if (containerRef.current && overlayRef.current && effectRef.current) {
                 containerRef.current.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 overlayRef.current.style.filter = "brightness(1.2) opacity(0.8)";
                 overlayRef.current.style.backgroundPosition = `${x / 5 + y / 5}%`;
-                effectRef.current.style.background = `radial-gradient(circle at ${x}px ${y}px, #ffffff3e 10%, transparent 80%)`;
+                effectRef.current.style.background = `radial-gradient(circle at ${x}px ${y}px, #ffffff7d 10%, transparent 50%)`;
             };
         };
 
@@ -47,20 +48,21 @@ const ProjectCard = () => {
         <ProjectCardBox ref={containerRef}>
             <Overlay ref={overlayRef} />
             <WhiteGradient ref={effectRef} />
-            ProjectPage
+            <CardImage src={projectDto[0]?.thumbnail} alt='' />
         </ProjectCardBox>
     )
 };
 
 const ProjectCardBox = styled.div`
-    width: 220px;
-    height: 310px;
+    width: 360px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
     transition: all 0.1s;
+    border-radius: 10px;
     cursor: pointer;
 `;
 
@@ -78,6 +80,7 @@ const Overlay = styled.div`
     mix-blend-mode: color-dodge;
     background-size: 150% 150%;
     background-position: 100%;
+    filter: brightness(1.2) opacity(0);
 `;
 
 const WhiteGradient = styled.div`
@@ -86,8 +89,13 @@ const WhiteGradient = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background: radial-gradient(circle at 30% 10%, #ffffff3e 10%, transparent 80%);
     background-size: cover;
+`;
+
+const CardImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;
 
 export default ProjectCard;
