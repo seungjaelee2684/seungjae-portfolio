@@ -95,7 +95,7 @@ const HeaderLayout = styled.header`
   z-index: 14;
   transition: all 0.4s ease-out;
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1600px) {
     top: 70px;
     left: 10px;
   }
@@ -115,7 +115,7 @@ const HeaderWrapper = styled.nav`
   gap: 60px;
   position: relative;
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1600px) {
     gap: 30px;
   }
 

@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import { pageMove } from '../store/modules/pageState';
 import { InBoxContainer } from './AboutMePage';
 import ProjectCard from '../components/ProjectPage/ProjectCard';
+import { projectDto } from '../utils/Projects';
 
 const ProjectPage = () => {
 
     const dispatch = useDispatch();
     const slideRef = useRef<HTMLDivElement>(null);
-    const [step, setStep] = useState<number>(0);
-    const stepCurrent = step * 390;
+    const [step, setStep] = useState<number>(1);
+    const stepCurrent = step * 480;
     const [projectKind, setProjectKind] = useState<any>();
 
     const onClickNextHandler = () => {
@@ -30,9 +31,16 @@ const ProjectPage = () => {
             <ProjectOutContainer>
                 <ProjectListOutBox>
                     <ProjectListBox ref={slideRef}>
-                        <ProjectCard />
-                        <ProjectCard />
-                        <ProjectCard />
+                        {projectDto?.map((item: any, index: number) => {
+                            return (
+                                <ProjectCardBox key={item?.id}>
+                                    <ProjectCard
+                                        item={item}
+                                        step={step}
+                                        setStep={setStep} />
+                                </ProjectCardBox>
+                            )
+                        })}
                     </ProjectListBox>
                 </ProjectListOutBox>
             </ProjectOutContainer>
@@ -49,6 +57,7 @@ const ProjectInBoxContainer = styled(InBoxContainer)`
     justify-content: center;
     align-items: center;
     gap: 50px;
+    overflow: visible;
 `;
 
 const ProjectOutContainer = styled.div`
@@ -56,7 +65,6 @@ const ProjectOutContainer = styled.div`
     display: flex;
     justify-content: end;
     align-items: center;
-    overflow: hidden;
 `;
 
 const ProjectListOutBox = styled.div`
@@ -72,6 +80,15 @@ const ProjectListBox = styled.div`
     align-items: center;
     gap: 30px;
     transition: all 0.3s;
+`;
+
+const  ProjectCardBox = styled.div`
+    width: 480px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const NextButton = styled.button`
