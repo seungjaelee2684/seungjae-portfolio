@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components';
 import { projectDto } from '../../utils/Projects';
 
-const ProjectCard = () => {
+interface ProjectCardProps {
+    item: any;
+    step: number;
+    setStep: React.Dispatch<React.SetStateAction<number>>;
+};
+
+const ProjectCard : React.FC<ProjectCardProps> = ({ item, step, setStep }) => {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
@@ -12,8 +18,8 @@ const ProjectCard = () => {
         const movement = (e: any) => {
             let x = e.offsetX;
             let y = e.offsetY;
-            let rotateX = 4 / 19 * y - 20;
-            let rotateY = -2 / 17 * x + 20;
+            let rotateX = 1 / 10 * y - 20;
+            let rotateY = -1 / 12 * x + 20;
 
             if (containerRef.current && overlayRef.current && effectRef.current) {
                 containerRef.current.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -46,23 +52,36 @@ const ProjectCard = () => {
 
     return (
         <ProjectCardBox ref={containerRef}>
-            <Overlay ref={overlayRef} />
             <WhiteGradient ref={effectRef} />
-            <CardImage src={projectDto[0]?.thumbnail} alt='' />
+            <CardImage src={item?.thumbnail}>
+                <Overlay ref={overlayRef} />
+            </CardImage>
+            <CardContent>
+                <ProjectTitle>
+                    {item?.project}
+                </ProjectTitle>
+                <Period>
+                    {item?.period}
+                </Period>
+            </CardContent>
         </ProjectCardBox>
     )
 };
 
 const ProjectCardBox = styled.div`
-    width: 360px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
     transition: all 0.1s;
     border-radius: 10px;
+    border: 1px solid #177edf6a;
+    background-color: #177edf6a;
+    box-shadow: #177edf95 0px 0px 5px 0px;
     cursor: pointer;
 `;
 
@@ -92,10 +111,34 @@ const WhiteGradient = styled.div`
     background-size: cover;
 `;
 
-const CardImage = styled.img`
+const CardImage = styled.div<{ src: string }>`
+    width: 100%;
+    min-height: 280px;
+    background-image: url(${(props) => props.src});
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+`;
+
+const CardContent = styled.div`
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: aliceblue;
+    line-height: 140%;
+`;
+
+const ProjectTitle = styled.div`
+    font-size: 24px;
+`;
+
+const Period = styled.div`
+    font-size: 16px;
 `;
 
 export default ProjectCard;
