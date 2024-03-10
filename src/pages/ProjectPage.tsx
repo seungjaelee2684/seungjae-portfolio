@@ -10,8 +10,8 @@ const ProjectPage = () => {
 
     const dispatch = useDispatch();
     const slideRef = useRef<HTMLDivElement>(null);
-    const [step, setStep] = useState<number>(1);
-    const stepCurrent = step * 480;
+    const [step, setStep] = useState<number>(0);
+    const stepCurrent = step * 600;
     const [projectKind, setProjectKind] = useState<any>();
 
     const onClickNextHandler = () => {
@@ -63,14 +63,13 @@ const ProjectInBoxContainer = styled(InBoxContainer)`
 const ProjectOutContainer = styled.div`
     width: 90%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
 `;
 
 const ProjectListOutBox = styled.div`
-    width: 60%;
+    width: 1680px;
     display: flex;
-    justify-content: start;
     align-items: center;
 `;
 
@@ -78,7 +77,7 @@ const ProjectListBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 120px;
     transition: all 0.3s;
 `;
 
@@ -89,6 +88,11 @@ const  ProjectCardBox = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 500px) {
+        width: 320px;
+        height: 280px;
+    }
 `;
 
 const NextButton = styled.button`

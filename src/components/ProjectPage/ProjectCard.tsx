@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components';
 import { projectDto } from '../../utils/Projects';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/config/configureStore';
 
 interface ProjectCardProps {
     item: any;
@@ -10,6 +12,7 @@ interface ProjectCardProps {
 
 const ProjectCard : React.FC<ProjectCardProps> = ({ item, step, setStep }) => {
 
+    const mobileView = useSelector((state: RootState) => state.isMobile);
     const containerRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const effectRef = useRef<HTMLDivElement>(null);
@@ -18,8 +21,8 @@ const ProjectCard : React.FC<ProjectCardProps> = ({ item, step, setStep }) => {
         const movement = (e: any) => {
             let x = e.offsetX;
             let y = e.offsetY;
-            let rotateX = 1 / 10 * y - 20;
-            let rotateY = -1 / 12 * x + 20;
+            let rotateX = (mobileView) ? 1 / 7 * y - 20 : 1 / 10 * y - 20;
+            let rotateY = (mobileView) ? -1 / 8 * x + 20 : -1 / 12 * x + 20;
 
             if (containerRef.current && overlayRef.current && effectRef.current) {
                 containerRef.current.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -60,6 +63,9 @@ const ProjectCard : React.FC<ProjectCardProps> = ({ item, step, setStep }) => {
                 <ProjectTitle>
                     {item?.project}
                 </ProjectTitle>
+                <Information>
+                    {item?.information}
+                </Information>
                 <Period>
                     {item?.period}
                 </Period>
@@ -80,7 +86,6 @@ const ProjectCardBox = styled.div`
     transition: all 0.1s;
     border-radius: 10px;
     border: 1px solid #177edf6a;
-    background-color: #177edf6a;
     box-shadow: #177edf95 0px 0px 5px 0px;
     cursor: pointer;
 `;
@@ -128,17 +133,22 @@ const CardContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
     color: aliceblue;
     line-height: 140%;
+    background: linear-gradient(to top, #177edf6a, transparent);
 `;
 
 const ProjectTitle = styled.div`
     font-size: 24px;
 `;
 
-const Period = styled.div`
+const Information = styled.div`
+    margin-top: 20px;
     font-size: 16px;
+`;
+
+const Period = styled.div`
+    font-size: 12px;
 `;
 
 export default ProjectCard;
