@@ -168,7 +168,7 @@ const LobyPage = () => {
   )
 };
 
-const PrevNextButtonMove = keyframes`
+export const PrevNextButtonMove = keyframes`
   0% {
     opacity: 1;
     transform: translateX(0%);
@@ -393,19 +393,20 @@ const Stars = styled.div`
   }
 `;
 
-const ChoiceButtonWrapper = styled.div`
+export const ChoiceButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  user-select: none;
 
   @media screen and (max-width: 500px) {
     gap: 10px;
   }
 `;
 
-const ChoiceButton = styled.div`
+export const ChoiceButton = styled.div`
   width: 240px;
   height: 50px;
   /* background-color: #e2dbb7; */
@@ -434,7 +435,7 @@ const ChoiceButton = styled.div`
   }
 `;
 
-const PrevNextButton = styled.div<{ xy : string }>`
+export const PrevNextButton = styled.div<{ xy : string }>`
   font-size: 50px;
   color: #d4b681;
   display: flex;
