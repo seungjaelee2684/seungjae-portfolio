@@ -26,30 +26,36 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                         {projectDto[id - 1]?.project}
                     </Title>
                 </TitleBox>
-                <ContentBox style={{color: "#d4b681", marginTop: "30px"}}>
+                <ContentBox style={{color: "#e7ca96", marginTop: "30px"}}>
                     ※ 프로젝트 소개
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.introduce}
                 </ContentBox>
-                <ContentBox style={{color: "#d4b681"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 프로젝트 기간
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.period}
                 </ContentBox>
-                <ContentBox style={{color: "#d4b681"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 사용 스킬
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.skill}
                 </ContentBox>
-                <ContentBox style={{color: "#d4b681"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 담당 부분
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.part}
                 </ContentBox>
+                <ContentBox style={{color: "#e7ca96"}}>
+                    ※ 링크
+                </ContentBox>
+                <Link onClick={() => window.open(projectDto[id - 1]?.url)}>
+                    {projectDto[id - 1]?.project}
+                </Link>
             </ModalContainer>
             <CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
                 닫기
@@ -72,6 +78,11 @@ const ModalOpenAnimation = keyframes`
 
 const TitleOpen = keyframes`
     0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    50% {
         opacity: 0;
         transform: scaleX(0);
     }
@@ -99,35 +110,35 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-    width: 100%;
+    width: 1320px;
     height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    background-image: radial-gradient(circle at center, #3b80c0ab, #10395fee);
-    border-top: 4px solid #328add;
-    border-bottom: 4px solid #328add;
-    animation: ${ModalOpenAnimation} 0.3s forwards;
+    gap: 20px;
+    background-image: radial-gradient(circle at center, #3b80c0c5, #10395fee);
+    border-left: 4px solid #328add;
+    border-right: 4px solid #328add;
+    animation: ${TitleOpen} 0.4s ease-out forwards;
     color: #FFFFFF;
 `;
 
 const TitleBox = styled.div`
-    width: 400px;
-    height: 80px;
+    width: 500px;
+    height: 60px;
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
 `;
 
 const TitleBackground = styled.div`
     width: 100%;
-    height: 30%;
-    background-image: radial-gradient(circle at center, #7f98ecf8, transparent);
+    height: 4px;
+    background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
     opacity: 0;
-    animation: ${TitleOpen} 0.5s forwards 0.3s;
+    animation: ${TitleOpen} 0.5s ease-out forwards 0.4s;
 `;
 
 const Title = styled.div`
@@ -136,18 +147,32 @@ const Title = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 36px;
+    font-size: 38px;
     line-height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    color: #e6cea5;
+    text-shadow: 1px 1px 4px #fff8e5;
 `;
 
 const ContentBox = styled.div`
     width: 100%;
     font-size: 18px;
-    line-height: 100%;
+    line-height: 150%;
+    white-space: pre-line;
+`;
+
+const Link = styled.a`
+    font-family: "GongGothicMedium";
+    width: 100%;
+    font-size: 18px;
+    line-height: 150%;
+    white-space: pre-line;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const CloseButton = styled.div`

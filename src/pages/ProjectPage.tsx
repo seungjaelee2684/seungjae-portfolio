@@ -77,9 +77,9 @@ const ProjectPage = () => {
                 <Loby.PrevNextButton xy="-50%" onClick={onClickPrevHandler}>
                     <TbArrowBadgeLeft />
                 </Loby.PrevNextButton>
-                <Loby.ChoiceButton>
+                <ProjectKindButton>
                     {projectDto[step]?.project}
-                </Loby.ChoiceButton>
+                </ProjectKindButton>
                 <Loby.PrevNextButton xy="50%" onClick={onClickNextHandler}>
                     <TbArrowBadgeRight />
                 </Loby.PrevNextButton>
@@ -133,6 +133,16 @@ const ProjectCardBox = styled.div`
     @media screen and (max-width: 500px) {
         width: 320px;
         height: 280px;
+    }
+`;
+
+const ProjectKindButton = styled(Loby.ChoiceButton)`
+    cursor: default;
+
+    &:hover {
+        border: 1px solid #d4b681;
+        color: #d4b681;
+        background-image: radial-gradient(circle at bottom center, #0a090ec5, #201d31c5);
     }
 `;
 
