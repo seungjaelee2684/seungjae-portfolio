@@ -5,16 +5,24 @@ import { pageMove } from '../store/modules/pageState';
 import { InBoxContainer } from './AboutMePage';
 import ProjectCard from '../components/ProjectPage/ProjectCard';
 import { projectDto } from '../utils/Projects';
+import * as Loby from './LobyPage';
+import { TbArrowBadgeLeft, TbArrowBadgeRight } from 'react-icons/tb';
 
 const ProjectPage = () => {
 
     const dispatch = useDispatch();
     const slideRef = useRef<HTMLDivElement>(null);
     const [step, setStep] = useState<number>(0);
-    const stepCurrent = step * 600;
+    const stepCurrent = step * 602;
     const [projectKind, setProjectKind] = useState<any>();
 
+    const onClickPrevHandler = () => {
+        if (step === 0) { return };
+        setStep((step) => step - 1);
+    };
+
     const onClickNextHandler = () => {
+        if (step === projectDto?.length - 1) { return };
         setStep((step) => step + 1);
     };
 
@@ -33,6 +41,12 @@ const ProjectPage = () => {
                     <ProjectListBox ref={slideRef}>
                         {projectDto?.map((item: any, index: number) => {
                             return (
+                                (index < projectDto?.length - 1)
+                                    &&  <ProjectCardBox key={item?.id}/> 
+                            )
+                        })}
+                        {projectDto?.map((item: any, index: number) => {
+                            return (
                                 <ProjectCardBox key={item?.id}>
                                     <ProjectCard
                                         item={item}
@@ -44,9 +58,17 @@ const ProjectPage = () => {
                     </ProjectListBox>
                 </ProjectListOutBox>
             </ProjectOutContainer>
-            <NextButton onClick={onClickNextHandler}>
-                next
-            </NextButton>
+            <Loby.ChoiceButtonWrapper>
+                <Loby.PrevNextButton xy="-50%" onClick={onClickPrevHandler}>
+                    <TbArrowBadgeLeft />
+                </Loby.PrevNextButton>
+                <Loby.ChoiceButton>
+                    {projectDto[step]?.project}
+                </Loby.ChoiceButton>
+                <Loby.PrevNextButton xy="50%" onClick={onClickNextHandler}>
+                    <TbArrowBadgeRight />
+                </Loby.PrevNextButton>
+            </Loby.ChoiceButtonWrapper>
         </ProjectInBoxContainer>
     )
 };
@@ -68,37 +90,31 @@ const ProjectOutContainer = styled.div`
 `;
 
 const ProjectListOutBox = styled.div`
-    width: 1680px;
     display: flex;
     align-items: center;
 `;
 
 const ProjectListBox = styled.div`
+    width: 2888px;
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 120px;
     transition: all 0.3s;
 `;
 
-const  ProjectCardBox = styled.div`
+const ProjectCardBox = styled.div`
     width: 480px;
     height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 
     @media screen and (max-width: 500px) {
         width: 320px;
         height: 280px;
     }
-`;
-
-const NextButton = styled.button`
-    width: 120px;
-    height: 40px;
-    cursor: pointer;
 `;
 
 export default ProjectPage;
