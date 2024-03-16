@@ -26,7 +26,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                         {projectDto[id - 1]?.project}
                     </Title>
                 </TitleBox>
-                <ContentBox style={{color: "#d4b681"}}>
+                <ContentBox style={{color: "#d4b681", marginTop: "30px"}}>
                     ※ 프로젝트 소개
                 </ContentBox>
                 <ContentBox>
@@ -39,16 +39,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                     {projectDto[id - 1]?.period}
                 </ContentBox>
                 <ContentBox style={{color: "#d4b681"}}>
-                    ※ 프로젝트 기간
+                    ※ 사용 스킬
                 </ContentBox>
                 <ContentBox>
-                    {projectDto[id - 1]?.period}
+                    {projectDto[id - 1]?.skill}
                 </ContentBox>
                 <ContentBox style={{color: "#d4b681"}}>
-                    ※ 프로젝트 기간
+                    ※ 담당 부분
                 </ContentBox>
                 <ContentBox>
-                    {projectDto[id - 1]?.period}
+                    {projectDto[id - 1]?.part}
                 </ContentBox>
             </ModalContainer>
             <CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
@@ -95,7 +95,7 @@ const ModalBackground = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
 `;
 
 const ModalContainer = styled.div`
@@ -105,7 +105,7 @@ const ModalContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     background-image: radial-gradient(circle at center, #3b80c0ab, #10395fee);
     border-top: 4px solid #328add;
     border-bottom: 4px solid #328add;
@@ -114,21 +114,20 @@ const ModalContainer = styled.div`
 `;
 
 const TitleBox = styled.div`
-    width: 700px;
+    width: 400px;
     height: 80px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const TitleBackground = styled.div`
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: radial-gradient(circle at center, #431ed7f9, transparent);
+    height: 30%;
+    background-image: radial-gradient(circle at center, #7f98ecf8, transparent);
     opacity: 0;
     animation: ${TitleOpen} 0.5s forwards 0.3s;
-    border-radius: 80px;
 `;
 
 const Title = styled.div`
@@ -142,6 +141,7 @@ const Title = styled.div`
     position: absolute;
     top: 0;
     left: 0;
+    color: #e6cea5;
 `;
 
 const ContentBox = styled.div`
