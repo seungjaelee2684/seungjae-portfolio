@@ -7,6 +7,7 @@ import ProjectCard from '../components/ProjectPage/ProjectCard';
 import { projectDto } from '../utils/Projects';
 import * as Loby from './LobyPage';
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from 'react-icons/tb';
+import ProjectModal from '../components/ProjectPage/ProjectModal';
 
 const ProjectPage = () => {
 
@@ -14,7 +15,14 @@ const ProjectPage = () => {
     const slideRef = useRef<HTMLDivElement>(null);
     const [step, setStep] = useState<number>(0);
     const stepCurrent = step * 602;
-    const [projectKind, setProjectKind] = useState<any>();
+    const [projectKind, setProjectKind] = useState<{
+        isopen: boolean,
+        id: number
+    }>({
+        isopen: false,
+        id: 1
+    });
+    const { isopen, id } = projectKind;
 
     const onClickPrevHandler = () => {
         if (step === 0) { return };
@@ -47,7 +55,14 @@ const ProjectPage = () => {
                         })}
                         {projectDto?.map((item: any, index: number) => {
                             return (
-                                <ProjectCardBox key={item?.id}>
+                                <ProjectCardBox
+                                    key={item?.id}
+                                    onClick={() => {
+                                        if (step === index) {
+                                            setProjectKind({...projectKind, isopen: !isopen, id: item?.id})
+                                        };
+                                        setStep(index);
+                                    }}>
                                     <ProjectCard
                                         item={item}
                                         step={step}
@@ -69,6 +84,10 @@ const ProjectPage = () => {
                     <TbArrowBadgeRight />
                 </Loby.PrevNextButton>
             </Loby.ChoiceButtonWrapper>
+            {(isopen)
+                && <ProjectModal
+                    projectKind={projectKind}
+                    setProjectKind={setProjectKind}/>}
         </ProjectInBoxContainer>
     )
 };
