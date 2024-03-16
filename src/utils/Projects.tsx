@@ -11,8 +11,8 @@ export const projectDto = [
         information: "글로벌 일러스트 학원",
         introduce: "다양한 그림 스타일과 강사들을 통해 학습을 제공하는 다국적 학원 플랫폼",
         url: "https://www.aria-academy.com",
-        skill: "React, TypeScript, Axios, React-Query, Recoil, Styled-Components",
-        part: "전반적인 구상, 디자인, 기능, 제작 및 운영"
+        skill: "React, TypeScript,\nAxios, React-Query, Recoil, Styled-Components",
+        part: "전반적인 서비스 구상과 웹페이지의 디자인, 기능, 제작 및 운영을 담당"
     },
     {
         id: 2,
@@ -22,8 +22,8 @@ export const projectDto = [
         information: "물물거래 플랫폼",
         introduce: "유저 간 물물교환 및 경매시스템을 이용한 물물 거래 플랫폼",
         url: "https://github.com/seungjaelee2684/PEEPPO-front-end",
-        skill: "React, TypeScript, Axios, React-Query, Recoil, Styled-Components, WebSocket, Stomp",
-        part: "전반적인 구상, 디자인, 기능, 제작 및 운영"
+        skill: "React, TypeScript,\nAxios, React-Query, Recoil, Styled-Components,\nWebSocket, Stomp",
+        part: "물물교환 및 경매시스템과 레이팅/평가게임 시스템들의 화면 제작과 기능 구현을 담당"
     },
     {
         id: 3,
@@ -33,7 +33,7 @@ export const projectDto = [
         information: "칵테일 레시피 공유 플랫폼",
         introduce: "모두가 함께 레시피를 공유할 수 있는 칵테일 플랫폼",
         url: "https://github.com/seungjaelee2684/project-alddalddal-front",
-        skill: "React, JavaScript, Axios, React-Query, Styled-Components",
+        skill: "React, JavaScript,\nAxios, React-Query, Styled-Components",
         part: "전반적인 구상, 디자인, 기능, 제작 및 운영"
     },
 ];
