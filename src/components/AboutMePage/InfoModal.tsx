@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { charactorStatus } from '../../utils/Status';
 
 interface InfoModalProps {
   statusModal: {
@@ -12,33 +13,105 @@ const InfoModal : React.FC<InfoModalProps> = ({ statusModal }) => {
 
   const { information, state } = statusModal;
 
+  const modalChange = () => {
+    if (information) {
+      return (
+        <ModalInWrapper style={{gap: "10px"}}>
+          <TitleBox>
+            캐릭터 배경
+          </TitleBox>
+          <Content>
+            1997.01.21 (27)
+          </Content>
+          <Content>
+            sean2684@naver.com
+          </Content>
+        </ModalInWrapper>
+      )
+    } else {
+      return (
+        <ModalInWrapper>
+          <Icons>
+            {(state) && charactorStatus[state - 1]?.icon}
+          </Icons>
+          <TitleBox>
+            {(state) && charactorStatus[state - 1]?.title}
+          </TitleBox>
+          <Content>
+            {(state) && charactorStatus[state - 1]?.content}
+          </Content>
+        </ModalInWrapper>
+      )
+    };
+  };
+
   return (
-    <ModalContainer>
-      <ModalInWrapper>
-        {state}
-      </ModalInWrapper>
+    <ModalContainer left={(information) ? 60 : 0}>
+      {modalChange()}
     </ModalContainer>
   )
 };
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{ left: number }>`
   width: 300px;
-  height: 400px;
+  height: 200px;
   position: absolute;
-  top: 50px;
-  left: 0;
+  top: 30px;
+  left: ${(props) => props.left}px;
   overflow: hidden;
-  z-index: 13;
-  border: 1px solid #208bf0ab;
-`;
-
-const ModalInWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to top, #3b80c0ef, #10395fee);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 13;
+  border: 1px solid #208bf0ab;
+  background-image: linear-gradient(to top, #3b80c0ef, #10395fee);
+
+  @media screen and (max-width: 500px) {
+    left: ${(props) => props.left - 40}px;
+  }
+`;
+
+const ModalInWrapper = styled.div`
+  width: 90%;
+  height: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  color: #FFFFFF;
+  position: relative;
+`;
+
+const Icons = styled.div`
+  font-size: 40px;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+`;
+
+const TitleBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  line-height: 120%;
+  white-space: pre-line;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  line-height: 120%;
+  white-space: pre-line;
+`;
+
+const InformationTitle = styled(TitleBox)`
+
 `;
 
 export default InfoModal;

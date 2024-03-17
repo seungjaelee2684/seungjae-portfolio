@@ -4,6 +4,7 @@ import { GiSpiderWeb, GiSpikesHalf, GiSmallFishingSailboat } from "react-icons/g
 import { StatusWrapper, DefaultLane, StatusIcon } from '../../pages/AboutMePage';
 import { BsMinecartLoaded } from 'react-icons/bs';
 import InfoModal from './InfoModal';
+import { charactorStatus } from '../../utils/Status';
 
 interface StatusLaneProps {
     statusModal: {
@@ -25,28 +26,18 @@ const StatusLane: React.FC<StatusLaneProps> = ({ statusModal, setStatusModal }) 
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
             <StatusWrapper>
-                <StatusIcon
-                    color="#294b94"
-                    size={0}
-                    onMouseOver={() => setStatusModal({ ...statusModal, state: 1 })}
-                    onMouseLeave={() => setStatusModal({ ...statusModal, state: undefined })}>
-                    <GiSmallFishingSailboat />
-                </StatusIcon>
-                <StatusIcon
-                    color="#237014"
-                    size={-2}
-                    onMouseOver={() => setStatusModal({ ...statusModal, state: 2 })}
-                    onMouseLeave={() => setStatusModal({ ...statusModal, state: undefined })}>
-                    <GiSpiderWeb />
-                </StatusIcon>
-                <StatusIcon
-                    color="#999b13"
-                    size={-4}
-                    onMouseOver={() => setStatusModal({ ...statusModal, state: 3 })}
-                    onMouseLeave={() => setStatusModal({ ...statusModal, state: undefined })}>
-                    <BsMinecartLoaded />
-                </StatusIcon>
-                {(state) && <InfoModal statusModal={statusModal} />}
+                {charactorStatus?.map((item: any, index: number) => {
+                    return (
+                        <StatusIcon
+                            color={item?.color}
+                            size={item?.size}
+                            onMouseOver={() => setStatusModal({ ...statusModal, state: item?.id })}
+                            onMouseLeave={() => setStatusModal({ ...statusModal, state: undefined })}>
+                            {item?.icon}
+                        </StatusIcon>
+                    )
+                })}
+                {(state && state < 4) && <InfoModal statusModal={statusModal} />}
             </StatusWrapper>
         </DefaultLane>
     )

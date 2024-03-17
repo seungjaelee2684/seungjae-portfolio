@@ -10,6 +10,7 @@ import { pageMove } from '../store/modules/pageState';
 import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
+import { modalOpen } from '../store/modules/globalModalOpen';
 
 const LobyPage = () => {
 
@@ -123,7 +124,7 @@ const LobyPage = () => {
           if (selectCharactor === 1) {
             navigate("/about");
           } else {
-
+            dispatch(modalOpen({ kind: "addCharactor", isopen: true}))
           };
         }}>
           {charactor[selectCharactor - 1]?.content}
@@ -155,29 +156,11 @@ const LobyPage = () => {
         </NoneCardContainer>
       </CardWrapper>
       <ChoiceButtonWrapper>
-        <PrevNextButton xy="-50%">
-          <TbArrowBadgeLeft />
-        </PrevNextButton>
         {selectButton()}
-        <PrevNextButton xy="50%">
-          <TbArrowBadgeRight />
-        </PrevNextButton>
       </ChoiceButtonWrapper>
     </LobyInBoxContainer>
   )
 };
-
-const PrevNextButtonMove = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0%);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(var(--xy));
-  }
-`;
 
 const LobyInBoxContainer = styled(InBoxContainer)`
   height: 100%;
@@ -392,19 +375,20 @@ const Stars = styled.div`
   }
 `;
 
-const ChoiceButtonWrapper = styled.div`
+export const ChoiceButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  user-select: none;
 
   @media screen and (max-width: 500px) {
     gap: 10px;
   }
 `;
 
-const ChoiceButton = styled.div`
+export const ChoiceButton = styled.div`
   width: 240px;
   height: 50px;
   /* background-color: #e2dbb7; */
@@ -431,18 +415,6 @@ const ChoiceButton = styled.div`
     height: 40px;
     font-size: 16px;
   }
-`;
-
-const PrevNextButton = styled.div<{ xy : string }>`
-  font-size: 50px;
-  color: #d4b681;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${PrevNextButtonMove} 1.5s linear infinite;
-  cursor: pointer;
-
-  --xy: ${(props) => props.xy};
 `;
 
 export default LobyPage;

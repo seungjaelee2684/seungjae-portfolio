@@ -53,7 +53,7 @@ const AboutMePage = () => {
               </Front>
               <NameWrapper>
                 이승재 (Lee SeungJae)
-                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information})}>
+                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information, state: 4})}>
                   <SlMagnifier />
                 </NameIconWrapper>
               </NameWrapper>
@@ -73,9 +73,9 @@ const AboutMePage = () => {
                     01065325635
                   </div>
                 </NameWrapper>
+                {(information) && <InfoModal statusModal={statusModal}/>}
               </StatusText>
             </IntroduceWrapper>
-            {(information) && <InfoModal statusModal={statusModal}/>}
           </LaneContainer>
           <StatusLane statusModal={statusModal} setStatusModal={setStatusModal}/>
           <LaneContainer
@@ -286,6 +286,7 @@ export const DefaultLane = styled(LaneContainer)`
 
   @media screen and (max-width: 1320px) {
     padding: 3px 10px 3px 0px;
+    font-size: 14px;
   }
 
   @media screen and (max-width: 836px) {
@@ -367,6 +368,7 @@ export const StatusText = styled(Front)`
   margin-top: 8px;
   color: #acb2c9;
   font-size: 18px;
+  position: relative;
 
   @media screen and (max-width: 1600px) {
     font-size: 14px;
