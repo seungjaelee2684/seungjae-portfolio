@@ -23,7 +23,7 @@ export const projectDto = [
         introduce: "유저 간 물물교환 및 경매시스템을 이용한 물물 거래 플랫폼",
         url: "https://github.com/seungjaelee2684/PEEPPO-front-end",
         skill: "React, TypeScript,\nAxios, React-Query, Recoil, Styled-Components,\nWebSocket, Stomp",
-        part: "물물교환 및 경매시스템과 레이팅/평가게임 시스템들의 화면 제작과 기능 구현을 담당"
+        part: "물물교환 및 경매시스템과 레이팅/평가게임 시스템들의 화면 제작과\n기능 구현을 담당"
     },
     {
         id: 3,
@@ -34,6 +34,6 @@ export const projectDto = [
         introduce: "모두가 함께 레시피를 공유할 수 있는 칵테일 플랫폼",
         url: "https://github.com/seungjaelee2684/project-alddalddal-front",
         skill: "React, JavaScript,\nAxios, React-Query, Styled-Components",
-        part: "전반적인 구상, 디자인, 기능, 제작 및 운영"
+        part: "로그인/회원가입, 메인페이지 내 칵테일 리스트의 화면 구성과\n마이페이지, 댓글 기능 구현을 담당"
     },
 ];
