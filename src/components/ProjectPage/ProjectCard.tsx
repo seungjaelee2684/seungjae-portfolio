@@ -21,8 +21,8 @@ const ProjectCard : React.FC<ProjectCardProps> = ({ item, step, setStep }) => {
         const movement = (e: any) => {
             let x = e.offsetX;
             let y = e.offsetY;
-            let rotateX = (mobileView) ? 1 / 7 * y - 20 : 1 / 10 * y - 20;
-            let rotateY = (mobileView) ? -1 / 8 * x + 20 : -1 / 12 * x + 20;
+            let rotateX = (mobileView) ? 4 / 25 * y - 20 : 1 / 10 * y - 20;
+            let rotateY = (mobileView) ? -2 / 15 * x + 20 : -1 / 12 * x + 20;
 
             if (containerRef.current && overlayRef.current && effectRef.current) {
                 containerRef.current.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -124,6 +124,10 @@ const CardImage = styled.div<{ src: string }>`
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+
+    @media screen and (max-width: 500px) {
+        min-height: 170px;
+    }
 `;
 
 const CardContent = styled.div`
@@ -136,19 +140,36 @@ const CardContent = styled.div`
     color: aliceblue;
     line-height: 140%;
     background: linear-gradient(to top, #177edf6a, transparent);
+
+    @media screen and (max-width: 500px) {
+        line-height: 110%;
+    }
 `;
 
 const ProjectTitle = styled.div`
     font-size: 24px;
+
+    @media screen and (max-width: 500px) {
+        font-size: 16px;
+    }
 `;
 
 const Information = styled.div`
     margin-top: 20px;
     font-size: 16px;
+
+    @media screen and (max-width: 500px) {
+        margin-top: 12px;
+        font-size: 10px;
+    }
 `;
 
 const Period = styled.div`
     font-size: 12px;
+
+    @media screen and (max-width: 500px) {
+        font-size: 8px;
+    }
 `;
 
 export default ProjectCard;

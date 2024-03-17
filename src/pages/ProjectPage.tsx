@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import styled, { keyframes } from 'styled-components';
 import { pageMove } from '../store/modules/pageState';
 import { InBoxContainer } from './AboutMePage';
 import ProjectCard from '../components/ProjectPage/ProjectCard';
@@ -8,13 +8,15 @@ import { projectDto } from '../utils/Projects';
 import * as Loby from './LobyPage';
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from 'react-icons/tb';
 import ProjectModal from '../components/ProjectPage/ProjectModal';
+import { RootState } from '../store/config/configureStore';
 
 const ProjectPage = () => {
 
     const dispatch = useDispatch();
+    const mobileView = useSelector((state: RootState) => state.isMobile);
     const slideRef = useRef<HTMLDivElement>(null);
     const [step, setStep] = useState<number>(0);
-    const stepCurrent = step * 602;
+    const stepCurrent = mobileView ? step * 400 : step * 600;
     const [projectKind, setProjectKind] = useState<{
         isopen: boolean,
         id: number
@@ -74,15 +76,15 @@ const ProjectPage = () => {
                 </ProjectListOutBox>
             </ProjectOutContainer>
             <Loby.ChoiceButtonWrapper>
-                <Loby.PrevNextButton xy="-50%" onClick={onClickPrevHandler}>
+                <PrevNextButton xy="-50%" onClick={onClickPrevHandler}>
                     <TbArrowBadgeLeft />
-                </Loby.PrevNextButton>
+                </PrevNextButton>
                 <ProjectKindButton>
                     {projectDto[step]?.project}
                 </ProjectKindButton>
-                <Loby.PrevNextButton xy="50%" onClick={onClickNextHandler}>
+                <PrevNextButton xy="50%" onClick={onClickNextHandler}>
                     <TbArrowBadgeRight />
-                </Loby.PrevNextButton>
+                </PrevNextButton>
             </Loby.ChoiceButtonWrapper>
             {(isopen)
                 && <ProjectModal
@@ -91,6 +93,18 @@ const ProjectPage = () => {
         </ProjectInBoxContainer>
     )
 };
+
+const PrevNextButtonMove = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(var(--xy));
+  }
+`;
 
 const ProjectInBoxContainer = styled(InBoxContainer)`
     display: flex;
@@ -114,11 +128,16 @@ const ProjectListOutBox = styled.div`
 `;
 
 const ProjectListBox = styled.div`
-    width: 2888px;
+    width: 2880px;
     display: flex;
     align-items: center;
     gap: 120px;
     transition: all 0.3s;
+
+    @media screen and (max-width: 500px) {
+        width: 1900px;
+        gap: 100px;
+    }
 `;
 
 const ProjectCardBox = styled.div`
@@ -131,8 +150,8 @@ const ProjectCardBox = styled.div`
     user-select: none;
 
     @media screen and (max-width: 500px) {
-        width: 320px;
-        height: 280px;
+        width: 300px;
+        height: 250px;
     }
 `;
 
@@ -144,6 +163,26 @@ const ProjectKindButton = styled(Loby.ChoiceButton)`
         color: #d4b681;
         background-image: radial-gradient(circle at bottom center, #0a090ec5, #201d31c5);
     }
+
+    @media screen and (max-width: 500px) {
+        font-size: 13px;
+    }
+`;
+
+const PrevNextButton = styled.div<{ xy : string }>`
+  font-size: 50px;
+  color: #d4b681;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${PrevNextButtonMove} 1.5s linear infinite;
+  cursor: pointer;
+
+  --xy: ${(props) => props.xy};
+
+  @media screen and (max-width: 500px) {
+    font-size: 36px;
+  }
 `;
 
 export default ProjectPage;

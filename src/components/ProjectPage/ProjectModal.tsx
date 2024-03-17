@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { projectDto } from '../../utils/Projects';
 
@@ -26,25 +26,25 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                         {projectDto[id - 1]?.project}
                     </Title>
                 </TitleBox>
-                <ContentBox style={{color: "#e7ca96", marginTop: "30px"}}>
+                <TopContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
                     ※ 프로젝트 소개
-                </ContentBox>
+                </TopContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.introduce}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96"}}>
+                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
                     ※ 프로젝트 기간
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.period}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96"}}>
+                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
                     ※ 사용 스킬
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.skill}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96"}}>
+                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
                     ※ 담당 부분
                 </ContentBox>
                 <ContentBox>
@@ -63,18 +63,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
         </ModalBackground>
     )
 };
-
-const ModalOpenAnimation = keyframes`
-    0% {
-        opacity: 0;
-        transform: scaleY(0);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scaleY(1);
-    }
-`;
 
 const TitleOpen = keyframes`
     0% {
@@ -106,12 +94,12 @@ const ModalBackground = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
 `;
 
 const ModalContainer = styled.div`
     width: 1320px;
-    height: 80%;
+    height: 85%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -122,6 +110,21 @@ const ModalContainer = styled.div`
     border-right: 4px solid #328add;
     animation: ${TitleOpen} 0.4s ease-out forwards;
     color: #FFFFFF;
+    overflow: hidden;
+
+    @media screen and (max-width: 1320px) {
+        width: 96%;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100%;
+        height: 60%;
+        gap: 10px;
+        border-top: 4px solid #328add;
+        border-bottom: 4px solid #328add;
+        border-left: none;
+        border-right: none;
+    }
 `;
 
 const TitleBox = styled.div`
@@ -131,6 +134,11 @@ const TitleBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: end;
+
+    @media screen and (max-width: 500px) {
+        width: 220px;
+        height: 40px;
+    }
 `;
 
 const TitleBackground = styled.div`
@@ -138,7 +146,7 @@ const TitleBackground = styled.div`
     height: 4px;
     background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
     opacity: 0;
-    animation: ${TitleOpen} 0.5s ease-out forwards 0.4s;
+    animation: ${TitleOpen} 0.8s ease-out forwards 0.4s;
 `;
 
 const Title = styled.div`
@@ -153,18 +161,31 @@ const Title = styled.div`
     top: 0;
     left: 0;
     text-shadow: 1px 1px 4px #fff8e5;
+
+    @media screen and (max-width: 500px) {
+        font-size: 18px;
+    }
 `;
 
 const ContentBox = styled.div`
-    width: 100%;
+    width: fit-content;
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
+
+    @media screen and (max-width: 500px) {
+        line-height: 110%;
+        font-size: 10px;
+    }
+`;
+
+const TopContentBox = styled(ContentBox)`
+    margin-top: 20px;
 `;
 
 const Link = styled.a`
     font-family: "GongGothicMedium";
-    width: 100%;
+    width: fit-content;
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
@@ -172,6 +193,12 @@ const Link = styled.a`
 
     &:hover {
         text-decoration: underline;
+        opacity: 0.8;
+    }
+
+    @media screen and (max-width: 500px) {
+        line-height: 110%;
+        font-size: 10px;
     }
 `;
 
@@ -193,6 +220,12 @@ const CloseButton = styled.div`
         box-shadow: #177edf 0px 0px 4px 0px;
         border: 1px solid #177edf;
         background-image: linear-gradient(to top, #3b7fc0, transparent);
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100px;
+        height: 36px;
+        font-size: 14px;
     }
 `;
 

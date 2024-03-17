@@ -156,29 +156,11 @@ const LobyPage = () => {
         </NoneCardContainer>
       </CardWrapper>
       <ChoiceButtonWrapper>
-        <PrevNextButton xy="-50%">
-          <TbArrowBadgeLeft />
-        </PrevNextButton>
         {selectButton()}
-        <PrevNextButton xy="50%">
-          <TbArrowBadgeRight />
-        </PrevNextButton>
       </ChoiceButtonWrapper>
     </LobyInBoxContainer>
   )
 };
-
-export const PrevNextButtonMove = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateX(0%);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(var(--xy));
-  }
-`;
 
 const LobyInBoxContainer = styled(InBoxContainer)`
   height: 100%;
@@ -433,18 +415,6 @@ export const ChoiceButton = styled.div`
     height: 40px;
     font-size: 16px;
   }
-`;
-
-export const PrevNextButton = styled.div<{ xy : string }>`
-  font-size: 50px;
-  color: #d4b681;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${PrevNextButtonMove} 1.5s linear infinite;
-  cursor: pointer;
-
-  --xy: ${(props) => props.xy};
 `;
 
 export default LobyPage;
