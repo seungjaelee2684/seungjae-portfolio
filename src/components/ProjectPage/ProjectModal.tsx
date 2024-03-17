@@ -201,14 +201,15 @@ const TopContentBox = styled(ContentBox)`
 const Link = styled.a`
     font-family: "GongGothicMedium";
     width: fit-content;
+    height: fit-content;
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
     cursor: pointer;
 
     &:hover {
-        text-decoration: underline;
-        opacity: 0.8;
+        border-bottom: 1px solid #ffffff75;
+        opacity: 0.7;
     }
 
     @media screen and (max-width: 500px) {
