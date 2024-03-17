@@ -53,7 +53,7 @@ const AboutMePage = () => {
               </Front>
               <NameWrapper>
                 이승재 (Lee SeungJae)
-                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information})}>
+                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information, state: 4})}>
                   <SlMagnifier />
                 </NameIconWrapper>
               </NameWrapper>
@@ -286,6 +286,7 @@ export const DefaultLane = styled(LaneContainer)`
 
   @media screen and (max-width: 1320px) {
     padding: 3px 10px 3px 0px;
+    font-size: 14px;
   }
 
   @media screen and (max-width: 836px) {
