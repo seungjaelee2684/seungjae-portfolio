@@ -73,9 +73,9 @@ const AboutMePage = () => {
                     01065325635
                   </div>
                 </NameWrapper>
+                {(information) && <InfoModal statusModal={statusModal}/>}
               </StatusText>
             </IntroduceWrapper>
-            {(information) && <InfoModal statusModal={statusModal}/>}
           </LaneContainer>
           <StatusLane statusModal={statusModal} setStatusModal={setStatusModal}/>
           <LaneContainer
@@ -368,6 +368,7 @@ export const StatusText = styled(Front)`
   margin-top: 8px;
   color: #acb2c9;
   font-size: 18px;
+  position: relative;
 
   @media screen and (max-width: 1600px) {
     font-size: 14px;
