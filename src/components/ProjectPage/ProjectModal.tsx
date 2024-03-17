@@ -26,32 +26,37 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                         {projectDto[id - 1]?.project}
                     </Title>
                 </TitleBox>
-                <TopContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
+                <TopContentBox style={{color: "#e7ca96"}}>
                     ※ 프로젝트 소개
+                    <UnderBar />
                 </TopContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.introduce}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 프로젝트 기간
+                    <UnderBar />
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.period}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 사용 스킬
+                    <UnderBar />
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.skill}
                 </ContentBox>
-                <ContentBox style={{color: "#e7ca96", borderBottom: "1px solid #e6cea5f8"}}>
+                <ContentBox style={{color: "#e7ca96"}}>
                     ※ 담당 부분
+                    <UnderBar />
                 </ContentBox>
                 <ContentBox>
                     {projectDto[id - 1]?.part}
                 </ContentBox>
                 <ContentBox style={{color: "#e7ca96"}}>
                     ※ 링크
+                    <UnderBar />
                 </ContentBox>
                 <Link onClick={() => window.open(projectDto[id - 1]?.url)}>
                     {projectDto[id - 1]?.project}
@@ -104,7 +109,7 @@ const ModalContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     background-image: radial-gradient(circle at center, #3b80c0c5, #10395fee);
     border-left: 4px solid #328add;
     border-right: 4px solid #328add;
@@ -172,11 +177,21 @@ const ContentBox = styled.div`
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
+    position: relative;
 
     @media screen and (max-width: 500px) {
         line-height: 110%;
         font-size: 10px;
     }
+`;
+
+const UnderBar = styled.div`
+    width: 100%;
+    height: 1px;
+    background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
 `;
 
 const TopContentBox = styled(ContentBox)`
