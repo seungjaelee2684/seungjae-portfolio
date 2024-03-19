@@ -307,7 +307,7 @@ const DefaultButton = styled.div`
     box-shadow: none;
     color: #ADADAD;
     background-color: #000000;
-    cursor: default;
+    /* cursor: default; */
 
     @media screen and (max-width: 1320px) {
         width: 140px;

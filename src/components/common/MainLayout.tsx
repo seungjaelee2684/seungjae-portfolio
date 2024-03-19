@@ -9,41 +9,31 @@ import ModalContainer from './ModalContainer';
 const MainLayout = () => {
 
   const location = useLocation();
-  const layoutRef = useRef<HTMLDivElement>(null);
+  const followRef = useRef<HTMLDivElement>(null);
   const cursorPointer = useRef<HTMLDivElement>(null);
 
   const isModal = useSelector((state : RootState) => state.modalOpen.isopen)
   const windowPath = useSelector((state : RootState) => state.pageState);
 
-  useEffect(() => {
+
     const cursorMove = (e: any) => {
       let x = e.clientX;
       let y = e.clientY;
       console.log(x, y);
 
-      if (cursorPointer.current) {
+      if (cursorPointer.current && followRef.current) {
         cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      };
-    };
-
-    const cursorLeave = () => {
-      if (cursorPointer.current) {
-        cursorPointer.current.style.transform = `none`;
+        followRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
       };
     };
 
     window.addEventListener("mousemove", cursorMove);
-    window.addEventListener("mouseleave", cursorLeave);
 
-    return () => {
-      window.removeEventListener("mousemove", cursorMove);
-      window.removeEventListener("mouseleave", cursorLeave);
-    }
-  }, []);
 
   return (
     <MainLayOut>
-      <CursorContainer ref={cursorPointer}/>
+      <CursorContainer ref={cursorPointer} />
+      <FollowCursor ref={followRef} />
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
@@ -182,12 +172,22 @@ const Icon = styled.div`
 `;
 
 const CursorContainer = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 100%;
   background-color: #be2e2e;
   position: absolute;
   z-index: 30;
+`;
+
+const FollowCursor = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background-color: #db6e6ed1;
+  position: absolute;
+  z-index: 29;
+  transition: all 0.2s;
 `;
 
 export default MainLayout;
