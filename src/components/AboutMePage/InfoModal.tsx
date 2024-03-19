@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { charactorStatus } from '../../utils/Status';
+import { CharacterStatus } from '../../utils/Status';
 
 interface InfoModalProps {
   statusModal: {
@@ -32,13 +32,13 @@ const InfoModal : React.FC<InfoModalProps> = ({ statusModal }) => {
       return (
         <ModalInWrapper>
           <Icons>
-            {(state) && charactorStatus[state - 1]?.icon}
+            {(state) && CharacterStatus[state - 1]?.icon}
           </Icons>
           <TitleBox>
-            {(state) && charactorStatus[state - 1]?.title}
+            {(state) && CharacterStatus[state - 1]?.title}
           </TitleBox>
           <Content>
-            {(state) && charactorStatus[state - 1]?.content}
+            {(state) && CharacterStatus[state - 1]?.content}
           </Content>
         </ModalInWrapper>
       )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
-import CharactorImage from '../assets/images/picture.webp';
-import CharactorBG from '../assets/images/nukki.webp';
+import CharacterImage from '../assets/images/picture.webp';
+import CharacterBG from '../assets/images/nukki.webp';
 import { BsFillStarFill } from "react-icons/bs";
 import { GiSpikesHalf, GiSkullStaff } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
@@ -35,9 +35,9 @@ const AboutMePage = () => {
     <InBoxContainer>
       <BackgroundEffect />
       <SecondBackgroundEffect />
-      <BackgroundCharactor src={CharactorBG} />
+      <BackgroundCharacter src={CharacterBG} />
       <InBoxContent>
-        <Charactor src={CharactorImage} alt='' />
+        <Character src={CharacterImage} alt='' />
         <RightWrapper>
           <LaneContainer>
             <StarWrapper>
@@ -128,7 +128,7 @@ const SecondBoxRotate = keyframes`
   }
 `;
 
-const CharactorAppear = keyframes`
+const CharacterAppear = keyframes`
   0% {
     opacity: 0;
   }
@@ -192,7 +192,7 @@ export const InBoxContent = styled.section`
   }
 `;
 
-export const Charactor = styled.img`
+export const Character = styled.img`
   width: 600px;
   height: auto;
   object-fit: cover;
@@ -200,7 +200,7 @@ export const Charactor = styled.img`
   position: absolute;
   bottom: 0;
   left: 10%;
-  animation: ${CharactorAppear} 0.5s forwards 0.2s;
+  animation: ${CharacterAppear} 0.5s forwards 0.2s;
 
   @media screen and (max-width: 1320px) {
     width: 400px;
@@ -219,7 +219,7 @@ export const Charactor = styled.img`
   }
 `;
 
-export const BackgroundCharactor = styled.img`
+export const BackgroundCharacter = styled.img`
   width: 80%;
   height: 150%;
   object-fit: contain;

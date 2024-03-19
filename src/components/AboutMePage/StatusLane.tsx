@@ -4,7 +4,7 @@ import { GiSpiderWeb, GiSpikesHalf, GiSmallFishingSailboat } from "react-icons/g
 import { StatusWrapper, DefaultLane, StatusIcon } from '../../pages/AboutMePage';
 import { BsMinecartLoaded } from 'react-icons/bs';
 import InfoModal from './InfoModal';
-import { charactorStatus } from '../../utils/Status';
+import { CharacterStatus } from '../../utils/Status';
 
 interface StatusLaneProps {
     statusModal: {
@@ -26,7 +26,7 @@ const StatusLane: React.FC<StatusLaneProps> = ({ statusModal, setStatusModal }) 
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
             <StatusWrapper>
-                {charactorStatus?.map((item: any, index: number) => {
+                {CharacterStatus?.map((item: any, index: number) => {
                     return (
                         <StatusIcon
                             color={item?.color}
