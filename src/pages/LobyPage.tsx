@@ -157,10 +157,30 @@ const LobyPage = () => {
       </CardWrapper>
       <ChoiceButtonWrapper>
         {selectButton()}
+        <ClickNavi>
+          Click!
+        </ClickNavi>
       </ChoiceButtonWrapper>
     </LobyInBoxContainer>
   )
 };
+
+const ClickButtonAnimation = keyframes`
+  0% {
+    opacity: 0.6;
+    color: #d4b681;
+  }
+
+  50% {
+    opacity: 1;
+    color: #e2dbb7;
+  }
+
+  100% {
+    opacity: 0.6;
+    color: #d4b681;
+  }
+`;
 
 const LobyInBoxContainer = styled(InBoxContainer)`
   height: 100%;
@@ -382,6 +402,7 @@ export const ChoiceButtonWrapper = styled.div`
   align-items: center;
   gap: 30px;
   user-select: none;
+  position: relative;
 
   @media screen and (max-width: 500px) {
     gap: 10px;
@@ -413,6 +434,23 @@ export const ChoiceButton = styled.div`
   @media screen and (max-width: 500px) {
     width: 150px;
     height: 40px;
+    font-size: 16px;
+  }
+`;
+
+const ClickNavi = styled.div`
+  width: 100%;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 100%;
+  position: absolute;
+  top: -60%;
+  left: 0;
+  letter-spacing: 3px;
+  animation: ${ClickButtonAnimation} 1s linear forwards infinite;
+
+  @media screen and (max-width: 500px) {
+    width: 150px;
     font-size: 16px;
   }
 `;

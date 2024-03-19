@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { projectDto } from '../../utils/Projects';
+import * as CommomModal from '../common/ModalContainer';
 
 interface ProjectModalProps {
     projectKind: {
@@ -62,9 +63,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                     {projectDto[id - 1]?.project}
                 </Link>
             </ModalContainer>
-            <CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
+            <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
                 닫기
-            </CloseButton>
+            </CommomModal.CloseButton>
         </ModalBackground>
     )
 };
@@ -215,33 +216,6 @@ const Link = styled.a`
     @media screen and (max-width: 500px) {
         line-height: 110%;
         font-size: 10px;
-    }
-`;
-
-const CloseButton = styled.div`
-    width: 140px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "GongGothicMedium";
-    color: #FFFFFF;
-    box-shadow: #177edf6a 0px 0px 4px 0px;
-    border: 1px solid #177edf6a;
-    background-image: linear-gradient(to top, #3b7fc06a, transparent);
-    transition: all 0.2s;
-    cursor: pointer;
-
-    &:hover {
-        box-shadow: #177edf 0px 0px 4px 0px;
-        border: 1px solid #177edf;
-        background-image: linear-gradient(to top, #3b7fc0, transparent);
-    }
-
-    @media screen and (max-width: 500px) {
-        width: 100px;
-        height: 36px;
-        font-size: 14px;
     }
 `;
 
