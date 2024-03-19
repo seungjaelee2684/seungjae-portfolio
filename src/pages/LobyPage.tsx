@@ -157,9 +157,10 @@ const LobyPage = () => {
       </CardWrapper>
       <ChoiceButtonWrapper>
         {selectButton()}
-        <ClickNavi>
-          Click!
-        </ClickNavi>
+        {(selectCharacter)
+          && <ClickNavi>
+            Click!
+          </ClickNavi>}
       </ChoiceButtonWrapper>
     </LobyInBoxContainer>
   )
@@ -444,7 +445,7 @@ const ClickNavi = styled.div`
   font-weight: 500;
   line-height: 100%;
   position: absolute;
-  top: -60%;
+  top: 120%;
   left: 0;
   letter-spacing: 3px;
   animation: ${ClickButtonAnimation} 1s linear forwards infinite;

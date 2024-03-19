@@ -156,7 +156,7 @@ const ProjectCardBox = styled.div`
 `;
 
 const ProjectKindButton = styled(Loby.ChoiceButton)`
-    cursor: default;
+    /* cursor: default; */
 
     &:hover {
         border: 1px solid #d4b681;

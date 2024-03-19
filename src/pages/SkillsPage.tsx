@@ -69,8 +69,7 @@ const SkillsPage = () => {
                       {item?.name}
                     </SkillButton>
                   : <SkillButton
-                    key={item?.id}
-                    style={{cursor: "default"}}>
+                    key={item?.id}>
                     <SkillIcon color={item?.color}>
                       <LockedIcon>
                         {item?.content}
