@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
@@ -9,12 +9,41 @@ import ModalContainer from './ModalContainer';
 const MainLayout = () => {
 
   const location = useLocation();
+  const layoutRef = useRef<HTMLDivElement>(null);
+  const cursorPointer = useRef<HTMLDivElement>(null);
 
   const isModal = useSelector((state : RootState) => state.modalOpen.isopen)
   const windowPath = useSelector((state : RootState) => state.pageState);
 
+  useEffect(() => {
+    const cursorMove = (e: any) => {
+      let x = e.clientX;
+      let y = e.clientY;
+      console.log(x, y);
+
+      if (cursorPointer.current) {
+        cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      };
+    };
+
+    const cursorLeave = () => {
+      if (cursorPointer.current) {
+        cursorPointer.current.style.transform = `none`;
+      };
+    };
+
+    window.addEventListener("mousemove", cursorMove);
+    window.addEventListener("mouseleave", cursorLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", cursorMove);
+      window.removeEventListener("mouseleave", cursorLeave);
+    }
+  }, []);
+
   return (
     <MainLayOut>
+      <CursorContainer ref={cursorPointer}/>
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
@@ -150,6 +179,15 @@ const Icon = styled.div`
   @media screen and (max-width: 500px) {
     font-size: 20px;
   }
+`;
+
+const CursorContainer = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #be2e2e;
+  position: absolute;
+  z-index: 30;
 `;
 
 export default MainLayout;

@@ -13,16 +13,24 @@ const ModalContainer = () => {
     const modalOpenData = () => {
         if (kind === "addCharacter") {
             return (
-                <ModalContainerBox onClick={(e) => e.stopPropagation()}>
-                    정말로 다른 지원자를 뽑으시겠습니까?
+                <ModalContainerBox>
+                    <TitleContainer>
+                        정말로 다른 지원자를 뽑으시겠습니까?
+                    </TitleContainer>
                 </ModalContainerBox>
             )
         };
     };
 
     return (
-        <ModalBackgroundContainer onClick={() => dispatch(modalOpen({ kind: "", isopen: false }))}>
+        <ModalBackgroundContainer>
             {modalOpenData()}
+            <CloseButton
+                onClick={() => {
+                    dispatch(modalOpen({ kind: "", isopen: false }));
+                }}>
+                닫기
+            </CloseButton>
         </ModalBackgroundContainer>
     )
 };
@@ -48,8 +56,10 @@ const ModalBackgroundContainer = styled.section`
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 30px;
     position: fixed;
     top: 0;
     left: 0;
@@ -61,6 +71,7 @@ const ModalBackgroundContainer = styled.section`
 const ModalContainerBox = styled.div`
     width: 100%;
     height: 500px;
+    font-family: "GongGothicMedium";
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,6 +84,40 @@ const ModalContainerBox = styled.div`
     color: #FFFFFF;
     overflow: hidden;
     user-select: none;
+`;
+
+const TitleContainer = styled.div`
+    width: fit-content;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 150%;
+`;
+
+export const CloseButton = styled.div`
+    width: 140px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "GongGothicMedium";
+    color: #FFFFFF;
+    box-shadow: #177edf6a 0px 0px 4px 0px;
+    border: 1px solid #177edf6a;
+    background-image: linear-gradient(to top, #3b7fc06a, transparent);
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: #177edf 0px 0px 4px 0px;
+        border: 1px solid #177edf;
+        background-image: linear-gradient(to top, #3b7fc0, transparent);
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100px;
+        height: 36px;
+        font-size: 14px;
+    }
 `;
 
 export default ModalContainer;
