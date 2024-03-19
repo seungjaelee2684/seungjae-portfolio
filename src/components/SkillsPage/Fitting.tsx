@@ -333,7 +333,7 @@ const Button = styled(DefaultButton)`
     background-image: linear-gradient(to top, #3b7fc06a, transparent);
     box-shadow: #177edf6a 0px 0px 4px 0px;
     color: #FFFFFF;
-    cursor: pointer;
+    /* cursor: pointer; */
 
     &:hover {
         box-shadow: #177edf 0px 0px 4px 0px;

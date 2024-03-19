@@ -51,7 +51,7 @@ const LocationButton = styled.div<{ size: number }>`
   border: 1px solid #177edf6a;
   background-image: linear-gradient(to top, #3b7fc06a, transparent);
   transition: all 0.2s;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   &:hover {
     box-shadow: #177edf 0px 0px 4px 0px;

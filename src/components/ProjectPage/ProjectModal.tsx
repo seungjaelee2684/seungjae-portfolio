@@ -206,7 +206,7 @@ const Link = styled.a`
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
-    cursor: pointer;
+    /* cursor: pointer; */
 
     &:hover {
         border-bottom: 1px solid #ffffff75;
