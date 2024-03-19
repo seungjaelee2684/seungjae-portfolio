@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { charactorStatus } from '../../utils/Status';
+import { CharacterStatus } from '../../utils/Status';
 
 interface InfoModalProps {
   statusModal: {
@@ -17,28 +17,28 @@ const InfoModal : React.FC<InfoModalProps> = ({ statusModal }) => {
     if (information) {
       return (
         <ModalInWrapper style={{gap: "10px"}}>
-          <TitleBox>
+          <InformationTitle>
             캐릭터 배경
-          </TitleBox>
-          <Content>
-            1997.01.21 (27)
-          </Content>
-          <Content>
-            sean2684@naver.com
-          </Content>
+          </InformationTitle>
+          <InformationContent style={{marginTop: "10px"}}>
+            탄생: 1997.01.21 (27)
+          </InformationContent>
+          <InformationContent>
+            코드네임: sean2684@naver.com
+          </InformationContent>
         </ModalInWrapper>
       )
     } else {
       return (
         <ModalInWrapper>
           <Icons>
-            {(state) && charactorStatus[state - 1]?.icon}
+            {(state) && CharacterStatus[state - 1]?.icon}
           </Icons>
           <TitleBox>
-            {(state) && charactorStatus[state - 1]?.title}
+            {(state) && CharacterStatus[state - 1]?.title}
           </TitleBox>
           <Content>
-            {(state) && charactorStatus[state - 1]?.content}
+            {(state) && CharacterStatus[state - 1]?.content}
           </Content>
         </ModalInWrapper>
       )
@@ -72,7 +72,7 @@ const ModalContainer = styled.div<{ left: number }>`
 `;
 
 const ModalInWrapper = styled.div`
-  width: 90%;
+  width: 75%;
   height: 96%;
   display: flex;
   flex-direction: column;
@@ -86,8 +86,8 @@ const ModalInWrapper = styled.div`
 const Icons = styled.div`
   font-size: 40px;
   position: absolute;
-  top: 30px;
-  left: 10px;
+  top: 8%;
+  left: -15%;
 `;
 
 const TitleBox = styled.div`
@@ -111,7 +111,13 @@ const Content = styled.div`
 `;
 
 const InformationTitle = styled(TitleBox)`
+  justify-content: start;
+  font-size: 20px;
+`;
 
+const InformationContent = styled(Content)`
+  justify-content: start;
+  font-size: 14px;
 `;
 
 export default InfoModal;

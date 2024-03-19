@@ -44,14 +44,14 @@ const Header = () => {
           Main
         </NavButton>
         <NavButton
-          style={{color: `${(page === "Charactor") ? "#d2cbe9" : ""}`}}
+          style={{color: `${(page === "Character") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/loby")
           }}>
           <ButtonIcons>
             <HiUsers />
           </ButtonIcons>
-          Charactor
+          Character
         </NavButton>
         <NavButton
           style={{color: `${(page === "About Us") ? "#d2cbe9" : ""}`}}
@@ -142,7 +142,7 @@ const NavButton = styled.a`
   color: #aea8c4ac;
   text-shadow: 1px 1px 2px #6b6777;
   transition: all 0.3s;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   &:hover {
     color: #d2cbe9;

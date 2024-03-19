@@ -87,7 +87,7 @@ const ProjectCardBox = styled.div`
     border-radius: 10px;
     border: 1px solid #177edf6a;
     box-shadow: #177edf95 0px 0px 5px 0px;
-    cursor: pointer;
+    /* cursor: pointer; */
 `;
 
 const Overlay = styled.div`

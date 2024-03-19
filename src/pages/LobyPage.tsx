@@ -17,32 +17,32 @@ const LobyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  type CharactorType = {
+  type CharacterType = {
     id: number,
     content: string,
   }
 
-  const charactor : CharactorType[] = [
+  const Character : CharacterType[] = [
     {id: 1, content: "캐릭터 접속"},
     {id: 2, content: "새 캐릭터 추가"},
   ];
-  const [selectCharactor, setSelectCharactor] = useState<number | undefined>();
-  console.log("선택 캐릭터", selectCharactor);
+  const [selectCharacter, setSelectCharacter] = useState<number | undefined>();
+  console.log("선택 캐릭터", selectCharacter);
 
   const onClickSelectHandler = (index: number) => {
-    if (selectCharactor) {
-      if (selectCharactor === index) {
-        setSelectCharactor(undefined);
+    if (selectCharacter) {
+      if (selectCharacter === index) {
+        setSelectCharacter(undefined);
       } else {
-        setSelectCharactor(index);
+        setSelectCharacter(index);
       };
     } else {
-      setSelectCharactor(index);
+      setSelectCharacter(index);
     };
   };
 
   const selectSaveContainer = () => {
-    if (selectCharactor === 1) {
+    if (selectCharacter === 1) {
       return (
         <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
           <SelectBackgroundImage src={CardBG} alt=''/>
@@ -90,7 +90,7 @@ const LobyPage = () => {
   };
 
   const selectNewContainer = () => {
-    if (selectCharactor === 2) {
+    if (selectCharacter === 2) {
       return (
         <SelectCardContainer
           style={{
@@ -118,16 +118,16 @@ const LobyPage = () => {
   };
 
   const selectButton = () => {
-    if (selectCharactor) {
+    if (selectCharacter) {
       return (
         <ChoiceButton onClick={() => {
-          if (selectCharactor === 1) {
+          if (selectCharacter === 1) {
             navigate("/about");
           } else {
-            dispatch(modalOpen({ kind: "addCharactor", isopen: true}))
+            dispatch(modalOpen({ kind: "addCharacter", isopen: true}))
           };
         }}>
-          {charactor[selectCharactor - 1]?.content}
+          {Character[selectCharacter - 1]?.content}
         </ChoiceButton>
       );
     } else {
@@ -140,7 +140,7 @@ const LobyPage = () => {
   };
 
   useEffect(() => {
-    dispatch(pageMove("Charactor"));
+    dispatch(pageMove("Character"));
   }, []);
 
   return (
@@ -157,10 +157,30 @@ const LobyPage = () => {
       </CardWrapper>
       <ChoiceButtonWrapper>
         {selectButton()}
+        <ClickNavi>
+          Click!
+        </ClickNavi>
       </ChoiceButtonWrapper>
     </LobyInBoxContainer>
   )
 };
+
+const ClickButtonAnimation = keyframes`
+  0% {
+    opacity: 0.6;
+    color: #d4b681;
+  }
+
+  50% {
+    opacity: 1;
+    color: #e2dbb7;
+  }
+
+  100% {
+    opacity: 0.6;
+    color: #d4b681;
+  }
+`;
 
 const LobyInBoxContainer = styled(InBoxContainer)`
   height: 100%;
@@ -237,7 +257,7 @@ const CardContainer = styled.div`
   color: #bcad6a;
   background-color: #393a43;
   font-size: 90px;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   &:hover {
     box-shadow: #dfe0b5c4 0px 0px 10px 2px;
@@ -382,6 +402,7 @@ export const ChoiceButtonWrapper = styled.div`
   align-items: center;
   gap: 30px;
   user-select: none;
+  position: relative;
 
   @media screen and (max-width: 500px) {
     gap: 10px;
@@ -402,7 +423,7 @@ export const ChoiceButton = styled.div`
   font-size: 20px;
   color: #d4b681;
   background-image: radial-gradient(circle at bottom center, #0a090ec5, #201d31c5);
-  cursor: pointer;
+  /* cursor: pointer; */
 
   &:hover {
     color: #e2dbb7;
@@ -413,6 +434,23 @@ export const ChoiceButton = styled.div`
   @media screen and (max-width: 500px) {
     width: 150px;
     height: 40px;
+    font-size: 16px;
+  }
+`;
+
+const ClickNavi = styled.div`
+  width: 100%;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 100%;
+  position: absolute;
+  top: -60%;
+  left: 0;
+  letter-spacing: 3px;
+  animation: ${ClickButtonAnimation} 1s linear forwards infinite;
+
+  @media screen and (max-width: 500px) {
+    width: 150px;
     font-size: 16px;
   }
 `;
