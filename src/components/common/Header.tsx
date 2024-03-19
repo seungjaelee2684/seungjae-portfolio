@@ -44,14 +44,14 @@ const Header = () => {
           Main
         </NavButton>
         <NavButton
-          style={{color: `${(page === "Charactor") ? "#d2cbe9" : ""}`}}
+          style={{color: `${(page === "Character") ? "#d2cbe9" : ""}`}}
           onClick={() => {
             navigate("/loby")
           }}>
           <ButtonIcons>
             <HiUsers />
           </ButtonIcons>
-          Charactor
+          Character
         </NavButton>
         <NavButton
           style={{color: `${(page === "About Us") ? "#d2cbe9" : ""}`}}

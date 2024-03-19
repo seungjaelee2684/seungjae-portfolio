@@ -17,32 +17,32 @@ const LobyPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  type CharactorType = {
+  type CharacterType = {
     id: number,
     content: string,
   }
 
-  const charactor : CharactorType[] = [
+  const Character : CharacterType[] = [
     {id: 1, content: "캐릭터 접속"},
     {id: 2, content: "새 캐릭터 추가"},
   ];
-  const [selectCharactor, setSelectCharactor] = useState<number | undefined>();
-  console.log("선택 캐릭터", selectCharactor);
+  const [selectCharacter, setSelectCharacter] = useState<number | undefined>();
+  console.log("선택 캐릭터", selectCharacter);
 
   const onClickSelectHandler = (index: number) => {
-    if (selectCharactor) {
-      if (selectCharactor === index) {
-        setSelectCharactor(undefined);
+    if (selectCharacter) {
+      if (selectCharacter === index) {
+        setSelectCharacter(undefined);
       } else {
-        setSelectCharactor(index);
+        setSelectCharacter(index);
       };
     } else {
-      setSelectCharactor(index);
+      setSelectCharacter(index);
     };
   };
 
   const selectSaveContainer = () => {
-    if (selectCharactor === 1) {
+    if (selectCharacter === 1) {
       return (
         <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
           <SelectBackgroundImage src={CardBG} alt=''/>
@@ -90,7 +90,7 @@ const LobyPage = () => {
   };
 
   const selectNewContainer = () => {
-    if (selectCharactor === 2) {
+    if (selectCharacter === 2) {
       return (
         <SelectCardContainer
           style={{
@@ -118,16 +118,16 @@ const LobyPage = () => {
   };
 
   const selectButton = () => {
-    if (selectCharactor) {
+    if (selectCharacter) {
       return (
         <ChoiceButton onClick={() => {
-          if (selectCharactor === 1) {
+          if (selectCharacter === 1) {
             navigate("/about");
           } else {
-            dispatch(modalOpen({ kind: "addCharactor", isopen: true}))
+            dispatch(modalOpen({ kind: "addCharacter", isopen: true}))
           };
         }}>
-          {charactor[selectCharactor - 1]?.content}
+          {Character[selectCharacter - 1]?.content}
         </ChoiceButton>
       );
     } else {
@@ -140,7 +140,7 @@ const LobyPage = () => {
   };
 
   useEffect(() => {
-    dispatch(pageMove("Charactor"));
+    dispatch(pageMove("Character"));
   }, []);
 
   return (

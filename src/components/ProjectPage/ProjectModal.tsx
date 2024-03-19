@@ -69,7 +69,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
     )
 };
 
-const TitleOpen = keyframes`
+const ModalOpen = keyframes`
     0% {
         opacity: 0;
         transform: scaleX(0);
@@ -113,7 +113,7 @@ const ModalContainer = styled.div`
     background-image: radial-gradient(circle at center, #3b80c0c5, #10395fee);
     border-left: 4px solid #328add;
     border-right: 4px solid #328add;
-    animation: ${TitleOpen} 0.4s ease-out forwards;
+    animation: ${ModalOpen} 0.4s ease-out forwards;
     color: #FFFFFF;
     overflow: hidden;
 
@@ -151,7 +151,7 @@ const TitleBackground = styled.div`
     height: 4px;
     background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
     opacity: 0;
-    animation: ${TitleOpen} 0.8s ease-out forwards 0.4s;
+    animation: ${ModalOpen} 0.8s ease-out forwards 0.4s;
 `;
 
 const Title = styled.div`

@@ -1,7 +1,7 @@
 import { BsMinecartLoaded } from "react-icons/bs";
 import { GiSmallFishingSailboat, GiSpiderWeb } from "react-icons/gi";
 
-export const charactorStatus = [
+export const CharacterStatus = [
   {
     id: 1,
     size: 0,
