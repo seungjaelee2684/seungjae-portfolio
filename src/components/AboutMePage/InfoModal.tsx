@@ -105,8 +105,8 @@ const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
-  line-height: 120%;
+  font-size: 11px;
+  line-height: 140%;
   white-space: pre-line;
 `;
 
