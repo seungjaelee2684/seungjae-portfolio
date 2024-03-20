@@ -51,7 +51,7 @@ const MainLayout = () => {
           </AboutWrapper>
         </AboutContainer>
       </EffectAnimation>
-      {(isModal) && <ModalContainer />}
+      <ModalContainer />
     </MainLayOut>
   )
 };

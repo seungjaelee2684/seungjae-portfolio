@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type InitialStateType = {
-    kind: string,
+    kind: string | undefined,
     isopen: boolean
 };
 
 const initialState : InitialStateType = {
-    kind: "",
+    kind: undefined,
     isopen: false
 };
 
@@ -15,7 +15,7 @@ const globalModalOpenSlice = createSlice({
     initialState,
     reducers: {
         modalOpen: (state, action : PayloadAction<{
-            kind: string,
+            kind: string | undefined,
             isopen: boolean
         }>) => {
             state.kind = action.payload.kind;
