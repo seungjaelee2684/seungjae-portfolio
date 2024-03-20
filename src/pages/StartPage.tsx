@@ -23,10 +23,16 @@ const StartPage = () => {
           Start Game
           <ButtonWrapper>
             <Button onClick={() => navigate("/loby")}>
-              New Game
+              <HoverButton />
+              <ButtonText >
+                New Game
+              </ButtonText>
             </Button>
             <DefaultButton>
-              Continue
+              <HoverButton />
+              <ButtonText >
+                Continue
+              </ButtonText>
             </DefaultButton>
           </ButtonWrapper>
         </StartGameWrapper>
@@ -96,17 +102,52 @@ const ButtonWrapper = styled.div`
   gap: 30px;
 `;
 
+const HoverButton = styled.div`
+  width: 20%;
+  height: 60%;
+  background-color: #1e92ff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 24;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%, 0% 100%);
+  border-radius: 5px;
+`;
+
+const ButtonText = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 28px;
+  line-height: 140%;
+  transition: all 0.3s;
+  z-index: 25;
+`;
+
 const DefaultButton = styled.button`
-  width: 240px;
-  height: 60px;
+  width: 180px;
+  height: 40px;
+  position: relative;
   outline: none;
   border: none;
   background: none;
-  color: #4876a0;
   font-family: "GongGothicMedium";
-  font-size: 28px;
-  line-height: 140%;
+  color: #4876a0;
+  
   cursor: none;
+
+  &:hover ${HoverButton} {
+    opacity: 1;
+    width: 110%;
+  }
+
+  &:hover {
+    color: #FFFFFF;
+  }
 `;
 
 const Button = styled(DefaultButton)`
