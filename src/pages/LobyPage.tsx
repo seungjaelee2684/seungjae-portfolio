@@ -441,17 +441,17 @@ export const ChoiceButton = styled.div`
 
 const ClickNavi = styled.div`
   width: 100%;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 500;
   line-height: 100%;
   position: absolute;
-  top: 120%;
+  top: -60%;
   left: 0;
+  z-index: 10;
   letter-spacing: 3px;
   animation: ${ClickButtonAnimation} 1s linear forwards infinite;
 
   @media screen and (max-width: 500px) {
-    width: 150px;
     font-size: 16px;
   }
 `;

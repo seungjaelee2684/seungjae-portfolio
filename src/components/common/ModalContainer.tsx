@@ -13,18 +13,22 @@ const ModalContainer = () => {
     const modalOpenData = () => {
         if (kind === "addCharacter") {
             return (
-                <ModalContainerBox>
+                <ModalInWrapper>
                     <TitleContainer>
                         정말로 다른 지원자를 뽑으시겠습니까?
                     </TitleContainer>
-                </ModalContainerBox>
+                </ModalInWrapper>
             )
         };
     };
 
     return (
         <ModalBackgroundContainer>
-            {modalOpenData()}
+            <ModalContainerBox>
+                <BarContainer top='0' bottom='auto' />
+                <BarContainer top='auto' bottom='0'/>
+                {modalOpenData()}
+            </ModalContainerBox>
             <CloseButton
                 onClick={() => {
                     dispatch(modalOpen({ kind: "", isopen: false }));
@@ -72,18 +76,32 @@ const ModalContainerBox = styled.div`
     width: 100%;
     height: 500px;
     font-family: "GongGothicMedium";
+    background-image: radial-gradient(circle at center, #10305fc5, transparent);
+    animation: ${ModalOpen} 0.4s ease-out forwards;
+    color: #FFFFFF;
+    overflow: hidden;
+    user-select: none;
+    position: relative;
+`;
+
+const ModalInWrapper = styled.div`
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
-    background-image: radial-gradient(circle at center, #3b80c0c5, #10395fee);
-    border-left: 4px solid #328add;
-    border-right: 4px solid #328add;
-    animation: ${ModalOpen} 0.4s ease-out forwards;
-    color: #FFFFFF;
-    overflow: hidden;
-    user-select: none;
+`;
+
+const BarContainer = styled.div<{ top: string, bottom: string }>`
+    width: 100%;
+    height: 2px;
+    background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
+    position: absolute;
+    top: ${(props) => props.top};
+    bottom: ${(props) => props.bottom};
+    left: 0;
 `;
 
 const TitleContainer = styled.div`
