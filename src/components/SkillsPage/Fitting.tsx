@@ -33,19 +33,19 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
             <ToolsWrapper>
                 <Tools
                     title="Github"
-                    right='0px'
+                    left='0px'
                     color="#181717">
                     <FaGithub />
                 </Tools>
                 <Tools
                     title="Jira"
-                    right='50px'
+                    left='50px'
                     color="#0052CC">
                     <SiJira />
                 </Tools>
                 <Tools
                     title="Visual Studio Code"
-                    right='20px'
+                    left='20px'
                     color="#007ACC">
                     <SiVisualstudiocode />
                 </Tools>
@@ -168,10 +168,10 @@ const ToolsWrapper = styled.div`
     }
 `;
 
-const Tools = styled(MainStack)<{ right : string, color : string }>`
+const Tools = styled(MainStack)<{ left : string, color : string }>`
     min-width: 100px;
     height: 100px;
-    margin-left: ${(props) => props.right};
+    margin-left: ${(props) => props.left};
     color: ${(props) => props.color};
     font-size: 46px;
 

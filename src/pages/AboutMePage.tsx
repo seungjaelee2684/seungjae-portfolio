@@ -244,7 +244,8 @@ export const RightWrapper = styled.div`
   padding-right: 20px;
 
   @media screen and (max-width: 836px) {
-    justify-content: end;
+    height: 70%;
+    align-items: center;
   }
 `;
 
