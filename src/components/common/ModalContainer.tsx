@@ -43,7 +43,7 @@ const ModalContainer = () => {
                     if (backgroundRef.current) {
                         backgroundRef.current.style.visibility = "hidden";
                     };
-                }, 600);  
+                }, 500);  
             }      
         };
     }, [isopen]);

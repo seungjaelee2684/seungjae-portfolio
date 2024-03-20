@@ -86,10 +86,9 @@ const ProjectPage = () => {
                     <TbArrowBadgeRight />
                 </PrevNextButton>
             </Loby.ChoiceButtonWrapper>
-            {(isopen)
-                && <ProjectModal
-                    projectKind={projectKind}
-                    setProjectKind={setProjectKind}/>}
+            <ProjectModal
+                projectKind={projectKind}
+                setProjectKind={setProjectKind}/>
         </ProjectInBoxContainer>
     )
 };
