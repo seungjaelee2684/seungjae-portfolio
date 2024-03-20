@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { projectDto } from '../../utils/Projects';
 import * as CommomModal from '../common/ModalContainer';
@@ -17,12 +17,48 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind }) => {
 
     const { isopen, id } = projectKind;
+    const bgRef = useRef<HTMLDivElement>(null);
+    const projectRef = useRef<HTMLDivElement>(null);
+    const underRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (projectRef.current && bgRef.current && underRef.current) {
+            if (isopen) {
+                bgRef.current.style.visibility = "visible";
+
+                setTimeout(() => {
+                    if (projectRef.current) {
+                        projectRef.current.style.opacity = "1";
+                        projectRef.current.style.transform = "scaleX(1)";
+                    };
+                }, 100);
+
+                setTimeout(() => {
+                    if (underRef.current) {
+                        underRef.current.style.opacity = "1";
+                        underRef.current.style.transform = "scaleX(1)";
+                    };
+                }, 500); 
+            } else {
+                underRef.current.style.opacity = "0";
+                underRef.current.style.transform = "scaleX(0)";
+                projectRef.current.style.opacity = "0";
+                projectRef.current.style.transform = "scaleX(0)";
+
+                setTimeout(() => {
+                    if (bgRef.current) {
+                        bgRef.current.style.visibility = "hidden";
+                    };
+                }, 500);  
+            }      
+        };
+    }, [isopen]);
 
     return (
-        <ModalBackground>
-            <ModalContainer>
+        <ModalBackground ref={bgRef}>
+            <ModalContainer ref={projectRef}>
                 <TitleBox>
-                    <TitleBackground />
+                    <TitleBackground ref={underRef}/>
                     <Title>
                         {projectDto[id - 1]?.project}
                     </Title>
@@ -70,23 +106,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
     )
 };
 
-const ModalOpen = keyframes`
-    0% {
-        opacity: 0;
-        transform: scaleX(0);
-    }
-
-    50% {
-        opacity: 0;
-        transform: scaleX(0);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-`;
-
 const ModalBackground = styled.div`
     width: 100%;
     height: 100%;
@@ -94,6 +113,7 @@ const ModalBackground = styled.div`
     top: 0;
     left: 0;
     z-index: 16;
+    visibility: hidden;
     background-color: #00000050;
     backdrop-filter: blur(3px);
     display: flex;
@@ -111,10 +131,12 @@ const ModalContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 16px;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    transform: scaleX(0);
     background-image: radial-gradient(circle at center, #3b80c0c5, #10395fee);
     border-left: 4px solid #328add;
     border-right: 4px solid #328add;
-    animation: ${ModalOpen} 0.4s ease-out forwards;
     color: #FFFFFF;
     overflow: hidden;
 
@@ -152,7 +174,8 @@ const TitleBackground = styled.div`
     height: 4px;
     background-image: radial-gradient(circle at center, #e6cea5f8, transparent);
     opacity: 0;
-    animation: ${ModalOpen} 0.8s ease-out forwards 0.4s;
+    transition: all 0.4s ease-in-out;
+    transform: scaleX(0);
 `;
 
 const Title = styled.div`
