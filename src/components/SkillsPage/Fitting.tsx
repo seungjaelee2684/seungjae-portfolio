@@ -28,7 +28,12 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
     <FittingContainer>
         <TopContainer>
             <MainStack>
-                {fittingSkill}%
+                <MainStackCircle>
+                    <MainStackContainer height={fittingSkill}/>
+                    <MainStackPercent>
+                        {fittingSkill}%
+                    </MainStackPercent>
+                </MainStackCircle>
             </MainStack>
             <ToolsWrapper>
                 <Tools
@@ -122,11 +127,11 @@ const MainStack = styled.div`
     height: 300px;
     border: 2px solid #d4b681;
     border-radius: 100%;
+    font-size: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
-    font-size: 32px;
     background-image: linear-gradient(to top, #c8a87840, transparent);
 
     @media screen and (max-width: 1320px) {
@@ -145,6 +150,40 @@ const MainStack = styled.div`
         height: 120px;
         font-size: 22px;
     }
+`;
+
+const MainStackCircle = styled.div`
+    width: 96%;
+    height: 96%;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+`;
+
+const MainStackContainer = styled.div<{ height: number }>`
+    width: 200%;
+    height: ${(props) => props.height}%;
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+    background-color: #e7cb96;
+    z-index: 11;
+    transition: all 0.2s ease-in-out;
+`;
+
+const MainStackPercent = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const ToolsWrapper = styled.div`
