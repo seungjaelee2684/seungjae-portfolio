@@ -11,7 +11,7 @@ const StartPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(pageMove(""));
+    dispatch(pageMove("Main"));
   }, []);
 
   return (

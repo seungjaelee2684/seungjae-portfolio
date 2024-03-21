@@ -28,8 +28,8 @@ const MainLayout = () => {
 
   return (
     <MainLayOut>
-      <CursorContainer ref={cursorPointer} />
-      <FollowCursor ref={followRef} />
+      {/* <CursorContainer ref={cursorPointer} />
+      <FollowCursor ref={followRef} /> */}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
