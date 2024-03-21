@@ -4,12 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { RootState } from '../../store/config/configureStore';
 import { pageMove } from '../../store/modules/pageState';
-import { LiaGripfire } from "react-icons/lia";
-import { GoHomeFill } from "react-icons/go";
-import { HiUsers } from "react-icons/hi2";
-import { GrContactInfo } from "react-icons/gr";
 import { mobileView } from '../../store/modules/isMobile';
-import { FaDungeon } from "react-icons/fa6";
+import { headerHtml } from '../../utils/NaviHTML';
 
 const Header = () => {
 
@@ -17,6 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const page = useSelector((state : RootState) => state.pageState);
   const isMobile = useSelector((state : RootState) => state.isMobile);
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,56 +30,21 @@ const Header = () => {
   return (
     <HeaderLayout>
       <HeaderWrapper>
-        <NavButton
-          style={{color: `${(page === "") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/")
-          }}>
-          <ButtonIcons>
-            <GoHomeFill />
-          </ButtonIcons>
-          Main
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Character") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/loby")
-          }}>
-          <ButtonIcons>
-            <HiUsers />
-          </ButtonIcons>
-          Character
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "About Us") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/about")
-          }}>
-          <ButtonIcons>
-            <GrContactInfo />
-          </ButtonIcons>
-          About Us
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Skills") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/skill")
-          }}>
-          <ButtonIcons>
-            <LiaGripfire />
-          </ButtonIcons>
-          Skills
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Dungeon") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/dungeon")
-          }}>
-          <ButtonIcons>
-            <FaDungeon />
-          </ButtonIcons>
-          Dungeon
-        </NavButton>
+        {headerHtml?.map((item: any, index: number) => {
+          return (
+            <NavButton
+              key={item?.id}
+              style={{color: `${(page === item?.content) ? "#d2cbe9" : ""}`}}
+              onClick={() => {
+                navigate(`${item?.url}`)
+              }}>
+              <ButtonIcons>
+                {item?.icon}
+              </ButtonIcons>
+              {item?.content}
+            </NavButton>
+          )
+        })}
       </HeaderWrapper>
     </HeaderLayout>
   )
