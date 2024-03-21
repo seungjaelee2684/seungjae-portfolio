@@ -346,7 +346,7 @@ const DefaultButton = styled.div`
     box-shadow: none;
     color: #ADADAD;
     background-color: #000000;
-    /* cursor: default; */
+    cursor: default;
 
     @media screen and (max-width: 1320px) {
         width: 140px;
@@ -372,7 +372,7 @@ const Button = styled(DefaultButton)`
     background-image: linear-gradient(to top, #3b7fc06a, transparent);
     box-shadow: #177edf6a 0px 0px 4px 0px;
     color: #FFFFFF;
-    /* cursor: pointer; */
+    cursor: pointer;
 
     &:hover {
         box-shadow: #177edf 0px 0px 4px 0px;

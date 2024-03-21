@@ -438,7 +438,7 @@ export const NameIconWrapper = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  /* cursor: pointer; */
+  cursor: pointer;
   margin-left: 5px;
 
   &:hover {
@@ -469,7 +469,7 @@ export const StatusIcon = styled.div<{ color: string, size : number }>`
   justify-content: center;
   align-items: center;
   box-shadow: #00000090 0px 0px 8px 0px;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   @media screen and (max-width: 1600px) {
     width: 32px;

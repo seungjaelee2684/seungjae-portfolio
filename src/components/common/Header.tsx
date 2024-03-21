@@ -142,7 +142,7 @@ const NavButton = styled.a`
   color: #aea8c4ac;
   text-shadow: 1px 1px 2px #6b6777;
   transition: all 0.3s;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   &:hover {
     color: #d2cbe9;
