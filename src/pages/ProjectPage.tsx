@@ -155,7 +155,7 @@ const ProjectCardBox = styled.div`
 `;
 
 const ProjectKindButton = styled(Loby.ChoiceButton)`
-    /* cursor: default; */
+    cursor: default;
 
     &:hover {
         border: 1px solid #d4b681;
@@ -175,7 +175,7 @@ const PrevNextButton = styled.div<{ xy : string }>`
   justify-content: center;
   align-items: center;
   animation: ${PrevNextButtonMove} 1.5s linear infinite;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   --xy: ${(props) => props.xy};
 

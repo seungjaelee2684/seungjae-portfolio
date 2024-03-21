@@ -11,22 +11,20 @@ const MainLayout = () => {
   const location = useLocation();
   const followRef = useRef<HTMLDivElement>(null);
   const cursorPointer = useRef<HTMLDivElement>(null);
-
-  const isModal = useSelector((state: RootState) => state.modalOpen.isopen)
   const windowPath = useSelector((state: RootState) => state.pageState);
 
-  const cursorMove = (e: any) => {
-    let x = e.clientX;
-    let y = e.clientY;
-    console.log(x, y);
+  // const cursorMove = (e: any) => {
+  //   let x = e.clientX;
+  //   let y = e.clientY;
+  //   console.log(x, y);
 
-    if (cursorPointer.current && followRef.current) {
-      cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      followRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
-    };
-  };
+  //   if (cursorPointer.current && followRef.current) {
+  //     cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  //     followRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
+  //   };
+  // };
 
-  window.addEventListener("mousemove", cursorMove);
+  // window.addEventListener("mousemove", cursorMove);
 
   return (
     <MainLayOut>

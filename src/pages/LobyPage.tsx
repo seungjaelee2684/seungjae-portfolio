@@ -258,7 +258,7 @@ const CardContainer = styled.div`
   color: #bcad6a;
   background-color: #393a43;
   font-size: 90px;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   &:hover {
     box-shadow: #dfe0b5c4 0px 0px 10px 2px;
@@ -424,7 +424,7 @@ export const ChoiceButton = styled.div`
   font-size: 20px;
   color: #d4b681;
   background-image: radial-gradient(circle at bottom center, #0a090ec5, #201d31c5);
-  /* cursor: pointer; */
+  cursor: pointer;
 
   &:hover {
     color: #e2dbb7;
