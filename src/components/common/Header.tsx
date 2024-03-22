@@ -13,13 +13,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const page = useSelector((state : RootState) => state.pageState);
   const isMobile = useSelector((state : RootState) => state.isMobile);
-  const [innerContent, setInnerContent] = useState<string[]>([
-    "Main",
-    "Character",
-    "About Us",
-    "Skills",
-    "Dungeon"
-  ]);
+  const naviList : string[] = ["Main", "Character", "About Us", "Skills", "Dungeon"];
+  const [innerContent, setInnerContent] = useState<string[]>(naviList);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +27,6 @@ const Header = () => {
   }, [window.innerWidth]);
 
   console.log("모바일 -> ", isMobile);
-  console.log("텍스트 -> ", innerContent);
 
   return (
     <HeaderLayout>
@@ -45,21 +39,30 @@ const Header = () => {
               onClick={() => {
                 navigate(`${item?.url}`)
               }}
-              onMouseOver={() => {
-                for (let i = 0; innerContent[index]?.length > i; i++) {
-                  let text = innerContent[index];
-                  let index1 = i;
-                  let index2 = i + 1;
-                  let strArr = text.split("");
-                  let temp = strArr[index1];
-                  strArr[index1] = strArr[index2];
-                  strArr[index2] = temp;
+              onMouseOver={() => { // 마우스 올렸을 때 텍스트의 순서가 바뀌게 애니메이션 구현
+                let i = 0
+                const interval = setInterval(() => {
+                  if (innerContent[index]?.length > i) {
+                    let text = innerContent[index];
+                    let index1 = i;
+                    let index2 = i + 1;
+                    let strArr = text.split("");
+                    let temp = strArr[index1];
+                    strArr[index1] = strArr[index2];
+                    strArr[index2] = temp;
 
-                  let modifiedStr = strArr.join("");
-                  const newInnerContent = [...innerContent];
-                  newInnerContent[index] = modifiedStr;
-                  setInnerContent(newInnerContent);
-                };
+                    let modifiedStr = strArr.join("");
+                    const newInnerContent = [...innerContent];
+                    newInnerContent[index] = modifiedStr;
+                    setInnerContent(newInnerContent);
+                    i++;
+                  } else {
+                    clearInterval(interval);
+                  };
+                }, 80);
+              }}
+              onMouseOut={() => {
+                setInnerContent(naviList);
               }}>
               <ButtonIcons>
                 {item?.icon}

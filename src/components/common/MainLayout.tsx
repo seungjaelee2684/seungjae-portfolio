@@ -1,17 +1,24 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
 import ModalContainer from './ModalContainer';
+import GuideAnimation from './GuideAnimation';
 
 const MainLayout = () => {
 
-  const location = useLocation();
   const followRef = useRef<HTMLDivElement>(null);
   const cursorPointer = useRef<HTMLDivElement>(null);
   const windowPath = useSelector((state: RootState) => state.pageState);
+  const isGuide = localStorage.getItem("guide");
+  const [guideStep, setGuideStep] = useState<boolean>(false);
+  console.log("가이드 여부 -> ", guideStep);
+
+  useEffect(() => {
+    setGuideStep(!!isGuide);
+  }, [isGuide]);
 
   // const cursorMove = (e: any) => {
   //   let x = e.clientX;
@@ -30,6 +37,8 @@ const MainLayout = () => {
     <MainLayOut>
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
+      {(guideStep)
+        && <GuideAnimation />}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
