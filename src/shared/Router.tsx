@@ -8,6 +8,7 @@ import StartPage from '../pages/StartPage';
 import Header from '../components/common/Header';
 import SkillsPage from '../pages/SkillsPage';
 import ProjectPage from '../pages/ProjectPage';
+import GuideAnimation from '../components/common/GuideAnimation';
 
 const Router = () => {
   return (
