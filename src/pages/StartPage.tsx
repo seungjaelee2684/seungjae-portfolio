@@ -22,7 +22,11 @@ const StartPage = () => {
         <StartGameWrapper>
           Start Game
           <ButtonWrapper>
-            <DefaultButton onClick={() => navigate("/loby")}>
+            <DefaultButton
+              onClick={() => {
+                localStorage.setItem("guide", "true");
+                navigate("/loby");
+              }}>
               <HoverButton />
               <ButtonText >
                 New Game
