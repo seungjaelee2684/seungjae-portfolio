@@ -12,6 +12,7 @@ const StartPage = () => {
 
   useEffect(() => {
     dispatch(pageMove("Main"));
+    localStorage.removeItem("guide");
   }, []);
 
   return (

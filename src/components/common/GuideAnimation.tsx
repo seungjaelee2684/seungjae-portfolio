@@ -7,7 +7,6 @@ const GuideAnimation = () => {
     <GuideContainer>
       <GuideInWrapper>
         <GuideBack />
-        <SelectBox />
         GuideAnimation
       </GuideInWrapper>
     </GuideContainer>
@@ -26,24 +25,16 @@ const GuideContainer = styled.div`
 `;
 
 const GuideInWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   position: relative;
 `;
 
 const GuideBack = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #00000070;
-`;
-
-const SelectBox = styled.div`
-  width: 500px;
-  height: 500px;
-  background-color: none;
-  border-radius: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 23;
+  background-color: #000000ca;
+  mask: radial-gradient(circle at 23% 50%, transparent 10%, #000000ca 10%);
 `;
 
 export default GuideAnimation;
