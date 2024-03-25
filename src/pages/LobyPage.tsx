@@ -66,7 +66,7 @@ const LobyPage = () => {
       )
     } else {
       return (
-        <CardContainer onClick={() => onClickSelectHandler(1)}>
+        <CardContainer onClick={() => onClickSelectHandler(1)} id='lobyContainer'>
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
@@ -141,6 +141,7 @@ const LobyPage = () => {
 
   useEffect(() => {
     dispatch(pageMove("Character"));
+    
   }, []);
 
   return (

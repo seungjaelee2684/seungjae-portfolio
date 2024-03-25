@@ -13,6 +13,7 @@ const StartPage = () => {
   useEffect(() => {
     dispatch(pageMove("Main"));
     localStorage.removeItem("guide");
+    localStorage.removeItem("guide_page");
   }, []);
 
   return (
@@ -26,6 +27,7 @@ const StartPage = () => {
             <DefaultButton
               onClick={() => {
                 localStorage.setItem("guide", "true");
+                localStorage.setItem("guide_page", "loby");
                 navigate("/loby");
               }}>
               <HoverButton />
