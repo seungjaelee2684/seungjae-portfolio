@@ -22,3 +22,16 @@ const initialState = [
         transverse: 0
     },
 ];
+
+const guideSlice = createSlice({
+    name: "guidePage",
+    initialState,
+    reducers: {
+        guideStep: (state, action) => {
+
+        }
+    }
+});
+
+export default guideSlice.reducer;
+export const { guideStep } = guideSlice.actions;
