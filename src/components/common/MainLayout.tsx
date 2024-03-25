@@ -13,12 +13,15 @@ const MainLayout = () => {
   const cursorPointer = useRef<HTMLDivElement>(null);
   const windowPath = useSelector((state: RootState) => state.pageState);
   const isGuide = localStorage.getItem("guide");
+  const guidePage = localStorage.getItem("guide_page");
+  const [guide, setGuide] = useState<boolean>(false);
   const [guideStep, setGuideStep] = useState<boolean>(false);
-  console.log("가이드 여부 -> ", guideStep);
+  console.log("가이드 여부 -> ", guide, guideStep);
 
   useEffect(() => {
-    setGuideStep(!!isGuide);
-  }, [isGuide]);
+    setGuide(!!isGuide);
+    setGuideStep(!!guidePage);
+  }, [isGuide, guidePage]);
 
   // const cursorMove = (e: any) => {
   //   let x = e.clientX;
@@ -37,7 +40,7 @@ const MainLayout = () => {
     <MainLayOut>
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
-      {(guideStep)
+      {(guide && guideStep)
         && <GuideAnimation />}
       <BackgroundEffect />
       <EffectAnimation>
