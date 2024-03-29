@@ -4,12 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { RootState } from '../../store/config/configureStore';
 import { pageMove } from '../../store/modules/pageState';
-import { LiaGripfire } from "react-icons/lia";
-import { GoHomeFill } from "react-icons/go";
-import { HiUsers } from "react-icons/hi2";
-import { GrContactInfo } from "react-icons/gr";
 import { mobileView } from '../../store/modules/isMobile';
-import { FaDungeon } from "react-icons/fa6";
+import { headerHtml } from '../../utils/NaviHTML';
 
 const Header = () => {
 
@@ -17,6 +13,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const page = useSelector((state : RootState) => state.pageState);
   const isMobile = useSelector((state : RootState) => state.isMobile);
+  const naviList : string[] = ["Main", "Character", "About Us", "Skills", "Dungeon"];
+  const [innerContent, setInnerContent] = useState<string[]>(naviList);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,56 +31,46 @@ const Header = () => {
   return (
     <HeaderLayout>
       <HeaderWrapper>
-        <NavButton
-          style={{color: `${(page === "") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/")
-          }}>
-          <ButtonIcons>
-            <GoHomeFill />
-          </ButtonIcons>
-          Main
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Character") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/loby")
-          }}>
-          <ButtonIcons>
-            <HiUsers />
-          </ButtonIcons>
-          Character
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "About Us") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/about")
-          }}>
-          <ButtonIcons>
-            <GrContactInfo />
-          </ButtonIcons>
-          About Us
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Skills") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/skill")
-          }}>
-          <ButtonIcons>
-            <LiaGripfire />
-          </ButtonIcons>
-          Skills
-        </NavButton>
-        <NavButton
-          style={{color: `${(page === "Dungeon") ? "#d2cbe9" : ""}`}}
-          onClick={() => {
-            navigate("/dungeon")
-          }}>
-          <ButtonIcons>
-            <FaDungeon />
-          </ButtonIcons>
-          Dungeon
-        </NavButton>
+        {headerHtml?.map((item: any, index: number) => {
+          return (
+            <NavButton
+              key={item?.id}
+              style={{color: `${(page === item?.content) ? "#d2cbe9" : ""}`}}
+              onClick={() => {
+                navigate(`${item?.url}`)
+              }}
+              onMouseOver={() => { // 마우스 올렸을 때 텍스트의 순서가 바뀌게 애니메이션 구현
+                let i = 0
+                const interval = setInterval(() => {
+                  if (innerContent[index]?.length > i) {
+                    let text = innerContent[index];
+                    let index1 = i;
+                    let index2 = i + 1;
+                    let strArr = text.split("");
+                    let temp = strArr[index1];
+                    strArr[index1] = strArr[index2];
+                    strArr[index2] = temp;
+
+                    let modifiedStr = strArr.join("");
+                    const newInnerContent = [...innerContent];
+                    newInnerContent[index] = modifiedStr;
+                    setInnerContent(newInnerContent);
+                    i++;
+                  } else {
+                    clearInterval(interval);
+                  };
+                }, 80);
+              }}
+              onMouseOut={() => {
+                setInnerContent(naviList);
+              }}>
+              <ButtonIcons>
+                {item?.icon}
+              </ButtonIcons>
+              {innerContent[index]}
+            </NavButton>
+          )
+        })}
       </HeaderWrapper>
     </HeaderLayout>
   )
@@ -142,7 +130,7 @@ const NavButton = styled.a`
   color: #aea8c4ac;
   text-shadow: 1px 1px 2px #6b6777;
   transition: all 0.3s;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   &:hover {
     color: #d2cbe9;

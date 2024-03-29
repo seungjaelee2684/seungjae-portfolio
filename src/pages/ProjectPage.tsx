@@ -86,10 +86,9 @@ const ProjectPage = () => {
                     <TbArrowBadgeRight />
                 </PrevNextButton>
             </Loby.ChoiceButtonWrapper>
-            {(isopen)
-                && <ProjectModal
-                    projectKind={projectKind}
-                    setProjectKind={setProjectKind}/>}
+            <ProjectModal
+                projectKind={projectKind}
+                setProjectKind={setProjectKind}/>
         </ProjectInBoxContainer>
     )
 };
@@ -176,7 +175,7 @@ const PrevNextButton = styled.div<{ xy : string }>`
   justify-content: center;
   align-items: center;
   animation: ${PrevNextButtonMove} 1.5s linear infinite;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   --xy: ${(props) => props.xy};
 

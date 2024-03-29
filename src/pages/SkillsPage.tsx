@@ -69,8 +69,7 @@ const SkillsPage = () => {
                       {item?.name}
                     </SkillButton>
                   : <SkillButton
-                    key={item?.id}
-                    style={{cursor: "default"}}>
+                    key={item?.id}>
                     <SkillIcon color={item?.color}>
                       <LockedIcon>
                         {item?.content}
@@ -194,7 +193,7 @@ const SkillButton = styled.div`
   justify-content: start;
   align-items: center;
   gap: 16px;
-  /* cursor: pointer; */
+  cursor: pointer;
   font-size: 18px;
   line-height: 110%;
   white-space: pre-line;

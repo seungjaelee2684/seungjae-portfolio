@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type InitialStateType = string;
 
-const initialState : InitialStateType = "";
+const initialState : InitialStateType = "Main";
 
 const pageStateSlice = createSlice({
     name: "pageState",

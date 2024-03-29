@@ -1,49 +1,47 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
 import ModalContainer from './ModalContainer';
+import GuideAnimation from './GuideAnimation';
 
 const MainLayout = () => {
 
-  const location = useLocation();
-  const layoutRef = useRef<HTMLDivElement>(null);
+  const followRef = useRef<HTMLDivElement>(null);
   const cursorPointer = useRef<HTMLDivElement>(null);
-
-  const isModal = useSelector((state : RootState) => state.modalOpen.isopen)
-  const windowPath = useSelector((state : RootState) => state.pageState);
+  const windowPath = useSelector((state: RootState) => state.pageState);
+  const isGuide = localStorage.getItem("guide");
+  const guidePage = localStorage.getItem("guide_page");
+  const [guide, setGuide] = useState<boolean>(false);
+  const [guideStep, setGuideStep] = useState<boolean>(false);
+  console.log("가이드 여부 -> ", guide, guideStep);
 
   useEffect(() => {
-    const cursorMove = (e: any) => {
-      let x = e.clientX;
-      let y = e.clientY;
-      console.log(x, y);
+    setGuide(!!isGuide);
+    setGuideStep(!!guidePage);
+  }, [isGuide, guidePage]);
 
-      if (cursorPointer.current) {
-        cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      };
-    };
+  // const cursorMove = (e: any) => {
+  //   let x = e.clientX;
+  //   let y = e.clientY;
+  //   console.log(x, y);
 
-    const cursorLeave = () => {
-      if (cursorPointer.current) {
-        cursorPointer.current.style.transform = `none`;
-      };
-    };
+  //   if (cursorPointer.current && followRef.current) {
+  //     cursorPointer.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  //     followRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`
+  //   };
+  // };
 
-    window.addEventListener("mousemove", cursorMove);
-    window.addEventListener("mouseleave", cursorLeave);
-
-    return () => {
-      window.removeEventListener("mousemove", cursorMove);
-      window.removeEventListener("mouseleave", cursorLeave);
-    }
-  }, []);
+  // window.addEventListener("mousemove", cursorMove);
 
   return (
     <MainLayOut>
-      <CursorContainer ref={cursorPointer}/>
+      {/* <CursorContainer ref={cursorPointer} />
+      <FollowCursor ref={followRef} /> */}
+      {/* {(guide && guideStep)
+        && <GuideAnimation />} */}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
@@ -61,7 +59,7 @@ const MainLayout = () => {
           </AboutWrapper>
         </AboutContainer>
       </EffectAnimation>
-      {(isModal) && <ModalContainer />}
+      <ModalContainer />
     </MainLayOut>
   )
 };
@@ -182,12 +180,22 @@ const Icon = styled.div`
 `;
 
 const CursorContainer = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 100%;
   background-color: #be2e2e;
   position: absolute;
   z-index: 30;
+`;
+
+const FollowCursor = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background-color: #db6e6ed1;
+  position: absolute;
+  z-index: 29;
+  transition: all 0.2s;
 `;
 
 export default MainLayout;

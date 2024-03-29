@@ -8,7 +8,7 @@ export const CharacterStatus = [
     color: "#294b94",
     icon: <GiSmallFishingSailboat />,
     title: "신중한 탐험가\n(Cautious Explorer)",
-    content: "탐험을 즐기면서도 새로운 것을 탐험하는데에 있어\n신중하게 고민하려는 성향.",
+    content: "탐험을 즐기면서도\n새로운 것을 탐험하는데에 있어\n신중하게 고민하려는 성향.",
   },
   {
     id: 2,

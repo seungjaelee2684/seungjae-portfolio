@@ -10,9 +10,13 @@ const LocationBtn = () => {
 
   return (
     <LocationButtonWrapper>
-      <LocationButton size={0} onClick={() => window.open("https://github.com/seungjaelee2684")}>
+      <LocationButton size={0} onClick={() => window.open("https://github.com/seungjaelee2684/")}>
         <LocationIcon src={Github} alt='' />
         Github
+      </LocationButton>
+      <LocationButton size={0} onClick={() => window.open("https://sean2684.tistory.com/")}>
+        <LocationIcon src={Tistory} alt='' />
+        Tistory
       </LocationButton>
       <LocationButton size={-3} onClick={() => navigate("/skill")}>
         스킬 장착하러 가기
@@ -51,7 +55,7 @@ const LocationButton = styled.div<{ size: number }>`
   border: 1px solid #177edf6a;
   background-image: linear-gradient(to top, #3b7fc06a, transparent);
   transition: all 0.2s;
-  /* cursor: pointer; */
+  cursor: pointer;
 
   &:hover {
     box-shadow: #177edf 0px 0px 4px 0px;
