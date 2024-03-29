@@ -40,8 +40,8 @@ const MainLayout = () => {
     <MainLayOut>
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
-      {(guide && guideStep)
-        && <GuideAnimation />}
+      {/* {(guide && guideStep)
+        && <GuideAnimation />} */}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
