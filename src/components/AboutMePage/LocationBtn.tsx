@@ -10,9 +10,13 @@ const LocationBtn = () => {
 
   return (
     <LocationButtonWrapper>
-      <LocationButton size={0} onClick={() => window.open("https://github.com/seungjaelee2684")}>
+      <LocationButton size={0} onClick={() => window.open("https://github.com/seungjaelee2684/")}>
         <LocationIcon src={Github} alt='' />
         Github
+      </LocationButton>
+      <LocationButton size={0} onClick={() => window.open("https://sean2684.tistory.com/")}>
+        <LocationIcon src={Tistory} alt='' />
+        Tistory
       </LocationButton>
       <LocationButton size={-3} onClick={() => navigate("/skill")}>
         스킬 장착하러 가기
