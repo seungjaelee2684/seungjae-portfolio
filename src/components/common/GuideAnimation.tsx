@@ -9,7 +9,7 @@ const GuideAnimation = () => {
   return (
     <GuideContainer>
       <GuideInWrapper>
-        <GuideBack length='23%' transverse='50%' onClick={() => localStorage.removeItem("guide")}/>
+        <GuideBack length='10%' transverse='40%' onClick={() => localStorage.removeItem("guide")}/>
         GuideAnimation
       </GuideInWrapper>
     </GuideContainer>

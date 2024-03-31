@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharacterImage from '../assets/images/picture.webp';
 import CharacterBG from '../assets/images/nukki.webp';
@@ -11,10 +11,12 @@ import { pageMove } from '../store/modules/pageState';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
 import InfoModal from '../components/AboutMePage/InfoModal';
 import StatusLane from '../components/AboutMePage/StatusLane';
+import HandleClick from '../utils/HandleClick';
 
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
+  const infoModalRef = useRef<HTMLDivElement>(null);
 
   const [statusModal, setStatusModal] = useState<{
     information: boolean,
@@ -25,10 +27,10 @@ const AboutMePage = () => {
   });
   const { information, state } = statusModal;
 
-  console.log("모달 창", state);
-
   useEffect(() => {
     dispatch(pageMove("About Us"));
+
+    HandleClick({infoModalRef, setStatusModal({...statusModal, information: false, state: undefined});});
   }, []);
 
   return (
@@ -53,7 +55,11 @@ const AboutMePage = () => {
               </Front>
               <NameWrapper>
                 이승재 (Lee SeungJae)
-                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information, state: 4})}>
+                <NameIconWrapper
+                  ref={infoModalRef}
+                  onClick={() => {
+                    setStatusModal({...statusModal, information: !information, state: 4});
+                  }}>
                   <SlMagnifier />
                 </NameIconWrapper>
               </NameWrapper>
