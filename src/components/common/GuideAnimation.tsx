@@ -1,44 +1,137 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { GuideFadeIn } from '../../styles/guide';
+import { useDispatch, useSelector } from 'react-redux';
+import { guideOpen } from '../../store/modules/guide';
+import { LuArrowBigDownDash } from "react-icons/lu";
+import { guideContent } from '../../utils/GuideContent';
+import { RootState } from '../../store/config/configureStore';
 
 const GuideAnimation = () => {
 
-  const guidePage = localStorage.getItem("guide_page");
+  const guide = localStorage.getItem("guide");
+  const dispatch = useDispatch();
+  const isMobile = useSelector((state: RootState) => state.isMobile);
+  const guideList = guideContent?.filter((item) => item?.id === guide);
+  const guideInfo = guideList ? guideList[0] : null;
 
   return (
-    <GuideContainer>
-      <GuideInWrapper>
-        <GuideBack length='23%' transverse='50%' onClick={() => localStorage.removeItem("guide")}/>
-        GuideAnimation
-      </GuideInWrapper>
+    <GuideContainer
+      path={guide}
+      onClick={() => {
+        dispatch(guideOpen(false));
+      }}>
+      <GuideBox>
+        {guideInfo?.content.map((item: any) => {
+          return (
+            <Text>
+              {item}
+            </Text>
+          )
+        })}
+      </GuideBox>
+      <Arrow>
+        <LuArrowBigDownDash />
+      </Arrow>
     </GuideContainer>
   )
 };
 
-const GuideContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  color: #d4b681;
-  position: fixed;
-  top: 0;
-  left: 0;
+const ModalFadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+`;
+
+const TextFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const ModalArrow = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`;
+
+const GuideContainer = styled.div<{ path: string | null }>`
+  color: #FFFFFF;
+  position: absolute;
+  top: -120px;
+  left: ${(props) => (props.path === "dungeon") ? "42%" : "5%"};
   z-index: 23;
   font-family: "GongGothicMedium";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
 `;
 
-const GuideInWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
+const GuideBox = styled.div`
+  width: fit-content;
+  height: fit-content;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 3px;
+  animation: ${ModalFadeIn} 0.7s forwards 0.3s;
+  padding: 30px 16px;
+  box-shadow: #17df9c 0px 0px 4px 0px;
+  border: 1px solid #17df9c;
+  background-image: linear-gradient(to top, #34d49f, transparent);
+  background-color: #115a42a2;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+    line-height: 120%;
+    padding: 16px 8px;
+  }
 `;
 
-const GuideBack = styled.div<{ length: string, transverse: string }>`
-  width: 100%;
-  height: 100%;
-  background-color: #000000ca;
-  mask: radial-gradient(circle at ${(props) => props.length} ${(props) => props.transverse}, transparent 10%, #000000db 10%);
-  animation: ${GuideFadeIn} 1s ease-in forwards;
+const Text = styled.div`
+  opacity: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  white-space: pre-line;
+  animation: ${TextFadeIn} 0.8s forwards 1s;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+    line-height: 120%;
+  }
+`;
+
+const Arrow = styled.div`
+  margin-left: 30px;
+  font-size: 50px;
+  opacity: 0;
+  animation: ${ModalArrow} 1s infinite forwards 1s;
+
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+  }
 `;
 
 export default GuideAnimation;

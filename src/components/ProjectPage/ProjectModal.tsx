@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { projectDto } from '../../utils/Projects';
 import * as CommomModal from '../common/ModalContainer';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectModalProps {
     projectKind: {
@@ -17,6 +18,7 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind }) => {
 
     const { isopen, id } = projectKind;
+    const navigate = useNavigate();
     const bgRef = useRef<HTMLDivElement>(null);
     const projectRef = useRef<HTMLDivElement>(null);
     const underRef = useRef<HTMLDivElement>(null);
@@ -99,9 +101,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                     {projectDto[id - 1]?.project}
                 </Link>
             </ModalContainer>
-            <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
-                닫기
-            </CommomModal.CloseButton>
+            <ButtonWrapper>
+                <CommomModal.CloseButton onClick={() => navigate(`/gamestart?dungeon=${projectDto[id - 1]?.project}`)}>
+                    게임 시작
+                </CommomModal.CloseButton>
+                <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
+                    닫기
+                </CommomModal.CloseButton>
+            </ButtonWrapper>
         </ModalBackground>
     )
 };
@@ -141,7 +148,8 @@ const ModalContainer = styled.div`
     overflow: hidden;
 
     @media screen and (max-width: 1320px) {
-        width: 96%;
+        width: 90%;
+        height: 70%;
     }
 
     @media screen and (max-width: 500px) {
@@ -226,20 +234,28 @@ const Link = styled.a`
     font-family: "GongGothicMedium";
     width: fit-content;
     height: fit-content;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 150%;
     white-space: pre-line;
+    border-bottom: 2px solid #93fff175;
+    color: #93fff1;
     cursor: pointer;
 
     &:hover {
-        border-bottom: 1px solid #ffffff75;
         opacity: 0.7;
     }
 
     @media screen and (max-width: 500px) {
         line-height: 110%;
-        font-size: 10px;
+        font-size: 12px;
     }
+`;
+
+const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 `;
 
 export default ProjectModal;

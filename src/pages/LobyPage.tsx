@@ -5,17 +5,21 @@ import { InBoxContainer } from './AboutMePage';
 import CardBG from '../assets/images/picture.webp';
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
 import { modalOpen } from '../store/modules/globalModalOpen';
+import { RootState } from '../store/config/configureStore';
+import GuideAnimation from '../components/common/GuideAnimation';
 
 const LobyPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isGuide = localStorage.getItem("guide");
+  const guide = useSelector((state: RootState) => state.guide);
 
   type CharacterType = {
     id: number,
@@ -27,7 +31,6 @@ const LobyPage = () => {
     {id: 2, content: "새 캐릭터 추가"},
   ];
   const [selectCharacter, setSelectCharacter] = useState<number | undefined>();
-  console.log("선택 캐릭터", selectCharacter);
 
   const onClickSelectHandler = (index: number) => {
     if (selectCharacter) {
@@ -44,7 +47,8 @@ const LobyPage = () => {
   const selectSaveContainer = () => {
     if (selectCharacter === 1) {
       return (
-        <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
+        <SelectCardContainer
+          onClick={() => onClickSelectHandler(1)}>
           <SelectBackgroundImage src={CardBG} alt=''/>
           <SelectFilterContainer />
           <CardContent>
@@ -66,7 +70,8 @@ const LobyPage = () => {
       )
     } else {
       return (
-        <CardContainer onClick={() => onClickSelectHandler(1)} id='lobyContainer'>
+        <CardContainer
+          onClick={() => onClickSelectHandler(1)} id='lobyContainer'>
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
@@ -122,6 +127,9 @@ const LobyPage = () => {
       return (
         <ChoiceButton onClick={() => {
           if (selectCharacter === 1) {
+            if (isGuide) {
+              localStorage.setItem("guide", "about");
+            };
             navigate("/about");
           } else {
             dispatch(modalOpen({ kind: "addCharacter", isopen: true}))
@@ -141,20 +149,22 @@ const LobyPage = () => {
 
   useEffect(() => {
     dispatch(pageMove("Character"));
-    
   }, []);
 
   return (
     <LobyInBoxContainer>
       <CardWrapper>
-        {selectSaveContainer()}
-        {selectNewContainer()}
-        <NoneCardContainer>
-          <IoIosPerson />
-        </NoneCardContainer>
-        <NoneCardContainer>
-          <IoIosPerson />
-        </NoneCardContainer>
+        <CardInWrapper>
+          {(guide) && <GuideAnimation />}
+          {selectSaveContainer()}
+          {selectNewContainer()}
+          <NoneCardContainer>
+            <IoIosPerson />
+          </NoneCardContainer>
+          <NoneCardContainer>
+            <IoIosPerson />
+          </NoneCardContainer>
+        </CardInWrapper>
       </CardWrapper>
       <ChoiceButtonWrapper>
         {selectButton()}
@@ -191,6 +201,7 @@ const LobyInBoxContainer = styled(InBoxContainer)`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  overflow: visible;
 
   @media screen and (max-width: 500px) {
     height: 94%;
@@ -205,8 +216,28 @@ const CardWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 16px;
   padding: 0px 20px;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+`;
+
+const CardInWrapper = styled.div`
+  width: 1048px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  @media screen and (max-width: 1048px) {
+    width: 100%;
+  }
 
   @media screen and (max-width: 500px) {
     flex-wrap: wrap;

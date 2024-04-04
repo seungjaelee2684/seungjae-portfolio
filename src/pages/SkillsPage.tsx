@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { InBoxContainer } from './AboutMePage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import { skillList } from '../utils/Skills';
 import Fitting from '../components/SkillsPage/Fitting';
+import GuideAnimation from '../components/common/GuideAnimation';
+import { RootState } from '../store/config/configureStore';
 
 const SkillsPage = () => {
 
   const dispatch = useDispatch();
+  const guide = useSelector((state: RootState) => state.guide);
 
   const [skillArr, setSkillArr] = useState<number[]>([]);
   const [fittingSkill, setFittingSkill] = useState<number>(0);
@@ -44,6 +47,7 @@ const SkillsPage = () => {
             setFittingSkill={setFittingSkill}/>
         </LeftContainer>
         <RightContainer>
+          {(guide) && <GuideAnimation />}
           <SkillsListWrapper>
             {skillList?.map((item: any) => {
               return (

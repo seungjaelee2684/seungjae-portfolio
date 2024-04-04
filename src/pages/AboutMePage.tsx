@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import CharacterImage from '../assets/images/picture.webp';
 import CharacterBG from '../assets/images/nukki.webp';
@@ -6,15 +6,18 @@ import { BsFillStarFill } from "react-icons/bs";
 import { GiSpikesHalf, GiSkullStaff } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
 import InfoModal from '../components/AboutMePage/InfoModal';
 import StatusLane from '../components/AboutMePage/StatusLane';
-
+import GuideAnimation from '../components/common/GuideAnimation';
+import { RootState } from '../store/config/configureStore';
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
+  const guide = useSelector((state: RootState) => state.guide);
+  const infoModalRef = useRef<HTMLDivElement>(null);
 
   const [statusModal, setStatusModal] = useState<{
     information: boolean,
@@ -25,10 +28,20 @@ const AboutMePage = () => {
   });
   const { information, state } = statusModal;
 
-  console.log("모달 창", state);
-
   useEffect(() => {
     dispatch(pageMove("About Us"));
+
+    const handleClickOutside = (event: any) => {
+      if (infoModalRef.current && !infoModalRef.current.contains(event.target)) {
+        setStatusModal({ ...statusModal, information: false, state: undefined });
+      };
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -47,13 +60,18 @@ const AboutMePage = () => {
             </StarWrapper>
           </LaneContainer>
           <LaneContainer>
+            {(guide) && <GuideAnimation />}
             <IntroduceWrapper>
               <Front>
                 Frontend Developer
               </Front>
               <NameWrapper>
                 이승재 (Lee SeungJae)
-                <NameIconWrapper onClick={() => setStatusModal({...statusModal, information: !information, state: 4})}>
+                <NameIconWrapper
+                  ref={infoModalRef}
+                  onClick={() => {
+                    setStatusModal({ ...statusModal, information: !information, state: 4 });
+                  }}>
                   <SlMagnifier />
                 </NameIconWrapper>
               </NameWrapper>
@@ -73,11 +91,11 @@ const AboutMePage = () => {
                     01065325635
                   </div>
                 </NameWrapper>
-                {(information) && <InfoModal statusModal={statusModal}/>}
+                {(information) && <InfoModal statusModal={statusModal} />}
               </StatusText>
             </IntroduceWrapper>
           </LaneContainer>
-          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal}/>
+          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal} />
           <LaneContainer
             style={{
               fontFamily: "EF_watermelonSalad",
@@ -182,7 +200,6 @@ export const InBoxContent = styled.section`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -227,7 +244,6 @@ export const BackgroundCharacter = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 9;
 
   @media screen and (max-width: 500px) {
     display: none;
@@ -458,7 +474,7 @@ export const NameIconWrapper = styled.div`
   }
 `;
 
-export const StatusIcon = styled.div<{ color: string, size : number }>`
+export const StatusIcon = styled.div<{ color: string, size: number }>`
   color: #FFFFFF;
   font-size: ${(props) => props.size + 32}px;
   width: 40px;

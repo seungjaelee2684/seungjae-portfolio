@@ -1,27 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components';
-import { Outlet, useLocation } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+import { Outlet } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
 import ModalContainer from './ModalContainer';
 import GuideAnimation from './GuideAnimation';
+import { guideOpen } from '../../store/modules/guide';
 
 const MainLayout = () => {
 
   const followRef = useRef<HTMLDivElement>(null);
   const cursorPointer = useRef<HTMLDivElement>(null);
   const windowPath = useSelector((state: RootState) => state.pageState);
-  const isGuide = localStorage.getItem("guide");
-  const guidePage = localStorage.getItem("guide_page");
-  const [guide, setGuide] = useState<boolean>(false);
-  const [guideStep, setGuideStep] = useState<boolean>(false);
-  console.log("가이드 여부 -> ", guide, guideStep);
+  const isGuide: string | null = localStorage.getItem("guide");
+  const dispatch = useDispatch();
+  const guide = useSelector((state: RootState) => state.guide);
 
   useEffect(() => {
-    setGuide(!!isGuide);
-    setGuideStep(!!guidePage);
-  }, [isGuide, guidePage]);
+    dispatch(guideOpen(!!isGuide));
+  }, [isGuide, window.location.pathname]);
 
   // const cursorMove = (e: any) => {
   //   let x = e.clientX;
@@ -40,8 +38,7 @@ const MainLayout = () => {
     <MainLayOut>
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
-      {/* {(guide && guideStep)
-        && <GuideAnimation />} */}
+      {(guide) && <GuideBackground onClick={() => dispatch(guideOpen(false))}/>}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
@@ -64,12 +61,33 @@ const MainLayout = () => {
   )
 };
 
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
 const MainLayOut = styled.main`
   width: 100%;
   height: 100vh;
   background-color: #212226;
   position: relative;
   overflow: hidden;
+`;
+
+const GuideBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000090;
+  z-index: 15;
+  animation: ${FadeIn} 0.3s forwards;
 `;
 
 const EffectAnimation = styled.div`
