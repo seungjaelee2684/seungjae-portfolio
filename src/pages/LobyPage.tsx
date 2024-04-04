@@ -201,6 +201,7 @@ const LobyInBoxContainer = styled(InBoxContainer)`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  overflow: visible;
 
   @media screen and (max-width: 500px) {
     height: 94%;
