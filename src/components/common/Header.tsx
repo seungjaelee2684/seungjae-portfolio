@@ -11,6 +11,8 @@ const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isGuide = localStorage.getItem("guide");
+  const guide = useSelector((state: RootState) => state.guide);
   const page = useSelector((state : RootState) => state.pageState);
   const isMobile = useSelector((state : RootState) => state.isMobile);
   const naviList : string[] = ["Main", "Character", "About Us", "Skills", "Dungeon"];
@@ -25,7 +27,7 @@ const Header = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, [window.innerWidth]);
-  
+
   return (
     <HeaderLayout>
       <HeaderWrapper>
@@ -35,7 +37,10 @@ const Header = () => {
               key={item?.id}
               style={{color: `${(page === item?.content) ? "#d2cbe9" : ""}`}}
               onClick={() => {
-                navigate(`${item?.url}`)
+                if (isGuide) {
+                  localStorage.setItem("guide", item?.url.slice(1));
+                };
+                navigate(`${item?.url}`); 
               }}
               onMouseOver={() => { // 마우스 올렸을 때 텍스트의 순서가 바뀌게 애니메이션 구현
                 let i = 0

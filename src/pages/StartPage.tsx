@@ -25,7 +25,7 @@ const StartPage = () => {
           <ButtonWrapper>
             <DefaultButton
               onClick={() => {
-                localStorage.setItem("guide", "true");
+                localStorage.setItem("guide", "loby");
                 navigate("/loby");
               }}>
               <HoverButton />

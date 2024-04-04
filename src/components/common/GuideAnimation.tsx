@@ -4,12 +4,15 @@ import { GuideFadeIn } from '../../styles/guide';
 import { useDispatch } from 'react-redux';
 import { guideOpen } from '../../store/modules/guide';
 import { LuArrowBigDownDash } from "react-icons/lu";
+import { guideContent } from '../../utils/GuideContent';
 
 const GuideAnimation = () => {
 
-  const isGuide = localStorage.getItem("guide");
-  const guidePage = localStorage.getItem("guide_page");
+  const guide = localStorage.getItem("guide");
   const dispatch = useDispatch();
+
+  const guideList = guideContent?.filter((item) => item?.id === guide);
+  const guideInfo = guideList ? guideList[0] : null;
 
   return (
     <GuideContainer
@@ -20,7 +23,13 @@ const GuideAnimation = () => {
         onClick={(e) => {
           e.stopPropagation();
         }}>
-        {guidePage}
+        {guideInfo?.content.map((item: any) => {
+          return (
+            <div>
+              {item}
+            </div>
+          )
+        })}
       </GuideBox>
       <Arrow>
         <LuArrowBigDownDash />
@@ -54,7 +63,7 @@ const ModalArrow = keyframes`
 const GuideContainer = styled.div`
   color: #d4b681;
   position: absolute;
-  top: -10%;
+  top: -20%;
   left: 0;
   z-index: 23;
   font-family: "GongGothicMedium";
@@ -66,22 +75,26 @@ const GuideContainer = styled.div`
 `;
 
 const GuideBox = styled.div`
-  width: 250px;
-  height: 100px;
+  width: fit-content;
+  height: fit-content;
   opacity: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  gap: 10px;
+  font-size: 12px;
   font-weight: 400;
   background-color: #FFFFFF;
   border-radius: 8px;
   animation: ${ModalFadeIn} 0.7s forwards 0.3s;
+  padding: 20px 10px;
+  white-space: pre-line;
 `;
 
 const Arrow = styled.div`
   font-size: 50px;
+  opacity: 0;
   animation: ${ModalArrow} 1s infinite forwards 1s;
 `;
 
