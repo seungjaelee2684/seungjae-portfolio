@@ -42,7 +42,7 @@ const Header = () => {
                 };
                 navigate(`${item?.url}`); 
               }}
-              onMouseOver={() => { // 마우스 올렸을 때 텍스트의 순서가 바뀌게 애니메이션 구현
+              onMouseEnter={() => { // 마우스 올렸을 때 텍스트의 순서가 바뀌게 애니메이션 구현
                 let i = 0
                 const interval = setInterval(() => {
                   if (innerContent[index]?.length > i) {
@@ -62,9 +62,9 @@ const Header = () => {
                   } else {
                     clearInterval(interval);
                   };
-                }, 80);
+                }, 70);
               }}
-              onMouseOut={() => {
+              onMouseLeave={() => {
                 setInnerContent(naviList);
               }}>
               <ButtonIcons>

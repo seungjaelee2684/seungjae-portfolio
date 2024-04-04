@@ -21,15 +21,12 @@ const GuideAnimation = () => {
       onClick={() => {
         dispatch(guideOpen(false));
       }}>
-      <GuideBox
-        onClick={(e) => {
-          e.stopPropagation();
-        }}>
+      <GuideBox>
         {guideInfo?.content.map((item: any) => {
           return (
-            <div>
+            <Text>
               {item}
-            </div>
+            </Text>
           )
         })}
       </GuideBox>
@@ -41,6 +38,18 @@ const GuideAnimation = () => {
 };
 
 const ModalFadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+`;
+
+const TextFadeIn = keyframes`
   0% {
     opacity: 0;
   }
@@ -63,10 +72,10 @@ const ModalArrow = keyframes`
 `;
 
 const GuideContainer = styled.div<{ path: string | null }>`
-  color: #d4b681;
+  color: #FFFFFF;
   position: absolute;
-  top: ${(props) => (props.path === "dungeon") ? "-150px" : "-100px"};
-  left: ${(props) => (props.path === "dungeon") ? "42%" : "10%"};
+  top: -120px;
+  left: ${(props) => (props.path === "dungeon") ? "42%" : "5%"};
   z-index: 23;
   font-family: "GongGothicMedium";
   display: flex;
@@ -85,19 +94,32 @@ const GuideBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 150%;
-  background-color: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 3px;
   animation: ${ModalFadeIn} 0.7s forwards 0.3s;
   padding: 30px 16px;
-  white-space: pre-line;
+  box-shadow: #17df9c 0px 0px 4px 0px;
+  border: 1px solid #17df9c;
+  background-image: linear-gradient(to top, #34d49f, transparent);
+  background-color: #115a42a2;
 
   @media screen and (max-width: 500px) {
     font-size: 10px;
     line-height: 120%;
     padding: 16px 8px;
+  }
+`;
+
+const Text = styled.div`
+  opacity: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+  white-space: pre-line;
+  animation: ${TextFadeIn} 0.8s forwards 1s;
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
+    line-height: 120%;
   }
 `;
 

@@ -19,6 +19,7 @@ const ModalContainer = () => {
                     <TitleContainer>
                         정말로 다른 지원자를 뽑으시겠습니까?
                     </TitleContainer>
+                    {`새로운 캐릭터를 추가하려면 지원자를 떨어트려야 합니다.\n(기존 캐릭터가 슬퍼할 수 있어요...)`}
                 </ModalInWrapper>
             )
         };
@@ -94,6 +95,10 @@ const ModalContainerBox = styled.div`
     transform: scaleX(0);
     user-select: none;
     position: relative;
+
+    @media screen and (max-width: 500px) {
+        height: 300px;
+    }
 `;
 
 const ModalInWrapper = styled.div`
@@ -103,7 +108,15 @@ const ModalInWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 30px;
+    font-size: 18px;
+    line-height: 150%;
+    white-space: pre-line;
+
+    @media screen and (max-width: 500px) {
+        font-size: 12px;
+        line-height: 120%;
+    }
 `;
 
 const BarContainer = styled.div<{ top: string, bottom: string }>`
@@ -133,6 +146,10 @@ const TitleContainer = styled.div`
     font-size: 28px;
     font-weight: 500;
     line-height: 150%;
+
+    @media screen and (max-width: 500px) {
+        font-size: 18px;
+    }
 `;
 
 export const CloseButton = styled.div`
