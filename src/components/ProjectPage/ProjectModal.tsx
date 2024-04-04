@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import styled, { keyframes } from 'styled-components';
 import { projectDto } from '../../utils/Projects';
 import * as CommomModal from '../common/ModalContainer';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectModalProps {
     projectKind: {
@@ -17,6 +18,7 @@ interface ProjectModalProps {
 const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind }) => {
 
     const { isopen, id } = projectKind;
+    const navigate = useNavigate();
     const bgRef = useRef<HTMLDivElement>(null);
     const projectRef = useRef<HTMLDivElement>(null);
     const underRef = useRef<HTMLDivElement>(null);
@@ -100,7 +102,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                 </Link>
             </ModalContainer>
             <ButtonWrapper>
-                <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
+                <CommomModal.CloseButton onClick={() => navigate(`/gamestart?dungeon=${projectDto[id - 1]?.project}`)}>
                     게임 시작
                 </CommomModal.CloseButton>
                 <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>

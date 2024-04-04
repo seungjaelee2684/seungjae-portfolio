@@ -1,10 +1,171 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react'
+import styled, { keyframes } from 'styled-components';
+import BG from '../assets/images/main_background.webp';
+import CharacterImage from '../assets/images/picture.webp';
+import { MdArrowDropDown } from "react-icons/md";
 
 const GameStartPage = () => {
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const dungeonValue = searchParams.get("dungeon");
+  const talk: string = "저는 프론트엔드 개발자로서 다양한 유저들을 대상으로 연구 및 분석하여 결과를 얻어내는 개발자가 되겠습니다! 또한, 급변하는 기술과 니즈 속에서 자발적으로 학습하고 연구하는 모습을 보이겠습니다!!!";
+  const [talkText, setTalkText] = useState<string>("");
+  const [count, setCount] = useState<number>(0);
+  const [talkStart, setTalkStart] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTalkStart(true)
+    }, 2000);
+
+    const interval = setInterval(() => {
+      if (!talkStart) return;
+      setTalkText(talkText + talk[count]);
+      setCount(count + 1);
+    }, 50);
+
+    if (count === talk.length) {
+      clearInterval(interval);
+    };
+ 
+    return () => {
+      clearInterval(interval);
+    }
+  }, [talkStart, count]);
+
   return (
-    <div>GameStartPage</div>
+    <GamePageLayout>
+      <Background src={BG} alt=''/>
+      <Effect />
+      <ContentContainer>
+        <Character src={CharacterImage} alt=''/>
+        <ContentWrapper>
+          이승재 (Frontend Developer) - 27세
+          <Text>
+            {talkText}
+            <TypingBar>
+              <MdArrowDropDown />
+            </TypingBar>
+          </Text>
+        </ContentWrapper>
+      </ContentContainer>
+    </GamePageLayout>
   )
 };
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+`;
+
+const Twinkle = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100%{
+    opacity: 0;
+  }
+`;
+
+const GamePageLayout = styled.article`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+`;
+
+const Background = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 16;
+`;
+
+const Effect = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #000000a9;
+  backdrop-filter: blur(1px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 17;
+  opacity: 0;
+  animation: ${FadeIn} 0.8s forwards 0.3s;
+`;
+
+const ContentContainer = styled.section`
+  width: 100%;
+  height: calc(100% - 120px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 18;
+  color: #FFFFFF;
+  font-family: "GongGothicMedium";
+  padding: 60px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Character = styled.img`
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  opacity: 0;
+  animation: ${FadeIn} 1s forwards 1s;
+`;
+
+const ContentWrapper = styled.div`
+  width: calc(100% - 200px);
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 40px;
+  padding: 50px 100px;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 150%;
+  opacity: 0;
+  position: relative;
+  background-image: linear-gradient(to top, #293347b2, #1a1d20b2);
+  animation: ${FadeIn} 2s forwards 1.8s;
+`;
+
+const Text = styled.div`
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-align: start;
+  white-space: pre-line;
+  font-size: 20px;
+`;
+
+const TypingBar = styled.div`
+  font-size: 40px;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  opacity: 0;
+  animation: ${Twinkle} 0.8s linear infinite forwards;
+`;
 
 export default GameStartPage;
