@@ -25,9 +25,7 @@ const Header = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, [window.innerWidth]);
-
-  console.log("모바일 -> ", isMobile);
-
+  
   return (
     <HeaderLayout>
       <HeaderWrapper>
