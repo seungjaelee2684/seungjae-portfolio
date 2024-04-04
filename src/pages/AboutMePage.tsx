@@ -6,14 +6,17 @@ import { BsFillStarFill } from "react-icons/bs";
 import { GiSpikesHalf, GiSkullStaff } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
 import InfoModal from '../components/AboutMePage/InfoModal';
 import StatusLane from '../components/AboutMePage/StatusLane';
+import GuideAnimation from '../components/common/GuideAnimation';
+import { RootState } from '../store/config/configureStore';
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
+  const guide = useSelector((state: RootState) => state.guide);
   const infoModalRef = useRef<HTMLDivElement>(null);
 
   const [statusModal, setStatusModal] = useState<{
@@ -57,6 +60,7 @@ const AboutMePage = () => {
             </StarWrapper>
           </LaneContainer>
           <LaneContainer>
+            {(guide) && <GuideAnimation />}
             <IntroduceWrapper>
               <Front>
                 Frontend Developer
@@ -196,7 +200,6 @@ export const InBoxContent = styled.section`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -241,7 +244,6 @@ export const BackgroundCharacter = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 9;
 
   @media screen and (max-width: 500px) {
     display: none;

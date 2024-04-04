@@ -18,6 +18,7 @@ const LobyPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isGuide = localStorage.getItem("guide");
   const guide = useSelector((state: RootState) => state.guide);
 
   type CharacterType = {
@@ -46,7 +47,8 @@ const LobyPage = () => {
   const selectSaveContainer = () => {
     if (selectCharacter === 1) {
       return (
-        <SelectCardContainer onClick={() => onClickSelectHandler(1)}>
+        <SelectCardContainer
+          onClick={() => onClickSelectHandler(1)}>
           <SelectBackgroundImage src={CardBG} alt=''/>
           <SelectFilterContainer />
           <CardContent>
@@ -68,7 +70,8 @@ const LobyPage = () => {
       )
     } else {
       return (
-        <CardContainer onClick={() => onClickSelectHandler(1)} id='lobyContainer'>
+        <CardContainer
+          onClick={() => onClickSelectHandler(1)} id='lobyContainer'>
           <CardBackgroundImage src={CardBG} alt=''/>
           <FilterContainer />
           <CardContent>
@@ -124,6 +127,9 @@ const LobyPage = () => {
       return (
         <ChoiceButton onClick={() => {
           if (selectCharacter === 1) {
+            if (isGuide) {
+              localStorage.setItem("guide", "about");
+            };
             navigate("/about");
           } else {
             dispatch(modalOpen({ kind: "addCharacter", isopen: true}))
@@ -143,21 +149,22 @@ const LobyPage = () => {
 
   useEffect(() => {
     dispatch(pageMove("Character"));
-    
   }, []);
 
   return (
     <LobyInBoxContainer>
       <CardWrapper>
-        {(guide) && <GuideAnimation />}
-        {selectSaveContainer()}
-        {selectNewContainer()}
-        <NoneCardContainer>
-          <IoIosPerson />
-        </NoneCardContainer>
-        <NoneCardContainer>
-          <IoIosPerson />
-        </NoneCardContainer>
+        <CardInWrapper>
+          {(guide) && <GuideAnimation />}
+          {selectSaveContainer()}
+          {selectNewContainer()}
+          <NoneCardContainer>
+            <IoIosPerson />
+          </NoneCardContainer>
+          <NoneCardContainer>
+            <IoIosPerson />
+          </NoneCardContainer>
+        </CardInWrapper>
       </CardWrapper>
       <ChoiceButtonWrapper>
         {selectButton()}
@@ -211,6 +218,25 @@ const CardWrapper = styled.div`
   position: relative;
   gap: 16px;
   padding: 0px 20px;
+
+  @media screen and (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+`;
+
+const CardInWrapper = styled.div`
+  width: 1048px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  @media screen and (max-width: 1048px) {
+    width: 100%;
+  }
 
   @media screen and (max-width: 500px) {
     flex-wrap: wrap;

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const LocationBtn = () => {
 
   const navigate = useNavigate();
+  const guide = localStorage.getItem("guide");
 
   return (
     <LocationButtonWrapper>
@@ -18,7 +19,14 @@ const LocationBtn = () => {
         <LocationIcon src={Tistory} alt='' />
         Tistory
       </LocationButton>
-      <LocationButton size={-3} onClick={() => navigate("/skill")}>
+      <LocationButton
+        size={-3}
+        onClick={() => {
+          if (guide) {
+            localStorage.setItem("guide", "skill");
+          };
+          navigate("/skill");
+        }}>
         스킬 장착하러 가기
       </LocationButton>
     </LocationButtonWrapper>

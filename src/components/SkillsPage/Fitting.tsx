@@ -18,6 +18,7 @@ interface FittingProps {
 const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill, setFittingSkill }) => {
   
     const navigate = useNavigate();
+    const guide = localStorage.getItem("guide");
 
     const onClickRemoveSkillHandler = () => {
         setSkillArr([]);
@@ -88,7 +89,12 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
                 ? <DefaultButton>
                     스킬 장착 완료
                 </DefaultButton>
-                : <Button onClick={() => navigate("/dungeon")}>
+                : <Button onClick={() => {
+                    if (guide) {
+                        localStorage.setItem("guide", "dungeon");
+                    };
+                    navigate("/dungeon");
+                }}>
                     스킬 장착 완료
                 </Button>}
         </ButtonWrapper>

@@ -13,6 +13,7 @@ import { RootState } from '../store/config/configureStore';
 const ProjectPage = () => {
 
     const dispatch = useDispatch();
+    const guide = useSelector((state: RootState) => state.guide);
     const mobileView = useSelector((state: RootState) => state.isMobile);
     const slideRef = useRef<HTMLDivElement>(null);
     const [step, setStep] = useState<number>(0);
@@ -37,6 +38,10 @@ const ProjectPage = () => {
     };
 
     useEffect(() => {
+        if (guide) {
+            localStorage.setItem("guide", "dungeon");
+        };
+
         dispatch(pageMove("Dungeon"));
 
         if (slideRef.current) {

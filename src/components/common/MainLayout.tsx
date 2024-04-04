@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import { GiWingedArrow } from "react-icons/gi";
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,6 +38,7 @@ const MainLayout = () => {
     <MainLayOut>
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
+      {(guide) && <GuideBackground onClick={() => dispatch(guideOpen(false))}/>}
       <BackgroundEffect />
       <EffectAnimation>
         <AboutContainer>
@@ -60,12 +61,33 @@ const MainLayout = () => {
   )
 };
 
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
 const MainLayOut = styled.main`
   width: 100%;
   height: 100vh;
   background-color: #212226;
   position: relative;
   overflow: hidden;
+`;
+
+const GuideBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000090;
+  z-index: 15;
+  animation: ${FadeIn} 0.3s forwards;
 `;
 
 const EffectAnimation = styled.div`
