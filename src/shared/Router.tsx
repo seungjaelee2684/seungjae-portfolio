@@ -9,6 +9,7 @@ import Header from '../components/common/Header';
 import SkillsPage from '../pages/SkillsPage';
 import ProjectPage from '../pages/ProjectPage';
 import GuideAnimation from '../components/common/GuideAnimation';
+import GameStartPage from '../pages/GameStartPage';
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
             <Route path='/skill' element={<SkillsPage />} />
             <Route path='/dungeon' element={<ProjectPage />} />
           </Route>
+          <Route path='/gamestart' element={<GameStartPage />} />
         </Routes>
       </AnimatePresence>
     </BrowserRouter>
