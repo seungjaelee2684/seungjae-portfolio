@@ -1,37 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-    {
-        id: "loby",
-        length: 0,
-        transverse: 0
-    },
-    {
-        id: "about",
-        length: 0,
-        transverse: 0
-    },
-    {
-        id: "skill",
-        length: 0,
-        transverse: 0
-    },
-    {
-        id: "project",
-        length: 0,
-        transverse: 0
-    },
-];
+const initialState: boolean = false;
 
 const guideSlice = createSlice({
-    name: "guidePage",
+    name: "guide",
     initialState,
     reducers: {
-        guideStep: (state, action) => {
-
+        guideOpen: (state, action: PayloadAction<boolean>) => {
+            return action.payload;
         }
     }
 });
 
 export default guideSlice.reducer;
-export const { guideStep } = guideSlice.actions;
+export const { guideOpen } = guideSlice.actions;

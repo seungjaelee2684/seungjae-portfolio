@@ -5,17 +5,20 @@ import { InBoxContainer } from './AboutMePage';
 import CardBG from '../assets/images/picture.webp';
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageMove } from '../store/modules/pageState';
 import { BsFillStarFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from "react-icons/tb";
 import { modalOpen } from '../store/modules/globalModalOpen';
+import { RootState } from '../store/config/configureStore';
+import GuideAnimation from '../components/common/GuideAnimation';
 
 const LobyPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const guide = useSelector((state: RootState) => state.guide);
 
   type CharacterType = {
     id: number,
@@ -27,7 +30,6 @@ const LobyPage = () => {
     {id: 2, content: "새 캐릭터 추가"},
   ];
   const [selectCharacter, setSelectCharacter] = useState<number | undefined>();
-  console.log("선택 캐릭터", selectCharacter);
 
   const onClickSelectHandler = (index: number) => {
     if (selectCharacter) {
@@ -147,6 +149,7 @@ const LobyPage = () => {
   return (
     <LobyInBoxContainer>
       <CardWrapper>
+        {(guide) && <GuideAnimation />}
         {selectSaveContainer()}
         {selectNewContainer()}
         <NoneCardContainer>
@@ -205,6 +208,7 @@ const CardWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 16px;
   padding: 0px 20px;
 

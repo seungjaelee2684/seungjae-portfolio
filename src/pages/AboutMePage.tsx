@@ -11,8 +11,6 @@ import { pageMove } from '../store/modules/pageState';
 import LocationBtn from '../components/AboutMePage/LocationBtn';
 import InfoModal from '../components/AboutMePage/InfoModal';
 import StatusLane from '../components/AboutMePage/StatusLane';
-import HandleClick from '../utils/HandleClick';
-
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
@@ -30,7 +28,17 @@ const AboutMePage = () => {
   useEffect(() => {
     dispatch(pageMove("About Us"));
 
-    HandleClick({infoModalRef, setStatusModal({...statusModal, information: false, state: undefined});});
+    const handleClickOutside = (event: any) => {
+      if (infoModalRef.current && !infoModalRef.current.contains(event.target)) {
+        setStatusModal({ ...statusModal, information: false, state: undefined });
+      };
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -58,7 +66,7 @@ const AboutMePage = () => {
                 <NameIconWrapper
                   ref={infoModalRef}
                   onClick={() => {
-                    setStatusModal({...statusModal, information: !information, state: 4});
+                    setStatusModal({ ...statusModal, information: !information, state: 4 });
                   }}>
                   <SlMagnifier />
                 </NameIconWrapper>
@@ -79,11 +87,11 @@ const AboutMePage = () => {
                     01065325635
                   </div>
                 </NameWrapper>
-                {(information) && <InfoModal statusModal={statusModal}/>}
+                {(information) && <InfoModal statusModal={statusModal} />}
               </StatusText>
             </IntroduceWrapper>
           </LaneContainer>
-          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal}/>
+          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal} />
           <LaneContainer
             style={{
               fontFamily: "EF_watermelonSalad",
@@ -464,7 +472,7 @@ export const NameIconWrapper = styled.div`
   }
 `;
 
-export const StatusIcon = styled.div<{ color: string, size : number }>`
+export const StatusIcon = styled.div<{ color: string, size: number }>`
   color: #FFFFFF;
   font-size: ${(props) => props.size + 32}px;
   width: 40px;
