@@ -9,6 +9,7 @@ import * as Loby from './LobyPage';
 import { TbArrowBadgeLeft, TbArrowBadgeRight } from 'react-icons/tb';
 import ProjectModal from '../components/ProjectPage/ProjectModal';
 import { RootState } from '../store/config/configureStore';
+import GuideAnimation from '../components/common/GuideAnimation';
 
 const ProjectPage = () => {
 
@@ -53,6 +54,7 @@ const ProjectPage = () => {
         <ProjectInBoxContainer>
             <ProjectOutContainer>
                 <ProjectListOutBox>
+                    {(guide) && <GuideAnimation />}
                     <ProjectListBox ref={slideRef}>
                         {projectDto?.map((item: any, index: number) => {
                             return (
@@ -129,6 +131,7 @@ const ProjectOutContainer = styled.div`
 const ProjectListOutBox = styled.div`
     display: flex;
     align-items: center;
+    position: relative;
 `;
 
 const ProjectListBox = styled.div`
@@ -161,6 +164,7 @@ const ProjectCardBox = styled.div`
 
 const ProjectKindButton = styled(Loby.ChoiceButton)`
     cursor: default;
+    position: relative;
 
     &:hover {
         border: 1px solid #d4b681;
