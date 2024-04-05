@@ -31,33 +31,29 @@ const GameStartPage = () => {
       clearInterval(interval);
       setComplete(true);
     };
- 
+
     return () => {
       clearInterval(interval);
     }
   }, [talkStart, count]);
 
   return (
-    <GamePageLayout>
-      <Background src={BG} alt=''/>
-      <Effect />
-      <ContentContainer>
-        <DungeonInfo>
-          던전: {dungeonValue}
-        </DungeonInfo>
-        <Character src={CharacterImage} alt=''/>
-        <ContentWrapper>
-          이승재 (Frontend Developer) - 27세
-          <Text>
-            {talkText}
-            <TypingBar>
-              <MdArrowDropDown />
-            </TypingBar>
-          </Text>
-          {(complete) && <Contact />}
-        </ContentWrapper>
-      </ContentContainer>
-    </GamePageLayout>
+    <ContentContainer>
+      <DungeonInfo>
+        던전: {dungeonValue}
+      </DungeonInfo>
+      <Character src={CharacterImage} alt='' />
+      <ContentWrapper>
+        이승재 (Frontend Developer) - 27세
+        <Text>
+          {talkText}
+          <TypingBar>
+            <MdArrowDropDown />
+          </TypingBar>
+        </Text>
+        {(complete) && <Contact />}
+      </ContentWrapper>
+    </ContentContainer>
   )
 };
 
@@ -75,13 +71,7 @@ const Twinkle = keyframes`
   }
 `;
 
-const GamePageLayout = styled.article`
-  width: 100%;
-  height: 100vh;
-  position: relative;
-`;
-
-const DungeonInfo = styled.div`
+export const DungeonInfo = styled.div`
   border: 1px solid;
   display: flex;
   justify-content: center;
@@ -95,31 +85,7 @@ const DungeonInfo = styled.div`
   padding: 10px;
 `;
 
-const Background = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 16;
-`;
-
-const Effect = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #000000a9;
-  backdrop-filter: blur(1px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 17;
-  opacity: 0;
-  animation: ${GuideFadeIn} 0.8s forwards 0.3s;
-`;
-
-const ContentContainer = styled.section`
+export const ContentContainer = styled.section`
   width: 100%;
   height: calc(100% - 120px);
   position: absolute;
@@ -131,8 +97,9 @@ const ContentContainer = styled.section`
   padding: 60px 0px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 50px;
 
   @media screen and (max-width: 500px) {
     height: calc(100% - 160px);
@@ -140,7 +107,7 @@ const ContentContainer = styled.section`
   }
 `;
 
-const Character = styled.img`
+export const Character = styled.img`
   width: 300px;
   height: auto;
   object-fit: cover;
@@ -156,7 +123,7 @@ const Character = styled.img`
   }
 `;
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   width: calc(100% - 200px);
   height: 200px;
   display: flex;
@@ -190,7 +157,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Text = styled.div`
+export const Text = styled.div`
   display: flex;
   align-items: center;
   width: fit-content;
@@ -207,7 +174,7 @@ const Text = styled.div`
   }
 `;
 
-const TypingBar = styled.div`
+export const TypingBar = styled.div`
   font-size: 40px;
   color: #FFFFFF;
   position: absolute;
