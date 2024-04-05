@@ -3,6 +3,8 @@ import styled, { keyframes } from 'styled-components';
 import BG from '../assets/images/main_background.webp';
 import CharacterImage from '../assets/images/picture.webp';
 import { MdArrowDropDown } from "react-icons/md";
+import Contact from '../components/GameStartPage/Contact';
+import { GuideFadeIn } from '../styles/guide';
 
 const GameStartPage = () => {
 
@@ -12,11 +14,12 @@ const GameStartPage = () => {
   const [talkText, setTalkText] = useState<string>("");
   const [count, setCount] = useState<number>(0);
   const [talkStart, setTalkStart] = useState<boolean>(false);
+  const [complete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
       setTalkStart(true)
-    }, 2000);
+    }, 3000);
 
     const interval = setInterval(() => {
       if (!talkStart) return;
@@ -26,6 +29,7 @@ const GameStartPage = () => {
 
     if (count === talk.length) {
       clearInterval(interval);
+      setComplete(true);
     };
  
     return () => {
@@ -38,6 +42,9 @@ const GameStartPage = () => {
       <Background src={BG} alt=''/>
       <Effect />
       <ContentContainer>
+        <DungeonInfo>
+          던전: {dungeonValue}
+        </DungeonInfo>
         <Character src={CharacterImage} alt=''/>
         <ContentWrapper>
           이승재 (Frontend Developer) - 27세
@@ -47,21 +54,12 @@ const GameStartPage = () => {
               <MdArrowDropDown />
             </TypingBar>
           </Text>
+          {(complete) && <Contact />}
         </ContentWrapper>
       </ContentContainer>
     </GamePageLayout>
   )
 };
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100%{
-    opacity: 1;
-  }
-`;
 
 const Twinkle = keyframes`
   0% {
@@ -81,6 +79,20 @@ const GamePageLayout = styled.article`
   width: 100%;
   height: 100vh;
   position: relative;
+`;
+
+const DungeonInfo = styled.div`
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 19;
+  font-size: 12px;
+  color: #ADADAD;
+  padding: 10px;
 `;
 
 const Background = styled.img`
@@ -104,7 +116,7 @@ const Effect = styled.div`
   left: 0;
   z-index: 17;
   opacity: 0;
-  animation: ${FadeIn} 0.8s forwards 0.3s;
+  animation: ${GuideFadeIn} 0.8s forwards 0.3s;
 `;
 
 const ContentContainer = styled.section`
@@ -121,6 +133,11 @@ const ContentContainer = styled.section`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 500px) {
+    height: calc(100% - 160px);
+    padding: 80px 0px;
+  }
 `;
 
 const Character = styled.img`
@@ -128,7 +145,15 @@ const Character = styled.img`
   height: auto;
   object-fit: cover;
   opacity: 0;
-  animation: ${FadeIn} 1s forwards 1s;
+  animation: ${GuideFadeIn} 1s forwards 1s;
+
+  @media screen and (max-width: 1320px) {
+    width: 240px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 180px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -140,13 +165,29 @@ const ContentWrapper = styled.div`
   align-items: start;
   gap: 40px;
   padding: 50px 100px;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 400;
   line-height: 150%;
   opacity: 0;
   position: relative;
   background-image: linear-gradient(to top, #293347b2, #1a1d20b2);
-  animation: ${FadeIn} 2s forwards 1.8s;
+  animation: ${GuideFadeIn} 2s forwards 1.8s;
+
+  @media screen and (max-width: 1320px) {
+    width: calc(100% - 160px);
+    height: 180px;
+    font-size: 20px;
+    line-height: 120%;
+    padding: 40px 80px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: calc(100% - 80px);
+    height: 160px;
+    font-size: 16px;
+    padding: 30px 40px;
+    gap: 30px;
+  }
 `;
 
 const Text = styled.div`
@@ -156,6 +197,14 @@ const Text = styled.div`
   text-align: start;
   white-space: pre-line;
   font-size: 20px;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
 const TypingBar = styled.div`
@@ -166,6 +215,10 @@ const TypingBar = styled.div`
   right: 5%;
   opacity: 0;
   animation: ${Twinkle} 0.8s linear infinite forwards;
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 export default GameStartPage;

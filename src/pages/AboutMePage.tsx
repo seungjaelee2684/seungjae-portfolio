@@ -13,6 +13,7 @@ import InfoModal from '../components/AboutMePage/InfoModal';
 import StatusLane from '../components/AboutMePage/StatusLane';
 import GuideAnimation from '../components/common/GuideAnimation';
 import { RootState } from '../store/config/configureStore';
+
 const AboutMePage = () => {
 
   const dispatch = useDispatch();
