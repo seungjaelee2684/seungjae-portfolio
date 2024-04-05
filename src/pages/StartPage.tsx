@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { pageMove } from '../store/modules/pageState';
 import Background from '../assets/images/main_background.webp';
 import { useNavigate } from 'react-router-dom';
+import { GuideFadeIn } from '../styles/guide';
 
 const StartPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const information = ["가이드에 안내에 따라 새로운 게임을 시작하세요!", "'이어서 하기'를 누르면 가이드 없이 시작하실 수 있습니다."];
+  const [info, setInfo] = useState<number | undefined>(undefined);
+  console.log("test", info);
 
   useEffect(() => {
     dispatch(pageMove("Main"));
@@ -28,8 +32,13 @@ const StartPage = () => {
           <SubTitle>
             SeungJae's Portfolio
           </SubTitle>
+          <InfoContainer>
+            {(info !== undefined) && information[info]}
+          </InfoContainer>
           <ButtonWrapper>
             <DefaultButton
+              onMouseOver={() => setInfo(0)}
+              onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
                 localStorage.setItem("guide", "loby");
                 navigate("/loby");
@@ -40,6 +49,8 @@ const StartPage = () => {
               </ButtonText>
             </DefaultButton>
             <DefaultButton
+              onMouseOver={() => setInfo(1)}
+              onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
                 navigate("/loby");
               }}>
@@ -64,16 +75,6 @@ const TitleAppear = keyframes`
   100% {
     opacity: 1;
     transform: scaleX(1);
-  }
-`;
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 `;
 
@@ -120,7 +121,7 @@ const Effect = styled.div`
 
 const StartGameWrapper = styled.section`
   width: 100%;
-  height: calc(100% - 100px);
+  height: calc(100% - 80px);
   margin-top: 80px;
   position: absolute;
   top: 0;
@@ -131,6 +132,16 @@ const StartGameWrapper = styled.section`
   justify-content: center;
   align-items: center;
   user-select: none;
+
+  @media screen and (max-width: 1320px) {
+    height: calc(100% - 40px);
+    margin-top: 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: calc(100% - 20px);
+    margin-top: 20px;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -139,6 +150,14 @@ const TitleContainer = styled.div`
   position: relative;
   opacity: 0;
   animation: ${TitleAppear} 1s forwards 0.2s;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 80px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 50px;
+  }
 `;
 
 const TitleBar = styled.div`
@@ -156,9 +175,36 @@ const SubTitle = styled.div`
   font-size: 24px;
   line-height: 150%;
   color: #55799b;
-  margin: 20px 0px 200px 0px;
+  margin: 20px 0px 0px 0px;
   opacity: 0;
-  animation: ${FadeIn} 0.8s forwards 1.2s;
+  animation: ${GuideFadeIn} 0.8s forwards 1.2s;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
+`;
+
+const InfoContainer = styled.div`
+  color: #FFFFFF;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 18px;
+    min-height: 160px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+    min-height: 100px;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -168,7 +214,11 @@ const ButtonWrapper = styled.div`
   align-items: center;
   gap: 30px;
   opacity: 0;
-  animation: ${FadeIn} 1s forwards 1.7s;
+  animation: ${GuideFadeIn} 1s forwards 1.7s;
+
+  @media screen and (max-width: 500px) {
+    gap: 16px;
+  }
 `;
 
 const HoverButton = styled.div`
@@ -195,6 +245,14 @@ const ButtonText = styled.div`
   line-height: 140%;
   transition: all 0.3s;
   z-index: 25;
+
+  @media screen and (max-width: 1320px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+  }
 `;
 
 const DefaultButton = styled.button`
@@ -215,6 +273,16 @@ const DefaultButton = styled.button`
 
   &:hover {
     color: #FFFFFF;
+  }
+
+  @media screen and (max-width: 1320px) {
+    width: 120px;
+    height: 30px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 100px;
+    height: 30px;
   }
 `;
 

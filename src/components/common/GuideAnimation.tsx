@@ -49,16 +49,6 @@ const ModalFadeIn = keyframes`
   }
 `;
 
-const TextFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
 const ModalArrow = keyframes`
   0% {
     opacity: 0;
@@ -83,6 +73,10 @@ const GuideContainer = styled.div<{ path: string | null }>`
   justify-content: center;
   align-items: start;
   gap: 10px;
+
+  @media screen and (max-height: 780px) {
+    top: 0;
+  }
 `;
 
 const GuideBox = styled.div`
@@ -115,7 +109,7 @@ const Text = styled.div`
   font-weight: 400;
   line-height: 150%;
   white-space: pre-line;
-  animation: ${TextFadeIn} 0.8s forwards 1s;
+  animation: ${GuideFadeIn} 0.8s forwards 1s;
 
   @media screen and (max-width: 500px) {
     font-size: 10px;
@@ -128,6 +122,10 @@ const Arrow = styled.div`
   font-size: 50px;
   opacity: 0;
   animation: ${ModalArrow} 1s infinite forwards 1s;
+
+  @media screen and (max-height: 780px) {
+    display: none;
+  }
 
   @media screen and (max-width: 500px) {
     font-size: 30px;
