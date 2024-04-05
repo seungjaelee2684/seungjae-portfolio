@@ -7,6 +7,7 @@ import { FaGithub } from "react-icons/fa";
 import { SiJira } from "react-icons/si";
 import { SiVisualstudiocode } from "react-icons/si";
 import { useNavigate } from 'react-router-dom';
+import { skillList } from '../../utils/Skills';
 
 interface FittingProps {
     skillArr: number[];
@@ -39,7 +40,7 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
             <ToolsWrapper>
                 <Tools
                     title="Github"
-                    left='0px'
+                    left='10px'
                     color="#181717">
                     <FaGithub />
                 </Tools>
@@ -78,6 +79,20 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
             </BackendStackWrapper>
         </TopContainer>
         <ButtonWrapper>
+            {(fittingSkill === 100)
+                ? <DefaultButton>
+                    전체 스킬 장착
+                </DefaultButton>
+                : <Button onClick={() => {
+                    let arr: number[] = [];
+                    skillList.forEach((item: any) => {
+                    arr.push(item?.id);
+                    });
+                    setSkillArr([...skillArr, ...arr]);
+                    setFittingSkill(100);
+                }}>
+                    전체 스킬 장착
+                </Button>}
             {(fittingSkill === 0)
                 ? <DefaultButton>
                     전체 스킬 장착해제
@@ -154,7 +169,7 @@ const MainStack = styled.div`
     @media screen and (max-width: 500px) {
         min-width: 120px;
         height: 120px;
-        font-size: 22px;
+        font-size: 18px;
     }
 `;
 
@@ -219,6 +234,7 @@ const Tools = styled(MainStack)<{ left : string, color : string }>`
     margin-left: ${(props) => props.left};
     color: ${(props) => props.color};
     font-size: 46px;
+    position: relative;
 
     @media screen and (max-width: 1320px) {
         min-width: 76px;

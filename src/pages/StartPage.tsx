@@ -247,7 +247,7 @@ const ButtonText = styled.div`
   z-index: 25;
 
   @media screen and (max-width: 1320px) {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   @media screen and (max-width: 500px) {
@@ -276,7 +276,7 @@ const DefaultButton = styled.button`
   }
 
   @media screen and (max-width: 1320px) {
-    width: 120px;
+    width: 140px;
     height: 30px;
   }
 

@@ -82,7 +82,7 @@ const SkillsPage = () => {
                     {item?.name}
                   </SkillButton>
               )
-            })} 
+            })}
           </SkillsListWrapper>
         </RightContainer> 
       </SkillsLayout>
@@ -183,9 +183,9 @@ const SkillIcon = styled.div<{ color : string }>`
   }
 
   @media screen and (max-width: 500px) {
-    min-width: 36px;
-    min-height: 36px;
-    font-size: 20px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 24px;
   }
 `;
 
@@ -212,17 +212,17 @@ const SkillButton = styled.div`
     font-size: 14px;
     gap: 8px;
   }
-
-  @media screen and (max-width: 836px) {
+ 
+  /* @media screen and (max-width: 836px) {
     width: 92px;
     height: 92px;
     font-size: 14px;
-  }
+  } */
 
   @media screen and (max-width: 500px) {
     width: 64px;
-    height: 70px;
-    font-size: 9px;
+    height: 76px;
+    font-size: 10px;
   }
 `;
 
