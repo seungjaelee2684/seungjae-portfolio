@@ -10,7 +10,7 @@ const StartPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const information = ["가이드에 안내에 따라 새로운 게임을 시작하세요!", "'이어서 하기'를 누르면 가이드 없이 시작하실 수 있습니다."];
+  const information = ["가이드의 안내에 따라 새로운 게임을 시작하세요!", "'이어서 하기'를 누르면 가이드 없이 시작하실 수 있습니다."];
   const [info, setInfo] = useState<number | undefined>(undefined);
   console.log("test", info);
 
