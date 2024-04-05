@@ -10,6 +10,8 @@ import SkillsPage from '../pages/SkillsPage';
 import ProjectPage from '../pages/ProjectPage';
 import GuideAnimation from '../components/common/GuideAnimation';
 import GameStartPage from '../pages/GameStartPage';
+import ProjectInfoPage from '../pages/ProjectInfoPage';
+import SubLayout from '../components/common/SubLayout';
 
 const Router = () => {
   return (
@@ -24,7 +26,10 @@ const Router = () => {
             <Route path='/skill' element={<SkillsPage />} />
             <Route path='/dungeon' element={<ProjectPage />} />
           </Route>
-          <Route path='/gamestart' element={<GameStartPage />} />
+          <Route element={<SubLayout />}>
+            <Route path='/dungeon/info' element={<ProjectInfoPage />} />
+            <Route path='/gamestart' element={<GameStartPage />} />
+          </Route>
         </Routes>
       </AnimatePresence>
     </BrowserRouter>
