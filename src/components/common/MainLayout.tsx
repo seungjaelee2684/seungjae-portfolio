@@ -7,6 +7,7 @@ import { RootState } from '../../store/config/configureStore';
 import ModalContainer from './ModalContainer';
 import GuideAnimation from './GuideAnimation';
 import { guideOpen } from '../../store/modules/guide';
+import { GuideFadeIn } from '../../styles/guide';
 
 const MainLayout = () => {
 
@@ -61,16 +62,6 @@ const MainLayout = () => {
   )
 };
 
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
 const MainLayOut = styled.main`
   width: 100%;
   height: 100vh;
@@ -85,9 +76,9 @@ const GuideBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #00000090;
+  background-color: #000000b9;
   z-index: 15;
-  animation: ${FadeIn} 0.3s forwards;
+  animation: ${GuideFadeIn} 0.3s forwards;
 `;
 
 const EffectAnimation = styled.div`

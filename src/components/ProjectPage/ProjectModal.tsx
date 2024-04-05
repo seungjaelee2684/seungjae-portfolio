@@ -100,6 +100,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                 <Link onClick={() => window.open(projectDto[id - 1]?.url)}>
                     {projectDto[id - 1]?.project}
                 </Link>
+                {(id === 1)
+                    && <Link onClick={() => window.open("https://github.com/seungjaelee2684/aria-front-end")}>
+                        Github 레포지토리
+                    </Link>}
             </ModalContainer>
             <ButtonWrapper>
                 <CommomModal.CloseButton onClick={() => navigate(`/gamestart?dungeon=${projectDto[id - 1]?.project}`)}>
@@ -171,6 +175,11 @@ const TitleBox = styled.div`
     justify-content: center;
     align-items: end;
 
+    @media screen and (max-width: 1320px) {
+        width: 360px;
+        height: 50px;
+    }
+
     @media screen and (max-width: 500px) {
         width: 220px;
         height: 40px;
@@ -199,6 +208,10 @@ const Title = styled.div`
     left: 0;
     text-shadow: 1px 1px 4px #fff8e5;
 
+    @media screen and (max-width: 1320px) {
+        font-size: 26px;
+    }
+
     @media screen and (max-width: 500px) {
         font-size: 18px;
     }
@@ -210,6 +223,11 @@ const ContentBox = styled.div`
     line-height: 150%;
     white-space: pre-line;
     position: relative;
+
+    @media screen and (max-width: 1320px) {
+        line-height: 120%;
+        font-size: 16px;
+    }
 
     @media screen and (max-width: 500px) {
         line-height: 110%;
@@ -243,6 +261,11 @@ const Link = styled.a`
 
     &:hover {
         opacity: 0.7;
+    }
+
+    @media screen and (max-width: 1320px) {
+        line-height: 120%;
+        font-size: 16px;
     }
 
     @media screen and (max-width: 500px) {
