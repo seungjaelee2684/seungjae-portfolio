@@ -18,7 +18,7 @@ const ProjectPage = () => {
     const mobileView = useSelector((state: RootState) => state.isMobile);
     const slideRef = useRef<HTMLDivElement>(null);
     const [step, setStep] = useState<number>(0);
-    const stepCurrent = mobileView ? step * 400 : step * 600;
+    const stepCurrent = (window.innerWidth <= 500) ? step * 400 : step * 600;
     const [projectKind, setProjectKind] = useState<{
         isopen: boolean,
         id: number
@@ -49,6 +49,7 @@ const ProjectPage = () => {
             slideRef.current.style.transform = `translateX(-${stepCurrent}px)`;
         };
     }, [step]);
+    console.log(step);
 
     return (
         <ProjectInBoxContainer>
