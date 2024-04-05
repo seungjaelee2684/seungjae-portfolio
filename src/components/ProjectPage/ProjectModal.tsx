@@ -107,7 +107,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
             </ModalContainer>
             <ButtonWrapper>
                 <CommomModal.CloseButton onClick={() => {
-                    localStorage.removeItem("guide");
                     navigate(`/dungeon/info?id=${id}&dungeon=${projectDto[id - 1]?.project}`);
                 }}>
                     던전 선택

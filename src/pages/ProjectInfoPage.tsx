@@ -27,11 +27,11 @@ const ProjectInfoPage = () => {
 
     const interval = setInterval(() => {
       if (!startPoint) return;
-      setInfoText(infoText + projectValue[step][count]);
+      setInfoText(infoText + projectValue[step].content[count]);
       setCount(count + 1);
-    }, 50);
+    }, 30);
 
-    if (count === projectValue[step].length) {
+    if (count === projectValue[step].content.length) {
       clearInterval(interval);
     };
 
@@ -51,7 +51,13 @@ const ProjectInfoPage = () => {
             <MdArrowDropDown />
           </Game.TypingBar>
         </Game.Text>
-        <Information step={step} setStep={setStep}/>
+        <Information
+          dungeonId={dungeonId}
+          dungeonValue={dungeonValue}
+          step={step}
+          setStep={setStep}
+          setInfoText={setInfoText}
+          setCount={setCount}/>
       </Game.ContentWrapper>
     </Game.ContentContainer>
   )

@@ -125,7 +125,7 @@ export const Character = styled.img`
 
 export const ContentWrapper = styled.div`
   width: calc(100% - 200px);
-  height: 200px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -142,18 +142,18 @@ export const ContentWrapper = styled.div`
 
   @media screen and (max-width: 1320px) {
     width: calc(100% - 160px);
-    height: 180px;
+    height: 200px;
     font-size: 20px;
     line-height: 120%;
     padding: 40px 80px;
   }
 
   @media screen and (max-width: 500px) {
-    width: calc(100% - 80px);
-    height: 160px;
+    width: calc(100% - 40px);
+    height: 190px;
     font-size: 16px;
-    padding: 30px 40px;
-    gap: 30px;
+    padding: 30px 20px;
+    gap: 20px;
   }
 `;
 

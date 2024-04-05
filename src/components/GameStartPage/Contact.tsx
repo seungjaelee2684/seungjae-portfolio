@@ -17,7 +17,7 @@ const Contact = () => {
                 <Icon>
                     <MdArrowRight />
                 </Icon>
-                대답하기
+                대화하기
             </LaneContainer>
             <LaneContainer onClick={() => {
                 navigate("/");
@@ -47,7 +47,7 @@ export const ContactContainer = styled.nav`
     width: 250px;
     position: absolute;
     opacity: 0;
-    top: -50%;
+    bottom: 105%;
     right: 20px;
     background-image: linear-gradient(to top, #354462b1, #24292fb1);
     animation: ${FadeIn} 0.5s ease-out forwards 1s;
