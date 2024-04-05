@@ -106,8 +106,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                     </Link>}
             </ModalContainer>
             <ButtonWrapper>
-                <CommomModal.CloseButton onClick={() => navigate(`/gamestart?dungeon=${projectDto[id - 1]?.project}`)}>
-                    게임 시작
+                <CommomModal.CloseButton onClick={() => {
+                    navigate(`/dungeon/info?id=${id}&dungeon=${projectDto[id - 1]?.project}`);
+                }}>
+                    던전 선택
                 </CommomModal.CloseButton>
                 <CommomModal.CloseButton onClick={() => setProjectKind({ ...projectKind, isopen: false })}>
                     닫기

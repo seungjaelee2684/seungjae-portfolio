@@ -8,27 +8,27 @@ const Contact = () => {
 
     const navigate = useNavigate();
 
-  return (
-    <ContactContainer>
-        <LaneContainer onClick={() => {
-            window.location.href = "mailto:sean2684@naver.com";
-            navigate("/");
-        }}>
-            <Icon>
-                <MdArrowRight />
-            </Icon>
-            대답하기
-        </LaneContainer>
-        <LaneContainer onClick={() => {
-            navigate("/");
-        }}>
-            <Icon>
-                <MdArrowRight />
-            </Icon>
-            다시 시작하기
-        </LaneContainer>
-    </ContactContainer>
-  )
+    return (
+        <ContactContainer>
+            <LaneContainer onClick={() => {
+                window.location.href = "mailto:sean2684@naver.com";
+                navigate("/");
+            }}>
+                <Icon>
+                    <MdArrowRight />
+                </Icon>
+                대화하기
+            </LaneContainer>
+            <LaneContainer onClick={() => {
+                navigate("/");
+            }}>
+                <Icon>
+                    <MdArrowRight />
+                </Icon>
+                다시 시작하기
+            </LaneContainer>
+        </ContactContainer>
+    )
 };
 
 const FadeIn = keyframes`
@@ -43,12 +43,11 @@ const FadeIn = keyframes`
     }
 `;
 
-const ContactContainer = styled.nav`
-    width: 300px;
-    height: 200px;
+export const ContactContainer = styled.nav`
+    width: 250px;
     position: absolute;
     opacity: 0;
-    top: -220px;
+    bottom: 105%;
     right: 20px;
     background-image: linear-gradient(to top, #354462b1, #24292fb1);
     animation: ${FadeIn} 0.5s ease-out forwards 1s;
@@ -56,25 +55,21 @@ const ContactContainer = styled.nav`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
 
     @media screen and (max-width: 1320px) {
-        width: 250px;
-        height: 160px;
-        top: -180px;
-        font-size: 18px;
+        width: 200px;
+        font-size: 16px;
     }
 
     @media screen and (max-width: 500px) {
-        width: 160px;
-        height: 80px;
-        top: -90px;
+        width: 140px;
         right: 10px;
         font-size: 12px;
     }
 `;
 
-const Icon = styled.div`
+export const Icon = styled.div`
     min-width: 30px;
     height: 100%;
     display: flex;
@@ -94,9 +89,9 @@ const Icon = styled.div`
     }
 `;
 
-const LaneContainer = styled.a`
+export const LaneContainer = styled.a`
     width: calc(100% - 30px);
-    height: 100%;
+    height: 60px;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -117,6 +112,7 @@ const LaneContainer = styled.a`
 
     @media screen and (max-width: 500px) {
         padding-left: 10px;
+        height: 40px;
     }
 `;
 

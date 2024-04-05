@@ -41,6 +41,12 @@ const MainLayout = () => {
       <FollowCursor ref={followRef} /> */}
       {(guide) && <GuideBackground onClick={() => dispatch(guideOpen(false))}/>}
       <BackgroundEffect />
+      {(isGuide)
+        && <GuideRemoveButton onClick={() => {
+          localStorage.removeItem("guide");
+        }}>
+          가이드 끄기
+        </GuideRemoveButton>}
       <EffectAnimation>
         <AboutContainer>
           <AboutWrapper>
@@ -185,6 +191,37 @@ const Icon = styled.div`
 
   @media screen and (max-width: 500px) {
     font-size: 20px;
+  }
+`;
+
+const GuideRemoveButton = styled.div`
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 16;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "GongGothicMedium";
+  color: #FFFFFF;
+  box-shadow: #17df9c 0px 0px 4px 0px;
+  border: 1px solid #17df9c;
+  background-image: linear-gradient(to top, #34d49f, transparent);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: #19b883 0px 0px 4px 0px;
+    border: 1px solid #19b883;
+    background-image: linear-gradient(to top, #2f7960, transparent);
+  }
+
+  @media screen and (max-width: 500px) {
+    top: 45px;
+    right: 5px;
+    padding: 5px;
+    bottom: auto;
+    font-size: 10px;
   }
 `;
 
