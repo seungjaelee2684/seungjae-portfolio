@@ -18,6 +18,8 @@ const SitePage = () => {
 const MainLayout = styled.article`
   width: 100%;
   position: relative;
+  font-family: "TTLaundryGothicB";
+  font-size: 400;
 `;
 
 const MainContainer = styled.div`
