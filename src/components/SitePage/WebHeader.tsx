@@ -5,6 +5,9 @@ const WebHeader = () => {
   return (
     <HeaderLayout>
       <HeaderContainer>
+        <HeaderLogo>
+          import SeungJae
+        </HeaderLogo>
         WebHeader
       </HeaderContainer>
     </HeaderLayout>
@@ -14,9 +17,11 @@ const WebHeader = () => {
 const HeaderLayout = styled.header`
   width: 100%;
   height: 70px;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
+  font-family: "D2Coding";
 `;
 
 const HeaderContainer = styled.nav`
@@ -30,6 +35,15 @@ const HeaderContainer = styled.nav`
 
   @media screen and (max-width: 1320px) {
     width: 96%;
+  }
+`;
+
+const HeaderLogo = styled.a`
+  font-size: 24px;
+  cursor: pointer;
+
+  &:hover {
+    color: #ADADAD;
   }
 `;
 
