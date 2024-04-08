@@ -120,7 +120,7 @@ const ModalContainerBox = styled.div`
     position: relative;
 
     @media screen and (max-width: 500px) {
-        height: 300px;
+        height: 400px;
     }
 `;
 
@@ -168,7 +168,7 @@ const TitleContainer = styled.div`
     line-height: 150%;
 
     @media screen and (max-width: 500px) {
-        font-size: 18px;
+        font-size: 14px;
     }
 `;
 
@@ -176,6 +176,10 @@ const ContentContainer = styled.div`
     font-size: 18px;
     line-height: 150%;
     white-space: pre-line;
+
+    @media screen and (max-width: 500px) {
+        font-size: 12px;
+    }
 `;
 
 export const CloseButton = styled.div`
