@@ -1,16 +1,36 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const WebHeader = () => {
+interface WebHeaderProps {
+  headerRef: React.RefObject<HTMLDivElement>;
+};
+
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
+
+  const onClickScrollTopHandler = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  const onClickMoveHandler = (id: string) => {
+    const elementId = document.getElementById(id);
+
+    if (elementId) {
+      elementId.scrollIntoView({ behavior: 'smooth' });
+    };
+  };
+
   return (
-    <HeaderLayout>
+    <HeaderLayout ref={headerRef}>
       <HeaderContainer>
-        <HeaderLogo>
+        <HeaderLogo onClick={onClickScrollTopHandler}>
           import SeungJae,
         </HeaderLogo>
         <RightContent>
           {"{"}
-          <Navigate>
+          <Navigate onClick={() => onClickMoveHandler("about us")}>
             About,
           </Navigate>
           <Navigate>
@@ -20,7 +40,7 @@ const WebHeader = () => {
             Skill,
           </Navigate>
           <Navigate>
-            Contact,
+            Contact
           </Navigate>
           {"} from 'Lee SeungJae'"}
         </RightContent>
@@ -38,6 +58,7 @@ const HeaderLayout = styled.header`
   z-index: 10;
   font-family: "D2Coding";
   user-select: none;
+  transition: all 0.2s;
 `;
 
 const HeaderContainer = styled.div`
