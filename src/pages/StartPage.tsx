@@ -5,18 +5,21 @@ import { pageMove } from '../store/modules/pageState';
 import Background from '../assets/images/main_background.webp';
 import { useNavigate } from 'react-router-dom';
 import { GuideFadeIn } from '../styles/guide';
+import { modalOpen } from '../store/modules/globalModalOpen';
+import { FaQuestion } from "react-icons/fa6";
 
 const StartPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const start = localStorage.getItem("start");
   const information = [
-    "가이드의 안내에 따라 새로운 게임을 시작하세요!",
-    "'이어서 하기'를 누르면 가이드 없이 시작하실 수 있습니다.",
+    "시작하기에 앞서 오른쪽 하단에 위치한 안내 버튼을 눌러주세요.",
+    "가이드의 안내에 따라 새로운 게임(New Game)을 시작하세요!",
+    "'Load Game'를 누르면 가이드 없이 시작하실 수 있습니다.",
     "웹페이지 형태의 포트폴리오를 확인하려면 이곳을 눌러주세요."
   ];
-  const [info, setInfo] = useState<number | undefined>(undefined);
-  console.log("test", info);
+  const [info, setInfo] = useState<number | undefined>(0);
 
   useEffect(() => {
     dispatch(pageMove("Main"));
@@ -26,6 +29,11 @@ const StartPage = () => {
   return (
     <StartGameContainer>
       <StartGameOutWrapper>
+        <GuideButton onClick={() => dispatch(modalOpen({ kind: "startGame", isopen: true }))}>
+          <QuestionMark>
+            <FaQuestion />
+          </QuestionMark>
+        </GuideButton>
         <BackgroundImage src={Background} alt=''/>
         <Effect />
         <StartGameWrapper>
@@ -41,7 +49,7 @@ const StartPage = () => {
           </InfoContainer>
           <ButtonWrapper>
             <DefaultButton
-              onMouseOver={() => setInfo(0)}
+              onMouseOver={() => setInfo(1)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
                 localStorage.setItem("guide", "loby");
@@ -53,18 +61,18 @@ const StartPage = () => {
               </ButtonText>
             </DefaultButton>
             <DefaultButton
-              onMouseOver={() => setInfo(1)}
+              onMouseOver={() => setInfo(2)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
                 navigate("/loby");
               }}>
               <HoverButton />
               <ButtonText >
-                Continue
+                Load Game
               </ButtonText>
             </DefaultButton>
-            <DefaultButton
-              onMouseOver={() => setInfo(2)}
+            {/* <DefaultButton
+              onMouseOver={() => setInfo(3)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
                 navigate("/website");
@@ -73,7 +81,7 @@ const StartPage = () => {
               <ButtonText >
                 Website
               </ButtonText>
-            </DefaultButton>
+            </DefaultButton> */}
           </ButtonWrapper>
         </StartGameWrapper>
       </StartGameOutWrapper>
@@ -84,12 +92,61 @@ const StartPage = () => {
 const TitleAppear = keyframes`
   0% {
     opacity: 0;
-    transform: scaleX(0);
+    transform: scaleX(0) skewX(-25deg);
   }
 
   100% {
     opacity: 1;
-    transform: scaleX(1);
+    transform: scaleX(1) skewX(-25deg);
+  }
+`;
+
+const TitleBarAppear = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%) scaleX(1);
+  }
+`;
+
+const ButtonMove = keyframes`
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) scale(100%);
+  }
+
+  30% {
+    opacity: 1;
+    transform: rotate(0deg) scale(100%);
+  }
+
+  35% {
+    opacity: 1;
+    transform: rotate(30deg) scale(110%);
+  }
+
+  40% {
+    opacity: 1;
+    transform: rotate(0deg) scale(100%);
+  }
+
+  45% {
+    opacity: 1;
+    transform: rotate(30deg) scale(110%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: rotate(0deg) scale(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(100%);
   }
 `;
 
@@ -108,6 +165,39 @@ const StartGameOutWrapper = styled.section`
   width: 100%;
   height: 100%;
   position: relative;
+`;
+
+const GuideButton = styled.div`
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  z-index: 26;
+  box-shadow: #177edf 0px 0px 4px 0px;
+  border: 1px solid #177edf;
+  background-image: linear-gradient(to top, #3b7fc0, #33526f);
+  animation: ${GuideFadeIn} 0.6s forwards 1.7s;
+  color: #FFFFFF;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: #1f4f7c 0px 0px 4px 0px;
+    border: 1px solid #1f4f7c;
+    background-image: linear-gradient(to top, #386fa3, transparent);
+  }
+`;
+
+const QuestionMark = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  animation: ${ButtonMove} 2.4s linear infinite forwards;
 `;
 
 const BackgroundImage = styled.img`
@@ -161,7 +251,6 @@ const StartGameWrapper = styled.section`
 
 const TitleContainer = styled.div`
   font-size: 100px;
-  transform: skewX(-25deg);
   position: relative;
   opacity: 0;
   animation: ${TitleAppear} 1s forwards 0.2s;
@@ -178,12 +267,13 @@ const TitleContainer = styled.div`
 const TitleBar = styled.div`
   width: 100%;
   height: 3px;
-  background-image: linear-gradient(to right, #55799b9e, #bfe0ff);
+  border-radius: 3px;
+  background-image: linear-gradient(to right, #55799b66, #bfe0ff);
   position: absolute;
   bottom: 0;
   left: 10px;
   opacity: 0;
-  animation: ${TitleAppear} 0.8s forwards 0.5s;
+  animation: ${TitleBarAppear} 0.6s forwards 0.7s;
 `;
 
 const SubTitle = styled.div`
@@ -210,6 +300,8 @@ const InfoContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  opacity: 0;
+  animation: ${GuideFadeIn} 0.6s forwards 2s;
 
   @media screen and (max-width: 1320px) {
     font-size: 18px;

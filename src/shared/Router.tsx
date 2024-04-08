@@ -10,6 +10,7 @@ import ProjectPage from '../pages/ProjectPage';
 import GameStartPage from '../pages/GameStartPage';
 import ProjectInfoPage from '../pages/ProjectInfoPage';
 import SubLayout from '../components/common/SubLayout';
+import ConnectPage from '../pages/ConnectPage';
 import SitePage from '../pages/SitePage';
 
 const Router = () => {
@@ -28,6 +29,7 @@ const Router = () => {
             <Route path='/dungeon/info' element={<ProjectInfoPage />} />
             <Route path='/gamestart' element={<GameStartPage />} />
           </Route>
+          <Route path='/connect' element={<ConnectPage />} />
           <Route path='/website' element={<SitePage />} />
         </Routes>
       </AnimatePresence>

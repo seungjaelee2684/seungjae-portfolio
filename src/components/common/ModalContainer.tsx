@@ -13,13 +13,36 @@ const ModalContainer = () => {
     const { isopen, kind } = modalData;
 
     const modalOpenData = () => {
+        if (kind === "startGame") {
+            return (
+                <ModalInWrapper>
+                    <TitleContainer>
+                        포트폴리오 감상 안내
+                    </TitleContainer>
+                    <ContentContainer>
+                        {`게임을 모티브로 제작된 게임 캐릭터 프로필 형식의 포트폴리오입니다.`}
+                    </ContentContainer>
+                    <ContentContainer>
+                        {`'New Game', 혹은 'Load Game'을 눌러 게임을 시작하면\n지원자의 포트폴리오를 확인하실 수 있습니다.`}
+                    </ContentContainer>
+                    <ContentContainer>
+                        {`이용하는 방법은 크게 어렵지 않으며 'New Game'을 선택할 경우\n가이드가 제공되어 가이드의 안내에 따라 포트폴리오 확인이 가능합니다.`}
+                    </ContentContainer>
+                    <ContentContainer>
+                        {`New Game: 가이드가 제공되는 선택지입니다.\nLoad Game: 가이드 없이 빠르게 확인할 수 있는 선택지입니다.`}
+                    </ContentContainer>
+                </ModalInWrapper>
+            )
+        };
         if (kind === "addCharacter") {
             return (
                 <ModalInWrapper>
                     <TitleContainer>
-                        정말로 다른 지원자를 뽑으시겠습니까?
+                        새로운 지원자를 추가할 수 없습니다.
                     </TitleContainer>
-                    {`새로운 캐릭터를 추가하려면 지원자를 떨어트려야 합니다.\n(기존 캐릭터가 슬퍼할 수 있어요...)`}
+                    <ContentContainer>
+                        {`현 지원자는 기업의 이상을 실현함에 있어\n높은 기여가 기대되는 최고의 인재상입니다.`}
+                    </ContentContainer>
                 </ModalInWrapper>
             )
         };
@@ -79,7 +102,7 @@ const ModalBackgroundContainer = styled.section`
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 15;
+    z-index: 26;
     background-color: #00000050;
     backdrop-filter: blur(3px);
 `;
@@ -109,9 +132,6 @@ const ModalInWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 30px;
-    font-size: 18px;
-    line-height: 150%;
-    white-space: pre-line;
 
     @media screen and (max-width: 500px) {
         font-size: 12px;
@@ -150,6 +170,12 @@ const TitleContainer = styled.div`
     @media screen and (max-width: 500px) {
         font-size: 18px;
     }
+`;
+
+const ContentContainer = styled.div`
+    font-size: 18px;
+    line-height: 150%;
+    white-space: pre-line;
 `;
 
 export const CloseButton = styled.div`
