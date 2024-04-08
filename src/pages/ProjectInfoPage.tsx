@@ -65,6 +65,7 @@ const ProjectInfoPage = () => {
 
 const ProjectImage = styled(Game.Character)`
   width: 600px;
+  user-select: none;
 
   @media screen and (max-width: 1320px) {
     width: 450px;

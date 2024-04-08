@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import CharacterImage from '../assets/images/picture.webp';
 import CharacterBG from '../assets/images/nukki.webp';
 import { BsFillStarFill } from "react-icons/bs";
-import { GiSpikesHalf, GiSkullStaff } from "react-icons/gi";
+import { GiSpikesHalf, GiLifeSupport } from "react-icons/gi";
 import { RiSwordFill } from "react-icons/ri";
 import { SlMagnifier } from "react-icons/sl";
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,9 +79,9 @@ const AboutMePage = () => {
               <StatusText>
                 <NameWrapper>
                   <StatusIcons>
-                    <GiSkullStaff />
+                    <GiLifeSupport />
                   </StatusIcons>
-                  네크로맨서
+                  불멸자
                 </NameWrapper>
                 <NameWrapper>
                   <StatusIcons>
@@ -554,7 +554,7 @@ export const MyIntroBox = styled.div`
 
 export const IntroContentWrapper = styled.div`
   width: 90%;
-  font-family: "EF_watermelonSalad";
+  font-family: "GongGothicMedium";
   font-size: 18px;
   font-weight: 400;
   line-height: 140%;
