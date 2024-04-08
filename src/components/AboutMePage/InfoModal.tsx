@@ -53,8 +53,8 @@ const InfoModal : React.FC<InfoModalProps> = ({ statusModal }) => {
 };
 
 const ModalContainer = styled.div<{ left: number }>`
-  width: 300px;
-  height: 200px;
+  width: 360px;
+  height: 240px;
   position: absolute;
   top: 30px;
   left: ${(props) => props.left}px;
@@ -68,11 +68,13 @@ const ModalContainer = styled.div<{ left: number }>`
 
   @media screen and (max-width: 500px) {
     left: ${(props) => props.left - 40}px;
+    width: 300px;
+    height: 200px;
   }
 `;
 
 const ModalInWrapper = styled.div`
-  width: 75%;
+  width: 90%;
   height: 96%;
   display: flex;
   flex-direction: column;
@@ -87,7 +89,7 @@ const Icons = styled.div`
   font-size: 40px;
   position: absolute;
   top: 8%;
-  left: -15%;
+  left: 0%;
 `;
 
 const TitleBox = styled.div`
@@ -95,9 +97,13 @@ const TitleBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 120%;
   white-space: pre-line;
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 `;
 
 const Content = styled.div`
@@ -105,9 +111,13 @@ const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 140%;
   white-space: pre-line;
+
+  @media screen and (max-width: 500px) {
+    font-size: 12px;
+  }
 `;
 
 const InformationTitle = styled(TitleBox)`

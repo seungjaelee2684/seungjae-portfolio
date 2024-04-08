@@ -83,6 +83,7 @@ export const DungeonInfo = styled.div`
   font-size: 12px;
   color: #ADADAD;
   padding: 10px;
+  user-select: none;
 `;
 
 export const ContentContainer = styled.section`
@@ -100,6 +101,7 @@ export const ContentContainer = styled.section`
   justify-content: center;
   align-items: center;
   gap: 50px;
+  user-select: none;
 
   @media screen and (max-width: 500px) {
     height: calc(100% - 160px);

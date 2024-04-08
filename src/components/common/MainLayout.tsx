@@ -8,6 +8,7 @@ import ModalContainer from './ModalContainer';
 import GuideAnimation from './GuideAnimation';
 import { guideOpen } from '../../store/modules/guide';
 import { GuideFadeIn } from '../../styles/guide';
+import Header from './Header';
 
 const MainLayout = () => {
 
@@ -37,6 +38,7 @@ const MainLayout = () => {
 
   return (
     <MainLayOut>
+      <Header />
       {/* <CursorContainer ref={cursorPointer} />
       <FollowCursor ref={followRef} /> */}
       {(guide) && <GuideBackground onClick={() => dispatch(guideOpen(false))}/>}

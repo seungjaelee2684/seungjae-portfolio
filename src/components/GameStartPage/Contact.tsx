@@ -11,8 +11,8 @@ const Contact = () => {
     return (
         <ContactContainer>
             <LaneContainer onClick={() => {
-                window.location.href = "mailto:sean2684@naver.com";
-                navigate("/");
+                window.location.href = "mailto:sean2684@naver.com"
+                // navigate("/connect");
             }}>
                 <Icon>
                     <MdArrowRight />
@@ -25,7 +25,7 @@ const Contact = () => {
                 <Icon>
                     <MdArrowRight />
                 </Icon>
-                다시 시작하기
+                포기하기
             </LaneContainer>
         </ContactContainer>
     )

@@ -24,6 +24,6 @@ export const CharacterStatus = [
     color: "#999b13",
     icon: <BsMinecartLoaded />,
     title: "불굴의 리프터\n(Indomitable Lifter)",
-    content: "궂은 일을 꺼려하지 않고,\n혼자서 많은 일을 처리해야 하는 상황을 반김.\n문제해결을 스스로 헤쳐나가려고 노력하는 성향.",
+    content: "궂은 일을 꺼려하지 않고,\n혼자서 많은 일을 처리해야 하는 상황을 반김.\n문제해결을 스스로 헤쳐나가려고\n노력하는 성향.",
   }
 ];
