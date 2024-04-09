@@ -188,6 +188,13 @@ const GuideButton = styled.div`
     border: 1px solid #1f4f7c;
     background-image: linear-gradient(to top, #386fa3, transparent);
   }
+
+  @media screen and (max-width: 500px) {
+    width: 40px;
+    height: 40px;
+    bottom: 2%;
+    right: 4%;
+  }
 `;
 
 const QuestionMark = styled.div`
@@ -198,6 +205,10 @@ const QuestionMark = styled.div`
   align-items: center;
   font-size: 40px;
   animation: ${ButtonMove} 2.4s linear infinite forwards;
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 const BackgroundImage = styled.img`
@@ -383,12 +394,12 @@ const DefaultButton = styled.button`
   }
 
   @media screen and (max-width: 1320px) {
-    width: 140px;
+    width: 150px;
     height: 30px;
   }
 
   @media screen and (max-width: 500px) {
-    width: 100px;
+    width: 110px;
     height: 30px;
   }
 `;

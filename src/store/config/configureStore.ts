@@ -9,7 +9,7 @@ const store = configureStore({
         pageState,
         isMobile,
         modalOpen,
-        guide
+        guide,
     }
 });
 
