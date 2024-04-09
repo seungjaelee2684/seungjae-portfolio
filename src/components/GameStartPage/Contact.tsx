@@ -55,7 +55,7 @@ export const ContactContainer = styled.nav`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
 
     @media screen and (max-width: 1320px) {
         width: 200px;
@@ -91,7 +91,7 @@ export const Icon = styled.div`
 
 export const LaneContainer = styled.a`
     width: calc(100% - 30px);
-    height: 60px;
+    height: 54px;
     display: flex;
     justify-content: start;
     align-items: center;
