@@ -4,9 +4,11 @@ import styled from 'styled-components';
 const ConnectPage = () => {
   return (
     <ConnectLayout>
-      <Title>
-        The End
-      </Title>
+      <InContainer>
+        <Title>
+          The End
+        </Title>
+      </InContainer>
     </ConnectLayout>
   )
 };
@@ -20,10 +22,21 @@ const ConnectLayout = styled.article`
   font-family: "Nanum Brush Script";
 `;
 
-const Title = styled.section`
-  font-size: 70px;
+const InContainer = styled.section`
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  font-size: 80px;
   font-weight: 700;
   line-height: 150%;
+  user-select: none;
 `;
 
 export default ConnectPage;
