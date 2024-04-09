@@ -130,6 +130,7 @@ const ButtonWrapper = styled.div`
 
 const Button = styled.div`
   width: 160px;
+  height: 50px;
   font-size: 36px;
   line-height: 120%;
   display: flex;
@@ -153,6 +154,7 @@ const Button = styled.div`
   }
 
   @media screen and (max-width: 500px) {
+    height: 30px;
     font-size: 20px;
     width: 300px;
     gap: 30px;
