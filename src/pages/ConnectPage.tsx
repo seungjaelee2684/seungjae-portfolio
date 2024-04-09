@@ -64,7 +64,7 @@ const ConnectPage = () => {
 
 const Appear = keyframes`
   0% {
-    transform: translateY(80%);
+    transform: translateY(110%);
   }
 
   100% {
