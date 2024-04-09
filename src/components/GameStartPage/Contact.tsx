@@ -11,8 +11,7 @@ const Contact = () => {
     return (
         <ContactContainer>
             <LaneContainer onClick={() => {
-                window.location.href = "mailto:sean2684@naver.com"
-                // navigate("/connect");
+                navigate("/connect");
             }}>
                 <Icon>
                     <MdArrowRight />
