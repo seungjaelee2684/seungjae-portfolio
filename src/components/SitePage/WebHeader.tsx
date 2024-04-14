@@ -10,7 +10,7 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
   const onClickScrollTopHandler = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      // behavior: "smooth"
     });
   };
 
