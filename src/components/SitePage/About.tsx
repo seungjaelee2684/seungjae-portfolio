@@ -3,40 +3,29 @@ import styled from 'styled-components';
 
 const About = () => {
 
-    const boxRef1 = useRef<HTMLDivElement>(null);
-    const boxRef2 = useRef<HTMLDivElement>(null);
-    const boxRef3 = useRef<HTMLDivElement>(null);
-    const [scrollEffect, setScrollEffect] = useState<number>(0);
-
-    useEffect(() => {
-        const scrollEvent = () => {
-            let scrollY = window.scrollY;
-            let scroll = scrollY - 700;
-            console.log("스크롤 -> ", scroll);
-            
-            if (boxRef1.current && boxRef2.current && boxRef3.current) {
-                boxRef1.current.style.transform = `translateY(-${(scrollY - 700)}%)`;
-            };
-
-        };
-
-        window.addEventListener("scroll", scrollEvent);
-
-        return () => window.removeEventListener("scroll", scrollEvent);
-    }, []);
-
     return (
         <AboutMeContainer id="about us">
             <Title>
                 About Us
             </Title>
             <CardWrapper>
-                <AboutCardContainer height="2400px">
+                <AboutCardContainer height="2000px">
                     <AboutCard>
-                        1
+                        <ContentWrapper>
+                            이름
+                        </ContentWrapper>
+                        <ContentWrapper>
+                            이승재
+                        </ContentWrapper>
+                        <ContentWrapper>
+                            출생
+                        </ContentWrapper>
+                        <ContentWrapper>
+                            1997.01.21
+                        </ContentWrapper>
                     </AboutCard>
                 </AboutCardContainer>
-                <AboutCardContainer height="1600px">
+                <AboutCardContainer height="1400px">
                     <AboutCard>
                         2
                     </AboutCard>
@@ -62,7 +51,7 @@ const AboutMeContainer = styled.section`
 
 const CardWrapper = styled.div`
     width: 100%;
-    height: 3000px;
+    height: 2800px;
     display: flex;
     justify-content: space-between;
     align-items: end;
@@ -71,27 +60,37 @@ const CardWrapper = styled.div`
 
 const Title = styled.label`
     font-size: 34px;
+    position: sticky;
+    top: 100px;
 `;
 
 const AboutCardContainer = styled.div<{ height: string }>`
-    width: 350px;
+    width: 400px;
     height: ${(props) => props.height};
     display: flex;
     justify-content: center;
     align-items: start;
-    position: sticky;
-    top: 80px;
 `;
 
 const AboutCard = styled.div`
-    width: 350px;
-    height: 350px;
+    width: calc(100% - 40px);
+    height: 360px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid;
-    border-radius: 5px;
+    border-radius: 8px;
+    position: sticky;
+    top: 180px;
+    padding: 20px;
+`;
+
+const ContentWrapper = styled.div`
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 150%;
 `;
 
 export default About;
