@@ -12,16 +12,22 @@ const About = () => {
                 <AboutCardContainer height="2000px">
                     <AboutCard>
                         <ContentWrapper>
-                            이름
+                            🏷️ 이름
                         </ContentWrapper>
                         <ContentWrapper>
-                            이승재
+                            : 이승재 (Lee SeungJae)
                         </ContentWrapper>
                         <ContentWrapper>
-                            출생
+                            👶 출생일
                         </ContentWrapper>
                         <ContentWrapper>
-                            1997.01.21
+                            : 1997년 1월 21일
+                        </ContentWrapper>
+                        <ContentWrapper>
+                            🗺️ 출생지
+                        </ContentWrapper>
+                        <ContentWrapper>
+                            : 대구 (Daegu)
                         </ContentWrapper>
                     </AboutCard>
                 </AboutCardContainer>
@@ -73,8 +79,8 @@ const AboutCardContainer = styled.div<{ height: string }>`
 `;
 
 const AboutCard = styled.div`
-    width: calc(100% - 40px);
-    height: 360px;
+    width: calc(100% - 80px);
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,14 +89,16 @@ const AboutCard = styled.div`
     border-radius: 8px;
     position: sticky;
     top: 180px;
-    padding: 20px;
+    padding: 40px;
+    gap: 16px;
 `;
 
 const ContentWrapper = styled.div`
     width: 100%;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 150%;
+    text-align: start;
 `;
 
 export default About;
