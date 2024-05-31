@@ -71,7 +71,7 @@ const StartPage = () => {
                 Load Game
               </ButtonText>
             </DefaultButton>
-            {/* <DefaultButton
+            <DefaultButton
               onMouseOver={() => setInfo(3)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
@@ -81,7 +81,7 @@ const StartPage = () => {
               <ButtonText >
                 Website
               </ButtonText>
-            </DefaultButton> */}
+            </DefaultButton>
           </ButtonWrapper>
         </StartGameWrapper>
       </StartGameOutWrapper>
