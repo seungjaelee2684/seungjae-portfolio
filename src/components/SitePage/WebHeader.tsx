@@ -22,6 +22,10 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
     };
   };
 
+  const onMouseOverHandler = () => {
+    
+  };
+
   return (
     <HeaderLayout ref={headerRef}>
       <HeaderContainer>

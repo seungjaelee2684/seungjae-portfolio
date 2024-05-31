@@ -16,10 +16,11 @@ const SitePage = () => {
 
       if (scrolly >= 300) {
         headerRef.current.style.position = "fixed";
-        headerRef.current.style.backgroundColor = "#222020";
+        headerRef.current.style.backdropFilter = "blur(3px)";
+        // headerRef.current.style.backgroundColor = "#222020";
       } else {
         headerRef.current.style.position = "absolute";
-        headerRef.current.style.backgroundColor = "transparent";
+        // headerRef.current.style.backgroundColor = "transparent";
       };
     };
 
@@ -46,11 +47,12 @@ const MainLayout = styled.article`
   position: relative;
   font-family: "TTLaundryGothicB";
   font-size: 400;
+  background-color: #222020;
 `;
 
 const MainContainer = styled.div`
   width: 1320px;
-  margin: 40px auto;
+  margin: 0px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
