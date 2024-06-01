@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import WebHeader from '../components/SitePage/WebHeader';
 import Banner from '../components/SitePage/Banner';
 import About from '../components/SitePage/About';
+import Background from '../assets/images/main_background.webp';
 
 const SitePage = () => {
 
@@ -34,7 +35,7 @@ const SitePage = () => {
   return (
     <MainLayout>
       <WebHeader headerRef={headerRef} />
-      <Banner />
+      <MainBackground src={Background} />
       <MainContainer>
         <About />
       </MainContainer>
@@ -44,10 +45,20 @@ const SitePage = () => {
 
 const MainLayout = styled.article`
   width: 100%;
+  height: 100vh;
   position: relative;
   font-family: "TTLaundryGothicB";
   font-size: 400;
-  background-color: #222020;
+`;
+
+const MainBackground = styled.div<{ src: string }>`
+  width: 100%;
+  height: 100vh;
+  background-image: url(${(props) => props.src});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 `;
 
 const MainContainer = styled.div`
