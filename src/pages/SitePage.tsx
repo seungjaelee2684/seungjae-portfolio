@@ -12,9 +12,9 @@ const SitePage = () => {
 
   useEffect(() => {
     const scrollEvent = () => {
-      let scrolly = window.scrollY;
-
       if (!headerRef.current) return;
+      
+      let scrolly = window.scrollY;
 
       if (scrolly >= 300) {
         headerRef.current.style.position = "fixed";
