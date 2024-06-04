@@ -9,20 +9,25 @@ import Background2 from '../assets/images/start_back.jpg';
 const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
+  const testRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!headerRef.current) return;
+      if (!testRef.current) return;
       
       let scrolly = window.scrollY;
+      let test = scrolly * 1/100
+
+      testRef.current.style.transform = `translateX(${scrolly}px)`;
 
       if (scrolly >= 300) {
         headerRef.current.style.position = "fixed";
         headerRef.current.style.backdropFilter = "blur(3px)";
-        // headerRef.current.style.backgroundColor = "#222020";
+        headerRef.current.style.backgroundColor = "#22202050";
       } else {
         headerRef.current.style.position = "absolute";
-        // headerRef.current.style.backgroundColor = "transparent";
+        headerRef.current.style.backgroundColor = "transparent";
       };
     };
 
@@ -38,7 +43,7 @@ const SitePage = () => {
       <WebHeader headerRef={headerRef} />
       <MainBackground src={Background1} />
       <MainContainer>
-        <About />
+        <About testRef={testRef} />
       </MainContainer>
       <MainBackground src={Background2} />
     </MainLayout>
