@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components';
 
-const About = () => {
+interface AboutProps {
+    testRef: React.RefObject<HTMLDivElement>;
+};
+
+const About: React.FC<AboutProps> = ({ testRef }) => {
 
     useEffect(() => {
         
@@ -13,7 +17,7 @@ const About = () => {
                 About Us
             </Title>
             <CardWrapper>
-                <LaneContainer>
+                <LaneContainer ref={testRef}>
                     <CardBox>
 
                     </CardBox>
