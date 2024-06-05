@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { GuideFadeIn } from '../../styles/guide';
 
 interface AboutProps {
-    // testRef: React.RefObject<HTMLDivElement>;
+    aboutRef: any;
+    navRef: React.RefObject<HTMLAnchorElement>;
 };
 
-const About: React.FC<AboutProps> = () => {
-
-    // const boxRef1 = useRef<HTMLDivElement>(null);
-    // const boxRef2 = useRef<HTMLDivElement>(null);
-    // const boxRef3 = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        
-    }, []);
+const About: React.FC<AboutProps> = ({ aboutRef, navRef }) => {
 
     return (
         <AboutMeContainer id="about us">
@@ -21,7 +15,7 @@ const About: React.FC<AboutProps> = () => {
                 About Us
             </Title>
             <CardWrapper>
-                <LaneContainer>
+                <LaneContainer id="element1" ref={el => aboutRef.current[0] = el}>
                     <CardBox>
 
                     </CardBox>
@@ -29,7 +23,7 @@ const About: React.FC<AboutProps> = () => {
 
                     </ContentBox>
                 </LaneContainer>
-                <LaneContainer>
+                <LaneContainer id="element2" ref={el => aboutRef.current[1] = el}>
                     <ContentBox>
 
                     </ContentBox>
@@ -37,7 +31,7 @@ const About: React.FC<AboutProps> = () => {
 
                     </CardBox>
                 </LaneContainer>
-                <LaneContainer>
+                <LaneContainer id="element3" ref={el => aboutRef.current[2] = el}>
                     <CardBox>
 
                     </CardBox>
@@ -58,12 +52,12 @@ const AboutMeContainer = styled.section`
     align-items: center;
     padding: 40px 0px;
     gap: 40px;
+    color: #222020;
 `;
 
 const Title = styled.label`
     font-size: 34px;
     top: 100px;
-    color: #FEFEFE;
 `;
 
 const CardWrapper = styled.div`
@@ -81,12 +75,15 @@ const LaneContainer = styled.div`
     align-items: center;
     gap: 30px;
     padding: 20px 0px;
+    transition: all 1.2s ease-in;
+    opacity: 0;
+    transform: translateY(-60px);
 `;
 
 const CardBox = styled.div`
     min-width: 400px;
     height: 300px;
-    border: 1px solid #FEFEFE;
+    border: 1px solid;
     border-radius: 10px;
     display: flex;
     justify-content: center;
