@@ -9,17 +9,12 @@ import Background2 from '../assets/images/start_back.jpg';
 const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
-  const testRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!headerRef.current) return;
-      if (!testRef.current) return;
       
       let scrolly = window.scrollY;
-      let test = scrolly * 1/100
-
-      testRef.current.style.transform = `translateX(${scrolly}px)`;
 
       if (scrolly >= 300) {
         headerRef.current.style.position = "fixed";
@@ -43,7 +38,7 @@ const SitePage = () => {
       <WebHeader headerRef={headerRef} />
       <MainBackground src={Background1} />
       <MainContainer>
-        <About testRef={testRef} />
+        <About />
       </MainContainer>
       <MainBackground src={Background2} />
     </MainLayout>
