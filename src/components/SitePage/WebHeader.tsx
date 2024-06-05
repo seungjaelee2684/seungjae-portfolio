@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
+  navRef: React.RefObject<HTMLAnchorElement>;
 };
 
-const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, navRef }) => {
 
   const onClickScrollTopHandler = () => {
     window.scrollTo({
@@ -32,8 +33,9 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
         <HeaderLogo onClick={onClickScrollTopHandler}>
           import SeungJae
         </HeaderLogo>
-        <RightContent>
-          <Navigate onClick={() => onClickMoveHandler("about us")}>
+        <RightContent ref={navRef}>
+          <Navigate
+            onClick={() => onClickMoveHandler("about us")}>
             About
           </Navigate>
           <Navigate>
@@ -115,11 +117,10 @@ const Navigate = styled.a`
   height: 100%;
   display: flex;
   align-items: center;
-  color: #FFFFFF;
   cursor: pointer;
 
   &:hover {
-    color: #ADADAD;
+    color: #FEFEFE;
   }
 
   @media screen and (max-width: 1320px) {

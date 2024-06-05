@@ -11,11 +11,14 @@ import { GoArrowUpRight } from 'react-icons/go';
 const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLAnchorElement>(null);
+  const aboutRef = useRef<any>([]);
+  const infoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scrollEvent = () => {
       if (!headerRef.current) return;
-      
+
       let scrolly = window.scrollY;
 
       if (scrolly >= 300) {
@@ -27,16 +30,64 @@ const SitePage = () => {
       };
     };
 
+    if (!aboutRef.current || !infoRef.current) return;
+
+    const callback2 = (entries: any, observer: any) => {
+      entries.forEach((entry: any) => {
+        if (!navRef.current) return;
+        if (entry.isIntersecting) {
+          navRef.current.style.color = `#222020`;
+        } else {
+          navRef.current.style.color = `#fefefea6`;
+        };
+      });
+    };
+
+    const callback = (entries: any, observer: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          console.log("true");
+          entry.target.style.opacity = `1`;
+          entry.target.style.transform = `translateY(0px)`;
+        } else {
+          console.log("false");
+          // entry.target.style.opacity = `0`;
+          // entry.target.style.transform = `translateY(-30px)`;
+        };
+      });
+    };
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1
+    }
+
+    const observer = new IntersectionObserver(callback, options);
+    const observer2 = new IntersectionObserver(callback2, options);
+
+    aboutRef.current.forEach((element: any) => {
+      if (!element) return;
+      observer.observe(element);
+    });
+    observer2.observe(infoRef.current);
+
     window.addEventListener("scroll", scrollEvent);
 
     return () => {
       window.removeEventListener("scroll", scrollEvent);
+      if (!aboutRef.current || !infoRef.current) return;
+      aboutRef.current.forEach((element: any) => {
+        if (!element) return;
+        observer.unobserve(element);
+      });
+      observer2.unobserve(infoRef.current);
     }
   }, []);
 
   return (
     <MainLayout>
-      <WebHeader headerRef={headerRef} />
+      <WebHeader headerRef={headerRef} navRef={navRef} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
           <MainTitleWrapper>
@@ -57,8 +108,8 @@ const SitePage = () => {
           </SubTitle>
         </MainTitleContainer>
       </MainBackground>
-      <MainContainer>
-        <About />
+      <MainContainer ref={infoRef}>
+        <About aboutRef={aboutRef} navRef={navRef} />
       </MainContainer>
       <MainBackground src={Background2} />
     </MainLayout>
@@ -80,12 +131,12 @@ const TitleAppear = keyframes`
 const BarAppear = keyframes`
   0% {
     opacity: 0;
-    transform: translateX(-10%) scaleX(0);
+    transform: scaleX(0);
   }
 
   100% {
     opacity: 1;
-    transform: translateX(0%) scaleX(1);
+    transform: scaleX(1);
   }
 `;
 
@@ -94,7 +145,6 @@ const MainLayout = styled.article`
   position: relative;
   font-family: "TTLaundryGothicB";
   font-size: 400;
-  background-color: #222020;
 `;
 
 const MainBackground = styled.div<{ src: string }>`
@@ -153,7 +203,7 @@ const MainTitle = styled.div`
   font-size: 55px;
   user-select: none;
   opacity: 0;
-  animation: ${TitleAppear} 1.3s forwards;
+  animation: ${TitleAppear} 1s forwards;
 
   @media screen and (max-width: 1320px) {
     font-size: 40px;
@@ -164,7 +214,7 @@ const BarContainer = styled.line`
   width: 300px;
   height: 1px;
   background-color: #fefefe74;
-  animation: ${BarAppear} 1.3s forwards 0.3s;
+  animation: ${BarAppear} 1s forwards 0.3s;
   opacity: 0;
 
   @media screen and (max-width: 1320px) {
@@ -180,7 +230,7 @@ const SubTitle = styled(MainTitle)`
   align-items: end;
   gap: 20px;
   opacity: 0;
-  animation: ${TitleAppear} 1.3s forwards 0.8s;
+  animation: ${TitleAppear} 1.5s forwards 0.8s;
 
   @media screen and (max-width: 1320px) {
     align-items: start;
