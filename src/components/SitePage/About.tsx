@@ -7,41 +7,12 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = () => {
 
-    const boxRef1 = useRef<HTMLDivElement>(null);
-    const boxRef2 = useRef<HTMLDivElement>(null);
-    const boxRef3 = useRef<HTMLDivElement>(null);
+    // const boxRef1 = useRef<HTMLDivElement>(null);
+    // const boxRef2 = useRef<HTMLDivElement>(null);
+    // const boxRef3 = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const scrollEvent = () => {
-            if (!boxRef1.current || !boxRef2.current || !boxRef3.current) return;
-
-            let scrolly = window.scrollY;
-            let viewportHeight = window.innerHeight;
-            let scrolling = scrolly - viewportHeight;
-            let elementHeight1 = boxRef1.current.offsetTop + 200;
-            let elementHeight2 = boxRef2.current.offsetTop + 200;
-            let elementHeight3 = boxRef3.current.offsetTop + 200;
-            let result1 = (scrolling / elementHeight1) * 100;
-            let result2 = (scrolling / elementHeight2) * 100 - 15;
-            let result3 = (scrolling / elementHeight3) * 100 - 30;
-            console.log("백분율 => ", result1, result2, result3);
-
-            if (result1 <= 0) {
-                boxRef1.current.style.transform = `translateX(${result1}%)`;
-            };
-            if (result2 <= 0) {
-                boxRef2.current.style.transform = `translateX(${result2}%)`;
-            };
-            if (result3 <= 0) {
-                boxRef3.current.style.transform = `translateX(${result3}%)`;
-            };
-        };
-
-        window.addEventListener("scroll", scrollEvent);
-
-        return () => {
-            window.removeEventListener("scroll", scrollEvent);
-        }
+        
     }, []);
 
     return (
@@ -50,7 +21,7 @@ const About: React.FC<AboutProps> = () => {
                 About Us
             </Title>
             <CardWrapper>
-                <LaneContainer ref={boxRef1}>
+                <LaneContainer>
                     <CardBox>
 
                     </CardBox>
@@ -58,7 +29,7 @@ const About: React.FC<AboutProps> = () => {
 
                     </ContentBox>
                 </LaneContainer>
-                <LaneContainer ref={boxRef2}>
+                <LaneContainer>
                     <ContentBox>
 
                     </ContentBox>
@@ -66,7 +37,7 @@ const About: React.FC<AboutProps> = () => {
 
                     </CardBox>
                 </LaneContainer>
-                <LaneContainer ref={boxRef3}>
+                <LaneContainer>
                     <CardBox>
 
                     </CardBox>
