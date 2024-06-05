@@ -30,23 +30,21 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
     <HeaderLayout ref={headerRef}>
       <HeaderContainer>
         <HeaderLogo onClick={onClickScrollTopHandler}>
-          import SeungJae,
+          import SeungJae
         </HeaderLogo>
         <RightContent>
-          {"{"}
           <Navigate onClick={() => onClickMoveHandler("about us")}>
-            About,
+            About
           </Navigate>
           <Navigate>
-            Project,
+            Project
           </Navigate>
           <Navigate>
-            Skill,
+            Skill
           </Navigate>
           <Navigate>
             Contact
           </Navigate>
-          {"} from 'Lee SeungJae'"}
         </RightContent>
       </HeaderContainer>
     </HeaderLayout>
@@ -55,7 +53,7 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
 
 const HeaderLayout = styled.header`
   width: 100%;
-  height: 70px;
+  height: 80px;
   position: absolute;
   top: 0;
   left: 0;
@@ -63,6 +61,7 @@ const HeaderLayout = styled.header`
   font-family: "D2Coding";
   user-select: none;
   transition: all 0.2s;
+  position: fixed;
 `;
 
 const HeaderContainer = styled.div`
@@ -80,7 +79,7 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderLogo = styled.div`
-  font-size: 40px;
+  font-size: 32px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -88,7 +87,7 @@ const HeaderLogo = styled.div`
   cursor: pointer;
 
   @media screen and (max-width: 1320px) {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   &:hover {
@@ -97,21 +96,21 @@ const HeaderLogo = styled.div`
 `;
 
 const RightContent = styled.nav`
-  font-size: 20px;
+  font-size: 16px;
   line-height: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
   color: #bebebe;
 
   @media screen and (max-width: 1320px) {
-    font-size: 16px;
+    font-size: 12px;
   }
 `;
 
 const Navigate = styled.a`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   height: 100%;
   display: flex;
@@ -124,7 +123,7 @@ const Navigate = styled.a`
   }
 
   @media screen and (max-width: 1320px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 `;
 
