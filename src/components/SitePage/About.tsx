@@ -4,10 +4,9 @@ import { GuideFadeIn } from '../../styles/guide';
 
 interface AboutProps {
     aboutRef: any;
-    navRef: React.RefObject<HTMLAnchorElement>;
 };
 
-const About: React.FC<AboutProps> = ({ aboutRef, navRef }) => {
+const About: React.FC<AboutProps> = ({ aboutRef }) => {
 
     return (
         <AboutMeContainer id="about us">
