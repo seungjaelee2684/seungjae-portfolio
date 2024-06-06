@@ -1,12 +1,15 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react'
+import styled, { keyframes } from 'styled-components';
 
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
-  navRef: React.RefObject<HTMLAnchorElement>;
+  isScroll: boolean;
 };
 
-const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, navRef }) => {
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
+
+  const [mouseOver, setMouseOver] = useState<boolean>(false);
+  const hoverRef = useRef<HTMLDivElement>(null);
 
   const onClickScrollTopHandler = () => {
     window.scrollTo({
@@ -30,22 +33,50 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, navRef }) => {
   return (
     <HeaderLayout ref={headerRef}>
       <HeaderContainer>
-        <HeaderLogo onClick={onClickScrollTopHandler}>
+        <HeaderLogo
+          color={(isScroll) ? "#222020" : "#FEFEFE"}
+          hovercolor={(isScroll) ? "#ADADAD" : "#ADADAD"}
+          onClick={onClickScrollTopHandler}>
           import SeungJae
         </HeaderLogo>
-        <RightContent ref={navRef}>
+        <RightContent>
           <Navigate
-            onClick={() => onClickMoveHandler("about us")}>
-            About
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("about us")}
+            onMouseOver={() => {
+              if (!hoverRef.current) return;
+              hoverRef.current.style.visibility = `visible`;
+            }}
+            onMouseLeave={() => {
+              if (!hoverRef.current) return;
+              hoverRef.current.style.visibility = `hidden`;
+            }}>
+            ABOUT
+            <HoverContainer ref={hoverRef}>
+              <HoverContent>
+                <Navigate
+                  color={(isScroll) ? "#222020" : "#fefefea6"}
+                  hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+                    나에대해
+                </Navigate>
+              </HoverContent>
+            </HoverContainer>
           </Navigate>
-          <Navigate>
-            Project
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            PROJECT
           </Navigate>
-          <Navigate>
-            Skill
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            SKILL
           </Navigate>
-          <Navigate>
-            Contact
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            CONTACT
           </Navigate>
         </RightContent>
       </HeaderContainer>
@@ -56,7 +87,6 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, navRef }) => {
 const HeaderLayout = styled.header`
   width: 100%;
   height: 80px;
-  position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
@@ -64,6 +94,11 @@ const HeaderLayout = styled.header`
   user-select: none;
   transition: all 0.2s;
   position: fixed;
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background-color: #222020b0;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -73,19 +108,22 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #FFFFFF;
+  padding-right: 160px;
+  box-sizing: border-box;
 
   @media screen and (max-width: 1320px) {
+    padding-right: 0px;
     width: 96%;
   }
 `;
 
-const HeaderLogo = styled.div`
+const HeaderLogo = styled.div<{ color: string, hovercolor: string }>`
   font-size: 32px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.color};
   cursor: pointer;
 
   @media screen and (max-width: 1320px) {
@@ -93,7 +131,7 @@ const HeaderLogo = styled.div`
   }
 
   &:hover {
-    color: #ADADAD;
+    color: ${(props) => props.hovercolor};
   }
 `;
 
@@ -103,29 +141,52 @@ const RightContent = styled.nav`
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 24px;
-  color: #bebebe;
+  gap: 70px;
 
   @media screen and (max-width: 1320px) {
+    gap: 40px;
     font-size: 12px;
   }
 `;
 
-const Navigate = styled.a`
+const Navigate = styled.a<{ color: string, hovercolor: string }>`
   font-size: 20px;
   font-weight: 700;
   height: 100%;
   display: flex;
   align-items: center;
+  color: ${(props) => props.color};
   cursor: pointer;
 
   &:hover {
-    color: #FEFEFE;
+    color: ${(props) => props.hovercolor};
   }
 
   @media screen and (max-width: 1320px) {
-    font-size: 16px;
+    font-size: 18px;
   }
+`;
+
+const HoverContainer = styled.div`
+  width: 100vw;
+  height: 60px;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  visibility: hidden;
+  background-color: #222020c3;
+  z-index: 5;
+`;
+
+const HoverContent = styled.div`
+  width: 1320px;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 30px;
+  padding-right: 300px;
+  box-sizing: border-box;
 `;
 
 export default WebHeader;

@@ -1,47 +1,34 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import WebHeader from '../components/SitePage/WebHeader';
 import Banner from '../components/SitePage/Banner';
 import About from '../components/SitePage/About';
 import Background1 from '../assets/images/portfolioBG.jpg';
-import Background2 from '../assets/images/start_back.jpg';
+import Background2 from '../assets/images/backgroundWeb.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
 import { GoArrowUpRight } from 'react-icons/go';
 
 const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLAnchorElement>(null);
   const aboutRef = useRef<any>([]);
   const infoRef = useRef<HTMLDivElement>(null);
+  const [isScroll, setIsScroll] = useState<boolean>(false);
 
   useEffect(() => {
     const scrollEvent = () => {
-      if (!headerRef.current) return;
-
       let scrolly = window.scrollY;
+      let viewport = window.innerHeight;
 
-      if (scrolly >= 300) {
-        headerRef.current.style.backdropFilter = "blur(3px)";
-        headerRef.current.style.backgroundColor = "#ffffffb";
+      console.log(scrolly, viewport);
+      if (scrolly > viewport) {
+        setIsScroll(true);
       } else {
-        headerRef.current.style.backdropFilter = "none";
-        headerRef.current.style.backgroundColor = "transparent";
+        setIsScroll(false);
       };
     };
 
     if (!aboutRef.current || !infoRef.current) return;
-
-    const callback2 = (entries: any, observer: any) => {
-      entries.forEach((entry: any) => {
-        if (!navRef.current) return;
-        if (entry.isIntersecting) {
-          navRef.current.style.color = `#222020`;
-        } else {
-          navRef.current.style.color = `#fefefea6`;
-        };
-      });
-    };
 
     const callback = (entries: any, observer: any) => {
       entries.forEach((entry: any) => {
@@ -51,8 +38,6 @@ const SitePage = () => {
           entry.target.style.transform = `translateY(0px)`;
         } else {
           console.log("false");
-          // entry.target.style.opacity = `0`;
-          // entry.target.style.transform = `translateY(-30px)`;
         };
       });
     };
@@ -64,30 +49,28 @@ const SitePage = () => {
     }
 
     const observer = new IntersectionObserver(callback, options);
-    const observer2 = new IntersectionObserver(callback2, options);
 
     aboutRef.current.forEach((element: any) => {
       if (!element) return;
       observer.observe(element);
     });
-    observer2.observe(infoRef.current);
 
     window.addEventListener("scroll", scrollEvent);
 
     return () => {
       window.removeEventListener("scroll", scrollEvent);
+
       if (!aboutRef.current || !infoRef.current) return;
       aboutRef.current.forEach((element: any) => {
         if (!element) return;
         observer.unobserve(element);
       });
-      observer2.unobserve(infoRef.current);
     }
   }, []);
 
   return (
     <MainLayout>
-      <WebHeader headerRef={headerRef} navRef={navRef} />
+      <WebHeader headerRef={headerRef} isScroll={isScroll} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
           <MainTitleWrapper>
@@ -107,9 +90,13 @@ const SitePage = () => {
             </ContactBtn>
           </SubTitle>
         </MainTitleContainer>
+        <TextContent>
+          <Box />
+          React와 Typescript에 장점을 둔 높은 성장이 기대되는 개발자. 끊임없는 자기 계발과 문제 해결에 대한 열정으로 프로젝트 및 IT 교육 과정의 경험을 통해 빠르게 성장 중에 있으며, 실제 웹 서비스를 운영하면서 사용자 중심의 솔루션을 개발하는 경험을 쌓으며, 가치 있는 개발자로 발전해 나가고 있습니다.
+        </TextContent>
       </MainBackground>
       <MainContainer ref={infoRef}>
-        <About aboutRef={aboutRef} navRef={navRef} />
+        <About aboutRef={aboutRef} />
       </MainContainer>
       <MainBackground src={Background2} />
     </MainLayout>
@@ -140,6 +127,16 @@ const BarAppear = keyframes`
   }
 `;
 
+const TextAppear = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
 const MainLayout = styled.article`
   width: 100%;
   position: relative;
@@ -156,8 +153,11 @@ const MainBackground = styled.div<{ src: string }>`
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 100px;
+  color: #FEFEFE;
 `;
 
 const MainContainer = styled.div`
@@ -199,7 +199,6 @@ const MainTitleWrapper = styled.div`
 
 const MainTitle = styled.div`
   min-width: fit-content;
-  color: #FEFEFE;
   font-size: 55px;
   user-select: none;
   opacity: 0;
@@ -261,6 +260,31 @@ const ContactBtn = styled.button`
     color: #FEFEFE;
     font-size: 15px;
   }
+`;
+
+const TextContent = styled.p`
+  width: 1320px;
+  text-align: start;
+  font-size: 16px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 16px;
+  font-family: "";
+  font-weight: 500;
+  opacity: 0;
+  animation: ${TextAppear} 1.3s forwards 1.5s;
+
+  @media screen and (max-width: 1320px) {
+    width: 96%;
+  }
+`;
+
+const Box = styled.div`
+  min-width: 6px;
+  height: 6px;
+  background-color: #FEFEFE;
+  margin-top: 10px;
 `;
 
 export default SitePage;
