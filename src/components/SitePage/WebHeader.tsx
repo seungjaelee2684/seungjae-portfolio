@@ -53,7 +53,7 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
               hoverRef.current.style.visibility = `hidden`;
             }}>
             ABOUT
-            <HoverContainer ref={hoverRef}>
+            <HoverContainer ref={hoverRef} onClick={(e) => e.stopPropagation()}>
               <HoverContent>
                 <Navigate
                   color={(isScroll) ? "#222020" : "#fefefea6"}
@@ -75,7 +75,8 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
           </Navigate>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
-            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("contact")}>
             CONTACT
           </Navigate>
         </RightContent>
