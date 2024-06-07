@@ -98,7 +98,7 @@ const SitePage = () => {
       <MainContainer ref={infoRef}>
         <About aboutRef={aboutRef} />
       </MainContainer>
-      <MainBackground src={Background2} />
+      <MainBackground id="contact" src={Background2} />
     </MainLayout>
   )
 };

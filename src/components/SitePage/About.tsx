@@ -16,10 +16,10 @@ const About: React.FC<AboutProps> = ({ aboutRef }) => {
             <CardWrapper>
                 <LaneContainer id="element1" ref={el => aboutRef.current[0] = el}>
                     <CardBox>
-
+                        안녕
                     </CardBox>
                     <ContentBox>
-
+                        나는 승재야
                     </ContentBox>
                 </LaneContainer>
                 <LaneContainer id="element2" ref={el => aboutRef.current[1] = el}>
