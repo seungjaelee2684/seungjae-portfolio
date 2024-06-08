@@ -7,11 +7,11 @@ import Background1 from '../assets/images/portfolioBG.jpg';
 import Background2 from '../assets/images/backgroundWeb.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
 import { GoArrowUpRight } from 'react-icons/go';
+import Project from '../components/SitePage/Project';
 
 const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<any>([]);
   const infoRef = useRef<HTMLDivElement>(null);
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
@@ -28,43 +28,12 @@ const SitePage = () => {
       };
     };
 
-    if (!aboutRef.current || !infoRef.current) return;
-
-    const callback = (entries: any, observer: any) => {
-      entries.forEach((entry: any) => {
-        if (entry.isIntersecting) {
-          console.log("true");
-          entry.target.style.opacity = `1`;
-          entry.target.style.transform = `translateY(0px)`;
-        } else {
-          console.log("false");
-        };
-      });
-    };
-
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1
-    }
-
-    const observer = new IntersectionObserver(callback, options);
-
-    aboutRef.current.forEach((element: any) => {
-      if (!element) return;
-      observer.observe(element);
-    });
+    if (!infoRef.current) return;
 
     window.addEventListener("scroll", scrollEvent);
 
     return () => {
       window.removeEventListener("scroll", scrollEvent);
-
-      if (!aboutRef.current || !infoRef.current) return;
-      aboutRef.current.forEach((element: any) => {
-        if (!element) return;
-        observer.unobserve(element);
-      });
     }
   }, []);
 
@@ -75,7 +44,7 @@ const SitePage = () => {
         <MainTitleContainer>
           <MainTitleWrapper>
             <MainTitle>
-              아름다운 헌신
+              끊임없는 헌신
             </MainTitle>
             <MainTitle>
               성장하는 실력
@@ -96,7 +65,8 @@ const SitePage = () => {
         </TextContent>
       </MainBackground>
       <MainContainer ref={infoRef}>
-        <About aboutRef={aboutRef} />
+        <About />
+        <Project />
       </MainContainer>
       <MainBackground id="contact" src={Background2} />
     </MainLayout>
