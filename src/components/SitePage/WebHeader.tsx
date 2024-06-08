@@ -188,6 +188,10 @@ const HoverContent = styled.div`
   gap: 30px;
   padding-right: 300px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 1320px) {
+    width: 96%;
+  }
 `;
 
 export default WebHeader;
