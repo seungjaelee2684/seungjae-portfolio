@@ -29,9 +29,9 @@ const Project = () => {
           <CardBox>
 
           </CardBox>
-          <CenterCardBox>
+          <CardBox>
 
-          </CenterCardBox>
+          </CardBox>
           <CardBox>
 
           </CardBox>
@@ -83,7 +83,7 @@ const BackgroundBox = styled.div`
   background-color: #2d3275;
   position: absolute;
   bottom: 80px;
-  left: 0;
+  left: -20px;
 `;
 
 const SlideContainer = styled.div`

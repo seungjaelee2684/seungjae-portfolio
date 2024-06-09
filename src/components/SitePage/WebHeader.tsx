@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { IoGameControllerOutline } from "react-icons/io5";
 
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
@@ -8,6 +10,7 @@ interface WebHeaderProps {
 
 const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
 
+  const navigate = useNavigate();
   const [mouseOver, setMouseOver] = useState<boolean>(false);
   const hoverRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +68,8 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
           </Navigate>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
-            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("project")}>
             PROJECT
           </Navigate>
           <Navigate
@@ -79,6 +83,13 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
             onClick={() => onClickMoveHandler("contact")}>
             CONTACT
           </Navigate>
+          <GameButton
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => navigate("/")}>
+              <IoGameControllerOutline size={20} />
+              GAME
+          </GameButton>
         </RightContent>
       </HeaderContainer>
     </HeaderLayout>
@@ -109,11 +120,9 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 160px;
   box-sizing: border-box;
 
   @media screen and (max-width: 1320px) {
-    padding-right: 0px;
     width: 96%;
   }
 `;
@@ -165,6 +174,25 @@ const Navigate = styled.a<{ color: string, hovercolor: string }>`
 
   @media screen and (max-width: 1320px) {
     font-size: 18px;
+  }
+`;
+
+const GameButton = styled.button<{ color: string, hovercolor: string }>`
+  width: 100px;
+  height: 38px;
+  outline: none;
+  border: 1px solid;
+  border-radius: 20px;
+  color: ${(props) => props.color};
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.hovercolor};
   }
 `;
 

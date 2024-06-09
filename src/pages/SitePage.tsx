@@ -15,6 +15,13 @@ const SitePage = () => {
   const infoRef = useRef<HTMLDivElement>(null);
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
+  const onClickScrollMoveHandler = (id: string) => {
+    const elementId = document.getElementById(id);
+
+    if (!elementId) return;
+    elementId.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     const scrollEvent = () => {
       let scrolly = window.scrollY;
@@ -51,18 +58,36 @@ const SitePage = () => {
             </MainTitle>
           </MainTitleWrapper>
           <BarContainer />
-          <SubTitle>
-            새하얀 도화지와 같은 개발자
+          <SubTitleWrapper>
+            <SubTitle>
+              새하얀 도화지와 같은 개발자
+            </SubTitle>
             <ContactBtn>
               섭외하기
               <GoArrowUpRight />
             </ContactBtn>
-          </SubTitle>
+          </SubTitleWrapper>
         </MainTitleContainer>
         <TextContent>
           <Box />
           React와 Typescript에 장점을 둔 높은 성장이 기대되는 개발자. 끊임없는 자기 계발과 문제 해결에 대한 열정으로 프로젝트 및 IT 교육 과정의 경험을 통해 빠르게 성장 중에 있으며, 실제 웹 서비스를 운영하면서 사용자 중심의 솔루션을 개발하는 경험을 쌓으며, 가치 있는 개발자로 발전해 나가고 있습니다.
         </TextContent>
+        <NavContainer>
+          <NavWrapper>
+            <NavButton onClick={() => onClickScrollMoveHandler("about us")}>
+              ABOUT
+            </NavButton>
+            <NavButton onClick={() => onClickScrollMoveHandler("project")}>
+              PROJECT
+            </NavButton>
+            <NavButton>
+              SKILL
+            </NavButton>
+            <NavButton onClick={() => onClickScrollMoveHandler("contact")}>
+              CONTACT
+            </NavButton>
+          </NavWrapper>
+        </NavContainer>
       </MainBackground>
       <MainContainer ref={infoRef}>
         <About />
@@ -128,6 +153,7 @@ const MainBackground = styled.div<{ src: string }>`
   align-items: center;
   gap: 100px;
   color: #FEFEFE;
+  position: relative;
 `;
 
 const MainContainer = styled.div`
@@ -191,19 +217,22 @@ const BarContainer = styled.line`
   }
 `;
 
-const SubTitle = styled(MainTitle)`
+const SubTitleWrapper = styled(MainTitle)`
   min-width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: end;
   gap: 20px;
-  opacity: 0;
-  animation: ${TitleAppear} 1.5s forwards 0.8s;
 
   @media screen and (max-width: 1320px) {
     align-items: start;
   }
+`;
+
+const SubTitle = styled.div`
+  opacity: 0;
+  animation: ${TitleAppear} 1.5s forwards 0.8s;
 `;
 
 const ContactBtn = styled.button`
@@ -222,7 +251,7 @@ const ContactBtn = styled.button`
   gap: 12px;
   transition: all 0.3s;
   opacity: 0;
-  animation: ${TitleAppear} 1.3s forwards 1s;
+  animation: ${TextAppear} 1.3s forwards 1s;
   cursor: pointer;
 
   &:hover {
@@ -255,6 +284,44 @@ const Box = styled.div`
   height: 6px;
   background-color: #FEFEFE;
   margin-top: 10px;
+`;
+
+const NavContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #22202081;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+`;
+
+const NavWrapper = styled.nav`
+  width: 1320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 1320px) {
+    width: 96%;
+  }
+`;
+
+const NavButton = styled.a`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FEFEFE;
+  background-color: #222020bb;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #625d5d88;
+  }
 `;
 
 export default SitePage;
