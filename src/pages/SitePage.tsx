@@ -8,6 +8,7 @@ import Background2 from '../assets/images/backgroundWeb.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
 import { GoArrowUpRight } from 'react-icons/go';
 import Project from '../components/SitePage/Project';
+import { BsBoxArrowUpRight } from "react-icons/bs";
 
 const SitePage = () => {
 
@@ -76,15 +77,19 @@ const SitePage = () => {
           <NavWrapper>
             <NavButton onClick={() => onClickScrollMoveHandler("about us")}>
               ABOUT
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
             <NavButton onClick={() => onClickScrollMoveHandler("project")}>
               PROJECT
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
             <NavButton>
               SKILL
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
             <NavButton onClick={() => onClickScrollMoveHandler("contact")}>
               CONTACT
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
           </NavWrapper>
         </NavContainer>
@@ -315,8 +320,10 @@ const NavButton = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 16px;
   color: #FEFEFE;
   background-color: #222020bb;
+  line-height: 150%;
   cursor: pointer;
 
   &:hover {
