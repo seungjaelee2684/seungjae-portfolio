@@ -14,6 +14,7 @@ const ConnectPage = lazy(() => import("../pages/ConnectPage"));
 const SitePage = lazy(() => import("../pages/SitePage"));
 const AboutUsPage = lazy(() => import("../pages/AboutMePage"));
 const LobyPage = lazy(() => import("../pages/LobyPage"));
+const ContactPage = lazy(() => import("../components/SitePage/Contact"));
 
 const Router = () => {
 
@@ -35,6 +36,7 @@ const Router = () => {
             </Route>
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
             <Route path='/website' element={<SitePage />} caseSensitive />
+            <Route path='/website/contact' element={<ContactPage />} caseSensitive />
           </Routes>
         </Suspense>
       </AnimatePresence>

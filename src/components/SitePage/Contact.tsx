@@ -53,6 +53,7 @@ const Contact = () => {
                         <Label>To</Label>
                         <DefaultInput
                             name='to_name'
+                            value={to_name}
                             onChange={(e: any) => e.preventDefault()}
                              />
                     </Wrapper>
