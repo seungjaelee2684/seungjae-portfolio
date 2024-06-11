@@ -4,11 +4,11 @@ import WebHeader from '../components/SitePage/WebHeader';
 import Banner from '../components/SitePage/Banner';
 import About from '../components/SitePage/About';
 import Background1 from '../assets/images/portfolioBG.jpg';
-import Background2 from '../assets/images/backgroundWeb.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
 import { GoArrowUpRight } from 'react-icons/go';
 import Project from '../components/SitePage/Project';
 import { BsBoxArrowUpRight } from "react-icons/bs";
+import Contact from '../components/SitePage/Contact';
 
 const SitePage = () => {
 
@@ -16,11 +16,12 @@ const SitePage = () => {
   const infoRef = useRef<HTMLDivElement>(null);
   const [isScroll, setIsScroll] = useState<boolean>(false);
 
-  const onClickScrollMoveHandler = (id: string) => {
+  const onClickMoveHandler = (id: string) => {
     const elementId = document.getElementById(id);
 
-    if (!elementId) return;
-    elementId.scrollIntoView({ behavior: "smooth" });
+    if (elementId) {
+      elementId.scrollIntoView({ behavior: 'smooth' });
+    };
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const SitePage = () => {
       let viewport = window.innerHeight;
 
       console.log(scrolly, viewport);
-      if (scrolly > viewport) {
+      if (scrolly > viewport && scrolly < viewport * 3) {
         setIsScroll(true);
       } else {
         setIsScroll(false);
@@ -47,7 +48,7 @@ const SitePage = () => {
 
   return (
     <MainLayout>
-      <WebHeader headerRef={headerRef} isScroll={isScroll} />
+      <WebHeader headerRef={headerRef} isScroll={isScroll} onClickMoveHandler={onClickMoveHandler} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
           <MainTitleWrapper>
@@ -63,7 +64,7 @@ const SitePage = () => {
             <SubTitle>
               새하얀 도화지와 같은 개발자
             </SubTitle>
-            <ContactBtn>
+            <ContactBtn onClick={() => onClickMoveHandler("contact")}>
               섭외하기
               <GoArrowUpRight />
             </ContactBtn>
@@ -75,11 +76,11 @@ const SitePage = () => {
         </TextContent>
         <NavContainer>
           <NavWrapper>
-            <NavButton onClick={() => onClickScrollMoveHandler("about us")}>
+            <NavButton onClick={() => onClickMoveHandler("about us")}>
               ABOUT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickScrollMoveHandler("project")}>
+            <NavButton onClick={() => onClickMoveHandler("project")}>
               PROJECT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
@@ -87,7 +88,7 @@ const SitePage = () => {
               SKILL
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickScrollMoveHandler("contact")}>
+            <NavButton onClick={() => onClickMoveHandler("contact")}>
               CONTACT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
@@ -98,7 +99,7 @@ const SitePage = () => {
         <About />
         <Project />
       </MainContainer>
-      <MainBackground id="contact" src={Background2} />
+      <Contact />
     </MainLayout>
   )
 };
@@ -144,7 +145,7 @@ const MainLayout = styled.article`
   font-size: 400;
 `;
 
-const MainBackground = styled.div<{ src: string }>`
+export const MainBackground = styled.div<{ src: string }>`
   width: 100%;
   height: 100vh;
   background-image: url(${(props) => props.src});

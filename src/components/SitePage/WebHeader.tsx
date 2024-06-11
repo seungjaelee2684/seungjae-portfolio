@@ -6,31 +6,18 @@ import { IoGameControllerOutline } from "react-icons/io5";
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
   isScroll: boolean;
+  onClickMoveHandler: (id: string) => void;
 };
 
-const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll, onClickMoveHandler }) => {
 
   const navigate = useNavigate();
-  const [mouseOver, setMouseOver] = useState<boolean>(false);
-  const hoverRef = useRef<HTMLDivElement>(null);
 
   const onClickScrollTopHandler = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
-  };
-
-  const onClickMoveHandler = (id: string) => {
-    const elementId = document.getElementById(id);
-
-    if (elementId) {
-      elementId.scrollIntoView({ behavior: 'smooth' });
-    };
-  };
-
-  const onMouseOverHandler = () => {
-    
   };
 
   return (
@@ -46,25 +33,8 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll }) => {
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
             hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
-            onClick={() => onClickMoveHandler("about us")}
-            onMouseOver={() => {
-              if (!hoverRef.current) return;
-              hoverRef.current.style.visibility = `visible`;
-            }}
-            onMouseLeave={() => {
-              if (!hoverRef.current) return;
-              hoverRef.current.style.visibility = `hidden`;
-            }}>
+            onClick={() => onClickMoveHandler("about us")}>
             ABOUT
-            <HoverContainer ref={hoverRef} onClick={(e) => e.stopPropagation()}>
-              <HoverContent>
-                <Navigate
-                  color={(isScroll) ? "#222020" : "#fefefea6"}
-                  hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
-                    나에대해
-                </Navigate>
-              </HoverContent>
-            </HoverContainer>
           </Navigate>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
@@ -163,6 +133,7 @@ const Navigate = styled.a<{ color: string, hovercolor: string }>`
   font-size: 20px;
   font-weight: 700;
   height: 100%;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
   color: ${(props) => props.color};
@@ -193,32 +164,6 @@ const GameButton = styled.button<{ color: string, hovercolor: string }>`
 
   &:hover {
     color: ${(props) => props.hovercolor};
-  }
-`;
-
-const HoverContainer = styled.div`
-  width: 100vw;
-  height: 60px;
-  position: fixed;
-  top: 80px;
-  left: 0;
-  visibility: hidden;
-  background-color: #222020c3;
-  z-index: 5;
-`;
-
-const HoverContent = styled.div`
-  width: 1320px;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 30px;
-  padding-right: 300px;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 1320px) {
-    width: 96%;
   }
 `;
 
