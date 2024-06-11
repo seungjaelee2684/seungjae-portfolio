@@ -1,57 +1,32 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react'
+import styled, { keyframes } from 'styled-components';
+import { GuideFadeIn } from '../../styles/guide';
 
-const About = () => {
-  return (
-    <AboutMeContainer id="about us">
-        <Title>
-            About
-        </Title>
-        <CardWrapper>
-            <AboutCard>
-                1
-            </AboutCard>
-            <AboutCard>
-                2
-            </AboutCard>
-            <AboutCard>
-                3
-            </AboutCard>
-        </CardWrapper>
-    </AboutMeContainer>
-  )
+interface AboutProps {
+    
+};
+
+const About: React.FC<AboutProps> = () => {
+
+    return (
+        <AboutMeContainer id="about us">
+            about us
+        </AboutMeContainer>
+    )
 };
 
 const AboutMeContainer = styled.section`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-`;
-
-const CardWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 0px;
-`;
-
-const Title = styled.label`
-
-`;
-
-const AboutCard = styled.div`
-    width: 350px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid;
-    border-radius: 5px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 40px 0px;
+  gap: 40px;
+  color: #222020;
 `;
 
 export default About;

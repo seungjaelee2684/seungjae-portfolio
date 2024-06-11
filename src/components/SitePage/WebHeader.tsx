@@ -1,11 +1,17 @@
-import React from 'react'
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+import { IoGameControllerOutline } from "react-icons/io5";
 
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
+  isScroll: boolean;
+  onClickMoveHandler: (id: string) => void;
 };
 
-const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll, onClickMoveHandler }) => {
+
+  const navigate = useNavigate();
 
   const onClickScrollTopHandler = () => {
     window.scrollTo({
@@ -14,35 +20,46 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
     });
   };
 
-  const onClickMoveHandler = (id: string) => {
-    const elementId = document.getElementById(id);
-
-    if (elementId) {
-      elementId.scrollIntoView({ behavior: 'smooth' });
-    };
-  };
-
   return (
     <HeaderLayout ref={headerRef}>
       <HeaderContainer>
-        <HeaderLogo onClick={onClickScrollTopHandler}>
-          import SeungJae,
+        <HeaderLogo
+          color={(isScroll) ? "#222020" : "#FEFEFE"}
+          hovercolor={(isScroll) ? "#ADADAD" : "#ADADAD"}
+          onClick={onClickScrollTopHandler}>
+          import SeungJae
         </HeaderLogo>
         <RightContent>
-          {"{"}
-          <Navigate onClick={() => onClickMoveHandler("about us")}>
-            About,
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("about us")}>
+            ABOUT
           </Navigate>
-          <Navigate>
-            Project,
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("project")}>
+            PROJECT
           </Navigate>
-          <Navigate>
-            Skill,
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            SKILL
           </Navigate>
-          <Navigate>
-            Contact
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler("contact")}>
+            CONTACT
           </Navigate>
-          {"} from 'Lee SeungJae'"}
+          <GameButton
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => navigate("/")}>
+              <IoGameControllerOutline size={20} />
+              GAME
+          </GameButton>
         </RightContent>
       </HeaderContainer>
     </HeaderLayout>
@@ -51,14 +68,19 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef }) => {
 
 const HeaderLayout = styled.header`
   width: 100%;
-  height: 70px;
-  position: absolute;
+  height: 80px;
   top: 0;
   left: 0;
   z-index: 10;
   font-family: "D2Coding";
   user-select: none;
   transition: all 0.2s;
+  position: fixed;
+  backdrop-filter: blur(5px);
+
+  &:hover {
+    background-color: #222020b0;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -68,59 +90,80 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #FFFFFF;
+  box-sizing: border-box;
 
   @media screen and (max-width: 1320px) {
     width: 96%;
   }
 `;
 
-const HeaderLogo = styled.div`
-  font-size: 40px;
+const HeaderLogo = styled.div<{ color: string, hovercolor: string }>`
+  font-size: 32px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.color};
   cursor: pointer;
 
   @media screen and (max-width: 1320px) {
-    font-size: 32px;
+    font-size: 24px;
   }
 
   &:hover {
-    color: #ADADAD;
+    color: ${(props) => props.hovercolor};
   }
 `;
 
 const RightContent = styled.nav`
-  font-size: 20px;
+  font-size: 16px;
   line-height: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 20px;
-  color: #bebebe;
+  gap: 70px;
 
   @media screen and (max-width: 1320px) {
-    font-size: 16px;
+    gap: 40px;
+    font-size: 12px;
   }
 `;
 
-const Navigate = styled.a`
-  font-size: 24px;
+const Navigate = styled.a<{ color: string, hovercolor: string }>`
+  font-size: 20px;
   font-weight: 700;
   height: 100%;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
-  color: #FFFFFF;
+  color: ${(props) => props.color};
   cursor: pointer;
 
   &:hover {
-    color: #ADADAD;
+    color: ${(props) => props.hovercolor};
   }
 
   @media screen and (max-width: 1320px) {
-    font-size: 20px;
+    font-size: 18px;
+  }
+`;
+
+const GameButton = styled.button<{ color: string, hovercolor: string }>`
+  width: 100px;
+  height: 38px;
+  outline: none;
+  border: 1px solid;
+  border-radius: 20px;
+  color: ${(props) => props.color};
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  &:hover {
+    color: ${(props) => props.hovercolor};
   }
 `;
 

@@ -43,7 +43,12 @@ const GameStartPage = () => {
         던전: {dungeonValue}
       </DungeonInfo>
       <Character src={CharacterImage} alt='' />
-      <ContentWrapper>
+      <ContentWrapper onClick={() => {
+          setTalkStart(false);
+          setTalkText(talk);
+          setCount(talk.length);
+          setComplete(true);
+        }}>
         이승재 (Frontend Developer) - 27세
         <Text>
           {talkText}
