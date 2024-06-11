@@ -3,9 +3,11 @@ import styled, { keyframes } from 'styled-components';
 import { MdContentCopy } from "react-icons/md";
 import CopyAlert from '../components/ConnectPage/CopyAlert';
 import { GuideFadeIn } from '../styles/guide';
+import { useNavigate } from 'react-router-dom';
 
 const ConnectPage = () => {
 
+  const navigate = useNavigate();
   const [isCopy, setIsCopy] = useState<boolean>(false);
 
   const onClickCopyHandler = async (text: string) => {
@@ -28,15 +30,9 @@ const ConnectPage = () => {
         </SubTitle>
         <ButtonWrapper>
           <Button>
-            <ButtonTitle>
+            <ButtonTitle onClick={() => navigate("/website/contact")}>
               이메일 보내기
             </ButtonTitle>
-            <ButtonInfo>
-              sean2684@naver.com
-              <ButtonIcon onClick={() => onClickCopyHandler("sean2684@naver.com")}>
-                <MdContentCopy />
-              </ButtonIcon>
-            </ButtonInfo>
           </Button>
           <Button>
             <ButtonTitle>
