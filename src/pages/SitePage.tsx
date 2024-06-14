@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import WebHeader from '../components/SitePage/WebHeader';
-import Banner from '../components/SitePage/Banner';
+import Skill from '../components/SitePage/Skill';
 import About from '../components/SitePage/About';
 import Background1 from '../assets/images/portfolioBG.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
@@ -30,7 +30,7 @@ const SitePage = () => {
       let viewport = window.innerHeight;
 
       console.log(scrolly, viewport);
-      if (scrolly > viewport && scrolly < viewport * 3) {
+      if (scrolly > viewport && scrolly < viewport * 4) {
         setIsScroll(true);
       } else {
         setIsScroll(false);
@@ -97,6 +97,7 @@ const SitePage = () => {
       </MainBackground>
       <MainContainer ref={infoRef}>
         <About />
+        <Skill />
         <Project />
       </MainContainer>
       <Contact />
