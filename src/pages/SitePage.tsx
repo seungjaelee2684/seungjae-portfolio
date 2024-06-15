@@ -210,6 +210,10 @@ const MainTitle = styled.div`
   @media screen and (max-width: 1320px) {
     font-size: 40px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 const BarContainer = styled.line`
@@ -238,8 +242,17 @@ const SubTitleWrapper = styled(MainTitle)`
 `;
 
 const SubTitle = styled.div`
+  font-size: 55px;
   opacity: 0;
   animation: ${TitleAppear} 1.5s forwards 0.8s;
+  
+  @media screen and (max-width: 1320px) {
+    font-size: 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 const ContactBtn = styled.button`
@@ -266,6 +279,26 @@ const ContactBtn = styled.button`
     color: #FEFEFE;
     font-size: 15px;
   }
+
+  @media screen and (max-width: 1320px) {
+    font-size: 12px;
+    width: 100px;
+    height: 38px;
+
+    &:hover {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 9px;
+    width: 90px;
+    height: 30px;
+
+    &:hover {
+      font-size: 9px;
+    }
+  }
 `;
 
 const TextContent = styled.p`
@@ -283,6 +316,11 @@ const TextContent = styled.p`
 
   @media screen and (max-width: 1320px) {
     width: 96%;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
   }
 `;
 
