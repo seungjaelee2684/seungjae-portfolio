@@ -2,44 +2,38 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 
 const Project = () => {
-  
-  const projectRef = useRef<HTMLDivElement>(null);
 
   const [count, setCount] = useState<number>(0);
-  const slideCount = count * 370;
-
-  useEffect(() => {
-    if (!projectRef.current) return;
-
-    projectRef.current.style.transform = `translateX(-${slideCount}px)`;
-  }, [count]);
+  const num = [0, 1, 2];
 
   return (
     <ProjectContainer id="project">
       <TitleContainer>
-        <Title onClick={() => setCount(prev => prev + 1)}>
+        <Title onClick={() => {
+          if (count >= 2) {
+            setCount(0);
+          } else {
+            setCount(prev => prev + 1);
+          };
+        }}>
           프로젝트
         </Title>
         <Content>
           {`안녕하세요\n이승재입니다.`}
         </Content>
       </TitleContainer>
-      <SlideContainer>
-        <CardWrapper ref={projectRef}>
-          <CardBox>
+      <CardWrapper>
+        {num.map((item: any, index: number) => {
+          return (
+            <CardBox key={index} style={{
+              minWidth: `${(count === index) ? "400px" : "300px"}`,
+              height: `${(count === index) ? "350px" : "250px"}`
+            }}>
 
-          </CardBox>
-          <CardBox>
-
-          </CardBox>
-          <CardBox>
-
-          </CardBox>
-          <CardBox>
-
-          </CardBox>
-        </CardWrapper>
-      </SlideContainer>
+            </CardBox>
+          )
+        })}
+      </CardWrapper>
       <BackgroundBox />
     </ProjectContainer>
   )
@@ -51,10 +45,10 @@ const ProjectContainer = styled.section`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: start;
   position: relative;
-  padding: 160px 0px;
+  padding: 40px 0px;
   gap: 40px;
   color: #222020;
 `;
@@ -79,43 +73,29 @@ const Content = styled.p`
 
 const BackgroundBox = styled.div`
   width: 100vw;
-  height: 250px;
+  height: 100px;
   background-color: #2d3275;
-  position: absolute;
-  bottom: 80px;
-  left: -20px;
-`;
-
-const SlideContainer = styled.div`
-  width: 100%;
-  position: absolute;
-  bottom: 140px;
-  left: 0;
-  z-index: 8;
 `;
 
 const CardWrapper = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: end;
-  gap: 20px;
+  gap: 40px;
   transition: all 0.3s ease-in-out;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
 `;
 
 const CardBox = styled.div`
-  min-width: 350px;
+  min-width: 400px;
   height: 300px;
   border: 1px solid;
   background-color: white;
   box-sizing: border-box;
-`;
-
-const CenterCardBox = styled.div`
-  min-width: 350px;
-  height: 450px;
-  border: 1px solid;
-  background-color: white;
-  box-sizing: border-box;
+  transition: all 0.2s;
 `;
 
 export default Project;
