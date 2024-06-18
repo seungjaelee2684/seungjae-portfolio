@@ -15,10 +15,6 @@ const LocationBtn = () => {
         <LocationIcon src={Github} alt='' />
         Github
       </LocationButton>
-      <LocationButton size={0} onClick={() => window.open("https://sean2684.tistory.com/")}>
-        <LocationIcon src={Tistory} alt='' />
-        Tistory
-      </LocationButton>
       <LocationButton
         size={-3}
         onClick={() => {
