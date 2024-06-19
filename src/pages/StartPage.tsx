@@ -17,7 +17,8 @@ const StartPage = () => {
     "시작하기에 앞서 오른쪽 하단에 위치한 안내 버튼을 눌러주세요.",
     "가이드의 안내에 따라 새로운 게임(New Game)을 시작하세요!",
     "'Load Game'를 누르면 가이드 없이 시작하실 수 있습니다.",
-    "웹페이지 형태의 포트폴리오를 확인하려면 이곳을 눌러주세요."
+    "웹페이지 형태의 포트폴리오를 확인하려면 이곳을 눌러주세요.",
+    "채용문의: sean2684@naver.com"
   ];
   const [info, setInfo] = useState<number | undefined>(0);
 
@@ -56,7 +57,7 @@ const StartPage = () => {
                 navigate("/loby");
               }}>
               <HoverButton />
-              <ButtonText >
+              <ButtonText>
                 New Game
               </ButtonText>
             </DefaultButton>
@@ -67,7 +68,7 @@ const StartPage = () => {
                 navigate("/loby");
               }}>
               <HoverButton />
-              <ButtonText >
+              <ButtonText>
                 Load Game
               </ButtonText>
             </DefaultButton>
@@ -82,6 +83,17 @@ const StartPage = () => {
                 Website
               </ButtonText>
             </DefaultButton> */}
+            <DefaultButton
+              onMouseOver={() => setInfo(4)}
+              onMouseLeave={() => setInfo(undefined)}
+              onClick={() => {
+                navigate("/website/contact");
+              }}>
+              <HoverButton />
+              <ButtonText>
+                Contact
+              </ButtonText>
+            </DefaultButton>
           </ButtonWrapper>
         </StartGameWrapper>
       </StartGameOutWrapper>
@@ -359,23 +371,23 @@ const ButtonText = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 140%;
   transition: all 0.3s;
   z-index: 25;
 
   @media screen and (max-width: 1320px) {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   @media screen and (max-width: 500px) {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
 const DefaultButton = styled.button`
   width: 160px;
-  height: 40px;
+  height: 36px;
   position: relative;
   outline: none;
   border: none;
@@ -395,7 +407,7 @@ const DefaultButton = styled.button`
 
   @media screen and (max-width: 1320px) {
     width: 150px;
-    height: 30px;
+    height: 28px;
   }
 
   @media screen and (max-width: 500px) {
