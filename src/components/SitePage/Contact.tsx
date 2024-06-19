@@ -138,6 +138,11 @@ const ContactContainer = styled.section`
 
     @media screen and (max-width: 836px) {
         flex-direction: column;
+        gap: 16px;
+    };
+
+    @media screen and (max-width: 500px) {
+        gap: 10px;
     };
 `;
 
@@ -155,6 +160,14 @@ const ContactInfoContainer = styled.div`
 
     @media screen and (max-width: 836px) {
         width: 100%;
+        height: 300px;
+        gap: 16px;
+    };
+
+    @media screen and (max-width: 500px) {
+        width: 100%;
+        height: 200px;
+        gap: 10px;
     };
 `;
 
@@ -164,10 +177,26 @@ const LaneContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 20px;
+
+    @media screen and (max-width: 836px) {
+        gap: 16px;
+    }
 `;
 
 const Icon = styled.div`
     font-size: 30px;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 24px;
+    }
+
+    @media screen and (max-width: 836px) {
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 18px;
+    }
 `;
 
 const TextWrapper = styled.div`
@@ -177,6 +206,10 @@ const TextWrapper = styled.div`
     justify-content: center;
     align-items: start;
     gap: 12px;
+
+    @media screen and (max-width: 836px) {
+        gap: 10px;
+    }
 `;
 
 const StrongText = styled.strong`
@@ -184,6 +217,20 @@ const StrongText = styled.strong`
     text-align: start;
     line-height: 120%;
     letter-spacing: 4px;
+    user-select: none;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 18px;
+    }
+
+    @media screen and (max-width: 836px) {
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
 `;
 
 const LinkText = styled.a`
@@ -196,6 +243,18 @@ const LinkText = styled.a`
     &:hover {
         border-bottom: 1px solid;
     }
+
+    @media screen and (max-width: 1320px) {
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 836px) {
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 8px;
+    }
 `;
 
 const Text = styled.div`
@@ -203,6 +262,18 @@ const Text = styled.div`
     font-weight: 400;
     text-align: start;
     line-height: 120%;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 836px) {
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 8px;
+    }
 `;
 
 const FormContainer = styled.form`
@@ -220,6 +291,13 @@ const FormContainer = styled.form`
 
     @media screen and (max-width: 836px) {
         width: 100%;
+        height: 350px;
+        gap: 10px;
+    };
+
+    @media screen and (max-width: 500px) {
+        height: 250px;
+        gap: 8px;
     };
 `;
 
@@ -228,6 +306,15 @@ const Title = styled.label`
     line-height: normal;
     margin-bottom: 10px;
     color: #47418e;
+
+    @media screen and (max-width: 836px) {
+        font-size: 18px;
+        margin-bottom: 8px;
+    };
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+    };
 `;
 
 const DefaultInput = styled.input`
@@ -244,6 +331,16 @@ const DefaultInput = styled.input`
     width: 100%;
     color: #ADADAD;
     cursor: default;
+
+    @media screen and (max-width: 836px) {
+        font-size: 12px;
+        height: 32px;
+    };
+
+    @media screen and (max-width: 500px) {
+        font-size: 10px;
+        height: 24px;
+    };
 `;
 
 const ShortInput = styled.input`
@@ -265,6 +362,16 @@ const ShortInput = styled.input`
     &:active {
         border-bottom: 1px solid #2186addc;
     }
+
+    @media screen and (max-width: 836px) {
+        font-size: 12px;
+        height: 32px;
+    };
+
+    @media screen and (max-width: 500px) {
+        font-size: 10px;
+        height: 24px;
+    };
 `;
 
 const ContentInput = styled.textarea`

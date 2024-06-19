@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
 import WebHeader from '../components/SitePage/WebHeader';
-import Banner from '../components/SitePage/Banner';
+import Skill from '../components/SitePage/Skill';
 import About from '../components/SitePage/About';
 import Background1 from '../assets/images/portfolioBG.jpg';
 import { BsArrow90DegRight } from 'react-icons/bs';
@@ -30,7 +30,7 @@ const SitePage = () => {
       let viewport = window.innerHeight;
 
       console.log(scrolly, viewport);
-      if (scrolly > viewport && scrolly < viewport * 3) {
+      if (scrolly > viewport && scrolly < viewport * 4) {
         setIsScroll(true);
       } else {
         setIsScroll(false);
@@ -97,6 +97,7 @@ const SitePage = () => {
       </MainBackground>
       <MainContainer ref={infoRef}>
         <About />
+        <Skill />
         <Project />
       </MainContainer>
       <Contact />
@@ -209,6 +210,10 @@ const MainTitle = styled.div`
   @media screen and (max-width: 1320px) {
     font-size: 40px;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 const BarContainer = styled.line`
@@ -237,8 +242,17 @@ const SubTitleWrapper = styled(MainTitle)`
 `;
 
 const SubTitle = styled.div`
+  font-size: 55px;
   opacity: 0;
   animation: ${TitleAppear} 1.5s forwards 0.8s;
+  
+  @media screen and (max-width: 1320px) {
+    font-size: 40px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 28px;
+  }
 `;
 
 const ContactBtn = styled.button`
@@ -265,6 +279,26 @@ const ContactBtn = styled.button`
     color: #FEFEFE;
     font-size: 15px;
   }
+
+  @media screen and (max-width: 1320px) {
+    font-size: 12px;
+    width: 100px;
+    height: 38px;
+
+    &:hover {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 9px;
+    width: 90px;
+    height: 30px;
+
+    &:hover {
+      font-size: 9px;
+    }
+  }
 `;
 
 const TextContent = styled.p`
@@ -282,6 +316,11 @@ const TextContent = styled.p`
 
   @media screen and (max-width: 1320px) {
     width: 96%;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 10px;
   }
 `;
 

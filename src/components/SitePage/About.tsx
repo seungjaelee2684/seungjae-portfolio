@@ -15,7 +15,7 @@ const About: React.FC<AboutProps> = () => {
                 <ContentWrapper>
                     <LaneTitle>헌신적인 태도</LaneTitle>
                     <LaneContent>
-                        비전공자로 부트캠프를 수료해 우수학생으로 마무리.
+                       {"비전공자로 부트캠프를 수료, 우수학생으로 마무리.\n"}
                     </LaneContent>
                 </ContentWrapper>
                 <ImageBox src={Image} alt="라인_1" />
@@ -39,18 +39,17 @@ const AboutMeContainer = styled.section`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 40px 0px;
-  gap: 40px;
+  padding: 30px 0px;
   color: #222020;
 `;
 
 const MainTitle = styled.h1`
     font-size: 32px;
     font-weight: 800;
-    line-height: 150%;
+    line-height: 100%;
 `;
 
 const AboutLaneContainer = styled.div`
@@ -83,6 +82,7 @@ const LaneContent = styled.p`
     line-height: 120%;
     text-align: start;
     color: #575757;
+    white-space: pre-line;
 `;
 
 const ImageBox = styled.img`
