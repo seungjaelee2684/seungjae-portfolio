@@ -148,7 +148,7 @@ const MainLayout = styled.article`
 
 export const MainBackground = styled.div<{ src: string }>`
   width: 100%;
-  height: 100vh;
+  height: 600px;
   background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
