@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
 import Background2 from '../../assets/images/backgroundWeb.jpg';
-import { MainBackground } from '../../pages/SitePage';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
@@ -64,7 +63,7 @@ const Contact = () => {
     };
 
     return (
-        <MainBackground id="contact" src={Background2}>
+        <ContactOutWrapper id="contact" src={Background2}>
             <ContactContainer>
                 <ContactInfoContainer>
                     {contactInfo?.map((item: contactInfoType, index: number) => {
@@ -121,9 +120,26 @@ const Contact = () => {
                     <Button type='submit' value="Send" />
                 </FormContainer>
             </ContactContainer>
-        </MainBackground>
+        </ContactOutWrapper>
     )
 };
+
+const ContactOutWrapper = styled.div<{ src: string }>`
+    width: 100%;
+    height: 100vh;
+    background-image: url(${(props) => props.src});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    color: #FEFEFE;
+    position: relative;
+`;
 
 const ContactContainer = styled.section`
     width: 1320px;
