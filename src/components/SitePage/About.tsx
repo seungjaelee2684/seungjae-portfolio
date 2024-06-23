@@ -15,7 +15,7 @@ const About: React.FC<AboutProps> = () => {
             <AboutContentWrapper>
                 <AboutLaneContainer>
                     <LeftWrapper>
-                        <LaneTitle>끊임없는 끈기</LaneTitle>
+                        <LaneTitle>끈기</LaneTitle>
                         <LaneContent>
                             아우
                         </LaneContent>
@@ -26,7 +26,7 @@ const About: React.FC<AboutProps> = () => {
                 <AboutLaneContainer>
                     <CardImage src={Image2} alt='about 이미지1' />
                     <LeftWrapper>
-                        <LaneTitle>끊임없는 끈기</LaneTitle>
+                        <LaneTitle>책임감</LaneTitle>
                         <LaneContent>
                             아우
                         </LaneContent>
@@ -81,16 +81,16 @@ const LeftWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
 `;
 
 const LaneTitle = styled.strong`
-    font-size: 24px;
+    font-size: 28px;
     line-height: normal;
 `;
 
 const LaneContent = styled.p`
-    font-size: 18px;
+    font-size: 20px;
     line-height: 120%;
 `;
 
@@ -103,6 +103,16 @@ const CardImage = styled.img`
 const Button = styled.button`
     width: 140px;
     height: 48px;
+    outline: none;
+    border: none;
+    background-color: #2d2864;
+    color: #FEFEFE;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #6a64ab;
+    }
 `;
 
 export default About;
