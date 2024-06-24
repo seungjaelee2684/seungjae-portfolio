@@ -17,7 +17,7 @@ const About: React.FC<AboutProps> = () => {
                     <LeftWrapper>
                         <LaneTitle>끈기</LaneTitle>
                         <LaneContent>
-                            아우
+                            자신의 한계를 뛰어넘는 원동력!
                         </LaneContent>
                         <Button>자세히보기</Button>
                     </LeftWrapper>
@@ -28,7 +28,7 @@ const About: React.FC<AboutProps> = () => {
                     <LeftWrapper>
                         <LaneTitle>책임감</LaneTitle>
                         <LaneContent>
-                            아우
+                            프로젝트의 성공을 좌지우지할 수 있는 힘!
                         </LaneContent>
                         <Button>자세히보기</Button>
                     </LeftWrapper>
@@ -85,13 +85,14 @@ const LeftWrapper = styled.div`
 `;
 
 const LaneTitle = styled.strong`
-    font-size: 28px;
+    font-size: 32px;
     line-height: normal;
 `;
 
 const LaneContent = styled.p`
-    font-size: 20px;
+    font-size: 24px;
     line-height: 120%;
+    color: #3b3838;
 `;
 
 const CardImage = styled.img`
@@ -101,8 +102,8 @@ const CardImage = styled.img`
 `;
 
 const Button = styled.button`
-    width: 140px;
-    height: 48px;
+    width: 130px;
+    height: 38px;
     outline: none;
     border: none;
     background-color: #2d2864;
