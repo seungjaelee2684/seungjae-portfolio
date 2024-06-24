@@ -95,7 +95,7 @@ const CardBox = styled.div`
   border: 1px solid;
   background-color: white;
   box-sizing: border-box;
-  transition: all 0.2s;
+  transition: all 0.4s ease-out;
 `;
 
 export default Project;
