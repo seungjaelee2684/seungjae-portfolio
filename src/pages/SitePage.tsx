@@ -14,7 +14,9 @@ const SitePage = () => {
 
   const headerRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
+  const outWrapperRef = useRef<HTMLDivElement>(null);
   const [isScroll, setIsScroll] = useState<boolean>(false);
+  const [scrollValue, setScrollValue] = useState<number>(0);
 
   const onClickMoveHandler = (id: string) => {
     const elementId = document.getElementById(id);
@@ -25,29 +27,48 @@ const SitePage = () => {
   };
 
   useEffect(() => {
-    const scrollEvent = () => {
-      let scrolly = window.scrollY;
-      let viewport = window.innerHeight;
+    if (!outWrapperRef.current) return;
 
-      console.log(scrolly, viewport);
-      if (scrolly > viewport && scrolly < viewport * 4) {
-        setIsScroll(true);
+    const scrollEvent = (e: any) => {
+      e.preventDefault();
+      if (!outWrapperRef.current) return;
+      let { deltaY } = e;
+      let { scrollTop } = outWrapperRef.current
+      let pageHeight = window.innerHeight;
+
+      if (deltaY > 0) {
+        if (scrollTop >= 0 && scrollTop < pageHeight) {
+          outWrapperRef.current.scrollTo({
+            top: pageHeight,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(1);
+        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 2,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(2);
+        };
       } else {
-        setIsScroll(false);
+
       };
     };
 
     if (!infoRef.current) return;
 
-    window.addEventListener("scroll", scrollEvent);
+    outWrapperRef.current.addEventListener("wheel", scrollEvent);
 
     return () => {
-      window.removeEventListener("scroll", scrollEvent);
+      if (!outWrapperRef.current) return;
+      outWrapperRef.current.removeEventListener("wheel", scrollEvent);
     }
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout ref={outWrapperRef}>
       <WebHeader headerRef={headerRef} isScroll={isScroll} onClickMoveHandler={onClickMoveHandler} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
@@ -148,7 +169,7 @@ const MainLayout = styled.article`
 
 const MainBackground = styled.div<{ src: string }>`
   width: 100%;
-  height: 600px;
+  height: 100vh;
   background-image: url(${(props) => props.src});
   background-position: center;
   background-size: cover;
