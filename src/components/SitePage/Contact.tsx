@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
 import Background2 from '../../assets/images/backgroundWeb.jpg';
-import { MainBackground } from '../../pages/SitePage';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
@@ -20,7 +19,6 @@ const Contact = () => {
 
     const contactInfo: contactInfoType[] = [
         { title: "GITHUB", content: "https://github.com/seungjaelee2684", icon: <FaGithub />, link: true },
-        { title: "BLOG", content: "https://sean2684.tistory.com/", icon: <SiTistory />, link: true },
         { title: "ADDRESS", content: "대구광역시 북구 매전로4길 9 매천센트럴파크 205동 401호", icon: <FaLocationDot />, link: false },
         { title: "PHONE", content: "010-6535-5635", icon: <FaPhoneAlt />, link: false },
         { title: "EMAIL", content: "sean2684@naver.com", icon: <IoMail />, link: false }
@@ -64,7 +62,7 @@ const Contact = () => {
     };
 
     return (
-        <MainBackground id="contact" src={Background2}>
+        <ContactOutWrapper id="contact" src={Background2}>
             <ContactContainer>
                 <ContactInfoContainer>
                     {contactInfo?.map((item: contactInfoType, index: number) => {
@@ -121,9 +119,26 @@ const Contact = () => {
                     <Button type='submit' value="Send" />
                 </FormContainer>
             </ContactContainer>
-        </MainBackground>
+        </ContactOutWrapper>
     )
 };
+
+const ContactOutWrapper = styled.div<{ src: string }>`
+    width: 100%;
+    height: 100vh;
+    background-image: url(${(props) => props.src});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    color: #FEFEFE;
+    position: relative;
+`;
 
 const ContactContainer = styled.section`
     width: 1320px;
@@ -155,13 +170,13 @@ const ContactInfoContainer = styled.div`
     align-items: center;
     background-color: #222020bc;
     padding: 20px;
-    gap: 30px;
+    gap: 45px;
     box-sizing: border-box;
 
     @media screen and (max-width: 836px) {
         width: 100%;
         height: 300px;
-        gap: 16px;
+        gap: 20px;
     };
 
     @media screen and (max-width: 500px) {

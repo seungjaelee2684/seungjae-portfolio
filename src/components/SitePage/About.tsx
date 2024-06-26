@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled, { keyframes } from 'styled-components';
-import Image from '../../assets/images/picture.webp';
+import Image1 from '../../assets/images/about_1.jpg';
+import Image2 from '../../assets/images/about_2.jpg';
 
 interface AboutProps {
     
@@ -11,24 +12,28 @@ const About: React.FC<AboutProps> = () => {
     return (
         <AboutMeContainer id="about us">
             <MainTitle>About Us</MainTitle>
-            <AboutLaneContainer>
-                <ContentWrapper>
-                    <LaneTitle>헌신적인 태도</LaneTitle>
-                    <LaneContent>
-                       {"비전공자로 부트캠프를 수료, 우수학생으로 마무리.\n"}
-                    </LaneContent>
-                </ContentWrapper>
-                <ImageBox src={Image} alt="라인_1" />
-            </AboutLaneContainer>
-            <AboutLaneContainer>
-                <ImageBox src={Image} alt="라인_1" />
-                <ContentWrapper style={{ alignItems: "end" }}>
-                    <LaneTitle>헌신적인 태도</LaneTitle>
-                    <LaneContent style={{ textAlign: "end" }}>
-                        비전공자로 부트캠프를 수료해 우수학생으로 마무리.
-                    </LaneContent>
-                </ContentWrapper>
-            </AboutLaneContainer>
+            <AboutContentWrapper>
+                <AboutLaneContainer>
+                    <LeftWrapper>
+                        <LaneTitle>끈기</LaneTitle>
+                        <LaneContent>
+                            자신의 한계를 뛰어넘는 원동력!
+                        </LaneContent>
+                        <Button>자세히보기</Button>
+                    </LeftWrapper>
+                    <CardImage src={Image1} alt='about 이미지1' />
+                </AboutLaneContainer>
+                <AboutLaneContainer>
+                    <CardImage src={Image2} alt='about 이미지1' />
+                    <LeftWrapper>
+                        <LaneTitle>책임감</LaneTitle>
+                        <LaneContent>
+                            프로젝트의 성공을 좌지우지할 수 있는 힘!
+                        </LaneContent>
+                        <Button>자세히보기</Button>
+                    </LeftWrapper>
+                </AboutLaneContainer>
+            </AboutContentWrapper>
         </AboutMeContainer>
     )
 };
@@ -52,43 +57,63 @@ const MainTitle = styled.h1`
     line-height: 100%;
 `;
 
+const AboutContentWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+`;
+
 const AboutLaneContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px;
+    gap: 150px;
 `;
 
-const ContentWrapper = styled.div`
+const LeftWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
-    gap: 12px;
+    align-items: center;
+    gap: 4px;
 `;
 
 const LaneTitle = styled.strong`
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 120%;
+    font-size: 32px;
+    line-height: normal;
 `;
 
 const LaneContent = styled.p`
-    width: 100%;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 24px;
     line-height: 120%;
-    text-align: start;
-    color: #575757;
-    white-space: pre-line;
+    color: #3b3838;
 `;
 
-const ImageBox = styled.img`
-    min-width: 350px;
+const CardImage = styled.img`
+    min-width: 500px;
     height: 300px;
     object-fit: cover;
+`;
+
+const Button = styled.button`
+    width: 130px;
+    height: 38px;
+    outline: none;
+    border: none;
+    background-color: #2d2864;
+    color: #FEFEFE;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #6a64ab;
+    }
 `;
 
 export default About;
