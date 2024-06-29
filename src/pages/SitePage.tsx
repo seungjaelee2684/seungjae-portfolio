@@ -38,26 +38,90 @@ const SitePage = () => {
 
       if (deltaY > 0) {
         if (scrollTop >= 0 && scrollTop < pageHeight) {
+          console.log("현재 1페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight,
             left: 0,
             behavior: 'smooth'
           });
-          setScrollValue(1);
+          setScrollValue(2);
         } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+          console.log("현재 2페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 2,
             left: 0,
             behavior: 'smooth'
           });
-          setScrollValue(2);
+          setScrollValue(3);
+        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+          console.log("현재 3페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 3,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(4);
+        } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
+          console.log("현재 4페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 4,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(5);
+        } else {
+          console.log("현재 5페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 4,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(5);
         };
       } else {
-
+        if (scrollTop >= 0 && scrollTop < pageHeight) {
+          console.log("현재 1페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(1);
+        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+          console.log("현재 2페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(1);
+        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+          console.log("현재 3페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(2);
+        } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
+          console.log("현재 4페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 2,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(3);
+        } else {
+          console.log("현재 5페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 3,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(4);
+        } ;
       };
     };
-
-    if (!infoRef.current) return;
 
     outWrapperRef.current.addEventListener("wheel", scrollEvent);
 
@@ -162,9 +226,12 @@ const TextAppear = keyframes`
 
 const MainLayout = styled.article`
   width: 100%;
+  height: 100vh;
   position: relative;
   font-family: "TTLaundryGothicB";
   font-size: 400;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const MainBackground = styled.div<{ src: string }>`
@@ -191,7 +258,6 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 60px;
 
   @media screen and (max-width: 1320px) {
     width: 96%;
