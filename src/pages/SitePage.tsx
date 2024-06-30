@@ -15,19 +15,24 @@ const SitePage = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const outWrapperRef = useRef<HTMLDivElement>(null);
-  const [isScroll, setIsScroll] = useState<boolean>(false);
-  const [scrollValue, setScrollValue] = useState<number>(0);
+  const [scrollValue, setScrollValue] = useState<number>(1);
+  console.log("🚀 ~ SitePage ~ scrollValue:", scrollValue)
 
-  const onClickMoveHandler = (id: string) => {
-    const elementId = document.getElementById(id);
-
-    if (elementId) {
-      elementId.scrollIntoView({ behavior: 'smooth' });
-    };
+  const onClickMoveHandler = (id: number) => {
+    setScrollValue(id);
   };
 
   useEffect(() => {
     if (!outWrapperRef.current) return;
+
+    let { scrollTop } = outWrapperRef.current;
+    let pageHeight = window.innerHeight;
+
+    scrollValue === 1 && outWrapperRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth"});
+    scrollValue === 2 && outWrapperRef.current.scrollTo({ top: pageHeight, left: 0, behavior: "smooth"});
+    scrollValue === 3 && outWrapperRef.current.scrollTo({ top: pageHeight * 2, left: 0, behavior: "smooth"});
+    scrollValue === 4 && outWrapperRef.current.scrollTo({ top: pageHeight * 3, left: 0, behavior: "smooth"});
+    scrollValue === 5 && outWrapperRef.current.scrollTo({ top: pageHeight * 4, left: 0, behavior: "smooth"});
 
     const scrollEvent = (e: any) => {
       e.preventDefault();
@@ -129,11 +134,11 @@ const SitePage = () => {
       if (!outWrapperRef.current) return;
       outWrapperRef.current.removeEventListener("wheel", scrollEvent);
     }
-  }, []);
+  }, [scrollValue]);
 
   return (
     <MainLayout ref={outWrapperRef}>
-      <WebHeader headerRef={headerRef} isScroll={isScroll} onClickMoveHandler={onClickMoveHandler} />
+      <WebHeader headerRef={headerRef} scrollValue={scrollValue} setScrollValue={setScrollValue} onClickMoveHandler={onClickMoveHandler} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
           <MainTitleWrapper>
@@ -149,7 +154,7 @@ const SitePage = () => {
             <SubTitle>
               새하얀 도화지와 같은 개발자
             </SubTitle>
-            <ContactBtn onClick={() => onClickMoveHandler("contact")}>
+            <ContactBtn onClick={() => onClickMoveHandler(5)}>
               섭외하기
               <GoArrowUpRight />
             </ContactBtn>
@@ -161,19 +166,19 @@ const SitePage = () => {
         </TextContent>
         <NavContainer>
           <NavWrapper>
-            <NavButton onClick={() => onClickMoveHandler("about us")}>
+            <NavButton onClick={() => onClickMoveHandler(2)}>
               ABOUT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickMoveHandler("project")}>
-              PROJECT
-              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
-            </NavButton>
-            <NavButton>
+            <NavButton onClick={() => onClickMoveHandler(3)}>
               SKILL
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickMoveHandler("contact")}>
+            <NavButton onClick={() => onClickMoveHandler(4)}>
+              PROJECT
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
+            </NavButton>
+            <NavButton onClick={() => onClickMoveHandler(5)}>
               CONTACT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
