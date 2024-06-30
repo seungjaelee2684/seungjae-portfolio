@@ -13,44 +13,45 @@ interface WebHeaderProps {
 const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, scrollValue, setScrollValue, onClickMoveHandler }) => {
 
   const navigate = useNavigate();
+  const isScroll = (scrollValue !== 1 && scrollValue !== 5) ? true : false;
 
   return (
     <HeaderLayout ref={headerRef}>
       <HeaderContainer>
         <HeaderLogo
-          color={(scrollValue) ? "#222020" : "#FEFEFE"}
-          hovercolor={(scrollValue) ? "#ADADAD" : "#ADADAD"}
+          color={(isScroll) ? "#222020" : "#FEFEFE"}
+          hovercolor={(isScroll) ? "#ADADAD" : "#ADADAD"}
           onClick={() => setScrollValue(1)}>
           import SeungJae
         </HeaderLogo>
         <RightContent>
           <Navigate
-            color={(scrollValue) ? "#222020" : "#fefefea6"}
-            hovercolor={(scrollValue) ? "#ADADAD" : "#FEFEFE"}
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
             onClick={() => onClickMoveHandler(2)}>
             ABOUT
           </Navigate>
           <Navigate
-            color={(scrollValue) ? "#222020" : "#fefefea6"}
-            hovercolor={(scrollValue) ? "#ADADAD" : "#FEFEFE"}
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
             onClick={() => onClickMoveHandler(3)}>
             SKILL
           </Navigate>
           <Navigate
-            color={(scrollValue) ? "#222020" : "#fefefea6"}
-            hovercolor={(scrollValue) ? "#ADADAD" : "#FEFEFE"}
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
             onClick={() => onClickMoveHandler(4)}>
             PROJECT
           </Navigate>
           <Navigate
-            color={(scrollValue) ? "#222020" : "#fefefea6"}
-            hovercolor={(scrollValue) ? "#ADADAD" : "#FEFEFE"}
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
             onClick={() => onClickMoveHandler(5)}>
             CONTACT
           </Navigate>
           <GameButton
-            color={(scrollValue) ? "#222020" : "#fefefea6"}
-            hovercolor={(scrollValue) ? "#ADADAD" : "#FEFEFE"}
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
             onClick={() => navigate("/")}>
               <IoGameControllerOutline size={20} />
               GAME
