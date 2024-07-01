@@ -49,6 +49,10 @@ const AboutMeContainer = styled.section`
   position: relative;
   padding: 30px 0px;
   color: #222020;
+
+  @media screen and (max-width: 1320px) {
+        padding: 20px 0px;
+    }
 `;
 
 const MainTitle = styled.h1`
@@ -65,6 +69,10 @@ const AboutContentWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: 40px;
+
+    @media screen and (max-width: 1320px) {
+        gap: 24px;
+    }
 `;
 
 const AboutLaneContainer = styled.div`
@@ -72,7 +80,7 @@ const AboutLaneContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 150px;
+    gap: 120px;
 `;
 
 const LeftWrapper = styled.div`
@@ -99,6 +107,11 @@ const CardImage = styled.img`
     min-width: 500px;
     height: 300px;
     object-fit: cover;
+
+    @media screen and (max-width: 1320px) {
+        min-width: 400px;
+        height: 250px;
+    }
 `;
 
 const Button = styled.button`

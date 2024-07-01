@@ -16,7 +16,6 @@ const SitePage = () => {
   const infoRef = useRef<HTMLDivElement>(null);
   const outWrapperRef = useRef<HTMLDivElement>(null);
   const [scrollValue, setScrollValue] = useState<number>(1);
-  console.log("🚀 ~ SitePage ~ scrollValue:", scrollValue)
 
   const onClickMoveHandler = (id: number) => {
     setScrollValue(id);
@@ -25,7 +24,6 @@ const SitePage = () => {
   useEffect(() => {
     if (!outWrapperRef.current) return;
 
-    let { scrollTop } = outWrapperRef.current;
     let pageHeight = window.innerHeight;
 
     scrollValue === 1 && outWrapperRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth"});
@@ -35,14 +33,14 @@ const SitePage = () => {
     scrollValue === 5 && outWrapperRef.current.scrollTo({ top: pageHeight * 4, left: 0, behavior: "smooth"});
 
     const scrollEvent = (e: any) => {
-      e.preventDefault();
       if (!outWrapperRef.current) return;
+      e.preventDefault();
       let { deltaY } = e;
-      let { scrollTop } = outWrapperRef.current
-      let pageHeight = window.innerHeight;
+      let { scrollTop } = outWrapperRef.current;
+      let mathScrollTop = Math.ceil(scrollTop);
 
       if (deltaY > 0) {
-        if (scrollTop >= 0 && scrollTop < pageHeight) {
+        if (mathScrollTop >= 0 && mathScrollTop < pageHeight) {
           console.log("현재 1페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight,
@@ -50,7 +48,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(2);
-        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+        } else if (mathScrollTop >= pageHeight && mathScrollTop < pageHeight * 2) {
           console.log("현재 2페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 2,
@@ -58,7 +56,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(3);
-        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+        } else if (mathScrollTop >= pageHeight * 2 && mathScrollTop < pageHeight * 3) {
           console.log("현재 3페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 3,
@@ -66,7 +64,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(4);
-        } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
+        } else if (mathScrollTop >= pageHeight * 3 && mathScrollTop < pageHeight * 4) {
           console.log("현재 4페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 4,
@@ -84,7 +82,7 @@ const SitePage = () => {
           setScrollValue(5);
         };
       } else {
-        if (scrollTop >= 0 && scrollTop < pageHeight) {
+        if (mathScrollTop >= 0 && mathScrollTop < pageHeight) {
           console.log("현재 1페이지 up");
           outWrapperRef.current.scrollTo({
             top: 0,
@@ -92,7 +90,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(1);
-        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+        } else if (mathScrollTop >= pageHeight && mathScrollTop < pageHeight * 2) {
           console.log("현재 2페이지 up");
           outWrapperRef.current.scrollTo({
             top: 0,
@@ -100,7 +98,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(1);
-        } else if (scrollTop >= pageHeight * 2 && scrollTop < pageHeight * 3) {
+        } else if (mathScrollTop >= pageHeight * 2 && mathScrollTop < pageHeight * 3) {
           console.log("현재 3페이지 up");
           outWrapperRef.current.scrollTo({
             top: pageHeight,
@@ -108,7 +106,7 @@ const SitePage = () => {
             behavior: 'smooth'
           });
           setScrollValue(2);
-        } else if (scrollTop >= pageHeight * 3 && scrollTop < pageHeight * 4) {
+        } else if (mathScrollTop >= pageHeight * 3 && mathScrollTop < pageHeight * 4) {
           console.log("현재 4페이지 up");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 2,
@@ -308,7 +306,7 @@ const MainTitle = styled.div`
   }
 `;
 
-const BarContainer = styled.line`
+const BarContainer = styled.div`
   width: 300px;
   height: 1px;
   background-color: #fefefe74;
@@ -393,7 +391,7 @@ const ContactBtn = styled.button`
   }
 `;
 
-const TextContent = styled.p`
+const TextContent = styled.div`
   width: 1320px;
   text-align: start;
   font-size: 16px;
