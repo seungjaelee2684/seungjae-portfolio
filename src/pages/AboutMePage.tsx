@@ -262,6 +262,7 @@ export const RightWrapper = styled.div`
 
   @media screen and (max-width: 836px) {
     height: 70%;
+    justify-content: end;
     align-items: center;
   }
 `;
