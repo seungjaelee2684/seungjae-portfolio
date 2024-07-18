@@ -5,20 +5,15 @@ import { IoGameControllerOutline } from "react-icons/io5";
 
 interface WebHeaderProps {
   headerRef: React.RefObject<HTMLDivElement>;
-  isScroll: boolean;
-  onClickMoveHandler: (id: string) => void;
+  scrollValue: number;
+  setScrollValue: React.Dispatch<React.SetStateAction<number>>;
+  onClickMoveHandler: (id: number) => void;
 };
 
-const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll, onClickMoveHandler }) => {
+const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, scrollValue, setScrollValue, onClickMoveHandler }) => {
 
   const navigate = useNavigate();
-
-  const onClickScrollTopHandler = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
+  const isScroll = (scrollValue !== 1 && scrollValue !== 5) ? true : false;
 
   return (
     <HeaderLayout ref={headerRef}>
@@ -26,31 +21,32 @@ const WebHeader : React.FC<WebHeaderProps> = ({ headerRef, isScroll, onClickMove
         <HeaderLogo
           color={(isScroll) ? "#222020" : "#FEFEFE"}
           hovercolor={(isScroll) ? "#ADADAD" : "#ADADAD"}
-          onClick={onClickScrollTopHandler}>
+          onClick={() => setScrollValue(1)}>
           import SeungJae
         </HeaderLogo>
         <RightContent>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
             hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
-            onClick={() => onClickMoveHandler("about us")}>
+            onClick={() => onClickMoveHandler(2)}>
             ABOUT
           </Navigate>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
             hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
-            onClick={() => onClickMoveHandler("project")}>
-            PROJECT
-          </Navigate>
-          <Navigate
-            color={(isScroll) ? "#222020" : "#fefefea6"}
-            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}>
+            onClick={() => onClickMoveHandler(3)}>
             SKILL
           </Navigate>
           <Navigate
             color={(isScroll) ? "#222020" : "#fefefea6"}
             hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
-            onClick={() => onClickMoveHandler("contact")}>
+            onClick={() => onClickMoveHandler(4)}>
+            PROJECT
+          </Navigate>
+          <Navigate
+            color={(isScroll) ? "#222020" : "#fefefea6"}
+            hovercolor={(isScroll) ? "#ADADAD" : "#FEFEFE"}
+            onClick={() => onClickMoveHandler(5)}>
             CONTACT
           </Navigate>
           <GameButton

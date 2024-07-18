@@ -15,49 +15,116 @@ const SitePage = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const outWrapperRef = useRef<HTMLDivElement>(null);
-  const [isScroll, setIsScroll] = useState<boolean>(false);
-  const [scrollValue, setScrollValue] = useState<number>(0);
+  const [scrollValue, setScrollValue] = useState<number>(1);
 
-  const onClickMoveHandler = (id: string) => {
-    const elementId = document.getElementById(id);
-
-    if (elementId) {
-      elementId.scrollIntoView({ behavior: 'smooth' });
-    };
+  const onClickMoveHandler = (id: number) => {
+    setScrollValue(id);
   };
 
   useEffect(() => {
     if (!outWrapperRef.current) return;
 
+    let pageHeight = window.innerHeight;
+
+    scrollValue === 1 && outWrapperRef.current.scrollTo({ top: 0, left: 0, behavior: "smooth"});
+    scrollValue === 2 && outWrapperRef.current.scrollTo({ top: pageHeight, left: 0, behavior: "smooth"});
+    scrollValue === 3 && outWrapperRef.current.scrollTo({ top: pageHeight * 2, left: 0, behavior: "smooth"});
+    scrollValue === 4 && outWrapperRef.current.scrollTo({ top: pageHeight * 3, left: 0, behavior: "smooth"});
+    scrollValue === 5 && outWrapperRef.current.scrollTo({ top: pageHeight * 4, left: 0, behavior: "smooth"});
+
     const scrollEvent = (e: any) => {
-      e.preventDefault();
       if (!outWrapperRef.current) return;
+      e.preventDefault();
       let { deltaY } = e;
-      let { scrollTop } = outWrapperRef.current
-      let pageHeight = window.innerHeight;
+      let { scrollTop } = outWrapperRef.current;
+      let mathScrollTop = Math.ceil(scrollTop);
 
       if (deltaY > 0) {
-        if (scrollTop >= 0 && scrollTop < pageHeight) {
+        if (mathScrollTop >= 0 && mathScrollTop < pageHeight) {
+          console.log("현재 1페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight,
             left: 0,
             behavior: 'smooth'
           });
-          setScrollValue(1);
-        } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
+          setScrollValue(2);
+        } else if (mathScrollTop >= pageHeight && mathScrollTop < pageHeight * 2) {
+          console.log("현재 2페이지 down");
           outWrapperRef.current.scrollTo({
             top: pageHeight * 2,
             left: 0,
             behavior: 'smooth'
           });
-          setScrollValue(2);
+          setScrollValue(3);
+        } else if (mathScrollTop >= pageHeight * 2 && mathScrollTop < pageHeight * 3) {
+          console.log("현재 3페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 3,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(4);
+        } else if (mathScrollTop >= pageHeight * 3 && mathScrollTop < pageHeight * 4) {
+          console.log("현재 4페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 4,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(5);
+        } else {
+          console.log("현재 5페이지 down");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 4,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(5);
         };
       } else {
-
+        if (mathScrollTop >= 0 && mathScrollTop < pageHeight) {
+          console.log("현재 1페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(1);
+        } else if (mathScrollTop >= pageHeight && mathScrollTop < pageHeight * 2) {
+          console.log("현재 2페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(1);
+        } else if (mathScrollTop >= pageHeight * 2 && mathScrollTop < pageHeight * 3) {
+          console.log("현재 3페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(2);
+        } else if (mathScrollTop >= pageHeight * 3 && mathScrollTop < pageHeight * 4) {
+          console.log("현재 4페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 2,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(3);
+        } else {
+          console.log("현재 5페이지 up");
+          outWrapperRef.current.scrollTo({
+            top: pageHeight * 3,
+            left: 0,
+            behavior: 'smooth'
+          });
+          setScrollValue(4);
+        } ;
       };
     };
-
-    if (!infoRef.current) return;
 
     outWrapperRef.current.addEventListener("wheel", scrollEvent);
 
@@ -65,11 +132,11 @@ const SitePage = () => {
       if (!outWrapperRef.current) return;
       outWrapperRef.current.removeEventListener("wheel", scrollEvent);
     }
-  }, []);
+  }, [scrollValue]);
 
   return (
     <MainLayout ref={outWrapperRef}>
-      <WebHeader headerRef={headerRef} isScroll={isScroll} onClickMoveHandler={onClickMoveHandler} />
+      <WebHeader headerRef={headerRef} scrollValue={scrollValue} setScrollValue={setScrollValue} onClickMoveHandler={onClickMoveHandler} />
       <MainBackground src={Background1}>
         <MainTitleContainer>
           <MainTitleWrapper>
@@ -85,7 +152,7 @@ const SitePage = () => {
             <SubTitle>
               새하얀 도화지와 같은 개발자
             </SubTitle>
-            <ContactBtn onClick={() => onClickMoveHandler("contact")}>
+            <ContactBtn onClick={() => onClickMoveHandler(5)}>
               섭외하기
               <GoArrowUpRight />
             </ContactBtn>
@@ -97,19 +164,19 @@ const SitePage = () => {
         </TextContent>
         <NavContainer>
           <NavWrapper>
-            <NavButton onClick={() => onClickMoveHandler("about us")}>
+            <NavButton onClick={() => onClickMoveHandler(2)}>
               ABOUT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickMoveHandler("project")}>
-              PROJECT
-              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
-            </NavButton>
-            <NavButton>
+            <NavButton onClick={() => onClickMoveHandler(3)}>
               SKILL
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
-            <NavButton onClick={() => onClickMoveHandler("contact")}>
+            <NavButton onClick={() => onClickMoveHandler(4)}>
+              PROJECT
+              <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
+            </NavButton>
+            <NavButton onClick={() => onClickMoveHandler(5)}>
               CONTACT
               <BsBoxArrowUpRight size={18} style={{ marginBottom: "6px" }} />
             </NavButton>
@@ -162,9 +229,12 @@ const TextAppear = keyframes`
 
 const MainLayout = styled.article`
   width: 100%;
+  height: 100vh;
   position: relative;
   font-family: "TTLaundryGothicB";
   font-size: 400;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const MainBackground = styled.div<{ src: string }>`
@@ -191,7 +261,6 @@ const MainContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 60px;
 
   @media screen and (max-width: 1320px) {
     width: 96%;
@@ -237,7 +306,7 @@ const MainTitle = styled.div`
   }
 `;
 
-const BarContainer = styled.line`
+const BarContainer = styled.div`
   width: 300px;
   height: 1px;
   background-color: #fefefe74;
@@ -322,7 +391,7 @@ const ContactBtn = styled.button`
   }
 `;
 
-const TextContent = styled.p`
+const TextContent = styled.div`
   width: 1320px;
   text-align: start;
   font-size: 16px;
