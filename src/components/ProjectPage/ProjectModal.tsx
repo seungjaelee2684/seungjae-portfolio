@@ -100,7 +100,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ projectKind, setProjectKind
                 <Link onClick={() => window.open(projectDto[id - 1]?.url)}>
                     {projectDto[id - 1]?.project}
                 </Link>
-                {(id === 1)
+                {(id === 2)
                     && <Link onClick={() => window.open("https://github.com/seungjaelee2684/aria-front-end")}>
                         Github 레포지토리
                     </Link>}
