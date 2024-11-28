@@ -35,8 +35,8 @@ const Router = () => {
               <Route path='/gamestart' element={<GameStartPage />} caseSensitive />
             </Route>
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
-            <Route path='/website' element={<SitePage />} caseSensitive />
-            <Route path='/website/contact' element={<ContactPage />} caseSensitive />
+            <Route path='/jaelog' element={<SitePage />} caseSensitive />
+            <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
           </Routes>
         </Suspense>
       </AnimatePresence>

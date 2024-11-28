@@ -136,14 +136,14 @@ const ProjectListOutBox = styled.div`
 `;
 
 const ProjectListBox = styled.div`
-    width: 2880px;
+    width: 4080px;
     display: flex;
     align-items: center;
     gap: 120px;
     transition: all 0.3s;
 
     @media screen and (max-width: 500px) {
-        width: 1900px;
+        width: 2700px;
         gap: 100px;
     }
 `;

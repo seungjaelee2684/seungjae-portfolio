@@ -1,13 +1,35 @@
 import PEEPPO from '../assets/images/PEEPPO/PEEPPO.png';
 import ARIA from '../assets/images/ARIA/ARIA.png';
 import ALDDALDDAL from '../assets/images/ALDDALDDAL/ALDDALDDAL.png';
+import ZEFIT from '../assets/images/zefit/ZEFIT.png';
 
 export const projectDto = [
     {
         id: 1,
+        project: "(주)제핏",
+        thumbnail: ZEFIT,
+        period: "2024.08 ~ 2024.11",
+        information: "비임상 CRO 회사",
+        introduce: "제브라피쉬 전문 CRO로 혁신적인 진단장비를 활용하여\n전임상단계의 신약후보물질의 발굴을 돕는 비임상 CRO 회사",
+        url: "https://zefit-front.vercel.app",
+        skill: "Next.js, TypeScript,\nRecoil, Supabase",
+        part: "기존 사이트 개편에 필요한 기획, 웹디자인, 프론트엔드 개발 및 DB설계를 담당",
+        game: [
+            {
+                id: "프로젝트 소개",
+                content: "제브라피쉬 전문 CRO로 혁신적인 진단장비를 활용하여 전임상단계의 신약후보물질의 발굴을 돕는 비임상 CRO 회사입니다."
+            },
+            {
+                id: "업적",
+                content: "기존 PHP기반의 사이트를 Next.js로 마이그레이션 작업을 기획했습니다.\n많은 정보를 담는 사이트 특성 상 가독성과 UX를 중점으로 웹디자인을 하였습니다.\nStatic파일을 이용해 데이터를 관리하던 방식에서 문의 메일, 공지사항과 같은 상황을 고려해 DB를 이용해 관리하는 방식으로 변경하였습니다.\n필요했던 관리자 기능을 추가하고 사용자의 경험을 피드백 받아 수정하고 개선하는 작업을 거쳤습니다."
+            }
+        ]
+    },
+    {
+        id: 2,
         project: "ARIA(아리아)",
         thumbnail: ARIA,
-        period: "2023.12 ~ 현재 운영중",
+        period: "2023.12 ~ 2024.04",
         information: "글로벌 일러스트 학원",
         introduce: "다양한 그림 스타일과 강사들을 통해 학습을 제공하는 다국적 학원 플랫폼",
         url: "https://www.aria-academy.com",
@@ -33,7 +55,7 @@ export const projectDto = [
         ]
     },
     {
-        id: 2,
+        id: 3,
         project: "PEEPPO(핍포)",
         thumbnail: PEEPPO,
         period: "2023.07 ~ 2023.09",
@@ -58,7 +80,7 @@ export const projectDto = [
         ]
     },
     {
-        id: 3,
+        id: 4,
         project: "ALDDALDDAL(알딸딸)",
         thumbnail: ALDDALDDAL,
         period: "2023.06 ~ 2023.06",
