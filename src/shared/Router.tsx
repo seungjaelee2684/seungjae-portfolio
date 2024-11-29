@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import MainLayout from '../components/common/MainLayout';
 import SubLayout from '../components/common/SubLayout';
 import Loading from '../components/common/Loading';
+import SiteLayout from '../components/common/SiteLayout';
 
 const StartPage = lazy(() => import("../pages/StartPage"));
 const SkillsPage = lazy(() => import("../pages/SkillsPage"));
@@ -34,9 +35,11 @@ const Router = () => {
               <Route path='/dungeon/info' element={<ProjectInfoPage />} caseSensitive />
               <Route path='/gamestart' element={<GameStartPage />} caseSensitive />
             </Route>
+            <Route element={<SiteLayout />}>
+              <Route path='/jaelog' element={<SitePage />} caseSensitive />
+              <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
+            </Route>
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
-            <Route path='/jaelog' element={<SitePage />} caseSensitive />
-            <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
           </Routes>
         </Suspense>
       </AnimatePresence>

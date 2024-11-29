@@ -3,6 +3,7 @@ import pageState from '../modules/pageState';
 import isMobile from '../modules/isMobile';
 import modalOpen from '../modules/globalModalOpen';
 import guide from '../modules/guide';
+import darkMode from "../modules/darkMode";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         isMobile,
         modalOpen,
         guide,
+        darkMode,
     }
 });
 
