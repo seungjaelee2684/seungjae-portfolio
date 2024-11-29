@@ -1,8 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
 import Picture from '../../assets/images/picture.webp';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/config/configureStore';
+import { textLight } from '../../styles/colorToken';
 
 const Profile = () => {
+
+  const theme = useSelector((state: RootState) => state.darkMode);
+
   return (
     <ProfileContainer>
       <ProfileImage
@@ -12,7 +18,7 @@ const Profile = () => {
         <NameText>
           이승재 (Lee SeungJae)
         </NameText>
-        <Role>
+        <Role $color={textLight[theme]}>
           프론트엔드 개발자
         </Role>
         <DetailDescription>
@@ -30,7 +36,8 @@ const ProfileContainer = styled.div`
   display: flex;
   align-items: start;
   gap: 32px;
-  padding: 24px 0px;
+  padding: 144px 0px 24px 0px;
+  border-bottom: 1px solid #e2e2e2;
 `;
 
 const ProfileImage = styled.img`
@@ -58,10 +65,10 @@ const NameText = styled.strong`
   font-weight: 700;
 `;
 
-const Role = styled.span`
-  font-size: 12px;
-  font-weight: 400;
-  color: #696969;
+const Role = styled.span<{ $color: string }>`
+  font-size: 14px;
+  font-weight: 300;
+  color: ${(props) => props.$color};
 `;
 
 const DetailDescription = styled.p`

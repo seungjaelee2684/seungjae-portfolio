@@ -31,34 +31,8 @@ const SitePage = () => {
   }, []);
 
   return (
-    <SiteContainer>
-      <SiteHeader />
-      <Profile />
-      <SiteWrapper>
-        <SideTap />
-      </SiteWrapper>
-    </SiteContainer>
+    <div></div>
   )
 };
-
-const SiteContainer = styled.div`
-  width: 900px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  margin: 120px auto 0px auto;
-
-  @media screen and (max-width: 900px) {
-    width: 94%;
-  }
-`;
-
-const SiteWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: start;
-`;
 
 export default SitePage;
