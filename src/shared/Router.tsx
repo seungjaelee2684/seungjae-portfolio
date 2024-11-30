@@ -16,6 +16,8 @@ const SitePage = lazy(() => import("../pages/SitePage"));
 const AboutUsPage = lazy(() => import("../pages/AboutMePage"));
 const LobyPage = lazy(() => import("../pages/LobyPage"));
 const ContactPage = lazy(() => import("../components/SitePage/Contact"));
+const PostsPage = lazy(() => import("../pages/PostsPage"));
+const PostsDetailPage = lazy(() => import("../pages/PostsDetailPage"));
 
 const Router = () => {
 
@@ -38,6 +40,8 @@ const Router = () => {
             <Route element={<SiteLayout />}>
               <Route path='/jaelog' element={<SitePage />} caseSensitive />
               <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
+              <Route path='/jaelog/:post' element={<PostsPage />} caseSensitive />
+              <Route path='/jaelog/:post/:postId' element={<PostsDetailPage />} caseSensitive />
             </Route>
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
           </Routes>

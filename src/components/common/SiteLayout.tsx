@@ -4,6 +4,7 @@ import SiteHeader from '../SitePage/SiteHeader';
 import Profile from '../SitePage/Profile';
 import SideTap from '../SitePage/SideTap';
 import { Outlet } from 'react-router-dom';
+import Category from '../SitePage/Category';
 
 const SiteLayout = () => {
 
@@ -11,16 +12,14 @@ const SiteLayout = () => {
     <SiteContainer>
       <SiteHeader />
       <Profile />
-      <SiteWrapper>
-        <SideTap />
-        <Outlet />
-      </SiteWrapper>
+      <Category />
+      <Outlet />
     </SiteContainer>
   )
 };
 
 const SiteContainer = styled.div`
-  width: 900px;
+  width: 980px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -28,16 +27,9 @@ const SiteContainer = styled.div`
   margin: 0px auto;
   font-family: "SUIT_Regular";
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 980px) {
     width: 94%;
   }
-`;
-
-const SiteWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: start;
 `;
 
 export default SiteLayout;
