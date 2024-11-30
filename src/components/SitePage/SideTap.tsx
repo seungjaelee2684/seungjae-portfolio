@@ -4,26 +4,34 @@ import styled from 'styled-components';
 import { RootState } from '../../store/config/configureStore';
 import { commonTextColor, textLight } from '../../styles/colorToken';
 
-const SideTap = () => {
+interface SideTapProps {
+  data?: any;
+  param?: any;
+};
+
+const SideTap = ({ data, param }: SideTapProps) => {
 
   const theme = useSelector((state: RootState) => state.darkMode);
 
   return (
     <SideTapContainer>
-      <SideTapLane>
-        <SideTapLink
-          $color={commonTextColor[theme]}
-          $hover={textLight[theme]}>
-          여기 링크
-        </SideTapLink>
-      </SideTapLane>
+      {data?.map((item: any, index: number) =>
+        <SideTapLane key={index}>
+          <SideTapLink
+            href={`/jaelog/${param}/${item?.id}`}
+            $color={commonTextColor[theme]}
+            $hover={textLight[theme]}>
+            {item?.name}
+          </SideTapLink>
+        </SideTapLane>
+      )}
     </SideTapContainer>
   )
 };
 
 const SideTapContainer = styled.ul`
-  min-width: 160px;
-  width: 160px;
+  min-width: 180px;
+  width: 180px;
   min-height: 100dvh;
   height: fit-content;
   display: flex;

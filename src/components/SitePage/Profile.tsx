@@ -24,7 +24,8 @@ const Profile = () => {
         <DetailDescription>
           {`React와 Typescript에 장점을 둔 높은 성장이 기대되는 개발자입니다.
             끊임없는 자기 계발과 문제 해결에 대한 열정으로 프로젝트 및 IT교육 과정의 경험을 통해 빠르게 성장 중입니다.
-            실제 웹 서비스를 운영하거나 인턴 생활을 통해 사용자 중심의 솔루션을 개발하는 경험을 쌓으며, 가치 있는 개발자로 발전해 나가고 있습니다.`}
+            실제 웹 서비스를 운영하며, 사용자 중심의 솔루션을 개발하는 경험을 쌓았습니다.
+            3개월 간의 인턴 생활을 통해 실전 경험을 익히며, 가치있는 개발자로 거듭나고 있습니다.`}
         </DetailDescription>
       </TextWrapper>
     </ProfileContainer>
@@ -37,7 +38,6 @@ const ProfileContainer = styled.div`
   align-items: start;
   gap: 32px;
   padding: 144px 0px 24px 0px;
-  border-bottom: 1px solid #e2e2e2;
 `;
 
 const ProfileImage = styled.img`
