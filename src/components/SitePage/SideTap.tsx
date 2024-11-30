@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store/config/configureStore';
 import { commonTextColor, textLight } from '../../styles/colorToken';
+import { PostsCategory } from '../../pages/SitePage';
 
 interface SideTapProps {
   data?: any;
@@ -15,12 +16,14 @@ const SideTap = ({ data, param }: SideTapProps) => {
 
   return (
     <SideTapContainer>
+      <PostsCategory>
+        Tags
+      </PostsCategory>
       {data?.map((item: any, index: number) =>
         <SideTapLane key={index}>
           <SideTapLink
             href={`/jaelog/${param}/${item?.id}`}
-            $color={commonTextColor[theme]}
-            $hover={textLight[theme]}>
+            $color={commonTextColor[theme]}>
             {item?.name}
           </SideTapLink>
         </SideTapLane>
@@ -37,7 +40,7 @@ const SideTapContainer = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   border-right: 1px solid #e9e9e9;
   padding-top: 40px;
 `;
@@ -47,20 +50,22 @@ const SideTapLane = styled.li`
   height: 34px;
 `;
 
-const SideTapLink = styled.a<{ $color: string, $hover: string }>`
+const SideTapLink = styled.a<{ $color: string }>`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   align-items: center;
-  padding: 0px 16px;
-  font-size: 16px;
+  padding: 0px 16px 0px 0px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
   color: ${(props) => props.$color};
   transition: all 0.3s;
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.$hover};
+    color: #ee6e6e;
   }
 `;
 

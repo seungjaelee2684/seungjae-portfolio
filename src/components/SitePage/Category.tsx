@@ -1,9 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
+import { FaGithub } from "react-icons/fa";
 
 const Category = () => {
   return (
     <CategoryWrapper>
+      <li>
+        <IconBox href='https://github.com/seungjaelee2684' target='_blank'>
+          <FaGithub />
+        </IconBox>
+      </li>
       <li>
         <CategoryButton href='/jaelog/resume'>
           소개글
@@ -32,6 +38,15 @@ const CategoryWrapper = styled.ul`
   gap: 16px;
   user-select: none;
   border-bottom: 1px solid #e2e2e2;
+`;
+
+const IconBox = styled.a`
+  height: 30px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  margin-right: 60px;
+  cursor: pointer;
 `;
 
 const CategoryButton = styled.a`

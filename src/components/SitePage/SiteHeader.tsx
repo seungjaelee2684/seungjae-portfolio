@@ -124,11 +124,17 @@ const HeaderLink = styled.a`
     display: flex;
     align-items: end;
     gap: 4px;
+    transition: all 0.3s;
+
+    &:hover {
+        color: #ee6e6e;
+    }
 `;
 
 const HeaderLinkIcon = styled.span`
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
+    margin-bottom: 4px;
     border-radius: 100%;
     background-color: #ee6e6e;
 `;
