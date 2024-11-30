@@ -16,7 +16,8 @@ const SitePage = () => {
       try {
         const { data, error } = await supabase
           .from('projects')
-          .select('*');
+          .select('*')
+          .order('created_at', { ascending: false });
 
         if (error) {
           throw error;
@@ -33,18 +34,23 @@ const SitePage = () => {
 
   return (
     <SiteContainer>
-      <SideTap data={blogData} />
+      <SideTap />
       <PostsContainer>
-        <PostsLanecontainer>
-          <PostTitleWrapper>
-            <PostTitle>
-              아이디
-            </PostTitle>
-            <PostSubTitle>
-              패스워드
-            </PostSubTitle>
-          </PostTitleWrapper>
-        </PostsLanecontainer>
+        <PostsCategory>
+          최근 글
+        </PostsCategory>
+        {blogData?.map((item: any, index: any) =>
+          <PostsLaneContainer key={index}>
+            <PostsLane>
+              <PostTitle>
+                {item?.name}
+              </PostTitle>
+              <PostDate>
+                {item?.created_at.slice(0, 10)}
+              </PostDate>
+            </PostsLane>
+          </PostsLaneContainer>
+        )}
       </PostsContainer>
     </SiteContainer>
   )
@@ -63,29 +69,33 @@ export const PostsContainer = styled.ul`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  padding: 24px;
+  padding: 40px 24px;
+  gap: 4px;
 `;
 
-export const PostsLanecontainer = styled.li`
+export const PostsCategory = styled.h1`
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 24px;
+`;
+
+export const PostsLaneContainer = styled.li`
   width: 100%;
-  height: 80px;
+`;
+
+export const PostsLane = styled.a`
+  width: 100%;
+  height: 50px;
   padding: 0px 16px;
   display: flex;
   justify-content: start;
   align-items: center;
-`;
-
-export const PostTitleWrapper = styled.a`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 12px;
+  border-radius: 10px;
   transition: all 0.3s;
   cursor: pointer;
 
   &:hover {
-    opacity: 0.5;
+    background-color: #e9edffc7;
   }
 `;
 
@@ -99,22 +109,16 @@ export const PostTitle = styled.strong`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   line-clamp: 1;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
 `;
 
-export const PostSubTitle = styled.p`
-  width: 100%;
-  text-align: start;
-  display: -webkitf-flex;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  font-size: 14px;
+export const PostDate = styled.span`
+  min-width: 80px;
+  width: 80px;
+  font-size: 12px;
   font-weight: 400;
+  letter-spacing: -0.7px;
 `;
 
 export default SitePage;
