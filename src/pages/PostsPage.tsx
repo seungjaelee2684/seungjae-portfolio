@@ -25,7 +25,7 @@ const PostsPage = () => {
 
         setPostData(data);
       } catch (error) {
-        console.error();
+        console.error("Error fetching paginated data from Supabase: ", error);
       };
     };
 

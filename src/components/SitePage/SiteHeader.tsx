@@ -24,7 +24,7 @@ const SiteHeader = () => {
         if (!toggleRef.current || !textRef.current) return;
 
         if (isDark) {
-            toggleRef.current.style.transform = 'translateX(34px)';
+            toggleRef.current.style.transform = 'translateX(33px)';
             toggleRef.current.style.backgroundColor = '#25afee';
             textRef.current.style.transform = 'translateX(-22px)';
             textRef.current.style.color = '#ffffff';
@@ -149,8 +149,8 @@ const ThemeWrapper = styled.div`
 
 const ThemeToggle = styled.button`
     width: 60px;
-    height: 28px;
-    border-radius: 40px;
+    height: 24px;
+    border-radius: 30px;
     padding: 0px 2px;
     display: flex;
     align-items: center;
@@ -163,7 +163,7 @@ const ThemeToggle = styled.button`
 `;
 
 const ToggleText = styled.span`
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     transition: all 0.3s;
     margin-top: 6px;
@@ -172,7 +172,9 @@ const ToggleText = styled.span`
 
 const ToggleCircle = styled.div`
     width: 18px;
+    max-width: 18px;
     height: 18px;
+    max-height: 18px;
     border-radius: 100%;
     background-color: #ffffff;
     transition: all 0.3s;
