@@ -1,16 +1,67 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/config/configureStore';
+import { darkModeAction } from '../../store/modules/darkMode';
+import { commonBgColor } from '../../styles/colorToken';
+import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs';
 
 const SiteHeader = () => {
-  return (
-    <SiteHeaderContainer>
-        <SiteHeaderInWrapper>
-            <HeaderLink href='/jaelog'>
-                Jaelog
-            </HeaderLink>
-        </SiteHeaderInWrapper>
-    </SiteHeaderContainer>
-  )
+
+    const dispatch = useDispatch();
+    const theme = useSelector((state: RootState) => state.darkMode);
+    const themeAction = 1 - theme;
+    const isDark = (theme === 1) ? true : false;
+
+    const toggleRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!toggleRef.current) return;
+
+        if (isDark) {
+            toggleRef.current.style.transform = 'translateX(20px)';
+            toggleRef.current.style.backgroundColor = '#25afee';
+        } else {
+            toggleRef.current.style.transform = 'translateX(0%)';
+            toggleRef.current.style.backgroundColor = '#f2c138';
+        };
+    }, [isDark]);
+
+    return (
+        <SiteHeaderContainer>
+            <SiteHeaderInWrapper>
+                <HeaderLink href='/jaelog'>
+                    Jaelog
+                    <HeaderLinkIcon />
+                </HeaderLink>
+                <ThemeWrapper>
+                    <BsSunFill
+                        color='#f2c138'
+                        style={{
+                            transition: 'all 0.3s',
+                            opacity: (isDark) ? '0' : '1',
+                            transform: (isDark) ? 'translateY(20px)' : 'translateY(0px)'
+                        }} />
+                    <ThemeToggle
+                        style={{
+                            backgroundColor: (isDark) ? '#092e40' : '#fae9b1',
+                            border: (isDark) ? '2px solid #25afee' : '2px solid #f2c138'
+                        }}
+                        onClick={() => dispatch(darkModeAction(themeAction))}>
+                        <ToggleCircle ref={toggleRef} />
+                    </ThemeToggle>
+                    <BsMoonStarsFill
+                        color='#25afee'
+                        style={{
+                            transition: 'all 0.3s',
+                            opacity: (isDark) ? '1' : '0',
+                            transform: (isDark) ? 'translateY(0px)' : 'translateY(20px)',
+                            fontSize: '16px'
+                        }} />
+                </ThemeWrapper>
+            </SiteHeaderInWrapper>
+        </SiteHeaderContainer>
+    )
 };
 
 const SiteHeaderContainer = styled.header`
@@ -25,6 +76,7 @@ const SiteHeaderContainer = styled.header`
     right: 0;
     z-index: 25;
     user-select: none;
+    backdrop-filter: blur(3px);
 `;
 
 const SiteHeaderInWrapper = styled.nav`
@@ -40,9 +92,58 @@ const SiteHeaderInWrapper = styled.nav`
 `;
 
 const HeaderLink = styled.a`
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     cursor: pointer;
+    display: flex;
+    align-items: end;
+    gap: 4px;
+    transition: all 0.3s;
+
+    &:hover {
+        color: #ee6e6e;
+    }
+`;
+
+const HeaderLinkIcon = styled.span`
+    width: 6px;
+    height: 6px;
+    margin-bottom: 4px;
+    border-radius: 100%;
+    background-color: #ee6e6e;
+`;
+
+const ThemeWrapper = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+`;
+
+const ThemeToggle = styled.button`
+    width: 46px;
+    height: 24px;
+    border-radius: 30px;
+    padding: 0px 2px;
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+`;
+
+const ToggleCircle = styled.div`
+    width: 18px;
+    max-width: 18px;
+    height: 18px;
+    max-height: 18px;
+    border-radius: 100%;
+    background-color: #ffffff;
+    transition: all 0.3s;
 `;
 
 export default SiteHeader;

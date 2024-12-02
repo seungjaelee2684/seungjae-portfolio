@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import MainLayout from '../components/common/MainLayout';
 import SubLayout from '../components/common/SubLayout';
 import Loading from '../components/common/Loading';
+import SiteLayout from '../components/common/SiteLayout';
 
 const StartPage = lazy(() => import("../pages/StartPage"));
 const SkillsPage = lazy(() => import("../pages/SkillsPage"));
@@ -15,6 +16,11 @@ const SitePage = lazy(() => import("../pages/SitePage"));
 const AboutUsPage = lazy(() => import("../pages/AboutMePage"));
 const LobyPage = lazy(() => import("../pages/LobyPage"));
 const ContactPage = lazy(() => import("../components/SitePage/Contact"));
+const ProjectListPage = lazy(() => import("../pages/ProjectListPage"));
+const PracticeListPage = lazy(() => import("../pages/PracticeListPage"));
+const PostsDetailPage = lazy(() => import("../pages/PostsDetailPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const ResumePage = lazy(() => import("../pages/ResumePage"));
 
 const Router = () => {
 
@@ -34,9 +40,16 @@ const Router = () => {
               <Route path='/dungeon/info' element={<ProjectInfoPage />} caseSensitive />
               <Route path='/gamestart' element={<GameStartPage />} caseSensitive />
             </Route>
+            <Route element={<SiteLayout />}>
+              <Route path='/jaelog' element={<SitePage />} caseSensitive />
+              <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
+              <Route path='/jaelog/projects' element={<ProjectListPage />} caseSensitive />
+              <Route path='/jaelog/practices' element={<PracticeListPage />} caseSensitive />
+              <Route path='/jaelog/:post/:postId' element={<PostsDetailPage />} caseSensitive />
+              <Route path='/jaelog/resume' element={<ResumePage />} caseSensitive />
+            </Route>
+            <Route path='/jaelog/login' element={<LoginPage />} caseSensitive />
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
-            <Route path='/jaelog' element={<SitePage />} caseSensitive />
-            <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
           </Routes>
         </Suspense>
       </AnimatePresence>
