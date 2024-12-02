@@ -11,14 +11,14 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
   return (
     <PostsContainer>
       <PostsCategory>
-        {data?.name}
+        {data?.title}
       </PostsCategory>
       <ContentLane>
         <ContentCategory>
           이름
         </ContentCategory>
         <ContentSentence>
-          {data?.name}
+          {data?.title}
         </ContentSentence>
       </ContentLane>
       <ContentLane>
@@ -39,7 +39,7 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
       </ContentLane>
       <ContentLane>
         <ContentCategory>
-          링크 주소
+          링크
         </ContentCategory>
         <UrlLink href={data?.url} target='_blank'>
           <LinkIcon>
@@ -80,9 +80,9 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
           {data?.work}
         </ContentSentence>
       </ContentLane>
-      <ContentLane>
+      <ContentLane style={{ borderBottom: 'none' }}>
         <ContentCategory>
-          내용
+          세부내용
         </ContentCategory>
         <ContentSentence>
           {data?.content}
@@ -98,7 +98,8 @@ const ContentLane = styled.div`
   justify-content: start;
   align-items: start;
   gap: 30px;
-  margin-top: 36px;
+  padding: 32px 0px;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const ContentCategory = styled.span`
@@ -106,13 +107,14 @@ const ContentCategory = styled.span`
   width: 90px;
   padding: 5px 0px;
   border-radius: 20px;
-  color: #ffffff;
-  background-color: #ee6e6e;
+  color: #ee6e6e;
+  border: 1px solid #ee6e6e;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   font-weight: 700;
+  user-select: none;
 `;
 
 const ContentSentence = styled.p`
