@@ -72,6 +72,15 @@ a {
   outline: none; /* 포커스 시 외곽선 제거 */
 }
 
+code {
+	padding: 3px 6px;
+  border: none;
+  border-radius: 3px;
+	background-color: #e9ecef;
+	font-size: 1.6rem;
+	font-family: "Pretendard", "Malgun Gothic", sans-serif;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

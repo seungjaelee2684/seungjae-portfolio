@@ -1,14 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
 import { darkModeAction } from '../../store/modules/darkMode';
 import { commonBgColor } from '../../styles/colorToken';
-import { BsFillBrightnessAltHighFill, BsMoonStarsFill, BsSunFill } from 'react-icons/bs';
-import { CiCloudSun } from "react-icons/ci";
-import { FaCloudSun } from 'react-icons/fa6';
-import { WiStars } from "react-icons/wi";
+import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs';
 
 const SiteHeader = () => {
 
@@ -18,21 +14,16 @@ const SiteHeader = () => {
     const isDark = (theme === 1) ? true : false;
 
     const toggleRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
-        if (!toggleRef.current || !textRef.current) return;
+        if (!toggleRef.current) return;
 
         if (isDark) {
-            toggleRef.current.style.transform = 'translateX(33px)';
+            toggleRef.current.style.transform = 'translateX(20px)';
             toggleRef.current.style.backgroundColor = '#25afee';
-            textRef.current.style.transform = 'translateX(-22px)';
-            textRef.current.style.color = '#ffffff';
         } else {
             toggleRef.current.style.transform = 'translateX(0%)';
             toggleRef.current.style.backgroundColor = '#f2c138';
-            textRef.current.style.transform = 'translateX(0px)';
-            textRef.current.style.color = '#ffffff';
         };
     }, [isDark]);
 
@@ -58,9 +49,6 @@ const SiteHeader = () => {
                         }}
                         onClick={() => dispatch(darkModeAction(themeAction))}>
                         <ToggleCircle ref={toggleRef} />
-                        <ToggleText ref={textRef}>
-                            {(isDark) ? <WiStars /> : <FaCloudSun />}
-                        </ToggleText>
                     </ThemeToggle>
                     <BsMoonStarsFill
                         color='#25afee'
@@ -75,20 +63,6 @@ const SiteHeader = () => {
         </SiteHeaderContainer>
     )
 };
-
-const ToggleAnimation = keyframes`
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.3;
-    }
-
-    100% {
-        opacity: 1;
-    }
-`;
 
 const SiteHeaderContainer = styled.header`
     width: 100%;
@@ -148,7 +122,7 @@ const ThemeWrapper = styled.div`
 `;
 
 const ThemeToggle = styled.button`
-    width: 60px;
+    width: 46px;
     height: 24px;
     border-radius: 30px;
     padding: 0px 2px;
@@ -160,14 +134,6 @@ const ThemeToggle = styled.button`
     gap: 8px;
     font-size: 14px;
     cursor: pointer;
-`;
-
-const ToggleText = styled.span`
-    font-size: 20px;
-    font-weight: 700;
-    transition: all 0.3s;
-    margin-top: 6px;
-    animation: ${ToggleAnimation} 1.5s linear infinite forwards;
 `;
 
 const ToggleCircle = styled.div`

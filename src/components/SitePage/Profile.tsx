@@ -38,6 +38,7 @@ const ProfileContainer = styled.div`
   align-items: start;
   gap: 32px;
   padding: 144px 0px 24px 0px;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const ProfileImage = styled.img`

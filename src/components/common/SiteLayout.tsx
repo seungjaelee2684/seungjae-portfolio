@@ -4,7 +4,6 @@ import SiteHeader from '../SitePage/SiteHeader';
 import Profile from '../SitePage/Profile';
 import SideTap from '../SitePage/SideTap';
 import { Outlet } from 'react-router-dom';
-import Category from '../SitePage/Category';
 
 const SiteLayout = () => {
 
@@ -12,7 +11,6 @@ const SiteLayout = () => {
     <SiteContainer>
       <SiteHeader />
       <Profile />
-      <Category />
       <Outlet />
     </SiteContainer>
   )

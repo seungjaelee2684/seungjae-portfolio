@@ -12,22 +12,56 @@ interface SideTapProps {
 
 const SideTap = ({ data, param }: SideTapProps) => {
 
+  console.log(data);
+
   const theme = useSelector((state: RootState) => state.darkMode);
+
+  const changeSideTap = () => {
+    if (param === 'projects') {
+      return (
+        data?.map((item: any, index: number) =>
+          <SideTapLane key={index}>
+            <SideTapLink
+              href={`/jaelog/${param}?cn=${item?.id}`}
+              $color={commonTextColor[theme]}>
+              {item?.connection} ({item?.count})
+            </SideTapLink>
+          </SideTapLane>
+        )
+      );
+    } else if (param === 'practices') {
+      return (
+        data?.map((item: any, index: number) =>
+          <SideTapLane key={index}>
+            <SideTapLink
+              href={`/jaelog/${param}?cg=${item?.id}`}
+              $color={commonTextColor[theme]}>
+              {item?.category} ({item?.count})
+            </SideTapLink>
+          </SideTapLane>
+        )
+      );
+    } else {
+      return (
+        data?.map((item: any, index: number) =>
+          <SideTapLane key={index}>
+            <SideTapLink
+              href={`/jaelog/${item?.location}`}
+              $color={commonTextColor[theme]}>
+              {item?.name}
+            </SideTapLink>
+          </SideTapLane>
+        )
+      );
+    };
+  };
 
   return (
     <SideTapContainer>
       <PostsCategory>
         Tags
       </PostsCategory>
-      {data?.map((item: any, index: number) =>
-        <SideTapLane key={index}>
-          <SideTapLink
-            href={`/jaelog/${param}/${item?.id}`}
-            $color={commonTextColor[theme]}>
-            {item?.name}
-          </SideTapLink>
-        </SideTapLane>
-      )}
+      {changeSideTap()}
     </SideTapContainer>
   )
 };
@@ -57,7 +91,7 @@ const SideTapLink = styled.a<{ $color: string }>`
   justify-content: start;
   align-items: center;
   padding: 0px 16px 0px 0px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.5px;
   color: ${(props) => props.$color};
