@@ -12,8 +12,6 @@ interface SideTapProps {
 
 const SideTap = ({ data, param }: SideTapProps) => {
 
-  console.log(data);
-
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const changeSideTap = () => {
@@ -61,6 +59,14 @@ const SideTap = ({ data, param }: SideTapProps) => {
       <PostsCategory>
         Tags
       </PostsCategory>
+      {(param !== 'main')
+        && <SideTapLane>
+          <SideTapLink
+            href='/jaelog'
+            $color={commonTextColor[theme]}>
+            메인으로 가기
+          </SideTapLink>
+        </SideTapLane>}
       {changeSideTap()}
     </SideTapContainer>
   )

@@ -54,9 +54,9 @@ const SitePage = () => {
         {blogData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
             <MainPostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
-              <PostCategory>
+              <PostLaneCategory>
                 # {categoryObj[item?.type]}
-              </PostCategory>
+              </PostLaneCategory>
               <MainTitleLane>
                 <PostTitle>
                   {item?.title}
@@ -97,6 +97,13 @@ export const PostsContainer = styled.ul`
   align-items: start;
   padding: 40px 24px 80px 24px;
   gap: 4px;
+`;
+
+export const CategoryWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 `;
 
 export const PostsCategory = styled.h1`
@@ -151,7 +158,7 @@ export const PostsLane = styled.a`
   }
 `;
 
-const PostCategory = styled.span`
+const PostLaneCategory = styled.span`
   font-size: 14px;
   font-weight: 400;
   color: #ee6e6e;
