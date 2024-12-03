@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { AdminButton, AdminButtonWrapper, PostDate, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer } from './SitePage';
+import { AdminButton, AdminButtonWrapper, PostDate, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { supabase } from '../utils/Supabase';
@@ -17,10 +17,10 @@ const ProjectListPage = () => {
   const connection = searchParam.get('cn');
 
   const theme = useSelector((state: RootState) => state.darkMode);
+  let hash: any;
 
   const [projectData, setProjectData] = useState<any>(null);
   const [tap, setTap] = useState<any>(null);
-  console.log('블로그 글', projectData);
 
   useEffect(() => {
     const postFetch = async () => {
@@ -36,6 +36,8 @@ const ProjectListPage = () => {
 
           setProjectData(projects?.data);
           setTap(connectionData?.data);
+
+          hash = connectionData?.data.find((item: any) => item.connection === connection);
         } catch (error) {
           console.error("Error fetching paginated data from Supabase: ", error);
         };
@@ -56,13 +58,18 @@ const ProjectListPage = () => {
         };
       };
     };
-    postFetch();
+    postFetch(); 
   }, []);
+
+  console.log('블로그 글', projectData, hash);
 
   return (
     <SiteContainer>
       <SideTap data={tap} param="projects" />
       <PostsContainer>
+        <PostsCategory>
+          {(connection) ? hash?.connection : '전체목록'}
+        </PostsCategory>
         {projectData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
             <PostsLane href={`/jaelog/${item?.type}/${item?.id}`}>

@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { PostsContainer, SiteContainer } from './SitePage';
+import { AdminButton, AdminButtonWrapper, PostDate, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
 import { supabase } from '../utils/Supabase';
 import { useSearchParams } from 'react-router-dom';
+import { cookies } from '../utils/Cookies';
+import { FaPenToSquare } from 'react-icons/fa6';
+import { FaTrashAlt } from 'react-icons/fa';
+import { commonTextColor } from '../styles/colorToken';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/config/configureStore';
 
 const PracticeListPage = () => {
 
     const [searchParam] = useSearchParams();
     const category = searchParam.get('cg');
 
+    const theme = useSelector((state: RootState) => state.darkMode);
+
     const [practice, setPractice] = useState<any>(null);
     const [tap, setTap] = useState<any>(null);
-
-    console.log('블로그 글', practice, tap);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,11 +57,39 @@ const PracticeListPage = () => {
         fetchData();
     }, []);
 
+    const hash = ((category !== null)  && (tap !== null))
+        ? tap?.find((item: any) => item.id === String(category))?.connection
+        : '전체목록';
+    console.log('블로그 글', practice, hash, category);
+
     return (
         <SiteContainer>
             <SideTap data={tap} param="practices" />
             <PostsContainer>
-
+                <PostsCategory>
+                    {/* {hash} */}
+                </PostsCategory>
+                {practice?.map((item: any, index: any) =>
+                    <PostsLaneContainer key={index}>
+                        <PostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
+                            <PostTitle>
+                                {item?.title}
+                            </PostTitle>
+                            <PostDate>
+                                {item?.created_at.slice(0, 10)}
+                            </PostDate>
+                            {(cookies())
+                                && <AdminButtonWrapper>
+                                    <AdminButton $color={commonTextColor[theme]}>
+                                        <FaPenToSquare />
+                                    </AdminButton>
+                                    <AdminButton $color={commonTextColor[theme]}>
+                                        <FaTrashAlt />
+                                    </AdminButton>
+                                </AdminButtonWrapper>}
+                        </PostsLane>
+                    </PostsLaneContainer>
+                )}
             </PostsContainer>
         </SiteContainer>
     )

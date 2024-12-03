@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { supabase } from '../utils/Supabase';
 
 const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const idValue = process.env.REACT_APP_MY_ID;
-  const passwordValue = process.env.REACT_APP_MY_PASSWORD;
+  const idValue = process.env.REACT_APP_MY_ID || '';
+  const emailValue = process.env.REACT_APP_SUPABASE_EMAIL || '';
+  const passwordValue = process.env.REACT_APP_MY_PASSWORD || '';
 
   const [login, setLogin] = useState<{
     id: string,
@@ -26,14 +28,27 @@ const LoginPage = () => {
     });
   };
 
-  const onSubmitLoginHandler = (e: any) => {
+  const onSubmitLoginHandler = async (e: any) => {
     e.preventDefault();
 
     if ((id !== idValue) || (password !== passwordValue)) return alert('아이디 혹은 비밀번호가 다릅니다.\n다시 입력해주세요.');
-    const now = new Date();
-    const expired = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    document.cookie = `sj-lg=${now.toISOString()}; expires=${expired.toUTCString()}; path=/`;
-    navigate('/jaelog');
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailValue,
+        password: passwordValue
+      })
+
+      if (error) throw error;
+
+      alert('로그인에 성공하였습니다.');
+      const now = new Date();
+      const expired = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      document.cookie = `sj-lg=${now.toISOString()}; expires=${expired.toUTCString()}; path=/`;
+      navigate('/jaelog');
+    } catch (error) {
+      alert('로그인에 실패하였습니다.');
+      console.error("Error fetching data from Supabase:", error);
+    };
   };
 
   return (
