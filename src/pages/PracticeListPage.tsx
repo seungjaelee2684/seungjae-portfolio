@@ -14,7 +14,7 @@ import { RootState } from '../store/config/configureStore';
 const PracticeListPage = () => {
 
     const [searchParam] = useSearchParams();
-    const category = searchParam.get('cg');
+    const category = searchParam.get('c');
 
     const theme = useSelector((state: RootState) => state.darkMode);
 
@@ -25,29 +25,29 @@ const PracticeListPage = () => {
         const fetchData = async () => {
             if (category) {
                 try {
-                    const [data, categoryData] = await Promise.all([
+                    const [practice, categoryData] = await Promise.all([
                         supabase.from('practices').select('*').eq('id', category).order('created_at', { ascending: false }),
-                        supabase.from('practices_category').select('*').order('created_at', { ascending: false })
+                        supabase.from('practices_category').select('category').eq('id', category).limit(1)
                     ]);
 
-                    if (data.error) throw data.error;
+                    if (practice.error) throw practice.error;
+                    if (categoryData.error) throw categoryData.error;
 
-                    setPractice(data?.data);
-                    setTap(categoryData?.data);
+                    setPractice(practice?.data);
+                    setTap(categoryData?.data[0]);
                 } catch (error) {
                     console.error("Error fetching paginated data from Supabase: ", error);
                 };
             } else {
                 try {
-                    const [data, categoryData] = await Promise.all([
-                        supabase.from('practices').select('*').order('created_at', { ascending: false }),
-                        supabase.from('practices_category').select('*').order('created_at', { ascending: false })
-                    ]);
+                    const { data, error } = await supabase
+                        .from('practices')
+                        .select('*')
+                        .order('created_at', { ascending: false });
 
-                    if (data.error) throw data.error;
+                    if (error) throw error;
 
-                    setPractice(data?.data);
-                    setTap(categoryData?.data);
+                    setPractice(data);
                 } catch (error) {
                     console.error("Error fetching paginated data from Supabase: ", error);
                 };
@@ -56,18 +56,14 @@ const PracticeListPage = () => {
 
         fetchData();
     }, []);
-
-    const hash = ((category !== null)  && (tap !== null))
-        ? tap?.find((item: any) => item.id === String(category))?.connection
-        : '전체목록';
-    console.log('블로그 글', practice, hash, category);
+    console.log('블로그 글', practice, tap);
 
     return (
         <SiteContainer>
-            <SideTap data={tap} param="practices" />
+            <SideTap />
             <PostsContainer>
                 <PostsCategory>
-                    {/* {hash} */}
+                    {(category) ? `${tap?.category} 항목` : '전체목록'}
                 </PostsCategory>
                 {practice?.map((item: any, index: any) =>
                     <PostsLaneContainer key={index}>

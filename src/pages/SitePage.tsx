@@ -23,8 +23,8 @@ const SitePage = () => {
     const fetchData = async () => {
       try {
         const [project, practice] = await Promise.all([
-          supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(10),
-          supabase.from('practices').select('*').order('created_at', { ascending: false }).limit(10),
+          supabase.from('projects').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
+          supabase.from('practices').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
         ]);
 
         if (project.error) throw project.error;
@@ -46,7 +46,7 @@ const SitePage = () => {
 
   return (
     <SiteContainer>
-      <SideTap data={sideTapList} param='main' />
+      <SideTap />
       <PostsContainer>
         <PostsCategory>
           최근 글
@@ -127,6 +127,7 @@ const MainPostsLane = styled.a`
   gap: 8px;
   border-radius: 10px;
   transition: all 0.3s;
+  user-select: none;
   cursor: pointer;
 
   &:hover {
@@ -151,6 +152,7 @@ export const PostsLane = styled.a`
   gap: 4px;
   border-radius: 10px;
   transition: all 0.3s;
+  user-select: none;
   cursor: pointer;
 
   &:hover {
