@@ -48,9 +48,15 @@ const SitePage = () => {
     <SiteContainer>
       <SideTap />
       <PostsContainer>
-        <PostsCategory>
-          최근 글
-        </PostsCategory>
+        <CategoryWrapper>
+          <PostsCategory>
+            최근 글
+          </PostsCategory>
+          {(cookies())
+            && <InsertButton href='/jaelog/insert'>
+              글쓰기
+            </InsertButton>}
+        </CategoryWrapper>
         {blogData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
             <MainPostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
@@ -66,9 +72,11 @@ const SitePage = () => {
                 </PostDate>
                 {(cookies())
                   && <AdminButtonWrapper>
-                    <AdminButton $color={commonTextColor[theme]}>
+                    <AdminLink
+                      href={`/jaelog/update/${item?.id}`}
+                      $color={commonTextColor[theme]}>
                       <FaPenToSquare />
-                    </AdminButton>
+                    </AdminLink>
                     <AdminButton $color={commonTextColor[theme]}>
                       <FaTrashAlt />
                     </AdminButton>
@@ -103,7 +111,7 @@ export const CategoryWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: start;
 `;
 
 export const PostsCategory = styled.h1`
@@ -111,6 +119,17 @@ export const PostsCategory = styled.h1`
   font-weight: 700;
   margin-bottom: 24px;
   user-select: none;
+`;
+
+export const InsertButton = styled.a`
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
 `;
 
 export const PostsLaneContainer = styled.li`
@@ -199,13 +218,32 @@ export const AdminButtonWrapper = styled.div`
 
 `;
 
+export const AdminLink = styled.a<{ $color: string }>`
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: ${(props) => props.$color};
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
+`;
+
 export const AdminButton = styled.button<{ $color: string }>`
   font-size: 16px;
   background-color: transparent;
   border: none;
   outline: none;
   color: ${(props) => props.$color};
+  transition: all 0.3s;
   cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
 `;
 
 export default SitePage;
