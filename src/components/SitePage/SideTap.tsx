@@ -9,6 +9,7 @@ import { sideTapList } from '../../utils/Category';
 
 const SideTap = () => {
 
+  const path = window.location.pathname;
   const theme = useSelector((state: RootState) => state.darkMode);
   const [tap, setTap] = useState<any>(null);
 
@@ -45,6 +46,14 @@ const SideTap = () => {
       <PostsCategory>
         Tags
       </PostsCategory>
+      {(path !== '/jaelog')
+        && <SideTapLane>
+          <SideTapLink
+            href='/jaelog'
+            $color={commonTextColor[theme]}>
+            메인으로 가기
+          </SideTapLink>
+        </SideTapLane>}
       {tap?.map((item: any, index: number) =>
         <SideTapLane key={index}>
           <SideTapLink
