@@ -1,73 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store/config/configureStore';
 import { commonTextColor, textLight } from '../../styles/colorToken';
 import { PostsCategory } from '../../pages/SitePage';
+import { supabase } from '../../utils/Supabase';
+import { sideTapList } from '../../utils/Category';
 
-interface SideTapProps {
-  data?: any;
-  param?: any;
-};
-
-const SideTap = ({ data, param }: SideTapProps) => {
+const SideTap = () => {
 
   const theme = useSelector((state: RootState) => state.darkMode);
+  const [tap, setTap] = useState<any>(null);
 
-  const changeSideTap = () => {
-    if (param === 'projects') {
-      return (
-        data?.map((item: any, index: number) =>
-          <SideTapLane key={index}>
-            <SideTapLink
-              href={`/jaelog/${param}?cn=${item?.id}`}
-              $color={commonTextColor[theme]}>
-              {item?.connection} ({item?.count})
-            </SideTapLink>
-          </SideTapLane>
-        )
-      );
-    } else if (param === 'practices') {
-      return (
-        data?.map((item: any, index: number) =>
-          <SideTapLane key={index}>
-            <SideTapLink
-              href={`/jaelog/${param}?cg=${item?.id}`}
-              $color={commonTextColor[theme]}>
-              {item?.category} ({item?.count})
-            </SideTapLink>
-          </SideTapLane>
-        )
-      );
-    } else {
-      return (
-        data?.map((item: any, index: number) =>
-          <SideTapLane key={index}>
-            <SideTapLink
-              href={`/jaelog/${item?.location}`}
-              $color={commonTextColor[theme]}>
-              {item?.name}
-            </SideTapLink>
-          </SideTapLane>
-        )
-      );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [project, practice] = await Promise.all([
+          supabase.from('projects_connection').select('*').order('created_at', { ascending: false }),
+          supabase.from('practices_category').select('*').order('created_at', { ascending: false })
+        ]);
+
+        if (project.error) throw project.error;
+        if (practice.error) throw practice.error;
+
+        const data = [
+          [],
+          project.data,
+          practice.data
+        ]
+
+        setTap(data);
+      } catch (error) {
+        console.error('Error fetching paginated data from Supabase: ', error);
+      };
     };
-  };
+
+    fetchData();
+  }, []);
+
+  console.log('사이드 탭', tap);
 
   return (
     <SideTapContainer>
       <PostsCategory>
         Tags
       </PostsCategory>
-      {(param !== 'main')
-        && <SideTapLane>
+      {tap?.map((item: any, index: number) =>
+        <SideTapLane key={index}>
           <SideTapLink
-            href='/jaelog'
+            href={`/jaelog/${sideTapList[index]?.location}`}
             $color={commonTextColor[theme]}>
-            메인으로 가기
+            {sideTapList[index]?.name}
           </SideTapLink>
-        </SideTapLane>}
-      {changeSideTap()}
+          {(index !== 0)
+            && <SideDetailTapLane>
+              {item?.map((list: any, idx: number) =>
+                <SideDetailTap
+                  key={idx}
+                  href={`/jaelog/${sideTapList[index]?.location}?c=${list.id}`}
+                  $color={commonTextColor[theme]}>
+                  ⦁ {(index === 1) ? list.connection : list.category} ({list.count})
+                </SideDetailTap>
+              )}
+            </SideDetailTapLane>}
+        </SideTapLane>
+      )}
     </SideTapContainer>
   )
 };
@@ -81,18 +78,23 @@ const SideTapContainer = styled.ul`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  border-right: 1px solid #e9e9e9;
   padding-top: 40px;
+  user-select: none;
+  gap: 8px;
 `;
 
 const SideTapLane = styled.li`
   width: 100%;
-  height: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 4px;
 `;
 
 const SideTapLink = styled.a<{ $color: string }>`
   width: 100%;
-  height: 100%;
+  height: 34px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -107,6 +109,21 @@ const SideTapLink = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+`;
+
+const SideDetailTapLane = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 2px;
+  padding-left: 6px;
+`;
+
+const SideDetailTap = styled(SideTapLink)`
+  font-size: 12px;
+  height: 22px;
 `;
 
 export default SideTap;
