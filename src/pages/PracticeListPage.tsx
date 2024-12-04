@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { AdminButton, AdminButtonWrapper, PostDate, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer } from './SitePage';
+import { AdminButton, AdminButtonWrapper, PostDate, PostLaneCategory, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer, TitleLane } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
 import { supabase } from '../utils/Supabase';
 import { useSearchParams } from 'react-router-dom';
@@ -26,7 +26,7 @@ const PracticeListPage = () => {
             if (category) {
                 try {
                     const [practice, categoryData] = await Promise.all([
-                        supabase.from('practices').select('*').eq('id', category).order('created_at', { ascending: false }),
+                        supabase.from('practices').select('id, title, created_at, type').eq('id', category).order('created_at', { ascending: false }),
                         supabase.from('practices_category').select('category').eq('id', category).limit(1)
                     ]);
 
@@ -42,7 +42,7 @@ const PracticeListPage = () => {
                 try {
                     const { data, error } = await supabase
                         .from('practices')
-                        .select('*')
+                        .select('id, title, created_at, type, category')
                         .order('created_at', { ascending: false });
 
                     if (error) throw error;
@@ -63,26 +63,32 @@ const PracticeListPage = () => {
             <SideTap />
             <PostsContainer>
                 <PostsCategory>
-                    {(category) ? `${tap?.category} 항목` : '전체목록'}
+                    {(category) ? `${tap?.category} 항목` : '전체목록(공부)'}
                 </PostsCategory>
                 {practice?.map((item: any, index: any) =>
                     <PostsLaneContainer key={index}>
                         <PostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
-                            <PostTitle>
-                                {item?.title}
-                            </PostTitle>
-                            <PostDate>
-                                {item?.created_at.slice(0, 10)}
-                            </PostDate>
-                            {(cookies())
-                                && <AdminButtonWrapper>
-                                    <AdminButton $color={commonTextColor[theme]}>
-                                        <FaPenToSquare />
-                                    </AdminButton>
-                                    <AdminButton $color={commonTextColor[theme]}>
-                                        <FaTrashAlt />
-                                    </AdminButton>
-                                </AdminButtonWrapper>}
+                            {(!category)
+                                && <PostLaneCategory>
+                                    # {item?.category}
+                                </PostLaneCategory>}
+                            <TitleLane>
+                                <PostTitle>
+                                    {item?.title}
+                                </PostTitle>
+                                <PostDate>
+                                    {item?.created_at.slice(0, 10)}
+                                </PostDate>
+                                {(cookies())
+                                    && <AdminButtonWrapper>
+                                        <AdminButton $color={commonTextColor[theme]}>
+                                            <FaPenToSquare />
+                                        </AdminButton>
+                                        <AdminButton $color={commonTextColor[theme]}>
+                                            <FaTrashAlt />
+                                        </AdminButton>
+                                    </AdminButtonWrapper>}
+                            </TitleLane>
                         </PostsLane>
                     </PostsLaneContainer>
                 )}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { AdminButton, AdminButtonWrapper, PostDate, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer } from './SitePage';
+import { AdminButton, AdminButtonWrapper, PostDate, PostLaneCategory, PostsCategory, PostsContainer, PostsLane, PostsLaneContainer, PostTitle, SiteContainer, TitleLane } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { supabase } from '../utils/Supabase';
@@ -42,7 +42,7 @@ const ProjectListPage = () => {
         try {
           const { data, error } = await supabase
             .from('projects')
-            .select('id, title, created_at, type')
+            .select('id, title, created_at, type, connection')
             .order('created_at', { ascending: false });
 
           if (error) throw error;
@@ -53,7 +53,7 @@ const ProjectListPage = () => {
         };
       };
     };
-    postFetch(); 
+    postFetch();
   }, []);
 
   console.log('블로그 글', projectData, tap);
@@ -63,26 +63,32 @@ const ProjectListPage = () => {
       <SideTap />
       <PostsContainer>
         <PostsCategory>
-          {(connection) ? `${tap?.connection} 소속` : '전체목록'}
+          {(connection) ? `${tap?.connection} 소속` : '전체목록(프로젝트)'}
         </PostsCategory>
         {projectData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
             <PostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
-              <PostTitle>
-                {item?.title}
-              </PostTitle>
-              <PostDate>
-                {item?.created_at.slice(0, 10)}
-              </PostDate>
-              {(cookies())
-                && <AdminButtonWrapper>
-                  <AdminButton $color={commonTextColor[theme]}>
-                    <FaPenToSquare />
-                  </AdminButton>
-                  <AdminButton $color={commonTextColor[theme]}>
-                    <FaTrashAlt />
-                  </AdminButton>
-                </AdminButtonWrapper>}
+              {(!connection)
+                && <PostLaneCategory>
+                  # {item?.connection}
+                </PostLaneCategory>}
+              <TitleLane>
+                <PostTitle>
+                  {item?.title}
+                </PostTitle>
+                <PostDate>
+                  {item?.created_at.slice(0, 10)}
+                </PostDate>
+                {(cookies())
+                  && <AdminButtonWrapper>
+                    <AdminButton $color={commonTextColor[theme]}>
+                      <FaPenToSquare />
+                    </AdminButton>
+                    <AdminButton $color={commonTextColor[theme]}>
+                      <FaTrashAlt />
+                    </AdminButton>
+                  </AdminButtonWrapper>}
+              </TitleLane>
             </PostsLane>
           </PostsLaneContainer>
         )}

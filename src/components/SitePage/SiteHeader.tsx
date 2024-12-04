@@ -80,13 +80,13 @@ const SiteHeaderContainer = styled.header`
 `;
 
 const SiteHeaderInWrapper = styled.nav`
-    width: 900px;
+    width: 980px;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 980px) {
         width: 94%;
     }
 `;
