@@ -59,11 +59,11 @@ const SitePage = () => {
         </CategoryWrapper>
         {blogData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
-            <MainPostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
+            <PostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
               <PostLaneCategory>
                 # {categoryObj[item?.type]}
               </PostLaneCategory>
-              <MainTitleLane>
+              <TitleLane>
                 <PostTitle>
                   {item?.title}
                 </PostTitle>
@@ -81,8 +81,8 @@ const SitePage = () => {
                       <FaTrashAlt />
                     </AdminButton>
                   </AdminButtonWrapper>}
-              </MainTitleLane>
-            </MainPostsLane>
+              </TitleLane>
+            </PostsLane>
           </PostsLaneContainer>
         )}
       </PostsContainer>
@@ -136,7 +136,7 @@ export const PostsLaneContainer = styled.li`
   width: 100%;
 `;
 
-const MainPostsLane = styled.a`
+export const PostsLane = styled.a`
   width: 100%;
   padding: 12px 16px;
   display: flex;
@@ -154,7 +154,7 @@ const MainPostsLane = styled.a`
   }
 `;
 
-const MainTitleLane = styled.div`
+export const TitleLane = styled.div`
   width: 100%;
   display: flex;
   justify-content: start;
@@ -162,24 +162,7 @@ const MainTitleLane = styled.div`
   gap: 4px;
 `;
 
-export const PostsLane = styled.a`
-  width: 100%;
-  padding: 16px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 4px;
-  border-radius: 10px;
-  transition: all 0.3s;
-  user-select: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e9edffc7;
-  }
-`;
-
-const PostLaneCategory = styled.span`
+export const PostLaneCategory = styled.span`
   font-size: 14px;
   font-weight: 400;
   color: #ee6e6e;
