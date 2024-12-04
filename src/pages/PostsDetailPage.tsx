@@ -13,7 +13,6 @@ const PostsDetailPage = () => {
   const { post, postId } = useParams();
 
   const [postDetail, setPostDetail] = useState<any>(null);
-  const [tap, setTap] = useState<any>([]);
   console.log('게시글 상세', postDetail);
 
   const Posts = () => {
@@ -27,43 +26,13 @@ const PostsDetailPage = () => {
         <PracticeDetail data={postDetail} />
       )
     } else {
-      return
+      return;
     };
   };
 
   useEffect(() => {
     const postData = async () => {
       if (!post || !postId) return;
-
-      if (post === 'projects') {
-        try {
-          const { data, error } = await supabase
-            .from('projects_connection')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-          if (error) throw error;
-
-          setTap(data);
-        } catch (error) {
-          console.error("Error fetching paginated data from Supabase: ", error);
-        };
-      } else if (post === 'practices') {
-        try {
-          const { data, error } = await supabase
-            .from('practices_category')
-            .select('*')
-            .order('created_at', { ascending: false });
-
-          if (error) throw error;
-
-          setTap(data);
-        } catch (error) {
-          console.error("Error fetching paginated data from Supabase: ", error);
-        };
-      } else {
-        setTap(sideTapList);
-      };
 
       try {
         const { data, error } = await supabase
@@ -84,7 +53,7 @@ const PostsDetailPage = () => {
 
   return (
     <SiteContainer>
-      <SideTap data={tap} param={post} />
+      <SideTap />
       {Posts()}
     </SiteContainer>
   )

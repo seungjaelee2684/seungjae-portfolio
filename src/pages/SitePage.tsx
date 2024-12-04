@@ -23,8 +23,8 @@ const SitePage = () => {
     const fetchData = async () => {
       try {
         const [project, practice] = await Promise.all([
-          supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(10),
-          supabase.from('practices').select('*').order('created_at', { ascending: false }).limit(10),
+          supabase.from('projects').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
+          supabase.from('practices').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
         ]);
 
         if (project.error) throw project.error;
@@ -46,7 +46,7 @@ const SitePage = () => {
 
   return (
     <SiteContainer>
-      <SideTap data={sideTapList} param='main' />
+      <SideTap />
       <PostsContainer>
         <PostsCategory>
           최근 글
@@ -54,9 +54,9 @@ const SitePage = () => {
         {blogData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
             <MainPostsLane href={`/jaelog/${item?.type}/${item?.id}`}>
-              <PostCategory>
+              <PostLaneCategory>
                 # {categoryObj[item?.type]}
-              </PostCategory>
+              </PostLaneCategory>
               <MainTitleLane>
                 <PostTitle>
                   {item?.title}
@@ -99,6 +99,13 @@ export const PostsContainer = styled.ul`
   gap: 4px;
 `;
 
+export const CategoryWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+`;
+
 export const PostsCategory = styled.h1`
   font-size: 18px;
   font-weight: 700;
@@ -120,6 +127,7 @@ const MainPostsLane = styled.a`
   gap: 8px;
   border-radius: 10px;
   transition: all 0.3s;
+  user-select: none;
   cursor: pointer;
 
   &:hover {
@@ -144,6 +152,7 @@ export const PostsLane = styled.a`
   gap: 4px;
   border-radius: 10px;
   transition: all 0.3s;
+  user-select: none;
   cursor: pointer;
 
   &:hover {
@@ -151,7 +160,7 @@ export const PostsLane = styled.a`
   }
 `;
 
-const PostCategory = styled.span`
+const PostLaneCategory = styled.span`
   font-size: 14px;
   font-weight: 400;
   color: #ee6e6e;
