@@ -41,6 +41,19 @@ const InsertPostPage = () => {
               value={title}
               onChange={onChangeInsertHandler} />
           </FormLane>
+          <FormLane>
+            <Expired>
+              제목
+              <Important>
+                *
+              </Important>
+            </Expired>
+            <LaneInput
+              $width='50%'
+              name='title'
+              value={title}
+              onChange={onChangeInsertHandler} />
+          </FormLane>
         </InsertFormContainer>
       </InsertContainer>
     </SiteContainer>
@@ -75,6 +88,7 @@ const InsertFormContainer = styled.form`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  gap: 24px;
 `;
 
 const FormLane = styled.div`
@@ -110,7 +124,6 @@ const LaneInput = styled.input<{ $width: string }>`
   border: 1px solid #b8b8b8;
   outline: none;
   font-size: 16px;
-  border-radius: 4px;
 
   &::placeholder {
     color: #b8b8b8;
