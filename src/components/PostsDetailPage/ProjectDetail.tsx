@@ -2,12 +2,20 @@ import React from 'react'
 import styled from 'styled-components';
 import { PostsCategory, PostsContainer } from '../../pages/SitePage';
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import DOMPurify from 'dompurify';
+import '../../styles/contentStyle.css';
 
 interface ProjectDetailProps {
   data: any;
 };
 
 const ProjectDetail = ({ data }: ProjectDetailProps) => {
+
+  const parser = new DOMParser();
+  const content = data?.content!;
+  const decodedString = parser.parseFromString(content, 'text/html').documentElement.innerHTML!;
+  const contentHtml = DOMPurify.sanitize(decodedString);
+
   return (
     <PostsContainer>
       <PostsCategory>
@@ -84,9 +92,7 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
         <ContentCategory>
           세부내용
         </ContentCategory>
-        <ContentSentence>
-          {data?.content}
-        </ContentSentence>
+        {(data) && <ContentSentence dangerouslySetInnerHTML={{ __html: contentHtml }} />}
       </ContentLane>
     </PostsContainer>
   )
