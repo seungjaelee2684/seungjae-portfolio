@@ -1,0 +1,13 @@
+ol,
+ul {
+    list-style: initial;
+    padding-left: 30px;
+}
+
+li {
+    list-style-type: initial;
+}
+
+h1, h2, h3, h4, h5, h6, b {
+    all: revert;
+}
