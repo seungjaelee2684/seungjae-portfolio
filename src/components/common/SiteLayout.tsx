@@ -42,7 +42,7 @@ const SiteLayout = () => {
       {(path === "/jaelog") && <Profile />}
       <Outlet />
       <FloatingButton
-        $opacity={(scroll > 300) ? '1' : '0'}
+        $opacity={(scroll > 200) ? '1' : '0'}
         $color={commonTextColor[theme]}
         onClick={onClickTopHandler}>
         <LiaArrowUpSolid />
