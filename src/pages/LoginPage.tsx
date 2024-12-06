@@ -113,7 +113,7 @@ const LoginPageLayout = styled.article`
 const LoginContainer = styled.form`
   width: 500px;
   min-height: 350px;
-  border: 1px solid #b8b8b8;
+  border: 2px solid #ee6e6e;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,7 +150,7 @@ const InputLabel = styled.label`
 
 const InputTagBox = styled.div`
   width: 100%;
-  height: 28px;
+  height: 32px;
   border: 1px solid #b8b8b8;
   display: flex;
   align-items: center;
@@ -160,27 +160,20 @@ const InputTagBox = styled.div`
   padding: 0px 12px;
   transition: all 0.3s;
   box-sizing: border-box;
+
+  &:hover {
+    border: 1px solid #525050;
+  }
 `;
 
 const InputTag = styled.input`
   width: 100%;
   outline: none;
   border: none;
+  font-size: 14px;
 
   &::placeholder {
     color: #b8b8b8;
-  }
-
-  &:hover {
-    ${InputTagBox} {
-      border: 1px solid #525050;
-    }
-  }
-
-  &:focus {
-    ${InputTagBox} {
-      border: 1px solid #ee6e6e;
-    }
   }
 `;
 

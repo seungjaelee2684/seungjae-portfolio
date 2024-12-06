@@ -11,6 +11,7 @@ import { RootState } from '../store/config/configureStore';
 import { commonTextColor } from '../styles/colorToken';
 import { categoryObj, sideTapList } from '../utils/Category';
 import { cookies } from '../utils/Cookies';
+import { BsPencilSquare } from "react-icons/bs";
 
 const SitePage = () => {
 
@@ -54,6 +55,7 @@ const SitePage = () => {
           </PostsCategory>
           {(cookies())
             && <InsertButton href='/jaelog/insert'>
+              <BsPencilSquare />
               글쓰기
             </InsertButton>}
         </CategoryWrapper>
@@ -124,6 +126,10 @@ export const PostsCategory = styled.h1`
 export const InsertButton = styled.a`
   font-size: 16px;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   transition: all 0.3s;
   cursor: pointer;
 
@@ -197,7 +203,7 @@ export const AdminButtonWrapper = styled.div`
   width: fit-content;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 
 `;
 

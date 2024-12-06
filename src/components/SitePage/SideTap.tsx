@@ -6,6 +6,8 @@ import { commonTextColor, textLight } from '../../styles/colorToken';
 import { PostsCategory } from '../../pages/SitePage';
 import { supabase } from '../../utils/Supabase';
 import { sideTapList } from '../../utils/Category';
+import { cookies } from '../../utils/Cookies';
+import { IoIosSettings } from "react-icons/io";
 
 const SideTap = () => {
 
@@ -74,6 +76,15 @@ const SideTap = () => {
             </SideDetailTapLane>}
         </SideTapLane>
       )}
+      {(cookies())
+        && <SideTapLane style={{ marginTop: '30px' }}>
+          <SideTapLink
+            href={`/jaelog/option/update`}
+            $color={commonTextColor[theme]}>
+            <IoIosSettings />
+            탭 수정하러가기
+          </SideTapLink>
+        </SideTapLane>}
     </SideTapContainer>
   )
 };
@@ -107,6 +118,7 @@ const SideTapLink = styled.a<{ $color: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
+  gap: 4px;
   padding: 0px 16px 0px 0px;
   font-size: 14px;
   font-weight: 500;

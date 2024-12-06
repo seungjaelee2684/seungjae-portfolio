@@ -21,6 +21,8 @@ const ProjectListPage = () => {
   const [projectData, setProjectData] = useState<any>(null);
   const [tap, setTap] = useState<any>(null);
 
+  const tapTitle = tap?.connection || '';
+
   useEffect(() => {
     const postFetch = async () => {
       if (connection) {
@@ -63,7 +65,7 @@ const ProjectListPage = () => {
       <SideTap />
       <PostsContainer>
         <PostsCategory>
-          {(connection) ? `${tap?.connection} 소속` : '전체목록(프로젝트)'}
+          {(connection) ? `${tapTitle} 소속` : '전체목록(프로젝트)'}
         </PostsCategory>
         {projectData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>

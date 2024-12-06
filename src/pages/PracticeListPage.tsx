@@ -21,6 +21,8 @@ const PracticeListPage = () => {
     const [practice, setPractice] = useState<any>(null);
     const [tap, setTap] = useState<any>(null);
 
+    const tapTitle = tap?.category || '';
+
     useEffect(() => {
         const fetchData = async () => {
             if (category) {
@@ -63,7 +65,7 @@ const PracticeListPage = () => {
             <SideTap />
             <PostsContainer>
                 <PostsCategory>
-                    {(category) ? `${tap?.category} 항목` : '전체목록(공부)'}
+                    {(category) ? `${tapTitle} 항목` : '전체목록(공부)'}
                 </PostsCategory>
                 {practice?.map((item: any, index: any) =>
                     <PostsLaneContainer key={index}>
