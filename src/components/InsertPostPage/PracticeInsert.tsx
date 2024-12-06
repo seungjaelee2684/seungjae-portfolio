@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components';
-import { Button, ButtonWrapper, Expired, FormLane, Important, InsertFormContainer, LaneInput, LaneTextarea } from './ProjectInsert';
+import { Button, ButtonWrapper, DropdownLink, Expired, FormLane, Important, InsertFormContainer, LaneInput, LaneTextarea } from './ProjectInsert';
 import DropDownMenu from '../common/DropDownMenu';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from '../../utils/Editor';
 import { supabase } from '../../utils/Supabase';
+import { FaRegPenToSquare } from 'react-icons/fa6';
 
 interface PracticeInsertProps {
   isPractice: boolean;
@@ -62,10 +63,10 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
           .insert([uploadData])
           .select();
 
-          if (error) {
-            alert('저장에 실패하였습니다.');
-            throw error;
-          };
+        if (error) {
+          alert('저장에 실패하였습니다.');
+          throw error;
+        };
       } catch (error) {
         alert('저장에 실패하였습니다.');
         console.error("Error fetching paginated data from Supabase: ", error);
@@ -105,6 +106,10 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
           value={dropdownValue}
           setValue={setDropdownValue}
           type={isPractice} />
+        <DropdownLink href='/jaelog/option/update'>
+          <FaRegPenToSquare />
+          소속 업데이트
+        </DropdownLink>
       </FormLane>
       <FormLane>
         <Expired>
