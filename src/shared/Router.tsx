@@ -44,7 +44,6 @@ const Router = () => {
             </Route>
             <Route element={<SiteLayout />}>
               <Route path='/jaelog' element={<SitePage />} caseSensitive />
-              <Route path='/jaelog/contact' element={<ContactPage />} caseSensitive />
               <Route path='/jaelog/projects' element={<ProjectListPage />} caseSensitive />
               <Route path='/jaelog/practices' element={<PracticeListPage />} caseSensitive />
               <Route path='/jaelog/:post/:postId' element={<PostsDetailPage />} caseSensitive />
@@ -54,6 +53,7 @@ const Router = () => {
             </Route>
             <Route path='/jaelog/login' element={<LoginPage />} caseSensitive />
             <Route path='/connect' element={<ConnectPage />} caseSensitive />
+            <Route path='/contact' element={<ContactPage />} caseSensitive />
           </Routes>
         </Suspense>
       </AnimatePresence>
