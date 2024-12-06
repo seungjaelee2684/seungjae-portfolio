@@ -30,7 +30,7 @@ const ConnectPage = () => {
         </SubTitle>
         <ButtonWrapper>
           <Button>
-            <ButtonTitle onClick={() => navigate("/jaelog/contact")}>
+            <ButtonTitle onClick={() => navigate("/contact")}>
               이메일 보내기
             </ButtonTitle>
           </Button>
