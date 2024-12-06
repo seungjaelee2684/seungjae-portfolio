@@ -87,7 +87,7 @@ const StartPage = () => {
               onMouseOver={() => setInfo(4)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
-                navigate("/jaelog/contact");
+                navigate("/contact");
               }}>
               <HoverButton />
               <ButtonText>
