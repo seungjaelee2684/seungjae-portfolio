@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { supabase } from '../utils/Supabase';
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 const LoginPage = () => {
 
@@ -11,6 +12,7 @@ const LoginPage = () => {
   const emailValue = process.env.REACT_APP_SUPABASE_EMAIL || '';
   const passwordValue = process.env.REACT_APP_MY_PASSWORD || '';
 
+  const [isView, setIsView] = useState<boolean>(false);
   const [login, setLogin] = useState<{
     id: string,
     password: string
@@ -26,6 +28,11 @@ const LoginPage = () => {
       ...login,
       [name]: value
     });
+  };
+
+  const onClickViewHandler = (e: any) => {
+    e.preventDefault();
+    setIsView(!isView);
   };
 
   const onSubmitLoginHandler = async (e: any) => {
@@ -61,23 +68,30 @@ const LoginPage = () => {
           <InputLabel>
             ID:
           </InputLabel>
-          <InputTag
-            type='text'
-            name='id'
-            value={id}
-            placeholder='아이디'
-            onChange={onChangeLoginHandler} />
+          <InputTagBox>
+            <InputTag
+              type='text'
+              name='id'
+              value={id}
+              placeholder='아이디'
+              onChange={onChangeLoginHandler} />
+          </InputTagBox>
         </InputWrapper>
         <InputWrapper>
           <InputLabel>
             PASSWORD:
           </InputLabel>
-          <InputTag
-            type='password'
-            name='password'
-            value={password}
-            placeholder='패스워드'
-            onChange={onChangeLoginHandler} />
+          <InputTagBox>
+            <InputTag
+              type={(isView) ? 'text' : 'password'}
+              name='password'
+              value={password}
+              placeholder='패스워드'
+              onChange={onChangeLoginHandler} />
+            <SeeIcon onClick={onClickViewHandler}>
+              {(isView) ? <IoEyeOff /> : <IoEye />}
+            </SeeIcon>
+          </InputTagBox>
         </InputWrapper>
         <LoginButton onClick={onSubmitLoginHandler}>
           LOGIN
@@ -134,28 +148,49 @@ const InputLabel = styled.label`
   text-align: start;
 `;
 
-const InputTag = styled.input`
+const InputTagBox = styled.div`
   width: 100%;
   height: 28px;
   border: 1px solid #b8b8b8;
   display: flex;
   align-items: center;
+  gap: 4px;
   outline: none;
   border-radius: 4px;
   padding: 0px 12px;
   transition: all 0.3s;
   box-sizing: border-box;
+`;
+
+const InputTag = styled.input`
+  width: 100%;
+  outline: none;
+  border: none;
 
   &::placeholder {
     color: #b8b8b8;
   }
 
   &:hover {
-    border: 1px solid #525050;
+    ${InputTagBox} {
+      border: 1px solid #525050;
+    }
   }
 
   &:focus {
-    border: 1px solid #ee6e6e;
+    ${InputTagBox} {
+      border: 1px solid #ee6e6e;
+    }
+  }
+`;
+
+const SeeIcon = styled.span`
+  font-size: 16px;
+  color: #9c9c9c;
+  cursor: pointer;
+
+  &:hover {
+    color: #222020;
   }
 `;
 
