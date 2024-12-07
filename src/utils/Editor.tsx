@@ -1,5 +1,4 @@
 import hljs from "highlight.js";
-import Quill from "quill";
 
 hljs.configure({ languages: ['javascript', 'python'] });
 
