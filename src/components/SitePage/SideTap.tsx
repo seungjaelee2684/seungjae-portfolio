@@ -6,12 +6,23 @@ import { commonTextColor, textLight } from '../../styles/colorToken';
 import { PostsCategory } from '../../pages/SitePage';
 import { supabase } from '../../utils/Supabase';
 import { sideTapList } from '../../utils/Category';
+import { cookies } from '../../utils/Cookies';
+import { IoIosSettings } from "react-icons/io";
 
 const SideTap = () => {
 
   const path = window.location.pathname;
   const theme = useSelector((state: RootState) => state.darkMode);
   const [tap, setTap] = useState<any>(null);
+
+  const linkChange = (index: number, item: any) => {
+    if (!item) return;
+    if (index === 1) {
+      return `/jaelog/${sideTapList[index]?.location}?c=${item.connection}`;
+    } else if (index === 2) {
+      return `/jaelog/${sideTapList[index]?.location}?c=${item.category}`;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +77,7 @@ const SideTap = () => {
               {item?.map((list: any, idx: number) =>
                 <SideDetailTap
                   key={idx}
-                  href={`/jaelog/${sideTapList[index]?.location}?c=${list.id}`}
+                  href={linkChange(index, list)}
                   $color={commonTextColor[theme]}>
                   ⦁ {(index === 1) ? list.connection : list.category} ({list.count})
                 </SideDetailTap>
@@ -74,6 +85,15 @@ const SideTap = () => {
             </SideDetailTapLane>}
         </SideTapLane>
       )}
+      {(cookies())
+        && <SideTapLane style={{ marginTop: '30px' }}>
+          <SideTapLink
+            href={`/jaelog/option/update`}
+            $color={commonTextColor[theme]}>
+            <IoIosSettings />
+            탭 수정하러가기
+          </SideTapLink>
+        </SideTapLane>}
     </SideTapContainer>
   )
 };
@@ -107,6 +127,7 @@ const SideTapLink = styled.a<{ $color: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
+  gap: 4px;
   padding: 0px 16px 0px 0px;
   font-size: 14px;
   font-weight: 500;

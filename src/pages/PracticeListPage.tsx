@@ -19,22 +19,21 @@ const PracticeListPage = () => {
     const theme = useSelector((state: RootState) => state.darkMode);
 
     const [practice, setPractice] = useState<any>(null);
-    const [tap, setTap] = useState<any>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             if (category) {
                 try {
-                    const [practice, categoryData] = await Promise.all([
-                        supabase.from('practices').select('id, title, created_at, type').eq('id', category).order('created_at', { ascending: false }),
-                        supabase.from('practices_category').select('category').eq('id', category).limit(1)
-                    ]);
+                    const { data, error } = await supabase
+                        .from('practices')
+                        .select('id, title, created_at, type')
+                        .eq('category', category)
+                        .order('created_at', { ascending: false })
+                        .limit(20);
 
-                    if (practice.error) throw practice.error;
-                    if (categoryData.error) throw categoryData.error;
+                    if (error) throw error;
 
-                    setPractice(practice?.data);
-                    setTap(categoryData?.data[0]);
+                    setPractice(data);
                 } catch (error) {
                     console.error("Error fetching paginated data from Supabase: ", error);
                 };
@@ -43,7 +42,8 @@ const PracticeListPage = () => {
                     const { data, error } = await supabase
                         .from('practices')
                         .select('id, title, created_at, type, category')
-                        .order('created_at', { ascending: false });
+                        .order('created_at', { ascending: false })
+                        .limit(10);
 
                     if (error) throw error;
 
@@ -56,14 +56,14 @@ const PracticeListPage = () => {
 
         fetchData();
     }, []);
-    console.log('블로그 글', practice, tap);
+    console.log('블로그 글', practice, category);
 
     return (
         <SiteContainer>
             <SideTap />
             <PostsContainer>
                 <PostsCategory>
-                    {(category) ? `${tap?.category} 항목` : '전체목록(공부)'}
+                    {(category) ? `${category} 항목` : '전체목록(공부)'}
                 </PostsCategory>
                 {practice?.map((item: any, index: any) =>
                     <PostsLaneContainer key={index}>

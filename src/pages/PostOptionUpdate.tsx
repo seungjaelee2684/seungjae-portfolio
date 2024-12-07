@@ -7,6 +7,7 @@ import { GoPlus } from "react-icons/go";
 
 const PostOptionUpdate = () => {
 
+  const [success, setSuccess] = useState<boolean>(false);
   const [option, setOption] = useState<any>({
     connection: null,
     category: null
@@ -51,6 +52,9 @@ const PostOptionUpdate = () => {
               alert('저장에 실패하였습니다.\n다시 시도해주세요.');
               throw error
             };
+
+            setAddOption({ ...addOption, addConnection: null });
+            setSuccess(!success);
         } catch (error) {
           alert('저장에 실패하였습니다.\n다시 시도해주세요.');
           console.error("Error fetching paginated data from Supabase: ", error);
@@ -73,6 +77,9 @@ const PostOptionUpdate = () => {
               alert('저장에 실패하였습니다.\n다시 시도해주세요.');
               throw error
             };
+
+            setAddOption({ ...addOption, addCategory: null });
+            setSuccess(!success);
         } catch (error) {
           alert('저장에 실패하였습니다.\n다시 시도해주세요.');
           console.error("Error fetching paginated data from Supabase: ", error);
@@ -97,6 +104,8 @@ const PostOptionUpdate = () => {
               alert('삭제에 실패하였습니다.\n다시 시도해주세요.');
               throw error
             };
+
+            setSuccess(!success);
         } catch (error) {
           alert('삭제에 실패하였습니다.\n다시 시도해주세요.');
           console.error("Error fetching paginated data from Supabase: ", error);
@@ -117,6 +126,8 @@ const PostOptionUpdate = () => {
               alert('삭제에 실패하였습니다.\n다시 시도해주세요.');
               throw error
             };
+
+            setSuccess(!success);
         } catch (error) {
           alert('삭제에 실패하였습니다.\n다시 시도해주세요.');
           console.error("Error fetching paginated data from Supabase: ", error);
@@ -149,7 +160,7 @@ const PostOptionUpdate = () => {
     };
 
     fetchData();
-  }, []);
+  }, [success]);
 
   return (
     <OptionUpdateContainer>

@@ -7,6 +7,8 @@ import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from '../../utils/Editor';
 import { supabase } from '../../utils/Supabase';
 import { FaRegPenToSquare } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+
 
 interface PracticeInsertProps {
   isPractice: boolean;
@@ -16,6 +18,8 @@ interface PracticeInsertProps {
 };
 
 const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: PracticeInsertProps) => {
+
+  const navigate = useNavigate();
 
   const [insertData, setInsertData] = useState<{
     title: string,
@@ -51,26 +55,34 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
     const uploadData = {
       ...insertData,
       category: dropdownValue,
-      type: (isPractice) ? 'practices' : 'projects'
+      type: 'practices'
     };
 
     const isUpload = window.confirm('저장하시겠습니까?');
 
     const uploadFetch = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('practices')
-          .insert([uploadData])
-          .select();
+      const { data, error } = await supabase
+        .from('practices_category')
+        .select('count')
+        .eq('category', dropdownValue)
+        .single();
 
-        if (error) {
-          alert('저장에 실패하였습니다.');
-          throw error;
-        };
-      } catch (error) {
+      if (error) {
         alert('저장에 실패하였습니다.');
-        console.error("Error fetching paginated data from Supabase: ", error);
+        throw error;
       };
+
+      const [practice, categoryCount] = await Promise.all([
+        supabase.from('practices').insert([uploadData]).select(),
+        supabase.from('practices_category').update({ count: data.count + 1 }).eq('category', dropdownValue)
+      ]);
+
+      if (practice.error || categoryCount.error) {
+        alert('저장에 실패하였습니다.');
+        throw error;
+      };
+
+      navigate(`/jaelog/practices`);
     };
 
     if (isUpload) {
@@ -108,7 +120,7 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
           type={isPractice} />
         <DropdownLink href='/jaelog/option/update'>
           <FaRegPenToSquare />
-          소속 업데이트
+          카테고리 추가/수정
         </DropdownLink>
       </FormLane>
       <FormLane>
@@ -128,11 +140,6 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
             width: '100%',
             height: '500px'
           }} />
-        {/* <LaneTextarea
-          name='content'
-          value={content}
-          placeholder='내용을 입력해주세요.'
-           /> */}
       </FormLane>
       <ButtonWrapper>
         <Button onClick={onSubmitUploadHandler}>

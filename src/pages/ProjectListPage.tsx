@@ -19,22 +19,21 @@ const ProjectListPage = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const [projectData, setProjectData] = useState<any>(null);
-  const [tap, setTap] = useState<any>(null);
 
   useEffect(() => {
     const postFetch = async () => {
       if (connection) {
         try {
-          const [projects, connectionData] = await Promise.all([
-            supabase.from('projects').select('id, title, created_at, type').eq('id', connection).order('created_at', { ascending: false }),
-            supabase.from('projects_connection').select('connection').eq('id', connection).limit(1)
-          ]);
+          const { data, error } = await supabase
+            .from('projects')
+            .select('id, title, created_at, type')
+            .eq('connection', connection)
+            .order('created_at', { ascending: false })
+            .limit(20);
 
-          if (projects.error) throw projects.error;
-          if (connectionData.error) throw connectionData.error;
+          if (error) throw error;
 
-          setProjectData(projects?.data);
-          setTap(connectionData?.data[0]);
+          setProjectData(data);
         } catch (error) {
           console.error("Error fetching paginated data from Supabase: ", error);
         };
@@ -43,7 +42,8 @@ const ProjectListPage = () => {
           const { data, error } = await supabase
             .from('projects')
             .select('id, title, created_at, type, connection')
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: false })
+            .limit(10);
 
           if (error) throw error;
 
@@ -56,14 +56,14 @@ const ProjectListPage = () => {
     postFetch();
   }, []);
 
-  console.log('블로그 글', projectData, tap);
+  console.log('블로그 글', projectData);
 
   return (
     <SiteContainer>
       <SideTap />
       <PostsContainer>
         <PostsCategory>
-          {(connection) ? `${tap?.connection} 소속` : '전체목록(프로젝트)'}
+          {(connection) ? `${connection} 소속` : '전체목록(프로젝트)'}
         </PostsCategory>
         {projectData?.map((item: any, index: any) =>
           <PostsLaneContainer key={index}>
