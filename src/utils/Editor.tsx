@@ -1,3 +1,8 @@
+import hljs from "highlight.js";
+import Quill from "quill";
+
+hljs.configure({ languages: ['javascript', 'python'] });
+
 export const formats = [
   'font',
   'header',
@@ -6,6 +11,7 @@ export const formats = [
   'underline',
   'strike',
   'blockquote',
+  'code-block',
   'list',
   'bullet',
   'indent',
@@ -23,7 +29,7 @@ export const modules = {
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       [{ size: ['small', false, 'large', 'huge'] }],
       [{ align: [] }],
-      ['bold', 'italic', 'underline', 'strike'],
+      ['bold', 'italic', 'underline', 'strike', 'code-block'],
       [{ list: 'ordered' }, { list: 'bullet' }, 'link', { indent: '-1' }, { indent: '+1' }],
       [
         {
@@ -35,5 +41,8 @@ export const modules = {
         ['clean'],
       ],
     ],
+  },
+  syntax: {
+    highlight: (text: string) => hljs.highlightAuto(text).value,
   },
 };
