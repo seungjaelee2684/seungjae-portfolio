@@ -7,9 +7,10 @@ import '../../styles/contentStyle.css';
 
 interface ProjectDetailProps {
   data: any;
+  stack: any;
 };
 
-const ProjectDetail = ({ data }: ProjectDetailProps) => {
+const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
 
   const parser = new DOMParser();
   const content = data?.content!;
@@ -63,13 +64,11 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
         <ContentSentence>
           {data?.connection}
         </ContentSentence>
-      </ContentLane>
-      <ContentLane>
         <ContentCategory>
           인원수
         </ContentCategory>
         <ContentSentence>
-          {data?.member}명
+          {data?.member} 명
         </ContentSentence>
       </ContentLane>
       <ContentLane>
@@ -82,6 +81,26 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
       </ContentLane>
       <ContentLane>
         <ContentCategory>
+          기술스택
+        </ContentCategory>
+        <StackWrapper>
+          {stack?.map((item: any, index: number) =>
+            <StackList
+              key={index}
+              $color={item?.color}>
+              <StackIcon
+                dangerouslySetInnerHTML={{
+                  __html: item?.icon.replace('<svg', `<svg fill=#ffffff`)
+                }}
+                role="img"
+                aria-label={`Icon for ${item?.stack}`} />
+              {item?.stack}
+            </StackList>
+          )}
+        </StackWrapper>
+      </ContentLane>
+      <ContentLane>
+        <ContentCategory>
           담당업무
         </ContentCategory>
         <ContentSentence>
@@ -89,9 +108,6 @@ const ProjectDetail = ({ data }: ProjectDetailProps) => {
         </ContentSentence>
       </ContentLane>
       <ContentLane style={{ borderBottom: 'none' }}>
-        <ContentCategory>
-          세부내용
-        </ContentCategory>
         {(data) && <ContentSentence dangerouslySetInnerHTML={{ __html: contentHtml }} />}
       </ContentLane>
     </PostsContainer>
@@ -133,7 +149,7 @@ const ContentSentence = styled.p`
 `;
 
 const UrlLink = styled.a`
-  width: 100%;
+  width: fit-content;
   text-align: start;
   white-space: pre-line;
   font-size: 16px;
@@ -151,6 +167,37 @@ const UrlLink = styled.a`
 const LinkIcon = styled.span`
   font-size: 14px;
   margin-right: 6px;
+`;
+
+const StackWrapper = styled.ul`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
+
+const StackList = styled.li<{ $color: string }>`
+  width: fit-content;
+  height: 32px;
+  padding: 0px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  background-color: ${(props) => props.$color};
+  color: #ffffff;
+  border: 1px solid;
+  border-radius: 20px;
+  user-select: none;
+`;
+
+const StackIcon = styled.div`
+  width: 20px;
+  height: 20px;
 `;
 
 export default ProjectDetail;

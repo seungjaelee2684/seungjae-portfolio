@@ -28,7 +28,8 @@ const PracticeListPage = () => {
                         .from('practices')
                         .select('id, title, created_at, type')
                         .eq('category', category)
-                        .order('created_at', { ascending: false });
+                        .order('created_at', { ascending: false })
+                        .limit(20);
 
                     if (error) throw error;
 
@@ -41,7 +42,8 @@ const PracticeListPage = () => {
                     const { data, error } = await supabase
                         .from('practices')
                         .select('id, title, created_at, type, category')
-                        .order('created_at', { ascending: false });
+                        .order('created_at', { ascending: false })
+                        .limit(10);
 
                     if (error) throw error;
 

@@ -52,6 +52,8 @@ const PostOptionUpdate = () => {
               alert('저장에 실패하였습니다.\n다시 시도해주세요.');
               throw error
             };
+
+            setAddOption({ ...addOption, addConnection: null });
             setSuccess(!success);
         } catch (error) {
           alert('저장에 실패하였습니다.\n다시 시도해주세요.');
@@ -76,6 +78,7 @@ const PostOptionUpdate = () => {
               throw error
             };
 
+            setAddOption({ ...addOption, addCategory: null });
             setSuccess(!success);
         } catch (error) {
           alert('저장에 실패하였습니다.\n다시 시도해주세요.');
