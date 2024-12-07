@@ -126,6 +126,7 @@ const DropDownMenuBox = styled.ul<{ $bgcolor: string }>`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  gap: 8px;
   overflow-y: auto;
   border: 1px solid #b8b8b8;
   background-color: ${(props) => props.$bgcolor};
@@ -134,7 +135,7 @@ const DropDownMenuBox = styled.ul<{ $bgcolor: string }>`
   left: -0.5px;
   right: 0;
   z-index: 19;
-  padding: 8px 2px;
+  padding: 8px 4px;
 `;
 
 const DropDownList = styled.li`

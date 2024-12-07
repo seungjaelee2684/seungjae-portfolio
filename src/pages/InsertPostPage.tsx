@@ -25,6 +25,7 @@ const InsertPostPage = () => {
         const { data, error } = await supabase
           .from('projects_connection')
           .select('connection')
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
 
@@ -39,6 +40,7 @@ const InsertPostPage = () => {
         const { data, error } = await supabase
           .from('practices_category')
           .select('category')
+          .order('created_at', { ascending: false });
 
         if (error) throw error;
 

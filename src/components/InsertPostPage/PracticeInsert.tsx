@@ -120,7 +120,7 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
           type={isPractice} />
         <DropdownLink href='/jaelog/option/update'>
           <FaRegPenToSquare />
-          카테고리 업데이트
+          카테고리 추가/수정
         </DropdownLink>
       </FormLane>
       <FormLane>

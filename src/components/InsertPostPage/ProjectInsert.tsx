@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import DropDownMenu from '../common/DropDownMenu';
 import { FaRegPenToSquare } from "react-icons/fa6";
 import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from '../../utils/Editor';
+import ReactQuill from 'react-quill';
+import { supabase } from '../../utils/Supabase';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectInsertProps {
   isPractice: boolean;
@@ -13,11 +17,14 @@ interface ProjectInsertProps {
 
 const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: ProjectInsertProps) => {
 
+  const navigate = useNavigate();
+
   const [insertData, setInsertData] = useState<{
     title: string,
     start_date: string,
     end_date: string,
     role: string,
+    url: string,
     description: string,
     member: number,
     work: string,
@@ -27,6 +34,7 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
     start_date: '',
     end_date: '',
     role: '',
+    url: '',
     description: '',
     member: 0,
     work: '',
@@ -37,6 +45,7 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
     start_date,
     end_date,
     role,
+    url,
     description,
     member,
     work,
@@ -57,6 +66,62 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
         ...insertData,
         [name]: value
       });
+    };
+  };
+
+  const onChangeContentHandler = (content: string) => {
+    setInsertData({
+      ...insertData,
+      content: content
+    });
+  };
+
+  const onClickSaveHandler = (e: any) => {
+    e.preventDefault();
+    if (title.length <= 0) return alert('프로젝트 명을 입력해주세요.');
+    if (!dropdownValue) return alert('소속를 선택해주세요.');
+    if (start_date.length <= 0) return alert('시작일을 입력해주세요.');
+    if (end_date.length <= 0) return alert('종료일을 입력해주세요.');
+    if (!member) return alert('팀원 수를 입력해주세요.');
+    if (url.length <= 0) return alert('링크를 입력해주세요.');
+    if (role.length <= 0) return alert('역할을 입력해주세요.');
+    if (work.length <= 0) return alert('담당 업무를 입력해주세요.');
+
+    const uploadData = {
+      ...insertData,
+      connection: dropdownValue,
+      type: 'projects'
+    };
+
+    const isUpload = window.confirm('저장하시겠습니까?');
+
+    const uploadFetch = async () => {
+      const { data, error } = await supabase
+        .from('projects_connection')
+        .select('count')
+        .eq('connection', dropdownValue)
+        .single();
+
+      if (error) {
+        alert('저장에 실패하였습니다.');
+        throw error;
+      };
+
+      const [project, connectionCount] = await Promise.all([
+        supabase.from('projects').insert([uploadData]).select(),
+        supabase.from('projects_connection').update({ count: data.count + 1 }).eq('connection', dropdownValue)
+      ]);
+
+      if (project.error || connectionCount.error) {
+        alert('저장에 실패하였습니다.');
+        throw error;
+      };
+
+      navigate(`/jaelog/projects`);
+    };
+
+    if (isUpload) {
+      uploadFetch();
     };
   };
 
@@ -90,7 +155,7 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
           type={isPractice} />
         <DropdownLink href='/jaelog/option/update'>
           <FaRegPenToSquare />
-          소속 업데이트
+          소속 추가/수정
         </DropdownLink>
       </FormLane>
       <FormLane>
@@ -135,6 +200,20 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
         <Expired>
           명
         </Expired>
+      </FormLane>
+      <FormLane>
+        <Expired>
+          주요링크
+          <Important>
+            *
+          </Important>
+        </Expired>
+        <LaneInput
+          $width='100%'
+          name='url'
+          value={url}
+          placeholder='링크를 입력해주세요.'
+          onChange={onChangeInsertHandler} />
       </FormLane>
       <FormLane>
         <Expired>
@@ -185,14 +264,19 @@ const ProjectInsert = ({ isPractice, option, dropdownValue, setDropdownValue }: 
             *
           </Important>
         </Expired>
-        <LaneTextarea
-          name='content'
+        <ReactQuill
+          theme="snow"
           value={content}
-          placeholder='내용을 입력해주세요.'
-          onChange={onChangeInsertHandler} />
+          onChange={onChangeContentHandler}
+          modules={modules}
+          formats={formats}
+          style={{
+            width: '100%',
+            height: '500px'
+          }} />
       </FormLane>
       <ButtonWrapper>
-        <Button>
+        <Button onClick={onClickSaveHandler}>
           저장
         </Button>
       </ButtonWrapper>

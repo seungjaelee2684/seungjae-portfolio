@@ -13,13 +13,14 @@ const PostsDetailPage = () => {
   const { post, postId } = useParams();
 
   const [postDetail, setPostDetail] = useState<any>(null);
-  console.log('게시글 상세', postDetail);
+  const [stack, setStack] = useState<any>(null);
+  console.log('게시글 상세', postDetail, stack);
 
   const Posts = () => {
     if (!post) return;
     if (post === 'projects') {
       return (
-        <ProjectDetail data={postDetail} />
+        <ProjectDetail data={postDetail} stack={stack} />
       )
     } else if (post === 'practices') {
       return (
@@ -38,11 +39,22 @@ const PostsDetailPage = () => {
         const { data, error } = await supabase
           .from(post)
           .select('*')
-          .eq('id', postId);
+          .eq('id', postId)
+          .single();
 
         if (error) throw error;
 
-        setPostDetail(data[0]);
+        setPostDetail(data);
+
+        const { data: stackData, error: stackError } = await supabase
+          .from('stacks')
+          .select('*')
+          .in('id', data.stack)
+          .order('created_at', { ascending: false });
+
+        if (stackError) throw stackError;
+
+        setStack(stackData);
       } catch (error) {
         console.error("Error fetching paginated data from Supabase: ", error);
       };
