@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import DropDownMenu from '../common/DropDownMenu';
 import { FaRegPenToSquare } from "react-icons/fa6";
 import 'react-quill/dist/quill.snow.css';
-import "quill-table-ui/dist/index.css";
 
 interface ProjectInsertProps {
   isPractice: boolean;

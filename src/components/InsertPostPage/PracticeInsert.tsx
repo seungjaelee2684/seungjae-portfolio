@@ -4,12 +4,10 @@ import { Button, ButtonWrapper, DropdownLink, Expired, FormLane, Important, Inse
 import DropDownMenu from '../common/DropDownMenu';
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import "quill-table-ui/dist/index.css";
 import { formats, modules } from '../../utils/Editor';
 import { supabase } from '../../utils/Supabase';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import TableUI from 'quill-table-ui';
 
 
 interface PracticeInsertProps {
