@@ -15,6 +15,15 @@ const SideTap = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
   const [tap, setTap] = useState<any>(null);
 
+  const linkChange = (index: number, item: any) => {
+    if (!item) return;
+    if (index === 1) {
+      return `/jaelog/${sideTapList[index]?.location}?c=${item.connection}`;
+    } else if (index === 2) {
+      return `/jaelog/${sideTapList[index]?.location}?c=${item.category}`;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,7 +77,7 @@ const SideTap = () => {
               {item?.map((list: any, idx: number) =>
                 <SideDetailTap
                   key={idx}
-                  href={`/jaelog/${sideTapList[index]?.location}?c=${list.id}`}
+                  href={linkChange(index, list)}
                   $color={commonTextColor[theme]}>
                   ⦁ {(index === 1) ? list.connection : list.category} ({list.count})
                 </SideDetailTap>
