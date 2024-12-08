@@ -12,6 +12,7 @@ import { Editor, EditorList, EditorWrapper, ListLink, DateText } from './Project
 import { cookies } from '../../utils/Cookies';
 import { supabase } from '../../utils/Supabase';
 import { koreaTime } from '../../utils/KoreaTime';
+import { onClickPostDeleteHandler } from '../../utils/ClickHandler';
 
 interface PracticeDetailProps {
   data: any;
@@ -24,26 +25,6 @@ const PracticeDetail = ({ data }: PracticeDetailProps) => {
   const content = data?.content!;
   const decodedString = parser.parseFromString(content, 'text/html').documentElement.innerHTML!;
   const contentHtml = DOMPurify.sanitize(decodedString);
-  console.log(koreaTime);
-
-  const onClickDeleteHandler = () => {
-    const deleteFetch = async () => {
-      if (!data) return;
-      try {
-        const { error } = await supabase
-          .from('practices')
-          .delete()
-          .eq('id', data?.id);
-
-        if (error) throw error;
-      } catch (error) {
-        console.error("Error fetching paginated data from Supabase: ", error)
-      };
-    };
-
-    const isDelete = window.confirm('정말로 삭제하시겠습니까?');
-    if (isDelete) deleteFetch();
-  };
 
   return (
     <PostsContainer>
@@ -63,13 +44,13 @@ const PracticeDetail = ({ data }: PracticeDetailProps) => {
           {(cookies())
             && <EditorList>
               <ListLink
-                href={`/jaelog/projects/update/${data?.id}`}
+                href={`/jaelog/practices/update/${data?.id}`}
                 $color={textMedium[theme]}>
                 수정
               </ListLink>
               /
               <Editor
-                onClick={onClickDeleteHandler}
+                onClick={() => onClickPostDeleteHandler(data?.category, data?.id, 'practices', 'category')}
                 $color={textMedium[theme]}>
                 삭제
               </Editor>
