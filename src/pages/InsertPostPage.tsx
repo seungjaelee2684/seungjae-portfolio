@@ -12,7 +12,9 @@ const InsertPostPage = () => {
 
   const [isPractice, setIsPractice] = useState<boolean>(false);
   const [option, setOption] = useState<any>(null);
+  const [stackOption, setStackOption] = useState<any>(null);
   const [dropdownValue, setDropdownValue] = useState<string | null>(null);
+  const [stackValue, setStackValue] = useState<number[]>([]);
 
   const onClickCheckHandler = (e: any, param: boolean) => {
     e.preventDefault();
@@ -22,14 +24,16 @@ const InsertPostPage = () => {
   useEffect(() => {
     const projectFetch = async () => {
       try {
-        const { data, error } = await supabase
-          .from('projects_connection')
-          .select('connection')
-          .order('created_at', { ascending: false });
+        const [optionData, stackData] = await Promise.all([
+          supabase.from('projects_connection').select('connection').order('created_at', { ascending: false }),
+          supabase.from('stacks').select('*'),
+        ]);
 
-        if (error) throw error;
+        if (optionData.error) throw optionData.error;
+        if (stackData.error) throw stackData.error;
 
-        setOption(data);
+        setOption(optionData.data);
+        setStackOption(stackData.data);
       } catch (error) {
         console.error("Error fetching paginated data from Supabase: ", error);
       };
@@ -96,13 +100,16 @@ const InsertPostPage = () => {
             isPractice={isPractice}
             option={option}
             dropdownValue={dropdownValue}
-            setDropdownValue={setDropdownValue} />}
+            setDropdownValue={setDropdownValue}
+            stackOption={stackOption}
+            stackValue={stackValue}
+            setStackValue={setStackValue} />}
       </InsertContainer>
     </SiteContainer>
   )
 };
 
-const InsertContainer = styled.section`
+export const InsertContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -111,14 +118,14 @@ const InsertContainer = styled.section`
   gap: 40px;
 `;
 
-const InsertTitleWrapper = styled.div`
+export const InsertTitleWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const BackIcon = styled.a`
+export const BackIcon = styled.a`
   width: 40px;
   height: 40px;
   display: flex;
@@ -134,18 +141,18 @@ const BackIcon = styled.a`
   }
 `;
 
-const InsertTitle = styled.h1`
+export const InsertTitle = styled.h1`
   font-size: 20px;
   font-weight: 700;
 `;
 
-const CheckBoxWrapper = styled.div`
+export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
 `;
 
-const CheckBox = styled.button<{ $color: string }>`
+export const CheckBox = styled.button<{ $color: string }>`
   display: flex;
   align-items: center;
   gap: 4px;

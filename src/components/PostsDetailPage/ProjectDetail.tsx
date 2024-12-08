@@ -10,6 +10,8 @@ import { RootState } from '../../store/config/configureStore';
 import { textLight, textMedium } from '../../styles/colorToken';
 import { supabase } from '../../utils/Supabase';
 import { koreaTime } from '../../utils/KoreaTime';
+import { useNavigate } from 'react-router-dom';
+import { onClickPostDeleteHandler } from '../../utils/ClickHandler';
 
 interface ProjectDetailProps {
   data: any;
@@ -18,30 +20,13 @@ interface ProjectDetailProps {
 
 const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
 
+  const navigate = useNavigate();
+
   const parser = new DOMParser();
   const theme = useSelector((state: RootState) => state.darkMode);
   const content = data?.content!;
   const decodedString = parser.parseFromString(content, 'text/html').documentElement.innerHTML!;
   const contentHtml = DOMPurify.sanitize(decodedString);
-
-  const onClickDeleteHandler = () => {
-    const deleteFetch = async () => {
-      if (!data) return;
-      try {
-        const { error } = await supabase
-          .from('projects')
-          .delete()
-          .eq('id', data?.id);
-
-          if (error) throw error;
-      } catch (error) {
-        console.error("Error fetching paginated data from Supabase: ", error)
-      };
-    };
-
-    const isDelete = window.confirm('정말로 삭제하시겠습니까?');
-    if (isDelete) deleteFetch();
-  };
 
   return (
     <PostsContainer>
@@ -67,7 +52,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
               </ListLink>
               /
               <Editor
-                onClick={onClickDeleteHandler}
+                onClick={() => onClickPostDeleteHandler(data?.connection, data?.id, 'projects', 'connection')}
                 $color={textMedium[theme]}>
                 삭제
               </Editor>
