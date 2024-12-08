@@ -1,9 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
-import { PostsCategory, PostsContainer } from '../../pages/SitePage';
+import { CategoryWrapper, PostsCategory, PostsContainer } from '../../pages/SitePage';
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import DOMPurify from 'dompurify';
 import '../../styles/contentStyle.css';
+import { cookies } from '../../utils/Cookies';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/config/configureStore';
+import { textLight, textMedium } from '../../styles/colorToken';
+import { supabase } from '../../utils/Supabase';
+import { koreaTime } from '../../utils/KoreaTime';
 
 interface ProjectDetailProps {
   data: any;
@@ -13,15 +19,61 @@ interface ProjectDetailProps {
 const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
 
   const parser = new DOMParser();
+  const theme = useSelector((state: RootState) => state.darkMode);
   const content = data?.content!;
   const decodedString = parser.parseFromString(content, 'text/html').documentElement.innerHTML!;
   const contentHtml = DOMPurify.sanitize(decodedString);
 
+  const onClickDeleteHandler = () => {
+    const deleteFetch = async () => {
+      if (!data) return;
+      try {
+        const { error } = await supabase
+          .from('projects')
+          .delete()
+          .eq('id', data?.id);
+
+          if (error) throw error;
+      } catch (error) {
+        console.error("Error fetching paginated data from Supabase: ", error)
+      };
+    };
+
+    const isDelete = window.confirm('정말로 삭제하시겠습니까?');
+    if (isDelete) deleteFetch();
+  };
+
   return (
     <PostsContainer>
-      <PostsCategory>
-        {data?.title}
-      </PostsCategory>
+      <CategoryWrapper>
+        <PostsCategory>
+          {data?.title}
+        </PostsCategory>
+        <EditorWrapper $color={textLight[theme]}>
+          <DateText>
+            {koreaTime(data?.created_at)}
+            <ListLink
+              href='/jaelog/projects'
+              $color={textMedium[theme]}>
+              목록
+            </ListLink>
+          </DateText>
+          {(cookies())
+            && <EditorList>
+              <ListLink
+                href={`/jaelog/projects/update/${data?.id}`}
+                $color={textMedium[theme]}>
+                수정
+              </ListLink>
+              /
+              <Editor
+                onClick={onClickDeleteHandler}
+                $color={textMedium[theme]}>
+                삭제
+              </Editor>
+            </EditorList>}
+        </EditorWrapper>
+      </CategoryWrapper>
       <ContentLane>
         <ContentCategory>
           이름
@@ -114,6 +166,57 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
   )
 };
 
+export const EditorWrapper = styled.div<{ $color: string }>`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 8px;
+  margin-top: 16px;
+  color: ${(props) => props.$color};
+`;
+
+export const EditorList = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+`;
+
+export const Editor = styled.button<{ $color: string }>`
+  outline: none;
+  border: none;
+  color: ${(props) => props.$color};
+  background-color: transparent;
+  transition: all 0.3s;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
+`;
+
+export const DateText = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: -0.3px;
+`;
+
+export const ListLink = styled.a<{ $color: string }>`
+  color: ${(props) => props.$color};
+  transition: all 0.3s;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
+`;
+
 const ContentLane = styled.div`
   width: 100%;
   display: flex;
@@ -176,6 +279,7 @@ const StackWrapper = styled.ul`
   align-items: start;
   gap: 8px;
   flex-wrap: wrap;
+  padding-left: 0px;
 `;
 
 const StackList = styled.li<{ $color: string }>`

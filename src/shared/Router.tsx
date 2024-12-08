@@ -23,6 +23,7 @@ const LoginPage = lazy(() => import("../pages/LoginPage"));
 const ResumePage = lazy(() => import("../pages/ResumePage"));
 const InsertPostPage = lazy(() => import("../pages/InsertPostPage"));
 const PostOptionUpdate = lazy(() => import("../pages/PostOptionUpdate"));
+const UpdatePostsPage = lazy(() => import("../pages/UpdatePostsPage"));
 
 const Router = () => {
 
@@ -50,6 +51,7 @@ const Router = () => {
               <Route path='/jaelog/resume' element={<ResumePage />} caseSensitive />
               <Route path='/jaelog/insert' element={<InsertPostPage />} caseSensitive />
               <Route path='/jaelog/option/update' element={<PostOptionUpdate />} caseSensitive />
+              <Route path='/jaelog/:post/update/:postId' element={<UpdatePostsPage />} caseSensitive />
             </Route>
             <Route path='/jaelog/login' element={<LoginPage />} caseSensitive />
             <Route path='/connect' element={<ConnectPage />} caseSensitive />

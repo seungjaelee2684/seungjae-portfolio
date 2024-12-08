@@ -119,8 +119,8 @@ export const CategoryWrapper = styled.div`
 export const PostsCategory = styled.h1`
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 24px;
   user-select: none;
+  margin-bottom: 24px;
 `;
 
 export const InsertButton = styled.a`

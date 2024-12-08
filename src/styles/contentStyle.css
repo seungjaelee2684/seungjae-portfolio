@@ -1,6 +1,7 @@
 ol,
 ul {
     list-style: initial;
+    padding-left: 30px;
 }
 
 li {
