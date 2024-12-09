@@ -35,6 +35,8 @@ const ProjectUpdate = ({
   const navigate = useNavigate();
   const theme = useSelector((state: RootState) => state.darkMode);
 
+  const [prevSelect, setPrevSelect] = useState<any>(null);
+  const [contentData, setContentData] = useState<string>('');
   const [insertData, setInsertData] = useState<{
     title: string,
     start_date: string,
@@ -43,8 +45,7 @@ const ProjectUpdate = ({
     url: string,
     description: string,
     member: number | string,
-    work: string,
-    content: string
+    work: string
   }>({
     title: '',
     start_date: '',
@@ -53,8 +54,7 @@ const ProjectUpdate = ({
     url: '',
     description: '',
     member: 0,
-    work: '',
-    content: ''
+    work: ''
   });
   const {
     title,
@@ -64,8 +64,7 @@ const ProjectUpdate = ({
     url,
     description,
     member,
-    work,
-    content
+    work
   } = insertData;
   console.log('입력값', insertData);
 
@@ -73,23 +72,20 @@ const ProjectUpdate = ({
     const { name, value } = e.target;
     if (name === 'member') {
       const input = value.replace(/[^0-9]/g, '');
-      setInsertData({
-        ...insertData,
+      setInsertData((prevState) => ({
+        ...prevState,
         member: input
-      });
+      }));
     } else {
-      setInsertData({
-        ...insertData,
+      setInsertData((prevState) => ({
+        ...prevState,
         [name]: value
-      });
+      }));
     };
   };
 
   const onChangeContentHandler = (content: string) => {
-    setInsertData({
-      ...insertData,
-      content: content
-    });
+    setContentData(content);
   };
 
   const onClickSaveHandler = (e: any) => {
@@ -106,6 +102,7 @@ const ProjectUpdate = ({
 
     const uploadData = {
       ...insertData,
+      content: contentData,
       connection: dropdownValue,
       stack: stackValue,
       type: 'projects'
@@ -123,15 +120,42 @@ const ProjectUpdate = ({
         throw error;
       };
 
-      try {
-        const { data: project, error: projectError } = await supabase
-          .from('project')
-          .select('*', { count: 'exact', head: true })
-          .eq('connection', dropdownValue);
-      } catch (error) {
-        alert('오류가 발생했습니다.');
-        console.error("Error fetching paginated data from Supabase: ", error);
+      if (prevSelect !== dropdownValue) {
+        const [prev, present] = await Promise.all([
+          supabase.from('projects_connection').select('count').eq('connection', prevSelect).single(),
+          supabase.from('projects_connection').select('count').eq('connection', dropdownValue).single()
+        ]);
+
+        if (prev.error) {
+          alert('저장에 실패하였습니다.');
+          throw prev.error;
+        };
+        if (present.error) {
+          alert('저장에 실패하였습니다.');
+          throw present.error;
+        };
+
+        try {
+          const [prevResult, presentResult] = await Promise.all([
+            supabase.from('projects_connection').update({ count: prev.data.count - 1 }).eq('connection', prevSelect),
+            supabase.from('projects_connection').update({ count: present.data.count + 1 }).eq('connection', dropdownValue)
+          ]);
+
+          if (prevResult.error) {
+            alert('저장에 실패하였습니다.');
+            throw prevResult.error;
+          };
+          if (presentResult.error) {
+            alert('저장에 실패하였습니다.');
+            throw presentResult.error;
+          };
+        } catch (error) {
+          alert('오류가 발생했습니다.');
+          console.error("Error fetching paginated data from Supabase: ", error);
+        };
       };
+
+
       navigate(`/jaelog/projects`);
     };
 
@@ -155,7 +179,6 @@ const ProjectUpdate = ({
         if (error) throw error;
 
         setInsertData({
-          ...insertData,
           title: data.title,
           start_date: data.start_date,
           end_date: data.end_date,
@@ -163,11 +186,13 @@ const ProjectUpdate = ({
           url: data.url,
           description: data.description,
           member: data.member,
-          work: data.work,
-          content: data.content
+          work: data.work
         });
+        setContentData(data.content);
+        setPrevSelect(data.connection);
         setDropdownValue(data.connection);
         setStackValue(data.stack);
+        console.log('성공');
       } catch (error) {
         console.error("Error fetching paginated data from Supabase: ", error)
       };
@@ -345,7 +370,7 @@ const ProjectUpdate = ({
         </Expired>
         <ReactQuill
           theme="snow"
-          value={content}
+          value={contentData}
           onChange={onChangeContentHandler}
           modules={modules}
           formats={formats}
