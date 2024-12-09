@@ -23,6 +23,8 @@ const SiteLayout = () => {
     });
   };
 
+  useEffect(() => {}, [])
+
   useEffect(() => {
     const scrollEvent = () => {
       const y = window.scrollY;

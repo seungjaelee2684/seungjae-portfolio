@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import DropDownMenu from '../common/DropDownMenu';
-import { FaRegPenToSquare } from "react-icons/fa6";
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from '../../utils/Editor';
-import ReactQuill from 'react-quill';
-import { supabase } from '../../utils/Supabase';
-import { useNavigate } from 'react-router-dom';
-import { textLight } from '../../styles/colorToken';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/config/configureStore';
+import { supabase } from '../../utils/Supabase';
+import { Button, ButtonWrapper, DropdownLink, Expired, FormLane, Important, InsertFormContainer, LaneInput, TagButton, TagWrapper } from '../InsertPostPage/ProjectInsert';
+import DropDownMenu from '../common/DropDownMenu';
+import { FaRegPenToSquare } from 'react-icons/fa6';
+import { textLight } from '../../styles/colorToken';
+import ReactQuill from 'react-quill';
+import { formats, modules } from '../../utils/Editor';
 
-interface ProjectInsertProps {
+interface ProjectUpdateProps {
+  postId: string;
   isPractice: boolean;
   option: any;
   dropdownValue: string | null;
@@ -21,7 +21,8 @@ interface ProjectInsertProps {
   setStackValue: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-const ProjectInsert = ({
+const ProjectUpdate = ({
+  postId,
   isPractice,
   option,
   dropdownValue,
@@ -29,11 +30,13 @@ const ProjectInsert = ({
   stackOption,
   stackValue,
   setStackValue
-}: ProjectInsertProps) => {
+}: ProjectUpdateProps) => {
 
   const navigate = useNavigate();
   const theme = useSelector((state: RootState) => state.darkMode);
 
+  const [prevSelect, setPrevSelect] = useState<any>(null);
+  const [contentData, setContentData] = useState<string>('');
   const [insertData, setInsertData] = useState<{
     title: string,
     start_date: string,
@@ -41,9 +44,8 @@ const ProjectInsert = ({
     role: string,
     url: string,
     description: string,
-    member: number,
-    work: string,
-    content: string
+    member: number | string,
+    work: string
   }>({
     title: '',
     start_date: '',
@@ -52,8 +54,7 @@ const ProjectInsert = ({
     url: '',
     description: '',
     member: 0,
-    work: '',
-    content: ''
+    work: ''
   });
   const {
     title,
@@ -63,8 +64,7 @@ const ProjectInsert = ({
     url,
     description,
     member,
-    work,
-    content
+    work
   } = insertData;
   console.log('입력값', insertData);
 
@@ -72,23 +72,20 @@ const ProjectInsert = ({
     const { name, value } = e.target;
     if (name === 'member') {
       const input = value.replace(/[^0-9]/g, '');
-      setInsertData({
-        ...insertData,
+      setInsertData((prevState) => ({
+        ...prevState,
         member: input
-      });
+      }));
     } else {
-      setInsertData({
-        ...insertData,
+      setInsertData((prevState) => ({
+        ...prevState,
         [name]: value
-      });
+      }));
     };
   };
 
   const onChangeContentHandler = (content: string) => {
-    setInsertData({
-      ...insertData,
-      content: content
-    });
+    setContentData(content);
   };
 
   const onClickSaveHandler = (e: any) => {
@@ -105,42 +102,104 @@ const ProjectInsert = ({
 
     const uploadData = {
       ...insertData,
+      content: contentData,
       connection: dropdownValue,
       stack: stackValue,
       type: 'projects'
     };
 
-    const isUpload = window.confirm('저장하시겠습니까?');
-
     const uploadFetch = async () => {
       const { data, error } = await supabase
-        .from('projects_connection')
-        .select('count')
-        .eq('connection', dropdownValue)
-        .single();
+        .from('projects')
+        .update(uploadData)
+        .eq('id', postId)
+        .select();
 
       if (error) {
         alert('저장에 실패하였습니다.');
         throw error;
       };
 
-      const [project, connectionCount] = await Promise.all([
-        supabase.from('projects').insert([uploadData]).select(),
-        supabase.from('projects_connection').update({ count: data.count + 1 }).eq('connection', dropdownValue)
-      ]);
+      if (prevSelect !== dropdownValue) {
+        const [prev, present] = await Promise.all([
+          supabase.from('projects_connection').select('count').eq('connection', prevSelect).single(),
+          supabase.from('projects_connection').select('count').eq('connection', dropdownValue).single()
+        ]);
 
-      if (project.error || connectionCount.error) {
-        alert('저장에 실패하였습니다.');
-        throw error;
+        if (prev.error) {
+          alert('저장에 실패하였습니다.');
+          throw prev.error;
+        };
+        if (present.error) {
+          alert('저장에 실패하였습니다.');
+          throw present.error;
+        };
+
+        try {
+          const [prevResult, presentResult] = await Promise.all([
+            supabase.from('projects_connection').update({ count: prev.data.count - 1 }).eq('connection', prevSelect),
+            supabase.from('projects_connection').update({ count: present.data.count + 1 }).eq('connection', dropdownValue)
+          ]);
+
+          if (prevResult.error) {
+            alert('저장에 실패하였습니다.');
+            throw prevResult.error;
+          };
+          if (presentResult.error) {
+            alert('저장에 실패하였습니다.');
+            throw presentResult.error;
+          };
+        } catch (error) {
+          alert('오류가 발생했습니다.');
+          console.error("Error fetching paginated data from Supabase: ", error);
+        };
       };
+
 
       navigate(`/jaelog/projects`);
     };
+
+    const isUpload = window.confirm('저장하시겠습니까?');
 
     if (isUpload) {
       uploadFetch();
     };
   };
+
+  useEffect(() => {
+    const updateData = async () => {
+      if (!postId) return;
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('id', postId)
+          .single();
+
+        if (error) throw error;
+
+        setInsertData({
+          title: data.title,
+          start_date: data.start_date,
+          end_date: data.end_date,
+          role: data.role,
+          url: data.url,
+          description: data.description,
+          member: data.member,
+          work: data.work
+        });
+        setContentData(data.content);
+        setPrevSelect(data.connection);
+        setDropdownValue(data.connection);
+        setStackValue(data.stack);
+        console.log('성공');
+      } catch (error) {
+        console.error("Error fetching paginated data from Supabase: ", error)
+      };
+    };
+
+    updateData();
+  }, []);
 
   console.log(stackValue);
 
@@ -311,7 +370,7 @@ const ProjectInsert = ({
         </Expired>
         <ReactQuill
           theme="snow"
-          value={content}
+          value={contentData}
           onChange={onChangeContentHandler}
           modules={modules}
           formats={formats}
@@ -329,170 +388,4 @@ const ProjectInsert = ({
   )
 };
 
-export const InsertFormContainer = styled.form`
-  width: 850px;
-  padding: 30px 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 24px;
-`;
-
-export const FormLane = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: start;
-  gap: 24px;
-`;
-
-export const Expired = styled.label`
-  min-width: 100px;
-  width: 100px;
-  height: 34px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  user-select: none;
-`;
-
-export const Important = styled.span`
-  font-size: 13px;
-  font-weight: 700;
-  color: #ee6e6e;
-`;
-
-export const LaneInput = styled.input<{ $width: string }>`
-  width: ${(props) => props.$width};
-  height: 38px;
-  padding: 0px 12px;
-  border: 1px solid #b8b8b8;
-  outline: none;
-  background-color: transparent;
-  font-size: 14px;
-  transition: all 0.3s;
-
-  &::placeholder {
-    color: #b8b8b8;
-  }
-
-  &:hover {
-    border: 1px solid #525050;
-  }
-
-  &:focus {
-    border: 1px solid #222020;
-  }
-`;
-
-export const DropdownLink = styled.a`
-  min-width: 140px;
-  width: 140px;
-  height: 34px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 700;
-  transition: all 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    color: #ee6e6e;
-  }
-`;
-
-export const LaneTextarea = styled.textarea`
-  width: 100%;
-  min-height: 600px;
-  padding: 12px;
-  border: 1px solid #b8b8b8;
-  outline: none;
-  font-family: "SUIT_Regular";
-  background-color: transparent;
-  font-size: 14px;
-  transition: all 0.3s;
-
-  &::placeholder {
-    color: #b8b8b8;
-  }
-
-  &:hover {
-    border: 1px solid #525050;
-  }
-
-  &:focus {
-    border: 1px solid #222020;
-  }
-`;
-
-export const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  gap: 24px;
-  margin: 60px 0px;
-`;
-
-export const Button = styled.div`
-  width: 110px;
-  height: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #ffffff;
-  background-color: #ee6e6e;
-  border-radius: 4px;
-  user-select: none;
-  transition: all 0.3s;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #ee9595;
-  }
-  
-  &:active {
-    background-color: #972727;
-  }
-`;
-
-export const TagWrapper = styled.ul`
-  width: 100%;
-  padding-left: 0px;
-  display: flex;
-  justify-content: start;
-  align-items: start;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-export const TagButton = styled.li<{ $color: string, $bgcolor: string }>`
-  width: fit-content;
-  height: 32px;
-  padding: 0px 16px;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
-  border-radius: 20px;
-  transition: all 0.3s;
-  color: ${(props) => props.$color};
-  background-color: ${(props) => props.$bgcolor};
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.6;
-  }
-`;
-
-export default ProjectInsert;
+export default ProjectUpdate;

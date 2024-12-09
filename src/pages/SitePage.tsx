@@ -12,6 +12,7 @@ import { commonTextColor } from '../styles/colorToken';
 import { categoryObj, sideTapList } from '../utils/Category';
 import { cookies } from '../utils/Cookies';
 import { BsPencilSquare } from "react-icons/bs";
+import { onClickPostDeleteHandler } from '../utils/ClickHandler';
 
 const SitePage = () => {
 
@@ -24,8 +25,8 @@ const SitePage = () => {
     const fetchData = async () => {
       try {
         const [project, practice] = await Promise.all([
-          supabase.from('projects').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
-          supabase.from('practices').select('id, title, created_at, type').order('created_at', { ascending: false }).limit(10),
+          supabase.from('projects').select('id, title, created_at, type, connection').order('created_at', { ascending: false }).limit(10),
+          supabase.from('practices').select('id, title, created_at, type, category').order('created_at', { ascending: false }).limit(10),
         ]);
 
         if (project.error) throw project.error;
@@ -74,12 +75,24 @@ const SitePage = () => {
                 </PostDate>
                 {(cookies())
                   && <AdminButtonWrapper>
-                    <AdminLink
-                      href={`/jaelog/update/${item?.id}`}
-                      $color={commonTextColor[theme]}>
+                    <AdminButton
+                      $color={commonTextColor[theme]}
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        window.location.href = `/jaelog/${item?.type}/update/${item?.id}`;
+                      }}>
                       <FaPenToSquare />
-                    </AdminLink>
-                    <AdminButton $color={commonTextColor[theme]}>
+                    </AdminButton>
+                    <AdminButton
+                      $color={commonTextColor[theme]}
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        onClickPostDeleteHandler(
+                          (item?.type === 'projects') ? item?.connection : item?.category,
+                          item?.id,
+                          item?.type,
+                          (item?.type === 'projects') ? 'connection' : 'category')
+                      }}>
                       <FaTrashAlt />
                     </AdminButton>
                   </AdminButtonWrapper>}
@@ -119,8 +132,8 @@ export const CategoryWrapper = styled.div`
 export const PostsCategory = styled.h1`
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 24px;
   user-select: none;
+  margin-bottom: 24px;
 `;
 
 export const InsertButton = styled.a`

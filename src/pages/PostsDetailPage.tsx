@@ -49,8 +49,7 @@ const PostsDetailPage = () => {
         const { data: stackData, error: stackError } = await supabase
           .from('stacks')
           .select('*')
-          .in('id', data.stack)
-          .order('created_at', { ascending: false });
+          .in('id', data.stack);
 
         if (stackError) throw stackError;
 

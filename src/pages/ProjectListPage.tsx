@@ -10,6 +10,7 @@ import { FaPenToSquare } from 'react-icons/fa6';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
+import { onClickPostDeleteHandler } from '../utils/ClickHandler';
 
 const ProjectListPage = () => {
 
@@ -26,7 +27,7 @@ const ProjectListPage = () => {
         try {
           const { data, error } = await supabase
             .from('projects')
-            .select('id, title, created_at, type')
+            .select('id, title, created_at, type, connection')
             .eq('connection', connection)
             .order('created_at', { ascending: false })
             .limit(20);
@@ -81,10 +82,20 @@ const ProjectListPage = () => {
                 </PostDate>
                 {(cookies())
                   && <AdminButtonWrapper>
-                    <AdminButton $color={commonTextColor[theme]}>
+                    <AdminButton
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        window.location.href = `/jaelog/projects/update/${item?.id}`;
+                      }}
+                      $color={commonTextColor[theme]}>
                       <FaPenToSquare />
                     </AdminButton>
-                    <AdminButton $color={commonTextColor[theme]}>
+                    <AdminButton
+                      onClick={(e: any) => {
+                        e.preventDefault();
+                        onClickPostDeleteHandler(item?.connection, item?.id, 'projects', 'connection');
+                      }}
+                      $color={commonTextColor[theme]}>
                       <FaTrashAlt />
                     </AdminButton>
                   </AdminButtonWrapper>}

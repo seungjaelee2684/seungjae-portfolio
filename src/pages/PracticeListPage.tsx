@@ -10,6 +10,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { commonTextColor } from '../styles/colorToken';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
+import { onClickPostDeleteHandler } from '../utils/ClickHandler';
 
 const PracticeListPage = () => {
 
@@ -26,7 +27,7 @@ const PracticeListPage = () => {
                 try {
                     const { data, error } = await supabase
                         .from('practices')
-                        .select('id, title, created_at, type')
+                        .select('id, title, created_at, type, category')
                         .eq('category', category)
                         .order('created_at', { ascending: false })
                         .limit(20);
@@ -81,10 +82,20 @@ const PracticeListPage = () => {
                                 </PostDate>
                                 {(cookies())
                                     && <AdminButtonWrapper>
-                                        <AdminButton $color={commonTextColor[theme]}>
+                                        <AdminButton
+                                            onClick={(e: any) => {
+                                                e.preventDefault();
+                                                window.location.href = `/jaelog/practices/update/${item?.id}`;
+                                            }}
+                                            $color={commonTextColor[theme]}>
                                             <FaPenToSquare />
                                         </AdminButton>
-                                        <AdminButton $color={commonTextColor[theme]}>
+                                        <AdminButton
+                                            onClick={(e: any) => {
+                                                e.preventDefault();
+                                                onClickPostDeleteHandler(item?.category, item?.id, 'practices', 'category');
+                                            }}
+                                            $color={commonTextColor[theme]}>
                                             <FaTrashAlt />
                                         </AdminButton>
                                     </AdminButtonWrapper>}

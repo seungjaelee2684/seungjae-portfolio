@@ -136,6 +136,7 @@ const DropDownMenuBox = styled.ul<{ $bgcolor: string }>`
   right: 0;
   z-index: 19;
   padding: 8px 4px;
+  box-shadow: 0px 4px 4px 0px #0000002b;
 `;
 
 const DropDownList = styled.li`
