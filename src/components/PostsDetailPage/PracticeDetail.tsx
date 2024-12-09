@@ -28,35 +28,44 @@ const PracticeDetail = ({ data }: PracticeDetailProps) => {
 
   return (
     <PostsContainer>
-      <CategoryWrapper>
-        <PostsCategory>
-          {data?.title}
-        </PostsCategory>
-        <EditorWrapper $color={textLight[theme]}>
-          <DateText>
-            {koreaTime(data?.created_at)}
-            <ListLink
-              href='/jaelog/projects'
-              $color={textMedium[theme]}>
-              목록
-            </ListLink>
-          </DateText>
-          {(cookies())
-            && <EditorList>
+      <PracticeTitleWrapper>
+        <PracticeCategory>
+          {data?.category}
+        </PracticeCategory>
+        <CategoryWrapper
+          style={{
+            borderBottom: '1px solid #adadad',
+            paddingBottom: '12px'
+          }}>
+          <PostsCategory>
+            {data?.title}
+          </PostsCategory>
+          <EditorWrapper $color={textLight[theme]}>
+            <DateText>
+              {koreaTime(data?.created_at)}
               <ListLink
-                href={`/jaelog/practices/update/${data?.id}`}
+                href='/jaelog/projects'
                 $color={textMedium[theme]}>
-                수정
+                목록
               </ListLink>
-              /
-              <Editor
-                onClick={() => onClickPostDeleteHandler(data?.category, data?.id, 'practices', 'category')}
-                $color={textMedium[theme]}>
-                삭제
-              </Editor>
-            </EditorList>}
-        </EditorWrapper>
-      </CategoryWrapper>
+            </DateText>
+            {(cookies())
+              && <EditorList>
+                <ListLink
+                  href={`/jaelog/practices/update/${data?.id}`}
+                  $color={textMedium[theme]}>
+                  수정
+                </ListLink>
+                /
+                <Editor
+                  onClick={() => onClickPostDeleteHandler(data?.category, data?.id, 'practices', 'category')}
+                  $color={textMedium[theme]}>
+                  삭제
+                </Editor>
+              </EditorList>}
+          </EditorWrapper>
+        </CategoryWrapper>
+      </PracticeTitleWrapper>
       {(data) && <Content dangerouslySetInnerHTML={{ __html: contentHtml }} />}
     </PostsContainer>
   )
@@ -65,6 +74,21 @@ const PracticeDetail = ({ data }: PracticeDetailProps) => {
 const Content = styled.div`
   width: 100%;
   text-align: start;
+  margin-top: 60px;
+`;
+
+const PracticeTitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+`;
+
+const PracticeCategory = styled.span`
+  font-size: 16px;
+  color: #ee6e6e;
 `;
 
 export default PracticeDetail;

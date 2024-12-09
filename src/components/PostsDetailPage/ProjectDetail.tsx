@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import { CategoryWrapper, PostsCategory, PostsContainer } from '../../pages/SitePage';
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
@@ -12,6 +12,9 @@ import { supabase } from '../../utils/Supabase';
 import { koreaTime } from '../../utils/KoreaTime';
 import { useNavigate } from 'react-router-dom';
 import { onClickPostDeleteHandler } from '../../utils/ClickHandler';
+import Image from '../../assets/images/ALDDALDDAL/ALDDALDDAL.png';
+import { projectImage } from '../../utils/ProjectImage';
+import ImageModal from './ImageModal';
 
 interface ProjectDetailProps {
   data: any;
@@ -20,7 +23,7 @@ interface ProjectDetailProps {
 
 const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
 
-  const navigate = useNavigate();
+  const [img, setImg] = useState<any>(null);
 
   const parser = new DOMParser();
   const theme = useSelector((state: RootState) => state.darkMode);
@@ -30,6 +33,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
 
   return (
     <PostsContainer>
+      {(img) && <ImageModal img={img} setImg={setImg} src={data?.image} />}
       <CategoryWrapper>
         <PostsCategory>
           {data?.title}
@@ -59,6 +63,10 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
             </EditorList>}
         </EditorWrapper>
       </CategoryWrapper>
+      <ImageContainer
+        src={projectImage[data?.image]}
+        alt='이미지'
+        onClick={() => setImg(data?.image)} />
       <ContentLane>
         <ContentCategory>
           이름
@@ -200,6 +208,16 @@ export const ListLink = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+`;
+
+const ImageContainer = styled.img`
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  user-select: none;
+  cursor: pointer;
 `;
 
 const ContentLane = styled.div`

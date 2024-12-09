@@ -13,6 +13,7 @@ import { categoryObj, sideTapList } from '../utils/Category';
 import { cookies } from '../utils/Cookies';
 import { BsPencilSquare } from "react-icons/bs";
 import { onClickPostDeleteHandler } from '../utils/ClickHandler';
+import { koreaDate } from '../utils/KoreaTime';
 
 const SitePage = () => {
 
@@ -71,7 +72,7 @@ const SitePage = () => {
                   {item?.title}
                 </PostTitle>
                 <PostDate>
-                  {item?.created_at.slice(0, 10)}
+                  {koreaDate(item?.created_at)}
                 </PostDate>
                 {(cookies())
                   && <AdminButtonWrapper>

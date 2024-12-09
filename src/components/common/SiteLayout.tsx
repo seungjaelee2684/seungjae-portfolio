@@ -41,7 +41,7 @@ const SiteLayout = () => {
   return (
     <SiteContainer>
       <SiteHeader />
-      {(path === "/jaelog") && <Profile />}
+      {(path === "/jaelog" || path === "/jaelog/resume") && <Profile />}
       <Outlet />
       <FloatingButton
         $opacity={(scroll > 200) ? '1' : '0'}

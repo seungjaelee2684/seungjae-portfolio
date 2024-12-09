@@ -11,6 +11,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
 import { onClickPostDeleteHandler } from '../utils/ClickHandler';
+import { koreaDate } from '../utils/KoreaTime';
 
 const ProjectListPage = () => {
 
@@ -78,7 +79,7 @@ const ProjectListPage = () => {
                   {item?.title}
                 </PostTitle>
                 <PostDate>
-                  {item?.created_at.slice(0, 10)}
+                  {koreaDate(item?.created_at)}
                 </PostDate>
                 {(cookies())
                   && <AdminButtonWrapper>
