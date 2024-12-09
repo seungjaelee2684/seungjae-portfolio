@@ -4,6 +4,7 @@ import { supabase } from '../utils/Supabase';
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { GrClose } from "react-icons/gr";
 import { GoPlus } from "react-icons/go";
+import UpdateModal from '../components/PostOptionUpdate/UpdateModal';
 
 const PostOptionUpdate = () => {
 
@@ -16,8 +17,14 @@ const PostOptionUpdate = () => {
     addConnection: null,
     addCategory: null
   });
+  const [update, setUpdate] = useState<any>({
+    id: null,
+    type: null,
+    text: null
+  });
   const { connection, category } = option;
   const { addConnection, addCategory } = addOption;
+  const { id, type, text } = update;
 
   const onClickAddHandler = (type: string) => {
     if (type === 'project') {
@@ -139,6 +146,14 @@ const PostOptionUpdate = () => {
     };
   };
 
+  const onClickUpdateHandler = (type: string) => {
+    if (type === 'project') {
+
+    } else {
+
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -164,6 +179,12 @@ const PostOptionUpdate = () => {
 
   return (
     <OptionUpdateContainer>
+      {(id)
+        && <UpdateModal
+          update={update}
+          setUpdate={setUpdate}
+          success={success}
+          setSuccess={setSuccess} />}
       <ColumnLane>
         <ColumnTitle>
           소속 (프로젝트)
@@ -174,7 +195,7 @@ const PostOptionUpdate = () => {
               {item?.connection}
             </OptionTitle>
             <IconWrapper>
-              <IconBox>
+              <IconBox onClick={() => setUpdate({ id: item?.id, type: 'projects', text: item?.connection })}>
                 <HiMiniPencilSquare />
               </IconBox>
               <IconBox onClick={() => onClickDeleteHandler('project', item?.id)}>
@@ -213,7 +234,7 @@ const PostOptionUpdate = () => {
               {item?.category}
             </OptionTitle>
             <IconWrapper>
-              <IconBox>
+              <IconBox  onClick={() => setUpdate({ id: item?.id, type: 'practices', text: item?.category })}>
                 <HiMiniPencilSquare />
               </IconBox>
               <IconBox onClick={() => onClickDeleteHandler('practice', item?.id)}>
@@ -346,9 +367,9 @@ const UpdateInput = styled.input`
   }
 `;
 
-const AddButton = styled.button`
+export const AddButton = styled.button`
   width: 100%;
-  height: 38px;
+  height: 40px;
   border-radius: 4px;
   background-color: #ee6e6e;
   color: #ffffff;
@@ -359,6 +380,14 @@ const AddButton = styled.button`
   align-items: center;
   transition: all 0.3s;
   cursor: pointer;
+
+  &:hover {
+    background-color: #ef9999;
+  }
+
+  &:active {
+    background-color: #8d3434;
+  }
 `;
 
 export default PostOptionUpdate;

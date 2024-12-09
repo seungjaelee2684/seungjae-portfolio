@@ -27,7 +27,7 @@ const ProjectListPage = () => {
         try {
           const { data, error } = await supabase
             .from('projects')
-            .select('id, title, created_at, type')
+            .select('id, title, created_at, type, connection')
             .eq('connection', connection)
             .order('created_at', { ascending: false })
             .limit(20);
