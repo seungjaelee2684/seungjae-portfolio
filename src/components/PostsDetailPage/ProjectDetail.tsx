@@ -110,7 +110,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
           {data?.connection}
         </ContentSentence>
         <ContentCategory>
-          인원수
+          개발인원
         </ContentCategory>
         <ContentSentence>
           {data?.member} 명

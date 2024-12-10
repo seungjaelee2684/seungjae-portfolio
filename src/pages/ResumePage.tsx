@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { PostsCategory, SiteContainer } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
@@ -7,15 +7,37 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
 import { TiArrowForward } from "react-icons/ti";
 import Skills from '../components/ResumePage/Skills';
+import Experience from '../components/ResumePage/Experience';
+import { supabase } from '../utils/Supabase';
 
 const ResumePage = () => {
 
   const theme = useSelector((state: RootState) => state.darkMode);
+  const [project, setProject] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        setProject(data);
+      } catch (error) {
+        console.error("", error);
+      };
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <SiteContainer>
       <ResumeContainer>
-        <ResumeLaneContainer $color={lineLight[theme]}>
+        <ResumeLaneContainer>
           <ResumeCategory>
             Introduce.
           </ResumeCategory>
@@ -52,33 +74,38 @@ const ResumePage = () => {
             </IntroText>
           </ResumeContentBox>
         </ResumeLaneContainer>
-        <ResumeLaneContainer $color={lineLight[theme]}>
+        <ResumeLaneContainer>
           <ResumeCategory>
             Skills.
           </ResumeCategory>
           <Skills />
         </ResumeLaneContainer>
-      </ResumeContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Experience.
+          </ResumeCategory>
+          <Experience project={project} theme={theme} />
+        </ResumeLaneContainer>
+      </ResumeContainer> 
     </SiteContainer>
   )
 };
 
 const ResumeContainer = styled.ul`
-  width: 850px;
+  width: 940px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
   margin: 0px auto;
-  padding: 40px 24px 80px 24px;
-  gap: 40px;
+  padding: 40px 0px 80px 0px;
 
   @media screen and (max-width: 980px) {
     width: 100%;
   }
 `;
 
-const ResumeLaneContainer = styled.li<{ $color: string }>`
+const ResumeLaneContainer = styled.li`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -86,8 +113,8 @@ const ResumeLaneContainer = styled.li<{ $color: string }>`
   align-items: start;
   gap: 24px;
   border-bottom: 1px solid;
-  border-color: ${(props) => props.$color};
-  padding: 20px 0px;
+  border-color: #e9e9e9;
+  padding: 80px 20px;
 `;
 
 const ResumeCategory = styled.h2`

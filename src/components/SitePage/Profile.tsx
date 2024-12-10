@@ -21,7 +21,7 @@ const Profile = () => {
           target='_blank'
           title='github 프로필 바로가기'>
           <FaGithub />
-          Github
+          Github 프로필
         </Link>
       </ProfileWrapper>
       <TextWrapper>
