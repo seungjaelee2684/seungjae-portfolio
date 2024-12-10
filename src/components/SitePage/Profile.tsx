@@ -4,6 +4,7 @@ import Picture from '../../assets/images/picture.webp';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/config/configureStore';
 import { textLight } from '../../styles/colorToken';
+import { FaGithub } from "react-icons/fa";
 
 const Profile = () => {
 
@@ -11,15 +12,24 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <ProfileImage
-        src={Picture}
-        alt='프로필 이미지' />
+      <ProfileWrapper>
+        <ProfileImage
+          src={Picture}
+          alt='프로필 이미지' />
+        <Link
+          href='https://github.com/seungjaelee2684'
+          target='_blank'
+          title='github 프로필 바로가기'>
+          <FaGithub />
+          Github
+        </Link>
+      </ProfileWrapper>
       <TextWrapper>
         <NameText>
           이승재 (Lee SeungJae)
         </NameText>
         <Role $color={textLight[theme]}>
-          프론트엔드 개발자
+          프론트엔드 개발자 | 신입
         </Role>
         <DetailDescription>
           {`React와 Typescript에 장점을 둔 높은 성장이 기대되는 개발자입니다.
@@ -41,15 +51,41 @@ const ProfileContainer = styled.div`
   border-bottom: 1px solid #e9e9e9;
 `;
 
-const ProfileImage = styled.img`
+const ProfileWrapper = styled.div`
   width: 150px;
   min-width: 150px;
-  height: 150px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+`;
+
+const ProfileImage = styled.img`
+  width: 140px;
+  height: 140px;
   border-radius: 100%;
   object-fit: cover;
   object-position: top;
   background-color: #e8f4f5;
   user-select: none;
+`;
+
+const Link = styled.a`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
 `;
 
 const TextWrapper = styled.div`
