@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components';
-import { PostsCategory, PostsContainer, SiteContainer } from './SitePage';
+import { PostsCategory, SiteContainer } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
 import { lineLight, textLight, textLightBlue } from '../styles/colorToken';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
 import { TiArrowForward } from "react-icons/ti";
+import Skills from '../components/ResumePage/Skills';
 
 const ResumePage = () => {
 
@@ -13,7 +14,7 @@ const ResumePage = () => {
 
   return (
     <SiteContainer>
-      <PostsContainer>
+      <ResumeContainer>
         <ResumeLaneContainer $color={lineLight[theme]}>
           <ResumeCategory>
             Introduce.
@@ -55,16 +56,29 @@ const ResumePage = () => {
           <ResumeCategory>
             Skills.
           </ResumeCategory>
-          <ResumeContent>
-            asdf
-          </ResumeContent>
+          <Skills />
         </ResumeLaneContainer>
-      </PostsContainer>
+      </ResumeContainer>
     </SiteContainer>
   )
 };
 
-const ResumeLaneContainer = styled.div<{ $color: string }>`
+const ResumeContainer = styled.ul`
+  width: 850px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 0px auto;
+  padding: 40px 24px 80px 24px;
+  gap: 40px;
+
+  @media screen and (max-width: 980px) {
+    width: 100%;
+  }
+`;
+
+const ResumeLaneContainer = styled.li<{ $color: string }>`
   width: 100%;
   display: flex;
   flex-direction: column;
