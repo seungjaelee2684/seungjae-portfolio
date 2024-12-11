@@ -31,66 +31,74 @@ const Skills = () => {
 
   return (
     <SkillListWrapper>
-      <SkillCategory>
-        프론트엔드
-      </SkillCategory>
-      <SkillWrapper>
-        {frontend?.map((item: any, index: number) =>
-          <SkillTag key={index} $color={textLightBlue[theme]}>
-            <StackIcon
-              dangerouslySetInnerHTML={{
-                __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
-              }}
-              role="img"
-              aria-label={`Icon for ${item?.stack}`} />
-            {item?.stack}
-          </SkillTag>)}
-      </SkillWrapper>
-      <SkillCategory>
-        백엔드
-      </SkillCategory>
-      <SkillWrapper>
-        {backend?.map((item: any, index: number) =>
-          <SkillTag key={index} $color={textLightBlue[theme]}>
-            <StackIcon
-              dangerouslySetInnerHTML={{
-                __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
-              }}
-              role="img"
-              aria-label={`Icon for ${item?.stack}`} />
-            {item?.stack}
-          </SkillTag>)}
-      </SkillWrapper>
-      <SkillCategory>
-        데이터베이스
-      </SkillCategory>
-      <SkillWrapper>
-        {database?.map((item: any, index: number) =>
-          <SkillTag key={index} $color={textLightBlue[theme]}>
-            <StackIcon
-              dangerouslySetInnerHTML={{
-                __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
-              }}
-              role="img"
-              aria-label={`Icon for ${item?.stack}`} />
-            {item?.stack}
-          </SkillTag>)}
-      </SkillWrapper>
-      <SkillCategory>
-        데브툴
-      </SkillCategory>
-      <SkillWrapper>
-        {devtool?.map((item: any, index: number) =>
-          <SkillTag key={index} $color={textLightBlue[theme]}>
-            <StackIcon
-              dangerouslySetInnerHTML={{
-                __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
-              }}
-              role="img"
-              aria-label={`Icon for ${item?.stack}`} />
-            {item?.stack}
-          </SkillTag>)}
-      </SkillWrapper>
+      <SkillLaneWrapper>
+        <SkillCategory>
+          프론트엔드
+        </SkillCategory>
+        <SkillWrapper>
+          {frontend?.map((item: any, index: number) =>
+            <SkillTag key={index} $color={textLightBlue[theme]}>
+              <StackIcon
+                dangerouslySetInnerHTML={{
+                  __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
+                }}
+                role="img"
+                aria-label={`Icon for ${item?.stack}`} />
+              {item?.stack}
+            </SkillTag>)}
+        </SkillWrapper>
+      </SkillLaneWrapper>
+      <SkillLaneWrapper>
+        <SkillCategory>
+          백엔드
+        </SkillCategory>
+        <SkillWrapper>
+          {backend?.map((item: any, index: number) =>
+            <SkillTag key={index} $color={textLightBlue[theme]}>
+              <StackIcon
+                dangerouslySetInnerHTML={{
+                  __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
+                }}
+                role="img"
+                aria-label={`Icon for ${item?.stack}`} />
+              {item?.stack}
+            </SkillTag>)}
+        </SkillWrapper>
+      </SkillLaneWrapper>
+      <SkillLaneWrapper>
+        <SkillCategory>
+          데이터베이스
+        </SkillCategory>
+        <SkillWrapper>
+          {database?.map((item: any, index: number) =>
+            <SkillTag key={index} $color={textLightBlue[theme]}>
+              <StackIcon
+                dangerouslySetInnerHTML={{
+                  __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
+                }}
+                role="img"
+                aria-label={`Icon for ${item?.stack}`} />
+              {item?.stack}
+            </SkillTag>)}
+        </SkillWrapper>
+      </SkillLaneWrapper>
+      <SkillLaneWrapper>
+        <SkillCategory>
+          데브툴
+        </SkillCategory>
+        <SkillWrapper>
+          {devtool?.map((item: any, index: number) =>
+            <SkillTag key={index} $color={textLightBlue[theme]}>
+              <StackIcon
+                dangerouslySetInnerHTML={{
+                  __html: item?.icon.replace('<svg', `<svg fill=${item?.color}`)
+                }}
+                role="img"
+                aria-label={`Icon for ${item?.stack}`} />
+              {item?.stack}
+            </SkillTag>)}
+        </SkillWrapper>
+      </SkillLaneWrapper>
     </SkillListWrapper>
   )
 };
@@ -101,13 +109,26 @@ const SkillListWrapper = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 16px;
+  gap: 30px;
   user-select: none;
 `;
 
+const SkillLaneWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+`;
+
 const SkillCategory = styled.h3`
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
+  min-width: 120px;
+  width: 120px;
+  height: 32px;
+  text-align: start;
+  display: flex;
+  align-items: center;
 `;
 
 const SkillWrapper = styled.ul`
@@ -121,11 +142,11 @@ const SkillWrapper = styled.ul`
 
 const SkillTag = styled.li<{ $color: string }>`
   width: fit-content;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border: 1px solid;
   border-color: ${(props) => props.$color};
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   display: flex;
   align-items: center;
