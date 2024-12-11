@@ -2,9 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../store/config/configureStore';
-import { commonBgColor, commonTextColor } from '../../styles/colorToken';
+import { commonBgColor, commonTextColor, textLight } from '../../styles/colorToken';
 import { AddButton } from '../../pages/PostOptionUpdate';
 import { supabase } from '../../utils/Supabase';
+import { GrClose } from 'react-icons/gr';
 
 interface UpdateModalProps {
     update: any;
@@ -52,6 +53,12 @@ const UpdateModal = ({ update, setUpdate, success, setSuccess }: UpdateModalProp
                 onClick={(e: any) => e.stopPropagation()}
                 onSubmit={onSubmitUpdateHandler}
                 $bgcolor={commonBgColor[theme]}>
+                <CloseButton
+                    $color={commonTextColor[theme]}
+                    $hover={textLight[theme]}
+                    onClick={() => setUpdate({ id: null, type: null, text: null })}>
+                    <GrClose size={24} />
+                </CloseButton>
                 <ModalTitle $color={commonTextColor[theme]}>
                     {(type === 'projects') ? '프로젝트' : '공부'}
                 </ModalTitle>
@@ -91,6 +98,7 @@ const ModalContainer = styled.form<{ $bgcolor: string }>`
     flex-direction: column;
     justify-content: center;
     align-items: start;
+    position: relative;
     gap: 24px;
     box-shadow: 0px 0px 8px 0px #00000080;
     background-color: ${(props) => props.$bgcolor};
@@ -113,6 +121,25 @@ const ModalInput = styled.input<{ $color: string }>`
     font-size: 14px;
     border-radius: 4px;
     background-color: transparent;
+`;
+
+const CloseButton = styled.button<{ $color: string, $hover: string }>`
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${(props) => props.$color};
+    background-color: transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        color: ${(props) => props.$hover};
+    }
 `;
 
 export default UpdateModal;

@@ -1,19 +1,202 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import { PostsCategory, PostsContainer, SiteContainer } from './SitePage';
+import { PostsCategory, SiteContainer } from './SitePage';
 import SideTap from '../components/SitePage/SideTap';
+import { lineLight, textLight, textLightBlue } from '../styles/colorToken';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/config/configureStore';
+import { TiArrowForward } from "react-icons/ti";
+import Skills from '../components/ResumePage/Skills';
+import Experience from '../components/ResumePage/Experience';
+import { supabase } from '../utils/Supabase';
+import Projects from '../components/ResumePage/Projects';
+import Education from '../components/ResumePage/Education';
 
 const ResumePage = () => {
+
+  const theme = useSelector((state: RootState) => state.darkMode);
+  const [project, setProject] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        setProject(data);
+      } catch (error) {
+        console.error("", error);
+      };
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SiteContainer>
-      <SideTap />
-      <PostsContainer>
-        <PostsCategory>
-          내 소개
-        </PostsCategory>
-      </PostsContainer>
+      <ResumeContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Introduce.
+          </ResumeCategory>
+          <ResumeContentBox>
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                생년월일
+              </IntroExpired>
+              <IntroText>
+                1997.01.21 (27세)
+              </IntroText>
+            </IntroLaneWrapper>
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                이메일
+              </IntroExpired>
+              <IntroText>
+                sean2684@naver.com
+              </IntroText>
+              <LinkIcon
+                $color={textLight[theme]}
+                href='/contact'>
+                <TiArrowForward />
+              </LinkIcon>
+            </IntroLaneWrapper>
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                휴대폰
+              </IntroExpired>
+              <IntroText>
+                010-6532-5635
+              </IntroText>
+              <LinkIcon
+                $color={textLight[theme]}
+                href='tel:01065325635'>
+                <TiArrowForward />
+              </LinkIcon>
+            </IntroLaneWrapper>
+          </ResumeContentBox>
+        </ResumeLaneContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Skills.
+          </ResumeCategory>
+          <Skills />
+        </ResumeLaneContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Experience.
+          </ResumeCategory>
+          <Experience project={project} theme={theme} />
+        </ResumeLaneContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Project.
+          </ResumeCategory>
+          <Projects project={project} theme={theme} />
+        </ResumeLaneContainer>
+        <ResumeLaneContainer style={{ borderBottom: 'none' }}>
+          <ResumeCategory>
+            Education.
+          </ResumeCategory>
+          <Education theme={theme} />
+        </ResumeLaneContainer>
+      </ResumeContainer> 
     </SiteContainer>
   )
 };
+
+const ResumeContainer = styled.ul`
+  width: 940px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 0px auto;
+  padding: 0px 0px 80px 0px;
+
+  @media screen and (max-width: 980px) {
+    width: 100%;
+  }
+`;
+
+const ResumeLaneContainer = styled.li`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 40px;
+  border-bottom: 1px solid;
+  border-color: #e9e9e9;
+  padding: 40px 20px;
+`;
+
+const ResumeCategory = styled.h2`
+  font-size: 22px;
+  font-weight: 700;
+  user-select: none;
+  color: #ee6e6e;
+`;
+
+const ResumeContentBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 16px;
+`;
+
+const IntroLaneWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 6px;
+`;
+
+const IntroExpired = styled.h3<{ $color: string }>`
+  width: 120px;
+  font-size: 17px;
+  font-weight: 700;
+  color: ${(props) => props.$color};
+  text-align: start;
+  user-select: none;
+`;
+
+const IntroText = styled.p`
+  font-size: 17px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+`;
+
+const LinkIcon = styled.a<{ $color: string }>`
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  color: ${(props) => props.$color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #ee6e6e;
+  }
+`;
+
+const ResumeContent = styled.p`
+  width: 100%;
+  font-size: 16px;
+  line-height: 150%;
+  white-space: pre-line;
+  text-align: start;
+`;
 
 export default ResumePage;
