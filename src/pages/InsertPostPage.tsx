@@ -116,6 +116,10 @@ export const InsertContainer = styled.section`
   justify-content: start;
   align-items: center;
   gap: 40px;
+
+  @media screen and (max-width: 980px) {
+    gap: 20px;
+  }
 `;
 
 export const InsertTitleWrapper = styled.div`
@@ -139,17 +143,31 @@ export const BackIcon = styled.a`
   &:hover {
     color: #222020;
   }
+
+  @media screen and (max-width: 980px) {
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+  }
 `;
 
 export const InsertTitle = styled.h1`
   font-size: 20px;
   font-weight: 700;
+
+  @media screen and (max-width: 980px) {
+    font-size: 14px;
+  }
 `;
 
 export const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media screen and (max-width: 980px) {
+    gap: 6px;
+  }
 `;
 
 export const CheckBox = styled.button<{ $color: string }>`
@@ -167,6 +185,11 @@ export const CheckBox = styled.button<{ $color: string }>`
 
   &:hover {
     color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
+    gap: 2px;
   }
 `;
 

@@ -43,6 +43,11 @@ const ModalContainer = styled.div<{ $src: string }>`
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
+
+    @media screen and (max-width: 980px) {
+        width: 94%;
+        height: 84%;
+    }
 `;
 
 const CloseButton = styled.button`
@@ -61,6 +66,14 @@ const CloseButton = styled.button`
 
     &:hover {
         color: #949494;
+    }
+
+    @media screen and (max-width: 980px) {
+        width: 24px;
+        height: 24px;
+        top: auto;
+        bottom: 0;
+        right: calc(50% - 20px);
     }
 `;
 

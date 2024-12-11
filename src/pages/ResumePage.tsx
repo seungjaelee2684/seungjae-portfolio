@@ -133,6 +133,11 @@ const ResumeLaneContainer = styled.li`
   border-bottom: 1px solid;
   border-color: #e9e9e9;
   padding: 40px 20px;
+
+  @media screen and (max-width: 980px) {
+    gap: 20px;
+    padding: 20px 0px;
+  }
 `;
 
 const ResumeCategory = styled.h2`
@@ -140,6 +145,10 @@ const ResumeCategory = styled.h2`
   font-weight: 700;
   user-select: none;
   color: #ee6e6e;
+
+  @media screen and (max-width: 980px) {
+    font-size: 14px;
+  }
 `;
 
 const ResumeContentBox = styled.div`
@@ -149,6 +158,10 @@ const ResumeContentBox = styled.div`
   justify-content: start;
   align-items: start;
   gap: 16px;
+
+  @media screen and (max-width: 980px) {
+    gap: 8px;
+  }
 `;
 
 const IntroLaneWrapper = styled.div`
@@ -166,6 +179,11 @@ const IntroExpired = styled.h3<{ $color: string }>`
   color: ${(props) => props.$color};
   text-align: start;
   user-select: none;
+
+  @media screen and (max-width: 980px) {
+    width: 60px;
+    font-size: 12px;
+  }
 `;
 
 const IntroText = styled.p`
@@ -173,6 +191,10 @@ const IntroText = styled.p`
   font-weight: 400;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 980px) {
+    font-size: 12px;
+  }
 `;
 
 const LinkIcon = styled.a<{ $color: string }>`
@@ -189,14 +211,12 @@ const LinkIcon = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
-`;
 
-const ResumeContent = styled.p`
-  width: 100%;
-  font-size: 16px;
-  line-height: 150%;
-  white-space: pre-line;
-  text-align: start;
+  @media screen and (max-width: 980px) {
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+  }
 `;
 
 export default ResumePage;

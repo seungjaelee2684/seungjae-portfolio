@@ -19,7 +19,7 @@ const SiteHeader = () => {
         if (!toggleRef.current) return;
 
         if (isDark) {
-            toggleRef.current.style.transform = 'translateX(20px)';
+            toggleRef.current.style.transform = 'translateX(110%)';
             toggleRef.current.style.backgroundColor = '#25afee';
         } else {
             toggleRef.current.style.transform = 'translateX(0%)';
@@ -56,7 +56,7 @@ const SiteHeader = () => {
                             transition: 'all 0.3s',
                             opacity: (isDark) ? '1' : '0',
                             transform: (isDark) ? 'translateY(0px)' : 'translateY(20px)',
-                            fontSize: '16px'
+                            fontSize: '15px'
                         }} />
                 </ThemeWrapper>
             </SiteHeaderInWrapper>
@@ -77,6 +77,10 @@ const SiteHeaderContainer = styled.header`
     z-index: 25;
     user-select: none;
     backdrop-filter: blur(3px);
+
+    @media screen and (max-width: 980px) {
+        height: 60px;
+    }
 `;
 
 const SiteHeaderInWrapper = styled.nav`
@@ -103,6 +107,11 @@ const HeaderLink = styled.a`
     &:hover {
         color: #ee6e6e;
     }
+
+    @media screen and (max-width: 980px) {
+        font-size: 20px;
+        gap: 2px;
+    }
 `;
 
 const HeaderLinkIcon = styled.span`
@@ -111,6 +120,11 @@ const HeaderLinkIcon = styled.span`
     margin-bottom: 4px;
     border-radius: 100%;
     background-color: #ee6e6e;
+
+    @media screen and (max-width: 980px) {
+        width: 4px;
+        height: 4px;
+    }
 `;
 
 const ThemeWrapper = styled.div`
@@ -119,6 +133,11 @@ const ThemeWrapper = styled.div`
     align-items: center;
     gap: 8px;
     font-size: 22px;
+
+    @media screen and (max-width: 980px) {
+        gap: 4px;
+        font-size: 20px;
+    }
 `;
 
 const ThemeToggle = styled.button`
@@ -134,6 +153,11 @@ const ThemeToggle = styled.button`
     gap: 8px;
     font-size: 14px;
     cursor: pointer;
+
+    @media screen and (max-width: 980px) {
+        width: 38px;
+        height: 20px;
+    }
 `;
 
 const ToggleCircle = styled.div`
@@ -144,6 +168,13 @@ const ToggleCircle = styled.div`
     border-radius: 100%;
     background-color: #ffffff;
     transition: all 0.3s;
+
+    @media screen and (max-width: 980px) {
+        width: 14px;
+        max-width: 14px;
+        height: 14px;
+        max-height: 14px;
+    }
 `;
 
 export default SiteHeader;
