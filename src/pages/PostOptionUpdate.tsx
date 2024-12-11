@@ -146,14 +146,6 @@ const PostOptionUpdate = () => {
     };
   };
 
-  const onClickUpdateHandler = (type: string) => {
-    if (type === 'project') {
-
-    } else {
-
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -273,6 +265,11 @@ const OptionUpdateContainer = styled.section`
   justify-content: start;
   align-items: start;
   gap: 60px;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    gap: 30px;
+  }
 `;
 
 const ColumnLane = styled.ul`
@@ -282,6 +279,10 @@ const ColumnLane = styled.ul`
   justify-content: start;
   align-items: start;
   gap: 12px;
+
+  @media screen and (max-width: 980px) {
+    gap: 8px;
+  }
 `;
 
 const ColumnTitle = styled.h2`
@@ -289,6 +290,11 @@ const ColumnTitle = styled.h2`
   font-weight: 700;
   user-select: none;
   margin: 20px 0px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 14px;
+    margin: 10px 0px;
+  }
 `;
 
 const RowLane = styled.li`
@@ -299,11 +305,20 @@ const RowLane = styled.li`
   align-items: center;
   border: 1px solid #cacaca;
   padding: 16px;
+
+  @media screen and (max-width: 980px) {
+    padding: 12px;
+    height: 48px;
+  }
 `;
 
 const OptionTitle = styled.h3`
   font-size: 16px;
   font-weight: 500;
+
+  @media screen and (max-width: 980px) {
+    font-size: 12px;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -325,6 +340,12 @@ const IconBox = styled.button`
   &:hover {
     color: #ee6e6e;
   }
+
+  @media screen and (max-width: 980px) {
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+  }
 `;
 
 const AddRow = styled.button`
@@ -343,6 +364,11 @@ const AddRow = styled.button`
   &:hover {
     color: #ee6e6e;
     border: 1px solid #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    height: 32px;
+    font-size: 18px;
   }
 `;
 
@@ -364,6 +390,11 @@ const UpdateInput = styled.input`
 
   &:focus {
     border: 1px solid #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    height: 28px;
+    font-size: 11px;
   }
 `;
 
@@ -387,6 +418,11 @@ export const AddButton = styled.button`
 
   &:active {
     background-color: #8d3434;
+  }
+
+  @media screen and (max-width: 980px) {
+    height: 32px;
+    font-size: 12px;
   }
 `;
 

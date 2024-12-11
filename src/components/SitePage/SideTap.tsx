@@ -110,6 +110,13 @@ const SideTapContainer = styled.ul`
   padding-top: 40px;
   user-select: none;
   gap: 8px;
+  padding-left: 0px;
+
+  @media screen and (max-width: 980px) {
+    min-width: 70px;
+    width: 70px;
+    padding-top: 16px;
+  }
 `;
 
 const SideTapLane = styled.li`
@@ -127,6 +134,7 @@ const SideTapLink = styled.a<{ $color: string }>`
   display: flex;
   justify-content: start;
   align-items: center;
+  text-align: start;
   gap: 4px;
   padding: 0px 16px 0px 0px;
   font-size: 14px;
@@ -139,6 +147,13 @@ const SideTapLink = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+
+  @media screen and (max-width: 980px) {
+    padding: 0px 12px 0px 0px;
+    font-size: 10px;
+    height: 16px;
+    gap: 2px;
+  }
 `;
 
 const SideDetailTapLane = styled.div`
@@ -149,11 +164,22 @@ const SideDetailTapLane = styled.div`
   align-items: start;
   gap: 2px;
   padding-left: 6px;
+
+  @media screen and (max-width: 980px) {
+    padding-left: 4px;
+  }
 `;
 
 const SideDetailTap = styled(SideTapLink)`
   font-size: 12px;
   height: 22px;
+  text-align: start;
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+    height: fit-content;
+    padding: 3px 0px;
+  }
 `;
 
 export default SideTap;

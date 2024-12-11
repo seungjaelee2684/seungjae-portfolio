@@ -44,7 +44,7 @@ const PracticeDetail = ({ data }: PracticeDetailProps) => {
             <DateText>
               {koreaTime(data?.created_at)}
               <ListLink
-                href='/jaelog/projects'
+                href={`/jaelog/practices?c=${data?.category}`}
                 $color={textMedium[theme]}>
                 목록
               </ListLink>
@@ -75,6 +75,10 @@ const Content = styled.div`
   width: 100%;
   text-align: start;
   margin-top: 60px;
+
+  @media screen and (max-width: 980px) {
+    margin-top: 30px;
+  }
 `;
 
 const PracticeTitleWrapper = styled.div`
@@ -84,11 +88,19 @@ const PracticeTitleWrapper = styled.div`
   justify-content: start;
   align-items: start;
   gap: 10px;
+
+  @media screen and (max-width: 980px) {
+    gap: 8px;
+  }
 `;
 
 const PracticeCategory = styled.span`
   font-size: 16px;
   color: #ee6e6e;
+
+  @media screen and (max-width: 980px) {
+    font-size: 11px;
+  }
 `;
 
 export default PracticeDetail;

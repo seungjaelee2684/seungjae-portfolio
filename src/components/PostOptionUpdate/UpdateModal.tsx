@@ -57,7 +57,7 @@ const UpdateModal = ({ update, setUpdate, success, setSuccess }: UpdateModalProp
                     $color={commonTextColor[theme]}
                     $hover={textLight[theme]}
                     onClick={() => setUpdate({ id: null, type: null, text: null })}>
-                    <GrClose size={24} />
+                    <GrClose />
                 </CloseButton>
                 <ModalTitle $color={commonTextColor[theme]}>
                     {(type === 'projects') ? '프로젝트' : '공부'}
@@ -102,6 +102,12 @@ const ModalContainer = styled.form<{ $bgcolor: string }>`
     gap: 24px;
     box-shadow: 0px 0px 8px 0px #00000080;
     background-color: ${(props) => props.$bgcolor};
+
+    @media screen and (max-width: 980px) {
+        width: 94%;
+        height: 200px;
+        gap: 16px;
+    }
 `;
 
 const ModalTitle = styled.label<{ $color: string }>`
@@ -109,6 +115,10 @@ const ModalTitle = styled.label<{ $color: string }>`
     font-weight: 700;
     padding-left: 8px;
     color: ${(props) => props.$color};
+
+    @media screen and (max-width: 980px) {
+        font-size: 16px;
+    }
 `;
 
 const ModalInput = styled.input<{ $color: string }>`
@@ -121,6 +131,11 @@ const ModalInput = styled.input<{ $color: string }>`
     font-size: 14px;
     border-radius: 4px;
     background-color: transparent;
+
+    @media screen and (max-width: 980px) {
+        height: 32px;
+        font-size: 12px;
+    }
 `;
 
 const CloseButton = styled.button<{ $color: string, $hover: string }>`
@@ -139,6 +154,13 @@ const CloseButton = styled.button<{ $color: string, $hover: string }>`
 
     &:hover {
         color: ${(props) => props.$hover};
+    }
+
+    @media screen and (max-width: 980px) {
+        width: 24px;
+        height: 24px;
+        top: 10px;
+        right: 10px;
     }
 `;
 

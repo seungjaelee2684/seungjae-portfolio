@@ -69,7 +69,7 @@ const DropDownMenu = ({ option, type, value, setValue }: DropDownMenuProps) => {
           </DropDownMenuBox>}
       </DropDownRender>
       <DropDownButton onClick={onClickOpenHandler}>
-        <IoIosArrowDown style={{ fontSize: '24px' }} />
+        <IoIosArrowDown />
       </DropDownButton>
     </DropDownWrapper>
   )
@@ -80,6 +80,10 @@ const DropDownWrapper = styled.div`
   height: 38px;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 980px) {
+    height: 28px;
+  }
 `;
 
 const DropDownRender = styled.div`
@@ -95,6 +99,11 @@ const DropDownRender = styled.div`
   border-bottom: 1px solid #b8b8b8;
   user-select: none;
   position: relative;
+
+  @media screen and (max-width: 980px) {
+    padding: 0px 12px;
+    font-size: 10px;
+  }
 `;
 
 const DropDownButton = styled.button`
@@ -108,7 +117,6 @@ const DropDownButton = styled.button`
   align-items: center;
   background-color: transparent;
   outline: none;
-  padding: 0px 12px;
   transition: all 0.3s;
   cursor: pointer;
 
@@ -116,6 +124,11 @@ const DropDownButton = styled.button`
     color: #ffffff;
     border: 1px solid #ee6e6e;
     background-color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    min-width: 28px;
+    width: 28px;
   }
 `;
 
@@ -137,6 +150,12 @@ const DropDownMenuBox = styled.ul<{ $bgcolor: string }>`
   z-index: 19;
   padding: 8px 4px;
   box-shadow: 0px 4px 4px 0px #0000002b;
+
+  @media screen and (max-width: 980px) {
+    top: 28px;
+    max-height: 500px;
+    padding: 6px 4px;
+  }
 `;
 
 const DropDownList = styled.li`
@@ -156,6 +175,11 @@ const DropDownList = styled.li`
     background-color: #ee6e6eb7;
     color: #ffffff;
     font-weight: 700;
+  }
+
+  @media screen and (max-width: 980px) {
+    height: 28px;
+    font-size: 10px;
   }
 `;
 
