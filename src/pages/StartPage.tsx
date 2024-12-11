@@ -17,7 +17,7 @@ const StartPage = () => {
     "시작하기에 앞서 오른쪽 하단에 위치한 안내 버튼을 눌러주세요.",
     "가이드의 안내에 따라 새로운 게임(New Game)을 시작하세요!",
     "'Load Game'를 누르면 가이드 없이 시작하실 수 있습니다.",
-    "웹페이지 형태의 포트폴리오를 확인하려면 이곳을 눌러주세요.",
+    "웹 블로그 형태의 포트폴리오를 확인하려면 이곳을 눌러주세요.",
     "채용문의: sean2684@naver.com"
   ];
   const [info, setInfo] = useState<number | undefined>(0);
@@ -72,17 +72,17 @@ const StartPage = () => {
                 Load Game
               </ButtonText>
             </DefaultButton>
-            {/* <DefaultButton
+            <DefaultButton
               onMouseOver={() => setInfo(3)}
               onMouseLeave={() => setInfo(undefined)}
               onClick={() => {
-                navigate("/website");
+                navigate("/jaelog");
               }}>
               <HoverButton />
               <ButtonText >
-                Website
+                Blog
               </ButtonText>
-            </DefaultButton> */}
+            </DefaultButton>
             <DefaultButton
               onMouseOver={() => setInfo(4)}
               onMouseLeave={() => setInfo(undefined)}
