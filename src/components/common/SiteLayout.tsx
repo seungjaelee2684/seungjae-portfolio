@@ -15,7 +15,6 @@ const SiteLayout = () => {
   const scrollRef = useRef<HTMLButtonElement>(null);
   const theme = useSelector((state: RootState) => state.darkMode);
   const [scroll, setScroll] = useState<number>(window.scrollY);
-  console.log("🚀 ~ SiteLayout ~ scroll:", scroll)
 
   const onClickTopHandler = (e: any) => {
     e.preventDefault();

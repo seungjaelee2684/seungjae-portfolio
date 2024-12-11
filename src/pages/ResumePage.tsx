@@ -9,6 +9,8 @@ import { TiArrowForward } from "react-icons/ti";
 import Skills from '../components/ResumePage/Skills';
 import Experience from '../components/ResumePage/Experience';
 import { supabase } from '../utils/Supabase';
+import Projects from '../components/ResumePage/Projects';
+import Education from '../components/ResumePage/Education';
 
 const ResumePage = () => {
 
@@ -42,36 +44,40 @@ const ResumePage = () => {
             Introduce.
           </ResumeCategory>
           <ResumeContentBox>
-            <IntroExpired $color={textLightBlue[theme]}>
-              생년월일
-            </IntroExpired>
-            <IntroText>
-              1997.01.21 (27세)
-            </IntroText>
-            |
-            <IntroExpired $color={textLightBlue[theme]}>
-              이메일
-            </IntroExpired>
-            <IntroText>
-              sean2684@naver.com
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                생년월일
+              </IntroExpired>
+              <IntroText>
+                1997.01.21 (27세)
+              </IntroText>
+            </IntroLaneWrapper>
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                이메일
+              </IntroExpired>
+              <IntroText>
+                sean2684@naver.com
+              </IntroText>
               <LinkIcon
                 $color={textLight[theme]}
                 href='/contact'>
                 <TiArrowForward />
               </LinkIcon>
-            </IntroText>
-            |
-            <IntroExpired $color={textLightBlue[theme]}>
-              휴대폰
-            </IntroExpired>
-            <IntroText>
-              010-6532-5635
+            </IntroLaneWrapper>
+            <IntroLaneWrapper>
+              <IntroExpired $color={textLightBlue[theme]}>
+                휴대폰
+              </IntroExpired>
+              <IntroText>
+                010-6532-5635
+              </IntroText>
               <LinkIcon
                 $color={textLight[theme]}
                 href='tel:01065325635'>
                 <TiArrowForward />
               </LinkIcon>
-            </IntroText>
+            </IntroLaneWrapper>
           </ResumeContentBox>
         </ResumeLaneContainer>
         <ResumeLaneContainer>
@@ -86,6 +92,18 @@ const ResumePage = () => {
           </ResumeCategory>
           <Experience project={project} theme={theme} />
         </ResumeLaneContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Project.
+          </ResumeCategory>
+          <Projects project={project} theme={theme} />
+        </ResumeLaneContainer>
+        <ResumeLaneContainer style={{ borderBottom: 'none' }}>
+          <ResumeCategory>
+            Education.
+          </ResumeCategory>
+          <Education theme={theme} />
+        </ResumeLaneContainer>
       </ResumeContainer> 
     </SiteContainer>
   )
@@ -98,7 +116,7 @@ const ResumeContainer = styled.ul`
   justify-content: start;
   align-items: start;
   margin: 0px auto;
-  padding: 40px 0px 80px 0px;
+  padding: 0px 0px 80px 0px;
 
   @media screen and (max-width: 980px) {
     width: 100%;
@@ -111,10 +129,10 @@ const ResumeLaneContainer = styled.li`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 24px;
+  gap: 40px;
   border-bottom: 1px solid;
   border-color: #e9e9e9;
-  padding: 80px 20px;
+  padding: 40px 20px;
 `;
 
 const ResumeCategory = styled.h2`
@@ -127,24 +145,34 @@ const ResumeCategory = styled.h2`
 const ResumeContentBox = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: start;
   gap: 16px;
 `;
 
+const IntroLaneWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 6px;
+`;
+
 const IntroExpired = styled.h3<{ $color: string }>`
-  font-size: 15px;
+  width: 120px;
+  font-size: 17px;
   font-weight: 700;
   color: ${(props) => props.$color};
+  text-align: start;
   user-select: none;
 `;
 
 const IntroText = styled.p`
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 4px;
 `;
 
 const LinkIcon = styled.a<{ $color: string }>`
