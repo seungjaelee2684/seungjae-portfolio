@@ -58,7 +58,6 @@ const PracticeListPage = () => {
 
         fetchData();
     }, []);
-    console.log('블로그 글', practice, category);
 
     return (
         <SiteContainer>

@@ -51,7 +51,9 @@ const ProfileContainer = styled.div`
   border-bottom: 1px solid #e9e9e9;
 
   @media screen and (max-width: 980px) {
-    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
     padding: 16px 0px;
   }
 `;
@@ -67,8 +69,6 @@ const ProfileWrapper = styled.div`
   gap: 16px;
 
   @media screen and (max-width: 980px) {
-    width: 90px;
-    min-width: 90px;
     gap: 8px;
   }
 `;
@@ -81,11 +81,6 @@ const ProfileImage = styled.img`
   object-position: top;
   background-color: #e8f4f5;
   user-select: none;
-
-  @media screen and (max-width: 980px) {
-    width: 80px;
-    height: 80px;
-  }
 `;
 
 const Link = styled.a`
@@ -117,6 +112,7 @@ const TextWrapper = styled.div`
   gap: 8px;
 
   @media screen and (max-width: 980px) {
+    width: 90%;
     gap: 4px;
   }
 `;

@@ -32,7 +32,6 @@ const PracticeInsert = ({ isPractice, option, dropdownValue, setDropdownValue }:
     title,
     content
   } = insertData;
-  console.log('입력값', insertData);
 
   const onChangeTitleHandler = (e: any) => {
     setInsertData({
