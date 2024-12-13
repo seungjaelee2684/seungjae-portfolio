@@ -81,7 +81,6 @@ const Projects = ({ project, theme }: ProjectsProps) => {
 
     if (flattenedList?.length > 0) fetchData();
   }, [flattenedList]);
-  console.log("🚀 ~ Experience ~ experienceList:", projectsList, stackData);
 
   return (
     <ProjectContainer>

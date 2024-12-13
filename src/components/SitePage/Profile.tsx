@@ -49,6 +49,13 @@ const ProfileContainer = styled.div`
   gap: 32px;
   padding: 44px 0px 24px 0px;
   border-bottom: 1px solid #e9e9e9;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0px;
+  }
 `;
 
 const ProfileWrapper = styled.div`
@@ -60,6 +67,10 @@ const ProfileWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+
+  @media screen and (max-width: 980px) {
+    gap: 8px;
+  }
 `;
 
 const ProfileImage = styled.img`
@@ -78,13 +89,17 @@ const Link = styled.a`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   transition: all 0.3s;
   cursor: pointer;
 
   &:hover {
     color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
   }
 `;
 
@@ -95,17 +110,30 @@ const TextWrapper = styled.div`
   justify-content: start;
   align-items: start;
   gap: 8px;
+
+  @media screen and (max-width: 980px) {
+    width: 90%;
+    gap: 4px;
+  }
 `;
 
 const NameText = styled.strong`
   font-size: 22px;
   font-weight: 700;
+
+  @media screen and (max-width: 980px) {
+    font-size: 15px;
+  }
 `;
 
 const Role = styled.span<{ $color: string }>`
   font-size: 14px;
   font-weight: 300;
   color: ${(props) => props.$color};
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
+  }
 `;
 
 const DetailDescription = styled.p`
@@ -116,6 +144,11 @@ const DetailDescription = styled.p`
   margin-top: 8px;
   text-align: start;
   white-space: pre-line;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    margin-top: 4px;
+  }
 `;
 
 export default Profile;

@@ -241,6 +241,7 @@ const CardInWrapper = styled.div`
 
   @media screen and (max-width: 500px) {
     flex-wrap: wrap;
+    gap: 8px;
   }
 `;
 
@@ -314,7 +315,7 @@ const CardContainer = styled.div`
   }
 
   @media screen and (max-width: 500px) {
-    max-width: 150px;
+    max-width: 140px;
     max-height: 50%;
   }
 `;
@@ -346,7 +347,7 @@ const NoneCardContainer = styled.div`
   }
 
   @media screen and (max-width: 500px) {
-    max-width: 150px;
+    max-width: 140px;
     max-height: 50%;
   }
 `;

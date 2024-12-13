@@ -30,8 +30,6 @@ const SkillsPage = () => {
     };
   };
 
-  console.log("My stack", skillArr, fittingSkill);
-
   useEffect(() => {
     dispatch(pageMove("Skills"));
   }, []);

@@ -66,7 +66,6 @@ const ProjectInsert = ({
     work,
     content
   } = insertData;
-  console.log('입력값', insertData);
 
   const onChangeInsertHandler = (e: any) => {
     const { name, value } = e.target;
@@ -141,8 +140,6 @@ const ProjectInsert = ({
       uploadFetch();
     };
   };
-
-  console.log(stackValue);
 
   return (
     <InsertFormContainer>
@@ -242,9 +239,6 @@ const ProjectInsert = ({
           value={(member === 0) ? '' : member}
           placeholder='0명 (숫자만 입력 가능)'
           onChange={onChangeInsertHandler} />
-        <Expired>
-          명
-        </Expired>
       </FormLane>
       <FormLane>
         <Expired>
@@ -337,6 +331,12 @@ export const InsertFormContainer = styled.form`
   justify-content: start;
   align-items: start;
   gap: 24px;
+  
+  @media screen and (max-width: 980px) {
+    width: 100%;
+    padding: 16px 0px;
+    gap: 12px;
+  }
 `;
 
 export const FormLane = styled.div`
@@ -345,6 +345,11 @@ export const FormLane = styled.div`
   justify-content: start;
   align-items: start;
   gap: 24px;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    gap: 4px;
+  }
 `;
 
 export const Expired = styled.label`
@@ -358,12 +363,24 @@ export const Expired = styled.label`
   font-size: 14px;
   font-weight: 700;
   user-select: none;
+
+  @media screen and (max-width: 980px) {
+    min-width: 80px;
+    width: 80px;
+    height: 28px;
+    font-size: 12px;
+    padding-left: 4px;
+  }
 `;
 
 export const Important = styled.span`
   font-size: 13px;
   font-weight: 700;
   color: #ee6e6e;
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
+  }
 `;
 
 export const LaneInput = styled.input<{ $width: string }>`
@@ -387,6 +404,11 @@ export const LaneInput = styled.input<{ $width: string }>`
   &:focus {
     border: 1px solid #222020;
   }
+
+  @media screen and (max-width: 980px) {
+    height: 28px;
+    font-size: 10px;
+  }
 `;
 
 export const DropdownLink = styled.a`
@@ -404,6 +426,13 @@ export const DropdownLink = styled.a`
 
   &:hover {
     color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    min-width: fit-content;
+    width: fit-content;
+    height: 28px;
+    font-size: 10px;
   }
 `;
 
@@ -429,6 +458,11 @@ export const LaneTextarea = styled.textarea`
   &:focus {
     border: 1px solid #222020;
   }
+
+  @media screen and (max-width: 980px) {
+    min-height: 400px;
+    padding: 8px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -438,6 +472,11 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   gap: 24px;
   margin: 60px 0px;
+
+  @media screen and (max-width: 980px) {
+    gap: 12px;
+    margin: 100px 0px;
+  }
 `;
 
 export const Button = styled.div`
@@ -462,6 +501,12 @@ export const Button = styled.div`
   &:active {
     background-color: #972727;
   }
+
+  @media screen and (max-width: 980px) {
+    width: 70px;
+    height: 28px;
+    font-size: 12px;
+  }
 `;
 
 export const TagWrapper = styled.ul`
@@ -472,6 +517,10 @@ export const TagWrapper = styled.ul`
   align-items: start;
   flex-wrap: wrap;
   gap: 8px;
+
+  @media screen and (max-width: 980px) {
+    gap: 4px;
+  }
 `;
 
 export const TagButton = styled.li<{ $color: string, $bgcolor: string }>`
@@ -492,6 +541,13 @@ export const TagButton = styled.li<{ $color: string, $bgcolor: string }>`
 
   &:hover {
     opacity: 0.6;
+  }
+
+  @media screen and (max-width: 980px) {
+    height: 24px;
+    padding: 0px 10px;
+    font-size: 10px;
+    border-radius: 16px;
   }
 `;
 

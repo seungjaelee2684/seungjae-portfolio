@@ -60,8 +60,6 @@ const UpdatePostsPage = () => {
     setDropdownValue(null);
   }, []);
 
-  console.log('드롭다운 메뉴', option);
-
   return (
     <SiteContainer>
       <InsertContainer>

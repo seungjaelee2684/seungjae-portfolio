@@ -20,7 +20,6 @@ const SitePage = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const [blogData, setBlogData] = useState<any>(null);
-  console.log('쿠키값 -> ', cookies(), '게시글 목록 -> ', blogData, theme);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,6 +120,10 @@ export const PostsContainer = styled.ul`
   align-items: start;
   padding: 40px 24px 80px 24px;
   gap: 4px;
+
+  @media screen and (max-width: 980px) {
+    padding: 16px 10px 30px 10px;
+  }
 `;
 
 export const CategoryWrapper = styled.div`
@@ -135,6 +138,11 @@ export const PostsCategory = styled.h1`
   font-weight: 700;
   user-select: none;
   margin-bottom: 24px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const InsertButton = styled.a`
@@ -149,6 +157,10 @@ export const InsertButton = styled.a`
 
   &:hover {
     color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
   }
 `;
 
@@ -172,6 +184,11 @@ export const PostsLane = styled.a`
   &:hover {
     background-color: #e9edffc7;
   }
+
+  @media screen and (max-width: 980px) {
+    padding: 4px 6px;
+    gap: 4px;
+  }
 `;
 
 export const TitleLane = styled.div`
@@ -187,6 +204,10 @@ export const PostLaneCategory = styled.span`
   font-weight: 400;
   color: #ee6e6e;
   font-style: italic;
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+  }
 `;
 
 export const PostTitle = styled.strong`
@@ -201,6 +222,10 @@ export const PostTitle = styled.strong`
   line-clamp: 1;
   font-size: 15px;
   font-weight: 600;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+  }
 `;
 
 export const PostDate = styled.span`
@@ -210,6 +235,12 @@ export const PostDate = styled.span`
   font-weight: 400;
   letter-spacing: -0.7px;
   color: #6599e2;
+
+  @media screen and (max-width: 980px) {
+    min-width: 34px;
+    width: 34px;
+    font-size: 7px;
+  }
 `;
 
 export const AdminButtonWrapper = styled.div`
@@ -219,6 +250,9 @@ export const AdminButtonWrapper = styled.div`
   align-items: center;
   gap: 8px;
 
+  @media screen and (max-width: 980px) {
+    gap: 4px;
+  }
 `;
 
 export const AdminLink = styled.a<{ $color: string }>`
@@ -233,6 +267,10 @@ export const AdminLink = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+  }
 `;
 
 export const AdminButton = styled.button<{ $color: string }>`
@@ -246,6 +284,10 @@ export const AdminButton = styled.button<{ $color: string }>`
 
   &:hover {
     color: #ee6e6e;
+  }
+
+  @media screen and (max-width: 980px) {
+    font-size: 12px;
   }
 `;
 

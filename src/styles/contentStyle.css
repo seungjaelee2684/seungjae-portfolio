@@ -1,8 +1,50 @@
-ul, ol {
+ul,
+ol {
     list-style: initial;
     padding-left: 30px;
 }
 
 li {
     list-style-type: decimal;
+}
+
+@media screen and (max-width: 980px) {
+
+    ul,
+    ol {
+        padding-left: 12px;
+    }
+
+    h1 {
+        font-size: 16px;
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 14px;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 13px;
+        padding-bottom: 10px;
+    }
+
+    h4 {
+        font-size: 12px;
+        padding-bottom: 10px;
+    }
+
+    h5 {
+        font-size: 11px;
+        padding-bottom: 10px;
+    }
+
+    p {
+        font-size: 10px;
+    }
+
+    li {
+        font-size: 10px;
+    }
 }

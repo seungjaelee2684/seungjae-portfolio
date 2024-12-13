@@ -42,7 +42,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
           <DateText>
             {koreaTime(data?.created_at)}
             <ListLink
-              href='/jaelog/projects'
+              href={`/jaelog/projects?c=${data?.connection}`}
               $color={textMedium[theme]}>
               목록
             </ListLink>
@@ -66,6 +66,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
       <ImageContainer
         src={projectImage[data?.image]}
         alt='이미지'
+        loading="lazy"
         onClick={() => setImg(data?.image)} />
       <ContentLane>
         <ContentCategory>
@@ -166,6 +167,11 @@ export const EditorWrapper = styled.div<{ $color: string }>`
   gap: 8px;
   margin-top: 16px;
   color: ${(props) => props.$color};
+
+  @media screen and (max-width: 980px) {
+    margin-top: 0px;
+    gap: 4px;
+  }
 `;
 
 export const EditorList = styled.div`
@@ -174,6 +180,10 @@ export const EditorList = styled.div`
   align-items: center;
   gap: 4px;
   font-size: 13px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+  }
 `;
 
 export const Editor = styled.button<{ $color: string }>`
@@ -188,6 +198,10 @@ export const Editor = styled.button<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+  }
 `;
 
 export const DateText = styled.div`
@@ -197,6 +211,11 @@ export const DateText = styled.div`
   gap: 10px;
   font-size: 12px;
   letter-spacing: -0.3px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+    gap: 4px;
+  }
 `;
 
 export const ListLink = styled.a<{ $color: string }>`
@@ -208,6 +227,10 @@ export const ListLink = styled.a<{ $color: string }>`
   &:hover {
     color: #ee6e6e;
   }
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+  }
 `;
 
 const ImageContainer = styled.img`
@@ -218,6 +241,12 @@ const ImageContainer = styled.img`
   margin-bottom: 30px;
   user-select: none;
   cursor: pointer;
+
+  @media screen and (max-width: 980px) {
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
 `;
 
 const ContentLane = styled.div`
@@ -228,6 +257,11 @@ const ContentLane = styled.div`
   gap: 30px;
   padding: 32px 0px;
   border-bottom: 1px solid #e9e9e9;
+
+  @media screen and (max-width: 980px) {
+    gap: 10px;
+    padding: 12px 0px;
+  }
 `;
 
 const ContentCategory = styled.span`
@@ -243,6 +277,13 @@ const ContentCategory = styled.span`
   font-size: 14px;
   font-weight: 700;
   user-select: none;
+
+  @media screen and (max-width: 980px) {
+    min-width: 50px;
+    width: 50px;
+    font-size: 9px;
+    padding: 3px 0px;
+  }
 `;
 
 const ContentSentence = styled.p`
@@ -252,6 +293,11 @@ const ContentSentence = styled.p`
   font-size: 16px;
   font-weight: 500;
   line-height: 175%;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    line-height: 160%;
+  }
 `;
 
 const UrlLink = styled.a`
@@ -268,11 +314,21 @@ const UrlLink = styled.a`
     color: #ee6e6e;
     text-decoration: underline;
   }
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    line-height: 160%;
+  }
 `;
 
 const LinkIcon = styled.span`
   font-size: 14px;
   margin-right: 6px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    margin-right: 4px;
+  }
 `;
 
 const StackWrapper = styled.ul`
@@ -283,6 +339,10 @@ const StackWrapper = styled.ul`
   gap: 8px;
   flex-wrap: wrap;
   padding-left: 0px;
+
+  @media screen and (max-width: 980px) {
+    gap: 4px;
+  }
 `;
 
 const StackList = styled.li<{ $color: string }>`
@@ -300,11 +360,22 @@ const StackList = styled.li<{ $color: string }>`
   border: 1px solid;
   border-radius: 20px;
   user-select: none;
+
+  @media screen and (max-width: 980px) {
+    height: 20px;
+    padding: 0px 8px;
+    font-size: 8px;
+  }
 `;
 
 const StackIcon = styled.div`
   width: 20px;
   height: 20px;
+
+  @media screen and (max-width: 980px) {
+    width: 10px;
+    height: 10px;
+  }
 `;
 
 export default ProjectDetail;

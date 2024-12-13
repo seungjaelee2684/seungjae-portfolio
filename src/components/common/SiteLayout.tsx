@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import SiteHeader from '../SitePage/SiteHeader';
 import Profile from '../SitePage/Profile';
@@ -12,7 +12,6 @@ import { LiaArrowUpSolid } from "react-icons/lia";
 const SiteLayout = () => {
 
   const path = window.location.pathname;
-  const scrollRef = useRef<HTMLButtonElement>(null);
   const theme = useSelector((state: RootState) => state.darkMode);
   const [scroll, setScroll] = useState<number>(window.scrollY);
 
@@ -25,26 +24,7 @@ const SiteLayout = () => {
   };
 
   useEffect(() => {
-    if (!scrollRef.current) return;
-
-    if (scroll > 200) {
-      scrollRef.current.style.display = 'flex';
-      setTimeout(() => {
-        if (!scrollRef.current) return;
-        scrollRef.current.style.opacity = '1';
-      }, 2);
-    } else {
-      scrollRef.current.style.opacity = '0';
-      setTimeout(() => {
-        if (!scrollRef.current) return;
-        scrollRef.current.style.display = 'none';
-      }, 300);
-    };
-  }, [scroll]);
-
-  useEffect(() => {
     const scrollEvent = () => {
-      if (!scrollRef.current) return;
       const y = window.scrollY;
       setScroll(y);
     };
@@ -62,9 +42,9 @@ const SiteLayout = () => {
       {(path === "/jaelog" || path === "/jaelog/resume") && <Profile />}
       <Outlet />
       <FloatingButton
-        ref={scrollRef}
         $color={commonTextColor[theme]}
-        onClick={onClickTopHandler}>
+        onClick={onClickTopHandler}
+        $display={(scroll > 200) ? 'flex' : 'none'}>
         <LiaArrowUpSolid />
       </FloatingButton>
     </SiteContainer>
@@ -83,10 +63,11 @@ const SiteContainer = styled.div`
 
   @media screen and (max-width: 980px) {
     width: 94%;
+    padding-top: 70px;
   }
 `;
 
-const FloatingButton = styled.button<{ $color: string }>`
+const FloatingButton = styled.button<{ $color: string, $display: string }>`
   width: 40px;
   height: 40px;
   position: fixed;
@@ -99,15 +80,22 @@ const FloatingButton = styled.button<{ $color: string }>`
   color: #ffffff;
   border-radius: 100%;
   transition: all 0.3s;
-  opacity: 0;
   font-size: 20px;
-  display: none;
+  display: ${(props) => props.$display};
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
   &:hover {
     background-color: ${(props) => props.$color}80;
+  }
+
+  @media screen and (max-width: 980px) {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    bottom: 10px;
+    right: 10px;
   }
 `;
 

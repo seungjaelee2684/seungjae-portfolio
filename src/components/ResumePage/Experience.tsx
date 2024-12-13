@@ -66,7 +66,6 @@ const Experience = ({ project, theme }: ExperienceProps) => {
 
     if (flattenedList?.length > 0) fetchData();
   }, [flattenedList]);
-  console.log("🚀 ~ Experience ~ experienceList:", experienceList, stackData);
 
   return (
     <ProjectContainer>
@@ -126,6 +125,11 @@ export const ProjectList = styled.div`
   justify-content: start;
   align-items: start;
   position: relative;
+
+  @media screen and (max-width: 980px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export const ProjectSeeMore = styled.a`
@@ -145,6 +149,16 @@ export const ProjectSeeMore = styled.a`
     gap: 16px;
     opacity: 0.8;
   }
+
+  @media screen and (max-width: 980px) {
+    gap: 4px;
+    font-size: 10px;
+    top: 0px;
+
+    &:hover {
+      gap: 6px;
+    }
+  }
 `;
 
 export const ProjectExpireWrapper = styled.div`
@@ -153,12 +167,22 @@ export const ProjectExpireWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media screen and (max-width: 980px) {
+    min-width: 90px;
+    width: 90px;
+    gap: 4px;
+  }
 `;
 
 export const ProjectExpire = styled.h3`
   font-size: 20px;
   font-weight: 700;
   text-align: start;
+
+  @media screen and (max-width: 980px) {
+    font-size: 13px;
+  }
 `;
 
 export const RoleText = styled.span<{ $color: string }>`
@@ -168,6 +192,10 @@ export const RoleText = styled.span<{ $color: string }>`
   font-style: italic;
   color: ${(props) => props.$color};
   white-space: pre-line;
+
+  @media screen and (max-width: 980px) {
+    font-size: 8px;
+  }
 `;
 
 export const DateText = styled.span<{ $color: string }>`
@@ -176,6 +204,11 @@ export const DateText = styled.span<{ $color: string }>`
   letter-spacing: -0.3px;
   margin-bottom: 8px;
   color: ${(props) => props.$color};
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
 `;
 
 export const ProjectContent = styled.div`
@@ -189,11 +222,20 @@ export const ProjectContent = styled.div`
 export const StrongText = styled.h4`
   font-size: 18px;
   font-weight: 700;
+
+  @media screen and (max-width: 980px) {
+    font-size: 12px;
+  }
 `;
 
 export const SmallExpired = styled.strong`
   font-size: 17px;
   margin: 30px 0px 10px 0px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
+    margin: 12px 0px 6px 0px;
+  }
 `;
 
 export const ContentText = styled.div`
@@ -203,12 +245,22 @@ export const ContentText = styled.div`
   white-space: pre-line;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding-left: 4px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    padding-left: 2px;
+  }
 `;
 
 export const StackBox = styled.div`
   font-size: 15px;
   text-align: start;
+
+  @media screen and (max-width: 980px) {
+    font-size: 9px;
+  }
 `;
 
 export const DetailContent = styled.div`
@@ -218,6 +270,11 @@ export const DetailContent = styled.div`
   font-size: 16px;
   font-weight: 400;
   line-height: 175%;
+
+  @media screen and (max-width: 980px) {
+    font-size: 10px;
+    line-height: 140%;
+  }
 `;
 
 export default Experience;
