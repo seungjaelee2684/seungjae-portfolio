@@ -47,7 +47,6 @@ const LoginPage = () => {
 
       if (error) throw error;
 
-      alert('로그인에 성공하였습니다.');
       const now = new Date();
       const expired = new Date(now.getTime() + 24 * 60 * 60 * 1000);
       document.cookie = `sj-lg=${now.toISOString()}; expires=${expired.toUTCString()}; path=/`;

@@ -15,9 +15,10 @@ interface StatusLaneProps {
         information: boolean,
         state: number | undefined
     }>>;
+    statusRef: React.RefObject<HTMLDivElement>;
 };
 
-const StatusLane: React.FC<StatusLaneProps> = ({ statusModal, setStatusModal }) => {
+const StatusLane: React.FC<StatusLaneProps> = ({ statusModal, setStatusModal, statusRef }) => {
 
     const { information, state } = statusModal;
 
@@ -25,14 +26,16 @@ const StatusLane: React.FC<StatusLaneProps> = ({ statusModal, setStatusModal }) 
         <DefaultLane>
             <GiSpikesHalf style={{ color: "#e5cca0" }} />
             행동특성
-            <StatusWrapper>
+            <StatusWrapper ref={statusRef}>
                 {CharacterStatus?.map((item: any, index: number) => {
                     return (
                         <StatusIcon
                             color={item?.color}
                             size={item?.size}
-                            onMouseOver={() => setStatusModal({ ...statusModal, state: item?.id })}
-                            onMouseLeave={() => setStatusModal({ ...statusModal, state: undefined })}>
+                            onClick={() => {
+                                if (state) return setStatusModal({ ...statusModal, state: undefined });
+                                setStatusModal({ ...statusModal, state: item?.id });
+                            }}>
                             {item?.icon}
                         </StatusIcon>
                     )

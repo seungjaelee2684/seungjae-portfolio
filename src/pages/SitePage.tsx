@@ -20,7 +20,6 @@ const SitePage = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const [blogData, setBlogData] = useState<any>(null);
-  console.log('쿠키값 -> ', cookies(), '게시글 목록 -> ', blogData, theme);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -187,7 +186,7 @@ export const PostsLane = styled.a`
   }
 
   @media screen and (max-width: 980px) {
-    padding: 8px 10px;
+    padding: 4px 6px;
     gap: 4px;
   }
 `;
@@ -207,7 +206,7 @@ export const PostLaneCategory = styled.span`
   font-style: italic;
 
   @media screen and (max-width: 980px) {
-    font-size: 9px;
+    font-size: 8px;
   }
 `;
 
@@ -225,7 +224,7 @@ export const PostTitle = styled.strong`
   font-weight: 600;
 
   @media screen and (max-width: 980px) {
-    font-size: 11px;
+    font-size: 10px;
   }
 `;
 
@@ -238,9 +237,9 @@ export const PostDate = styled.span`
   color: #6599e2;
 
   @media screen and (max-width: 980px) {
-    min-width: 40px;
-    width: 40px;
-    font-size: 8px;
+    min-width: 34px;
+    width: 34px;
+    font-size: 7px;
   }
 `;
 

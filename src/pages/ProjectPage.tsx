@@ -49,7 +49,6 @@ const ProjectPage = () => {
             slideRef.current.style.transform = `translateX(-${stepCurrent}px)`;
         };
     }, [step]);
-    console.log(step);
 
     return (
         <ProjectInBoxContainer>

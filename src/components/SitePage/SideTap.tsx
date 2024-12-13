@@ -50,8 +50,6 @@ const SideTap = () => {
     fetchData();
   }, []);
 
-  console.log('사이드 탭', tap);
-
   return (
     <SideTapContainer>
       <PostsCategory>
@@ -101,7 +99,6 @@ const SideTap = () => {
 const SideTapContainer = styled.ul`
   min-width: 180px;
   width: 180px;
-  min-height: 100dvh;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -113,8 +110,8 @@ const SideTapContainer = styled.ul`
   padding-left: 0px;
 
   @media screen and (max-width: 980px) {
-    min-width: 70px;
-    width: 70px;
+    min-width: 68px;
+    width: 68px;
     padding-top: 16px;
   }
 `;
@@ -149,8 +146,8 @@ const SideTapLink = styled.a<{ $color: string }>`
   }
 
   @media screen and (max-width: 980px) {
-    padding: 0px 12px 0px 0px;
-    font-size: 10px;
+    padding: 0px;
+    font-size: 9px;
     height: 16px;
     gap: 2px;
   }
@@ -176,7 +173,7 @@ const SideDetailTap = styled(SideTapLink)`
   text-align: start;
 
   @media screen and (max-width: 980px) {
-    font-size: 8px;
+    font-size: 7px;
     height: fit-content;
     padding: 3px 0px;
   }

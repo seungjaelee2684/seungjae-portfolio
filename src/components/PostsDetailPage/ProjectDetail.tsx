@@ -66,6 +66,7 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
       <ImageContainer
         src={projectImage[data?.image]}
         alt='이미지'
+        loading="lazy"
         onClick={() => setImg(data?.image)} />
       <ContentLane>
         <ContentCategory>

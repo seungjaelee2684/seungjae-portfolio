@@ -58,8 +58,6 @@ const ProjectListPage = () => {
     postFetch();
   }, []);
 
-  console.log('블로그 글', projectData);
-
   return (
     <SiteContainer>
       <SideTap />

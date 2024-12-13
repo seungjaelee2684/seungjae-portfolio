@@ -19,6 +19,7 @@ const AboutMePage = () => {
   const dispatch = useDispatch();
   const guide = useSelector((state: RootState) => state.guide);
   const infoModalRef = useRef<HTMLDivElement>(null);
+  const statusRef = useRef<HTMLDivElement>(null);
 
   const [statusModal, setStatusModal] = useState<{
     information: boolean,
@@ -33,7 +34,8 @@ const AboutMePage = () => {
     dispatch(pageMove("About Us"));
 
     const handleClickOutside = (event: any) => {
-      if (infoModalRef.current && !infoModalRef.current.contains(event.target)) {
+      if ((infoModalRef.current && !infoModalRef.current.contains(event.target))
+        && (statusRef.current && !statusRef.current.contains(event.target))) {
         setStatusModal({ ...statusModal, information: false, state: undefined });
       };
     };
@@ -96,7 +98,7 @@ const AboutMePage = () => {
               </StatusText>
             </IntroduceWrapper>
           </LaneContainer>
-          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal} />
+          <StatusLane statusModal={statusModal} setStatusModal={setStatusModal} statusRef={statusRef} />
           <LaneContainer
             style={{
               fontFamily: "EF_watermelonSalad",

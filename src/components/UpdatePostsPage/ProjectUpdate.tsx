@@ -66,7 +66,6 @@ const ProjectUpdate = ({
     member,
     work
   } = insertData;
-  console.log('입력값', insertData);
 
   const onChangeInsertHandler = (e: any) => {
     const { name, value } = e.target;
@@ -192,7 +191,6 @@ const ProjectUpdate = ({
         setPrevSelect(data.connection);
         setDropdownValue(data.connection);
         setStackValue(data.stack);
-        console.log('성공');
       } catch (error) {
         console.error("Error fetching paginated data from Supabase: ", error)
       };
@@ -200,8 +198,6 @@ const ProjectUpdate = ({
 
     updateData();
   }, []);
-
-  console.log(stackValue);
 
   return (
     <InsertFormContainer>

@@ -14,7 +14,6 @@ const PostsDetailPage = () => {
 
   const [postDetail, setPostDetail] = useState<any>(null);
   const [stack, setStack] = useState<any>(null);
-  console.log('게시글 상세', postDetail, stack);
 
   const Posts = () => {
     if (!post) return;

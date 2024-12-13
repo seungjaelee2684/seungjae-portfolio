@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import emailjs from '@emailjs/browser';
-import Background2 from '../../assets/images/backgroundWeb.jpg';
+import Background2 from '../../assets/images/backgroundWeb.webp';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
@@ -56,7 +56,7 @@ const Contact = () => {
                 },
                 (error: any) => {
                     alert("메일 전송 실패...!");
-                    console.log(error, publicKey);
+                    console.error(error);
                 }
             );
     };

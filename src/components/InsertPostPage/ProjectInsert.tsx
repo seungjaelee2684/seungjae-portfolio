@@ -66,7 +66,6 @@ const ProjectInsert = ({
     work,
     content
   } = insertData;
-  console.log('입력값', insertData);
 
   const onChangeInsertHandler = (e: any) => {
     const { name, value } = e.target;
@@ -141,8 +140,6 @@ const ProjectInsert = ({
       uploadFetch();
     };
   };
-
-  console.log(stackValue);
 
   return (
     <InsertFormContainer>
