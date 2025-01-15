@@ -9,6 +9,7 @@ import { headerHtml } from '../../utils/NaviHTML';
 
 const Header = () => {
 
+  const path = window.location.pathname;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isGuide = localStorage.getItem("guide");
@@ -17,6 +18,7 @@ const Header = () => {
   const isMobile = useSelector((state : RootState) => state.isMobile);
   const naviList : string[] = ["Main", "Character", "About Us", "Skills", "Dungeon"];
   const [innerContent, setInnerContent] = useState<string[]>(naviList);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +31,7 @@ const Header = () => {
   }, [window.innerWidth]);
 
   return (
-    <HeaderLayout>
+    <HeaderLayout style={{ opacity: (path === '/') ? '0' : '1' }}>
       <HeaderWrapper>
         {headerHtml?.map((item: any, index: number) => {
           return (
