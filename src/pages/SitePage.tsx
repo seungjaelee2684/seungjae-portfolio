@@ -38,7 +38,8 @@ const SitePage = () => {
         const { error: updateError } = await supabase
           .from('visit_count')
           .update({ count: updatedCount })
-          .eq('type', 'main');
+          .eq('type', 'main')
+          .select();
 
         if (updateError) throw updateError;
 
