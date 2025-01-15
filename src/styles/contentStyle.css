@@ -1,11 +1,24 @@
-ul,
 ol {
     list-style: initial;
-    padding-left: 30px;
+}
+
+ul {
+    list-style: initial;
 }
 
 li {
-    list-style-type: decimal;
+    list-style-type: inherit;
+    margin-left: 20px;
+}
+
+.ql-indent-1 {
+    margin-left: 40px;
+    list-style-type: circle;
+}
+
+.ql-indent-2 {
+    margin-left: 60px;
+    list-style-type: square;
 }
 
 @media screen and (max-width: 980px) {

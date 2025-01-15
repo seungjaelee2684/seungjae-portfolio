@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/config/configureStore';
 import { commonTextColor } from '../styles/colorToken';
 import { categoryObj, sideTapList } from '../utils/Category';
-import { cookies } from '../utils/Cookies';
+import { cookies, visitCookie } from '../utils/Cookies';
 import { BsPencilSquare } from "react-icons/bs";
 import { onClickPostDeleteHandler } from '../utils/ClickHandler';
 import { koreaDate } from '../utils/KoreaTime';
@@ -20,6 +20,43 @@ const SitePage = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const [blogData, setBlogData] = useState<any>(null);
+  const isCookie = visitCookie('vs-ct');
+
+  const cookieSet = () => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('visit_count')
+          .select('count')
+          .eq('type', 'main')
+          .single();
+
+        if (error) throw error;
+
+        const updatedCount = data.count + 1;
+
+        const { error: updateError } = await supabase
+          .from('visit_count')
+          .update({ count: updatedCount })
+          .eq('type', 'main');
+
+        if (updateError) throw updateError;
+
+        const now = new Date();
+        now.setHours(23, 59, 59, 999);
+        const expires = "expires=" + now.toUTCString();
+        document.cookie = `vs-ct=visited; ${expires}; path=/`;
+      } catch (error) {
+        console.error("Error fetching paginated data from Supabase: ", error);
+      };
+    };
+
+    fetchData();
+  };
+
+  useEffect(() => {
+    if (!isCookie) { cookieSet(); };
+  }, [isCookie]);
 
   useEffect(() => {
     const fetchData = async () => {
