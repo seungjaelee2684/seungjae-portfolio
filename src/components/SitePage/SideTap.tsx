@@ -14,6 +14,7 @@ const SideTap = () => {
   const path = window.location.pathname;
   const theme = useSelector((state: RootState) => state.darkMode);
   const [tap, setTap] = useState<any>(null);
+  const [count, setCount] = useState<number | null>(null);
 
   const linkChange = (index: number, item: any) => {
     if (!item) return;
@@ -47,6 +48,23 @@ const SideTap = () => {
       };
     };
 
+    const countData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('visit_count')
+          .select('count')
+          .eq('type', 'main')
+          .single();
+
+        if (error) throw error;
+
+        setCount(data.count);
+      } catch (error) {
+        console.error('Error fetching paginated data from Supabase: ', error);
+      };
+    };
+
+    countData();
     fetchData();
   }, []);
 
@@ -92,6 +110,7 @@ const SideTap = () => {
             탭 수정하러가기
           </SideTapLink>
         </SideTapLane>}
+      {(cookies()) && <VisitCount>{count}명 방문</VisitCount>}
     </SideTapContainer>
   )
 };
@@ -176,6 +195,18 @@ const SideDetailTap = styled(SideTapLink)`
     font-size: 7px;
     height: fit-content;
     padding: 3px 0px;
+  }
+`;
+
+const VisitCount = styled.span`
+  width: 100%;
+  text-align: end;
+  font-size: 14px;
+  color: #ee6e6e;
+  margin-top: 40px;
+
+  @media screen and (max-width: 980px) {
+    font-size: 7px;
   }
 `;
 
