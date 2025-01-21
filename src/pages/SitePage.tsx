@@ -148,6 +148,10 @@ export const SiteContainer = styled.div`
   display: flex;
   justify-content: start;
   align-items: start;
+
+  @media screen and (max-width: 980px) {
+    gap: 16px;
+  }
 `;
 
 export const PostsContainer = styled.ul`
@@ -172,6 +176,7 @@ export const CategoryWrapper = styled.div`
 `;
 
 export const PostsCategory = styled.h1`
+  width: fit-content;
   font-size: 18px;
   font-weight: 700;
   user-select: none;
@@ -180,6 +185,7 @@ export const PostsCategory = styled.h1`
   @media screen and (max-width: 980px) {
     font-size: 14px;
     margin-bottom: 10px;
+    text-align: start;
   }
 `;
 

@@ -142,6 +142,7 @@ const SideTapLane = styled.li`
   justify-content: center;
   align-items: start;
   gap: 4px;
+  margin-left: 0px;
 `;
 
 const SideTapLink = styled.a<{ $color: string }>`
