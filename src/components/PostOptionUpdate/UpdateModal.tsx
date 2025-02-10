@@ -103,7 +103,7 @@ const ModalContainer = styled.form<{ $bgcolor: string }>`
     box-shadow: 0px 0px 8px 0px #00000080;
     background-color: ${(props) => props.$bgcolor};
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         width: 94%;
         height: 200px;
         gap: 16px;
@@ -116,7 +116,7 @@ const ModalTitle = styled.label<{ $color: string }>`
     padding-left: 8px;
     color: ${(props) => props.$color};
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         font-size: 16px;
     }
 `;
@@ -132,7 +132,7 @@ const ModalInput = styled.input<{ $color: string }>`
     border-radius: 4px;
     background-color: transparent;
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         height: 32px;
         font-size: 12px;
     }
@@ -156,7 +156,7 @@ const CloseButton = styled.button<{ $color: string, $hover: string }>`
         color: ${(props) => props.$hover};
     }
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         width: 24px;
         height: 24px;
         top: 10px;

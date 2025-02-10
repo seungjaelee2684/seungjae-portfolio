@@ -44,7 +44,7 @@ const ModalContainer = styled.div<{ $src: string }>`
     background-repeat: no-repeat;
     position: relative;
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         width: 94%;
         height: 84%;
     }
@@ -68,7 +68,7 @@ const CloseButton = styled.button`
         color: #949494;
     }
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1140px) {
         width: 24px;
         height: 24px;
         top: auto;

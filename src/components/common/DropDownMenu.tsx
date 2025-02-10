@@ -81,7 +81,7 @@ const DropDownWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 28px;
   }
 `;
@@ -100,7 +100,7 @@ const DropDownRender = styled.div`
   user-select: none;
   position: relative;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 0px 12px;
     font-size: 10px;
   }
@@ -126,7 +126,7 @@ const DropDownButton = styled.button`
     background-color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 28px;
     width: 28px;
   }
@@ -151,7 +151,7 @@ const DropDownMenuBox = styled.ul<{ $bgcolor: string }>`
   padding: 8px 4px;
   box-shadow: 0px 4px 4px 0px #0000002b;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     top: 28px;
     max-height: 500px;
     padding: 6px 4px;
@@ -177,7 +177,7 @@ const DropDownList = styled.li`
     font-weight: 700;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 28px;
     font-size: 10px;
   }

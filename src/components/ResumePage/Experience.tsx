@@ -126,7 +126,7 @@ export const ProjectList = styled.div`
   align-items: start;
   position: relative;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     flex-direction: column;
     gap: 20px;
   }
@@ -150,7 +150,7 @@ export const ProjectSeeMore = styled.a`
     opacity: 0.8;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 4px;
     font-size: 10px;
     top: 0px;
@@ -168,7 +168,7 @@ export const ProjectExpireWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 90px;
     width: 90px;
     gap: 4px;
@@ -180,7 +180,7 @@ export const ProjectExpire = styled.h3`
   font-weight: 700;
   text-align: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 13px;
   }
 `;
@@ -193,7 +193,7 @@ export const RoleText = styled.span<{ $color: string }>`
   color: ${(props) => props.$color};
   white-space: pre-line;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 8px;
   }
 `;
@@ -205,7 +205,7 @@ export const DateText = styled.span<{ $color: string }>`
   margin-bottom: 8px;
   color: ${(props) => props.$color};
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     margin-bottom: 4px;
   }
@@ -223,7 +223,7 @@ export const StrongText = styled.h4`
   font-size: 18px;
   font-weight: 700;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 12px;
   }
 `;
@@ -232,7 +232,7 @@ export const SmallExpired = styled.strong`
   font-size: 17px;
   margin: 30px 0px 10px 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 9px;
     margin: 12px 0px 6px 0px;
   }
@@ -248,7 +248,7 @@ export const ContentText = styled.div`
   flex-wrap: wrap;
   padding-left: 4px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     padding-left: 2px;
   }
@@ -258,7 +258,7 @@ export const StackBox = styled.div`
   font-size: 15px;
   text-align: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 9px;
   }
 `;
@@ -271,7 +271,7 @@ export const DetailContent = styled.div`
   font-weight: 400;
   line-height: 175%;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     line-height: 140%;
   }

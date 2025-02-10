@@ -128,7 +128,7 @@ const SideTapContainer = styled.ul`
   gap: 8px;
   padding-left: 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     /* min-width: 68px;
     width: 68px;
     padding-top: 16px; */
@@ -166,7 +166,7 @@ const SideTapLink = styled.a<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 0px;
     font-size: 9px;
     height: 16px;
@@ -183,7 +183,7 @@ const SideDetailTapLane = styled.div`
   gap: 2px;
   padding-left: 6px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding-left: 4px;
   }
 `;
@@ -193,7 +193,7 @@ const SideDetailTap = styled(SideTapLink)`
   height: 22px;
   text-align: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 7px;
     height: fit-content;
     padding: 3px 0px;
@@ -207,7 +207,7 @@ const VisitCount = styled.span`
   color: #ee6e6e;
   margin-top: 40px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 7px;
   }
 `;
