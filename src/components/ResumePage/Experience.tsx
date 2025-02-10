@@ -12,7 +12,7 @@ interface ExperienceProps {
 
 const Experience = ({ project, theme }: ExperienceProps) => {
 
-  const experienceList = project?.filter((item: any) => item.connection !== '팀 프로젝트');
+  const experienceList = project?.filter((item: any) => !item.connection.includes('프로젝트'));
   const skillList = experienceList?.map((item: any) => item.stack);
   const [stackData, setStackData] = useState<any>(null);
   const [flattenedList, setFlattenedList] = useState<any>(null);

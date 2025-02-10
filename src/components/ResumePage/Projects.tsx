@@ -27,7 +27,7 @@ interface ProjectsProps {
 
 const Projects = ({ project, theme }: ProjectsProps) => {
 
-  const projectsList = project?.filter((item: any) => item.connection === '팀 프로젝트');
+  const projectsList = project?.filter((item: any) => item.connection.includes('프로젝트'));
   const skillList = projectsList?.map((item: any) => item.stack);
   const [stackData, setStackData] = useState<any>(null);
   const [flattenedList, setFlattenedList] = useState<any>(null);
