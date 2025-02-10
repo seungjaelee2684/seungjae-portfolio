@@ -11,7 +11,7 @@ export const projectDto = [
         period: "2024.08 ~ 2024.11",
         information: "비임상 CRO 회사",
         introduce: "제브라피쉬 전문 CRO로 혁신적인 진단장비를 활용하여\n전임상단계의 신약후보물질의 발굴을 돕는 비임상 CRO 회사",
-        url: "https://zefit-front.vercel.app",
+        url: "https://zefit.co.kr",
         skill: "Next.js, TypeScript,\nRecoil, Supabase",
         part: "기존 사이트 개편에 필요한 기획, 웹디자인, 프론트엔드 개발 및 DB설계를 담당",
         game: [
@@ -32,7 +32,7 @@ export const projectDto = [
         period: "2023.12 ~ 2024.04",
         information: "글로벌 일러스트 학원",
         introduce: "다양한 그림 스타일과 강사들을 통해 학습을 제공하는 다국적 학원 플랫폼",
-        url: "https://www.aria-academy.com",
+        url: "https://stellular-ganache-9fd795.netlify.app/mentor",
         skill: "React, TypeScript,\nAxios, React-Query, Recoil, Styled-Components",
         part: "전반적인 서비스 구상과 웹페이지의 디자인, 기능 개발 및 운영을 담당",
         game: [
