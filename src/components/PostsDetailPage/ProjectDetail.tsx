@@ -63,11 +63,12 @@ const ProjectDetail = ({ data, stack }: ProjectDetailProps) => {
             </EditorList>}
         </EditorWrapper>
       </CategoryWrapper>
-      <ImageContainer
-        src={projectImage[data?.image]}
-        alt='이미지'
-        loading="lazy"
-        onClick={() => setImg(data?.image)} />
+      {(projectImage[data?.image])
+        && <ImageContainer
+          src={projectImage[data?.image]}
+          alt='이미지'
+          loading="lazy"
+          onClick={() => setImg(data?.image)} />}
       <ContentLane>
         <ContentCategory>
           이름
@@ -209,19 +210,19 @@ export const DateText = styled.div`
   justify-content: end;
   align-items: end;
   gap: 10px;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: -0.3px;
 
   @media screen and (max-width: 980px) {
-    font-size: 8px;
-    gap: 4px;
+    font-size: 12px;
+    gap: 8px;
   }
 `;
 
 export const ListLink = styled.a<{ $color: string }>`
   color: ${(props) => props.$color};
   transition: all 0.3s;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
 
   &:hover {
@@ -229,7 +230,7 @@ export const ListLink = styled.a<{ $color: string }>`
   }
 
   @media screen and (max-width: 980px) {
-    font-size: 8px;
+    font-size: 13px;
   }
 `;
 
@@ -349,6 +350,7 @@ const StackList = styled.li<{ $color: string }>`
   width: fit-content;
   height: 32px;
   padding: 0px 16px;
+  margin-left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;

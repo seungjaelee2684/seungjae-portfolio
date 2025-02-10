@@ -9,6 +9,7 @@ ul {
 li {
     list-style-type: inherit;
     margin-left: 20px;
+    line-height: 180%;
 }
 
 .ql-indent-1 {
@@ -22,12 +23,6 @@ li {
 }
 
 @media screen and (max-width: 980px) {
-
-    ul,
-    ol {
-        padding-left: 12px;
-    }
-
     h1 {
         font-size: 16px;
         padding-bottom: 10px;
@@ -58,6 +53,18 @@ li {
     }
 
     li {
+        list-style-type: inherit;
+        margin-left: 10px;
         font-size: 10px;
+    }
+    
+    .ql-indent-1 {
+        margin-left: 20px;
+        list-style-type: circle;
+    }
+    
+    .ql-indent-2 {
+        margin-left: 30px;
+        list-style-type: square;
     }
 }

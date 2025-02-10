@@ -148,7 +148,7 @@ const SkillWrapper = styled.ul`
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 
   @media screen and (max-width: 980px) {
     gap: 6px;
@@ -161,6 +161,7 @@ const SkillTag = styled.li<{ $color: string }>`
   border: 1px solid;
   border-color: ${(props) => props.$color};
   border-radius: 20px;
+  margin-left: 0px;
   font-size: 15px;
   font-weight: 700;
   display: flex;

@@ -63,7 +63,6 @@ const PostsDetailPage = () => {
 
   return (
     <SiteContainer>
-      <SideTap />
       {Posts()}
     </SiteContainer>
   )

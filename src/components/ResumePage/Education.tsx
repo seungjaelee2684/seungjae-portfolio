@@ -62,6 +62,17 @@ const Education = ({ theme }: EducationProps) => {
       </EducationLane>
       <EducationLane>
         <ExpiredWrapper>
+          <Expired>계명대학교</Expired>
+          <DateText $color={textMedium[theme]}>
+            2016.03 - present
+          </DateText>
+        </ExpiredWrapper>
+        <Chapter>
+          휴학 중
+        </Chapter>
+      </EducationLane>
+      <EducationLane>
+        <ExpiredWrapper>
           <Expired>매천고등학교</Expired>
           <DateText $color={textMedium[theme]}>
             2013.03 - 2016.02
@@ -71,7 +82,6 @@ const Education = ({ theme }: EducationProps) => {
           고등학교 졸업
         </Chapter>
       </EducationLane>
-      <EducationLane></EducationLane>
     </EducationContainer>
   )
 };
