@@ -94,7 +94,7 @@ const EducationContainer = styled.div`
   align-items: start;
   gap: 60px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 40px;
   }
 `;
@@ -105,7 +105,7 @@ const EducationLane = styled.div`
   justify-content: start;
   align-items: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     flex-direction: column;
     gap: 20px;
   }
@@ -120,7 +120,7 @@ const ExpiredWrapper = styled.div`
   align-items: start;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 90px;
     width: 90px;
     gap: 4px;
@@ -133,7 +133,7 @@ const Expired = styled.h3`
   font-weight: 700;
   text-align: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 13px;
   }
 `;
@@ -147,7 +147,7 @@ const EducationContent = styled.ol`
   gap: 8px;
   padding-left: 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 4px;
   }
 `;
@@ -158,7 +158,7 @@ const Chapter = styled.li`
   white-space: pre-line;
   list-style-type: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
   }
 `;

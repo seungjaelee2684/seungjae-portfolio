@@ -13,6 +13,7 @@ const SiteLayout = () => {
 
   const path = window.location.pathname;
   const theme = useSelector((state: RootState) => state.darkMode);
+  const font = useSelector((state: RootState) => state.fontSize);
   const [scroll, setScroll] = useState<number>(window.scrollY);
 
   const onClickTopHandler = (e: any) => {
@@ -37,14 +38,14 @@ const SiteLayout = () => {
   }, []);
 
   return (
-    <SiteContainer>
+    <SiteContainer $font={font}>
       <SiteHeader />
-      {(path === "/" || path === "/jaelog/resume") && <Profile />}
+      {(path === "/jaelog" || path === "/jaelog/resume") && <Profile />}
       <Outlet />
       <FloatingButton
         $color={commonTextColor[theme]}
         onClick={onClickTopHandler}
-        $display={(scroll > 200) ? 'flex' : 'none'}>
+        $display={scroll > 200}>
         <LiaArrowUpSolid />
       </FloatingButton>
       <GameModeButton
@@ -56,8 +57,8 @@ const SiteLayout = () => {
   )
 };
 
-const SiteContainer = styled.div`
-  width: 980px;
+const SiteContainer = styled.article<{ $font: string }>`
+  width: 1140px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -65,14 +66,15 @@ const SiteContainer = styled.div`
   margin: 0px auto;
   padding-top: 100px;
   font-family: "SUIT_Regular";
+  font-size: ${(props) => props.$font};
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 94%;
     padding-top: 70px;
   }
 `;
 
-const FloatingButton = styled.button<{ $color: string, $display: string }>`
+const FloatingButton = styled.button<{ $color: string, $display: boolean }>`
   width: 50px;
   height: 50px;
   position: fixed;
@@ -86,16 +88,19 @@ const FloatingButton = styled.button<{ $color: string, $display: string }>`
   border-radius: 100%;
   transition: all 0.3s;
   font-size: 20px;
-  display: ${(props) => props.$display};
+  visibility: ${(props) => props.$display ? 'visible' : 'hidden'};
+  opacity: ${(props) => props.$display ? '1' : '0'};
+  display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-transition: all 0.3s;
   cursor: pointer;
 
   &:hover {
     background-color: ${(props) => props.$color}80;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 30px;
     height: 30px;
     font-size: 16px;
@@ -128,7 +133,7 @@ const GameModeButton = styled.a`
     background-color: #cb4747;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 30px;
     height: 30px;
     font-size: 16px;

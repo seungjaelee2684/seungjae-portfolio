@@ -76,7 +76,7 @@ const Content = styled.div`
   text-align: start;
   margin-top: 60px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     margin-top: 30px;
   }
 `;
@@ -89,7 +89,7 @@ const PracticeTitleWrapper = styled.div`
   align-items: start;
   gap: 10px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 8px;
   }
 `;
@@ -98,7 +98,7 @@ const PracticeCategory = styled.span`
   font-size: 16px;
   color: #ee6e6e;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 11px;
   }
 `;

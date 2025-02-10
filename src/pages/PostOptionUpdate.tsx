@@ -266,7 +266,7 @@ const OptionUpdateContainer = styled.section`
   align-items: start;
   gap: 60px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     flex-direction: column;
     gap: 30px;
   }
@@ -280,7 +280,7 @@ const ColumnLane = styled.ul`
   align-items: start;
   gap: 12px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 8px;
   }
 `;
@@ -291,7 +291,7 @@ const ColumnTitle = styled.h2`
   user-select: none;
   margin: 20px 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 14px;
     margin: 10px 0px;
   }
@@ -306,7 +306,7 @@ const RowLane = styled.li`
   border: 1px solid #cacaca;
   padding: 16px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 12px;
     height: 48px;
   }
@@ -316,7 +316,7 @@ const OptionTitle = styled.h3`
   font-size: 16px;
   font-weight: 500;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 12px;
   }
 `;
@@ -341,7 +341,7 @@ const IconBox = styled.button`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 24px;
     height: 24px;
     font-size: 18px;
@@ -366,7 +366,7 @@ const AddRow = styled.button`
     border: 1px solid #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 32px;
     font-size: 18px;
   }
@@ -392,7 +392,7 @@ const UpdateInput = styled.input`
     border: 1px solid #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 28px;
     font-size: 11px;
   }
@@ -420,7 +420,7 @@ export const AddButton = styled.button`
     background-color: #8d3434;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 32px;
     font-size: 12px;
   }

@@ -332,7 +332,7 @@ export const InsertFormContainer = styled.form`
   align-items: start;
   gap: 24px;
   
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 100%;
     padding: 16px 0px;
     gap: 12px;
@@ -346,7 +346,7 @@ export const FormLane = styled.div`
   align-items: start;
   gap: 24px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     flex-direction: column;
     gap: 4px;
   }
@@ -364,7 +364,7 @@ export const Expired = styled.label`
   font-weight: 700;
   user-select: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 80px;
     width: 80px;
     height: 28px;
@@ -378,7 +378,7 @@ export const Important = styled.span`
   font-weight: 700;
   color: #ee6e6e;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 9px;
   }
 `;
@@ -405,7 +405,7 @@ export const LaneInput = styled.input<{ $width: string }>`
     border: 1px solid #222020;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 28px;
     font-size: 10px;
   }
@@ -428,7 +428,7 @@ export const DropdownLink = styled.a`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: fit-content;
     width: fit-content;
     height: 28px;
@@ -459,7 +459,7 @@ export const LaneTextarea = styled.textarea`
     border: 1px solid #222020;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-height: 400px;
     padding: 8px;
   }
@@ -473,7 +473,7 @@ export const ButtonWrapper = styled.div`
   gap: 24px;
   margin: 60px 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 12px;
     margin: 100px 0px;
   }
@@ -502,7 +502,7 @@ export const Button = styled.div`
     background-color: #972727;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 70px;
     height: 28px;
     font-size: 12px;
@@ -518,7 +518,7 @@ export const TagWrapper = styled.ul`
   flex-wrap: wrap;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 4px;
   }
 `;
@@ -543,7 +543,7 @@ export const TagButton = styled.li<{ $color: string, $bgcolor: string }>`
     opacity: 0.6;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 24px;
     padding: 0px 10px;
     font-size: 10px;

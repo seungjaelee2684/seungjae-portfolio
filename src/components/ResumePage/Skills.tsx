@@ -112,7 +112,7 @@ const SkillListWrapper = styled.div`
   gap: 30px;
   user-select: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 20px;
   }
 `;
@@ -134,7 +134,7 @@ const SkillCategory = styled.h3`
   display: flex;
   align-items: center;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 60px;
     width: 60px;
     font-size: 11px;
@@ -150,7 +150,7 @@ const SkillWrapper = styled.ul`
   flex-wrap: wrap;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 6px;
   }
 `;
@@ -168,7 +168,7 @@ const SkillTag = styled.li<{ $color: string }>`
   align-items: center;
   gap: 6px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 4px 10px;
     font-size: 10px;
     gap: 4px;
@@ -179,7 +179,7 @@ const StackIcon = styled.div`
   width: 16px;
   height: 16px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 10px;
     height: 10px;
   }
