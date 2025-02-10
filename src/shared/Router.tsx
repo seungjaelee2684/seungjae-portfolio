@@ -33,7 +33,7 @@ const Router = () => {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route element={<MainLayout />}>
-              <Route path='/' element={<StartPage />} caseSensitive />
+              <Route path='/gamemode' element={<StartPage />} caseSensitive />
               <Route path='/loby' element={<LobyPage />} caseSensitive />
               <Route path='/about' element={<AboutUsPage />} caseSensitive />
               <Route path='/skill' element={<SkillsPage />} caseSensitive />
@@ -44,7 +44,7 @@ const Router = () => {
               <Route path='/gamestart' element={<GameStartPage />} caseSensitive />
             </Route>
             <Route element={<SiteLayout />}>
-              <Route path='/jaelog' element={<SitePage />} caseSensitive />
+              <Route path='/' element={<SitePage />} caseSensitive />
               <Route path='/jaelog/projects' element={<ProjectListPage />} caseSensitive />
               <Route path='/jaelog/practices' element={<PracticeListPage />} caseSensitive />
               <Route path='/jaelog/:post/:postId' element={<PostsDetailPage />} caseSensitive />

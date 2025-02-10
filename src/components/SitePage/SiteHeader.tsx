@@ -30,7 +30,7 @@ const SiteHeader = () => {
     return (
         <SiteHeaderContainer>
             <SiteHeaderInWrapper>
-                <HeaderLink href='/jaelog' title='블로그 홈'>
+                <HeaderLink href='/' title='블로그 홈'>
                     Jaelog
                     <HeaderLinkIcon />
                 </HeaderLink>

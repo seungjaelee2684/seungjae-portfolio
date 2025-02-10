@@ -281,8 +281,8 @@ export const PostDate = styled.span`
   color: #6599e2;
 
   @media screen and (max-width: 980px) {
-    min-width: 34px;
-    width: 34px;
+    min-width: 40px;
+    width: 40px;
     font-size: 7px;
   }
 `;

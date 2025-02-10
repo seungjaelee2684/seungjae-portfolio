@@ -73,10 +73,10 @@ const SideTap = () => {
       <PostsCategory>
         Tags
       </PostsCategory>
-      {(path !== '/jaelog')
+      {(path !== '/')
         && <SideTapLane>
           <SideTapLink
-            href='/jaelog'
+            href='/'
             $color={commonTextColor[theme]}>
             메인으로 가기
           </SideTapLink>
@@ -129,9 +129,10 @@ const SideTapContainer = styled.ul`
   padding-left: 0px;
 
   @media screen and (max-width: 980px) {
-    min-width: 68px;
+    /* min-width: 68px;
     width: 68px;
-    padding-top: 16px;
+    padding-top: 16px; */
+    display: none;
   }
 `;
 
