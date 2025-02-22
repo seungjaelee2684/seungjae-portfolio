@@ -40,7 +40,7 @@ const SiteLayout = () => {
   return (
     <SiteContainer $font={font}>
       <SiteHeader />
-      {(path === "/jaelog" || path === "/jaelog/resume") && <Profile />}
+      {(path === "/" || path === "/jaelog/resume") && <Profile />}
       <Outlet />
       <FloatingButton
         $color={commonTextColor[theme]}

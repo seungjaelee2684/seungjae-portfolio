@@ -93,7 +93,7 @@ export const DungeonInfo = styled.div`
 
 export const ContentContainer = styled.section`
   width: 100%;
-  height: calc(100% - 120px);
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -109,7 +109,7 @@ export const ContentContainer = styled.section`
   user-select: none;
 
   @media screen and (max-width: 500px) {
-    height: calc(100% - 160px);
+    height: 100%;
     padding: 80px 0px;
   }
 `;
@@ -132,7 +132,7 @@ export const Character = styled.img`
 
 export const ContentWrapper = styled.div`
   width: calc(100% - 200px);
-  height: 250px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -149,7 +149,6 @@ export const ContentWrapper = styled.div`
 
   @media screen and (max-width: 1320px) {
     width: calc(100% - 160px);
-    height: 200px;
     font-size: 20px;
     line-height: 120%;
     padding: 40px 80px;
@@ -157,7 +156,6 @@ export const ContentWrapper = styled.div`
 
   @media screen and (max-width: 500px) {
     width: calc(100% - 40px);
-    height: 190px;
     font-size: 16px;
     padding: 30px 20px;
     gap: 20px;

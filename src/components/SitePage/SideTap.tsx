@@ -129,10 +129,10 @@ const SideTapContainer = styled.ul`
   padding-left: 0px;
 
   @media screen and (max-width: 1140px) {
-    /* min-width: 68px;
+    min-width: 68px;
     width: 68px;
-    padding-top: 16px; */
-    display: none;
+    padding-top: 16px;
+    /* display: none; */
   }
 `;
 

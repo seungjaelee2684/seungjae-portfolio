@@ -42,7 +42,7 @@ const SiteHeader = () => {
                     <HeaderLinkIcon />
                 </HeaderLink>
                 <HeaderRightWrapper>
-                    {(path === '/')
+                    {/* {(path === '/')
                         && <FontSize
                             $color={commonTextColor[theme]}
                             onClick={() => setTapOpen(!tapOpen)}>
@@ -59,7 +59,7 @@ const SiteHeader = () => {
                                             {item}
                                         </FontSizeModalLane>)}
                                 </FontSizeModal>}
-                        </FontSize>}
+                        </FontSize>} */}
                     <ThemeWrapper>
                         <BsSunFill
                             color='#f2c138'
@@ -104,7 +104,6 @@ const SiteHeaderContainer = styled.header`
     z-index: 25;
     user-select: none;
     backdrop-filter: blur(3px);
-    padding: 0px 80px;
 
     @media screen and (max-width: 1140px) {
         height: 60px;

@@ -31,7 +31,7 @@ const Header = () => {
   }, [window.innerWidth]);
 
   return (
-    <HeaderLayout style={{ opacity: (path === '/') ? '0' : '1' }}>
+    <HeaderLayout style={{ opacity: (path === '/gamemode') ? '0' : '1' }}>
       <HeaderWrapper>
         {headerHtml?.map((item: any, index: number) => {
           return (
