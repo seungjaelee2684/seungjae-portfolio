@@ -5,7 +5,8 @@
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 10px;
+  height: 10px;
 }
 
 html, body, div, span, applet, object, iframe,

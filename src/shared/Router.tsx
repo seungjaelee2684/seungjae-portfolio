@@ -6,6 +6,7 @@ import SubLayout from '../components/common/SubLayout';
 import Loading from '../components/common/Loading';
 import SiteLayout from '../components/common/SiteLayout';
 
+const MainPage = lazy(() => import("../pages/MainPage"));
 const StartPage = lazy(() => import("../pages/StartPage"));
 const SkillsPage = lazy(() => import("../pages/SkillsPage"));
 const ProjectPage = lazy(() => import("../pages/ProjectPage"));
@@ -44,6 +45,7 @@ const Router = () => {
               <Route path='/gamestart' element={<GameStartPage />} caseSensitive />
             </Route>
             <Route element={<SiteLayout />}>
+              {/* <Route path='/' element={<MainPage />} /> */}
               <Route path='/' element={<SitePage />} caseSensitive />
               <Route path='/jaelog/projects' element={<ProjectListPage />} caseSensitive />
               <Route path='/jaelog/practices' element={<PracticeListPage />} caseSensitive />

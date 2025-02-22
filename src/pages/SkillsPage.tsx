@@ -96,7 +96,7 @@ const SkillsLayout = styled.div`
   align-items: center;
   user-select: none;
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1140px) {
     flex-direction: column;
   }
 `;
@@ -105,11 +105,11 @@ const LeftContainer = styled.section`
   width: calc(50% - 90px);
   height: calc(100% - 120px);
   position: relative;
-  padding: 100px 10px 20px 80px;
+  padding: 0px 10px 20px 80px;
 
-  @media screen and (max-width: 1320px) {
-    height: calc(60% - 80px);
-    padding: 60px 10px 20px 10px;
+  @media screen and (max-width: 1140px) {
+    height: calc(50% - 80px);
+    padding: 0px 10px 20px 10px;
     width: calc(100% - 20px);
   }
 `;
@@ -118,13 +118,15 @@ const RightContainer = styled.section`
   width: 50%;
   height: 100%;
   position: relative;
+  display: flex;
+  justify-content: center;
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1140px) {
     width: 100%;
   }
 
   @media screen and (max-width: 500px) {
-    height: 50%;
+    height: 45%;
   }
 `;
 

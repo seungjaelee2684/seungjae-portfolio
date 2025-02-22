@@ -11,11 +11,51 @@ import Experience from '../components/ResumePage/Experience';
 import { supabase } from '../utils/Supabase';
 import Projects from '../components/ResumePage/Projects';
 import Education from '../components/ResumePage/Education';
+import { visitCookie } from '../utils/Cookies';
 
 const ResumePage = () => {
 
   const theme = useSelector((state: RootState) => state.darkMode);
   const [project, setProject] = useState<any>(null);
+
+  const isCookie = visitCookie('vs-ct');
+
+  const cookieSet = () => {
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('visit_count')
+          .select('count')
+          .eq('type', 'main')
+          .single();
+
+        if (error) throw error;
+
+        const updatedCount = data.count + 1;
+
+        const { error: updateError } = await supabase
+          .from('visit_count')
+          .update({ count: updatedCount })
+          .eq('type', 'main')
+          .select();
+
+        if (updateError) throw updateError;
+
+        const now = new Date();
+        now.setHours(23, 59, 59, 999);
+        const expires = "expires=" + now.toUTCString();
+        document.cookie = `vs-ct=visited; ${expires}; path=/`;
+      } catch (error) {
+        console.error("Error fetching paginated data from Supabase: ", error);
+      };
+    };
+
+    fetchData();
+  };
+
+  useEffect(() => {
+    if (!isCookie) { cookieSet(); };
+  }, [isCookie]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,12 +122,6 @@ const ResumePage = () => {
         </ResumeLaneContainer>
         <ResumeLaneContainer>
           <ResumeCategory>
-            Skills.
-          </ResumeCategory>
-          <Skills />
-        </ResumeLaneContainer>
-        <ResumeLaneContainer>
-          <ResumeCategory>
             Experience.
           </ResumeCategory>
           <Experience project={project} theme={theme} />
@@ -98,19 +132,25 @@ const ResumePage = () => {
           </ResumeCategory>
           <Projects project={project} theme={theme} />
         </ResumeLaneContainer>
+        <ResumeLaneContainer>
+          <ResumeCategory>
+            Skills.
+          </ResumeCategory>
+          <Skills />
+        </ResumeLaneContainer>
         <ResumeLaneContainer style={{ borderBottom: 'none' }}>
           <ResumeCategory>
             Education.
           </ResumeCategory>
           <Education theme={theme} />
         </ResumeLaneContainer>
-      </ResumeContainer> 
+      </ResumeContainer>
     </SiteContainer>
   )
 };
 
 const ResumeContainer = styled.ul`
-  width: 940px;
+  width: 1140px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -118,7 +158,7 @@ const ResumeContainer = styled.ul`
   margin: 0px auto;
   padding: 0px 0px 80px 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 100%;
   }
 `;
@@ -134,7 +174,7 @@ const ResumeLaneContainer = styled.li`
   border-color: #e9e9e9;
   padding: 40px 20px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 20px;
     padding: 20px 0px;
   }
@@ -146,7 +186,7 @@ const ResumeCategory = styled.h2`
   user-select: none;
   color: #ee6e6e;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 14px;
   }
 `;
@@ -159,7 +199,7 @@ const ResumeContentBox = styled.div`
   align-items: start;
   gap: 16px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 8px;
   }
 `;
@@ -180,7 +220,7 @@ const IntroExpired = styled.h3<{ $color: string }>`
   text-align: start;
   user-select: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 60px;
     font-size: 12px;
   }
@@ -192,7 +232,7 @@ const IntroText = styled.p`
   display: flex;
   align-items: center;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 12px;
   }
 `;
@@ -212,7 +252,7 @@ const LinkIcon = styled.a<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 16px;
     height: 16px;
     font-size: 12px;

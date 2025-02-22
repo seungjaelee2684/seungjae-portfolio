@@ -115,7 +115,7 @@ export const InsertContainer = styled.section`
   align-items: center;
   gap: 40px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 20px;
   }
 `;
@@ -142,7 +142,7 @@ export const BackIcon = styled.a`
     color: #222020;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 20px;
     height: 20px;
     font-size: 16px;
@@ -153,7 +153,7 @@ export const InsertTitle = styled.h1`
   font-size: 20px;
   font-weight: 700;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 14px;
   }
 `;
@@ -163,7 +163,7 @@ export const CheckBoxWrapper = styled.div`
   align-items: center;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 6px;
   }
 `;
@@ -185,7 +185,7 @@ export const CheckBox = styled.button<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 9px;
     gap: 2px;
   }

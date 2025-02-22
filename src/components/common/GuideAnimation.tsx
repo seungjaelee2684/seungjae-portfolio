@@ -65,7 +65,7 @@ const GuideContainer = styled.div<{ path: string | null }>`
   color: #FFFFFF;
   position: absolute;
   top: ${(props) => (props.path === "skill") ? "0" : "-120px"};
-  left: ${(props) => (props.path === "dungeon") ? "42%" : "5%"};
+  left: ${(props) => (props.path === "dungeon") ? "43%" : "5%"};
   z-index: 23;
   font-family: "GongGothicMedium";
   display: flex;

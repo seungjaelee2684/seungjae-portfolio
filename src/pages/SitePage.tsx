@@ -20,44 +20,6 @@ const SitePage = () => {
   const theme = useSelector((state: RootState) => state.darkMode);
 
   const [blogData, setBlogData] = useState<any>(null);
-  const isCookie = visitCookie('vs-ct');
-
-  const cookieSet = () => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('visit_count')
-          .select('count')
-          .eq('type', 'main')
-          .single();
-
-        if (error) throw error;
-
-        const updatedCount = data.count + 1;
-
-        const { error: updateError } = await supabase
-          .from('visit_count')
-          .update({ count: updatedCount })
-          .eq('type', 'main')
-          .select();
-
-        if (updateError) throw updateError;
-
-        const now = new Date();
-        now.setHours(23, 59, 59, 999);
-        const expires = "expires=" + now.toUTCString();
-        document.cookie = `vs-ct=visited; ${expires}; path=/`;
-      } catch (error) {
-        console.error("Error fetching paginated data from Supabase: ", error);
-      };
-    };
-
-    fetchData();
-  };
-
-  useEffect(() => {
-    if (!isCookie) { cookieSet(); };
-  }, [isCookie]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -149,7 +111,7 @@ export const SiteContainer = styled.div`
   justify-content: start;
   align-items: start;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 16px;
   }
 `;
@@ -163,7 +125,7 @@ export const PostsContainer = styled.ul`
   padding: 40px 24px 80px 24px;
   gap: 4px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 16px 10px 30px 10px;
   }
 `;
@@ -182,7 +144,7 @@ export const PostsCategory = styled.h1`
   user-select: none;
   margin-bottom: 24px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: start;
@@ -203,7 +165,7 @@ export const InsertButton = styled.a`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
   }
 `;
@@ -229,7 +191,7 @@ export const PostsLane = styled.a`
     background-color: #e9edffc7;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     padding: 4px 6px;
     gap: 4px;
   }
@@ -249,7 +211,7 @@ export const PostLaneCategory = styled.span`
   color: #ee6e6e;
   font-style: italic;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 8px;
   }
 `;
@@ -267,7 +229,7 @@ export const PostTitle = styled.strong`
   font-size: 15px;
   font-weight: 600;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
   }
 `;
@@ -280,7 +242,7 @@ export const PostDate = styled.span`
   letter-spacing: -0.7px;
   color: #6599e2;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 40px;
     width: 40px;
     font-size: 7px;
@@ -294,7 +256,7 @@ export const AdminButtonWrapper = styled.div`
   align-items: center;
   gap: 8px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 4px;
   }
 `;
@@ -312,7 +274,7 @@ export const AdminLink = styled.a<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
   }
 `;
@@ -330,7 +292,7 @@ export const AdminButton = styled.button<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 12px;
   }
 `;

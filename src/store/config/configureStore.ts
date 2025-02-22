@@ -4,6 +4,7 @@ import isMobile from '../modules/isMobile';
 import modalOpen from '../modules/globalModalOpen';
 import guide from '../modules/guide';
 import darkMode from "../modules/darkMode";
+import fontSize from "../modules/fontSize";
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         modalOpen,
         guide,
         darkMode,
+        fontSize
     }
 });
 

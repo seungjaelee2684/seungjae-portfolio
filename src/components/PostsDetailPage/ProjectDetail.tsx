@@ -169,7 +169,7 @@ export const EditorWrapper = styled.div<{ $color: string }>`
   margin-top: 16px;
   color: ${(props) => props.$color};
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     margin-top: 0px;
     gap: 4px;
   }
@@ -182,7 +182,7 @@ export const EditorList = styled.div`
   gap: 4px;
   font-size: 13px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 8px;
   }
 `;
@@ -200,7 +200,7 @@ export const Editor = styled.button<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 8px;
   }
 `;
@@ -213,7 +213,7 @@ export const DateText = styled.div`
   font-size: 14px;
   letter-spacing: -0.3px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 12px;
     gap: 8px;
   }
@@ -229,7 +229,7 @@ export const ListLink = styled.a<{ $color: string }>`
     color: #ee6e6e;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 13px;
   }
 `;
@@ -243,7 +243,7 @@ const ImageContainer = styled.img`
   user-select: none;
   cursor: pointer;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 100px;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -259,7 +259,7 @@ const ContentLane = styled.div`
   padding: 32px 0px;
   border-bottom: 1px solid #e9e9e9;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 10px;
     padding: 12px 0px;
   }
@@ -279,7 +279,7 @@ const ContentCategory = styled.span`
   font-weight: 700;
   user-select: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     min-width: 50px;
     width: 50px;
     font-size: 9px;
@@ -295,7 +295,7 @@ const ContentSentence = styled.p`
   font-weight: 500;
   line-height: 175%;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     line-height: 160%;
   }
@@ -316,7 +316,7 @@ const UrlLink = styled.a`
     text-decoration: underline;
   }
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     line-height: 160%;
   }
@@ -326,7 +326,7 @@ const LinkIcon = styled.span`
   font-size: 14px;
   margin-right: 6px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     font-size: 10px;
     margin-right: 4px;
   }
@@ -341,7 +341,7 @@ const StackWrapper = styled.ul`
   flex-wrap: wrap;
   padding-left: 0px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     gap: 4px;
   }
 `;
@@ -363,7 +363,7 @@ const StackList = styled.li<{ $color: string }>`
   border-radius: 20px;
   user-select: none;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     height: 20px;
     padding: 0px 8px;
     font-size: 8px;
@@ -374,7 +374,7 @@ const StackIcon = styled.div`
   width: 20px;
   height: 20px;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1140px) {
     width: 10px;
     height: 10px;
   }
