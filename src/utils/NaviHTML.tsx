@@ -15,7 +15,7 @@ export const headerHtml : HeaderHtmlType[] = [
   {
     id: 0,
     content: "Main",
-    url: "/",
+    url: "/gamemode",
     icon: <GoHomeFill />
   },
   {

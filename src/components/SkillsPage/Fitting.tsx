@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { FaNodeJs } from "react-icons/fa";
 import { SiMysql } from "react-icons/si";
-import { SiMongodb } from "react-icons/si";
+import { RiSupabaseFill } from "react-icons/ri";
 import { FaGithub } from "react-icons/fa";
 import { SiJira } from "react-icons/si";
 import { SiVisualstudiocode } from "react-icons/si";
@@ -62,19 +62,25 @@ const Fitting : React.FC<FittingProps> = ({ skillArr, setSkillArr, fittingSkill,
                     Backend Skills
                 </BackendStackTitle>
                 <BackendStackBox title="Node.js">
-                    <BackendStack color="#339933">
+                    <BackendStack />
+                    <BackendStackInBox color="#339933">
                         <FaNodeJs />
-                    </BackendStack>
+                        <ToolsName>Node.js</ToolsName>
+                    </BackendStackInBox>
                 </BackendStackBox>
                 <BackendStackBox title="MySQL">
-                    <BackendStack color="#4479A1">
+                    <BackendStack />
+                    <BackendStackInBox color="#4479A1">
                         <SiMysql />
-                    </BackendStack>
+                        <ToolsName>MySQL</ToolsName>
+                    </BackendStackInBox>
                 </BackendStackBox>
-                <BackendStackBox title="MongoDB">
-                    <BackendStack color="#47A248">
-                        <SiMongodb />
-                    </BackendStack>
+                <BackendStackBox title="Supabase">
+                    <BackendStack />
+                    <BackendStackInBox color="#3FCF8E">
+                        <RiSupabaseFill />
+                        <ToolsName>supabase</ToolsName>
+                    </BackendStackInBox>
                 </BackendStackBox>
             </BackendStackWrapper>
         </TopContainer>
@@ -255,6 +261,22 @@ const Tools = styled(MainStack)<{ left : string, color : string }>`
     }
 `;
 
+const ToolsName = styled.span`
+    font-size: 12px;
+
+    @media screen and (max-width: 1320px) {
+        font-size: 11px;
+    }
+
+    @media screen and (max-width: 800px) {
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 500px) {
+        display: none;
+    }
+`;
+
 const BackendStackWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -292,16 +314,11 @@ const BackendStackTitle = styled.div`
 `;
 
 const BackendStackBox = styled.div`
-    border: 2px solid #d4b681;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #FFFFFF;
     width: 100px;
     height: 100px;
-    transform: rotate(45deg);
+    position: relative;
+    color: #FFFFFF;
     margin-bottom: 20px;
-    background-image: linear-gradient(to top left, #c8a87840, transparent);
 
     @media screen and (max-width: 1320px) {
         width: 80px;
@@ -315,16 +332,38 @@ const BackendStackBox = styled.div`
     }
 
     @media screen and (max-width: 800px) {
-        width: 42px;
-        height: 42px;
-        margin-bottom: 3px;
+        width: 54px;
+        height: 54px;
+        margin-bottom: 0px;
     }
 `;
 
-const BackendStack = styled.div<{ color : string }>`
-    transform: rotate(-45deg);
-    font-size: 55px;
+const BackendStack = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border: 2px solid #d4b681;
+    background-image: linear-gradient(to top left, #c8a87840, transparent);
+    transform: rotate(45deg);
+`;
+
+const BackendStackInBox = styled.div<{ color : string }>`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
     color: ${(props) => props.color};
+    font-size: 55px;
+    z-index: 2;
 
     @media screen and (max-width: 1320px) {
         font-size: 48px;

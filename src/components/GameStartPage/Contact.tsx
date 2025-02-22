@@ -43,7 +43,7 @@ const FadeIn = keyframes`
 `;
 
 export const ContactContainer = styled.nav`
-    width: 250px;
+    width: 280px;
     position: absolute;
     opacity: 0;
     bottom: 105%;
@@ -57,12 +57,12 @@ export const ContactContainer = styled.nav`
     font-size: 18px;
 
     @media screen and (max-width: 1320px) {
-        width: 200px;
+        width: 250px;
         font-size: 16px;
     }
 
     @media screen and (max-width: 500px) {
-        width: 140px;
+        width: 180px;
         right: 10px;
         font-size: 12px;
     }

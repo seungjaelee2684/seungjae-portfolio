@@ -27,7 +27,7 @@ export const skillList : SkillListType[] = [
         content: <FaHtml5 />,
         color: "#E34F26",
         mystack: true,
-        percentage: 4
+        percentage: 6
     },
     {
         id: 2,
@@ -35,7 +35,7 @@ export const skillList : SkillListType[] = [
         content: <IoLogoCss3 />,
         color: "#1572B6",
         mystack: true,
-        percentage: 6
+        percentage: 9
     },
     {
         id: 3,
@@ -51,7 +51,7 @@ export const skillList : SkillListType[] = [
         content: <SiTypescript />,
         color: "#3178C6",
         mystack: true,
-        percentage: 24
+        percentage: 14
     },
     {
         id: 5,
@@ -91,7 +91,7 @@ export const skillList : SkillListType[] = [
         content: <SiReactquery />,
         color: "#FF4154",
         mystack: true,
-        percentage: 2
+        percentage: 4
     },
     {
         id: 10,
@@ -99,7 +99,7 @@ export const skillList : SkillListType[] = [
         content: <SiAxios />,
         color: "#5A29E4",
         mystack: true,
-        percentage: 1
+        percentage: 4
     },
     {
         id: 11,
